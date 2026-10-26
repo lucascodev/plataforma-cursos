@@ -1,3 +1,4 @@
+import { X } from 'lucide-react';
 import type { ToastMessage } from '../../../../../types/toast/toast-message.type';
 import styles from './toast-viewport.module.css';
 
@@ -26,9 +27,7 @@ export function ToastViewport({ toasts, onDismiss }: ToastViewportProps) {
             </button>
           ) : null}
           <button type="button" className={styles.close} aria-label="Fechar aviso" onClick={() => onDismiss(toast.id)}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-              <path d="M6 6l12 12M18 6L6 18" />
-            </svg>
+            <X size={16} aria-hidden="true" />
           </button>
         </div>
       ))}

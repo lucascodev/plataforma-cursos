@@ -1,3 +1,4 @@
+import { X } from 'lucide-react';
 import type { ReactNode } from 'react';
 import styles from './banner.module.css';
 
@@ -19,9 +20,7 @@ export function Banner({ tone = 'info', title, children, action, onDismiss }: Ba
       {action ? <div className={styles.action}>{action}</div> : null}
       {onDismiss ? (
         <button type="button" className={styles.dismiss} aria-label="Fechar aviso" onClick={onDismiss}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-            <path d="M6 6l12 12M18 6L6 18" />
-          </svg>
+          <X size={18} aria-hidden="true" />
         </button>
       ) : null}
     </div>

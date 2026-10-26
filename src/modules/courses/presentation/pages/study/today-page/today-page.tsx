@@ -1,3 +1,4 @@
+import { BookOpen } from 'lucide-react';
 import { Link } from 'react-router';
 import { StatTile } from '@/shared/presentation/components/data/stat-tile/stat-tile';
 import { ProgressMeter } from '@/shared/presentation/components/feedback/progress-meter/progress-meter';
@@ -30,7 +31,8 @@ export function TodayPage() {
             <TodayCard today={study.todayView} onDayDoneChange={actions.setStudyDayDone} onItemDoneChange={actions.setItemCompleted} onJournalChange={actions.setJournalEntry} />
             {page.dayPath ? (
               <Link className={styles.openDay} to={page.dayPath}>
-                Abrir o dia, com a aula e o cronômetro →
+                <BookOpen size={18} aria-hidden="true" />
+                Abrir o dia
               </Link>
             ) : null}
           </div>
