@@ -1,0 +1,1 @@
+export const MAX_PROGRESS_BODY_BYTES = 2_000_000;

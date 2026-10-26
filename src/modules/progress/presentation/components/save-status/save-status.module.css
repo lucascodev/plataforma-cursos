@@ -1,0 +1,9 @@
+.status {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.error {
+  color: var(--warning);
+}

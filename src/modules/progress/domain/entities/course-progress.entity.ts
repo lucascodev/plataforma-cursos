@@ -1,0 +1,12 @@
+import type { DateKey } from '@/shared/domain/types/date-key.type';
+import type { StartDateSource } from './start-date-source.type';
+
+export interface CourseProgress {
+  readonly completedItems: Readonly<Record<string, true>>;
+  readonly studyDays: Readonly<Record<DateKey, true>>;
+  readonly moduleNotes: Readonly<Record<string, string>>;
+  readonly journal: Readonly<Record<DateKey, string>>;
+  readonly startDate: DateKey | null;
+  readonly startDateSource: StartDateSource | null;
+  readonly updatedAt: string | null;
+}

@@ -1,0 +1,4 @@
+# Copie para .dev.vars (já ignorado pelo git) para rodar as functions localmente com "npm run dev".
+# Use a chave PUBLICÁVEL. As functions recusam a chave secreta.
+SUPABASE_URL=https://SEU-PROJETO.supabase.co
+SUPABASE_PUBLISHABLE_KEY=sb_publishable_xxxxxxxxxxxxxxxxxxxxxxxx

@@ -1,0 +1,9 @@
+.status {
+  max-width: 60ch;
+  padding-block: 48px;
+}
+
+.title {
+  font-size: clamp(26px, 4vw, 36px);
+  margin: 0 0 12px;
+}

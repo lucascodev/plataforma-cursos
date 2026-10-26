@@ -1,0 +1,38 @@
+name: Problema na plataforma
+description: Algo não funciona como deveria.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: O que aconteceu
+      description: Descreva o problema e o que você esperava.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Como reproduzir
+      placeholder: "1. Abra o curso...\n2. Clique em...\n3. Veja o erro"
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Navegador e sistema
+      placeholder: Chrome 140 no Windows 11
+  - type: dropdown
+    id: area
+    attributes:
+      label: Em que parte aconteceu?
+      options:
+        - Login ou sessão
+        - Catálogo ou página do curso
+        - Plano, progresso ou diário
+        - Backup ou exclusão de dados
+        - Outra
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: "Não cole chaves, tokens nem o conteúdo do seu backup aqui."

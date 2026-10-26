@@ -1,0 +1,22 @@
+name: Conteúdo de curso
+description: Correção, link quebrado ou sugestão de aula, exercício ou projeto.
+labels: [conteúdo]
+body:
+  - type: input
+    id: course
+    attributes:
+      label: Curso e módulo
+      placeholder: Engenharia de IA, M3
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: O que mudar e por quê
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Fonte (se houver)
+      placeholder: https://

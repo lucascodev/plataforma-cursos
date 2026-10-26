@@ -1,0 +1,43 @@
+.page {
+  display: grid;
+  gap: 14px;
+  max-width: 480px;
+  margin: 48px auto;
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(28px, 5vw, 36px);
+  line-height: 1.05;
+}
+
+.lead {
+  margin: 0;
+  color: var(--muted);
+}
+
+.alert {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: var(--radius-small);
+  background: var(--warning-soft);
+  color: var(--warning);
+  font-size: 14px;
+}
+
+.action {
+  justify-self: start;
+}
+
+.facts {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--muted);
+}

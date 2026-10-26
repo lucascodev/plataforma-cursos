@@ -1,0 +1,32 @@
+:root {
+  color-scheme: light;
+  --bg: #edf1f3;
+  --surface: #ffffff;
+  --line: #d3dbe0;
+  --fg: #12202a;
+  --muted: #566570;
+  --accent: #0a7a72;
+  --accent-soft: #d3ece9;
+  --warning: #9a6a00;
+  --warning-soft: #f5e9c6;
+  --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --radius: 10px;
+  --radius-small: 6px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0c1317;
+    --surface: #121c22;
+    --line: #24333c;
+    --fg: #dce6eb;
+    --muted: #8e9da7;
+    --accent: #3cc4b8;
+    --accent-soft: #11302d;
+    --warning: #e9b23a;
+    --warning-soft: #332910;
+  }
+}

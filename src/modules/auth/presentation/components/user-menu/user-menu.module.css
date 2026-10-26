@@ -1,0 +1,46 @@
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.avatar {
+  border-radius: 50%;
+  border: 1px solid var(--line);
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 500;
+  max-width: 18ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.error {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 13px;
+  color: var(--warning);
+  text-align: right;
+}
+
+.signIn {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 11px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-small);
+  background: var(--accent);
+  color: var(--surface);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.signIn:hover {
+  filter: brightness(0.92);
+}

@@ -1,0 +1,110 @@
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useRef, useState } from 'react';
+import { useAuthSession } from '@/modules/auth';
+import { SessionExpiredError } from '@/shared/application/errors/session-expired.error';
+import type { LoadProgressOutputDto } from '../../../application/dtos/load-progress/load-progress-output.dto';
+import type { CourseProgress } from '../../../domain/entities/course-progress.entity';
+import { createEmptyProgress } from '../../../domain/rules/create-empty-progress.rule';
+import { setItemCompletion } from '../../../domain/rules/set-item-completion.rule';
+import { setJournalEntry } from '../../../domain/rules/set-journal-entry.rule';
+import { setModuleNote } from '../../../domain/rules/set-module-note.rule';
+import { setStartDate } from '../../../domain/rules/set-start-date.rule';
+import { setStudyDayDone } from '../../../domain/rules/set-study-day-done.rule';
+import { makeEraseProgress } from '../../../main/factories/make-erase-progress.factory';
+import { makeLoadProgress } from '../../../main/factories/make-load-progress.factory';
+import { makeSaveProgress } from '../../../main/factories/make-save-progress.factory';
+import { progressQueryKeys } from '../../query-keys/progress-query-keys';
+import type { CourseProgressState } from './course-progress-state.type';
+import type { SaveState } from './save-state.type';
+
+const SAVE_DELAY_MS = 600;
+const RETRY_DELAY_MS = 15_000;
+
+export function useCourseProgress(courseSlug: string): CourseProgressState {
+  const session = useAuthSession();
+  const userId = session.user?.id ?? null;
+  const queryClient = useQueryClient();
+  const queryKey = progressQueryKeys.byCourse(courseSlug, userId ?? 'signed-out');
+  const query = useQuery({
+    queryKey,
+    queryFn: () => makeLoadProgress().execute({ courseSlug }),
+    enabled: userId !== null,
+    staleTime: Infinity,
+    gcTime: Infinity,
+    retry: (failureCount, error) => !(error instanceof SessionExpiredError) && failureCount < 1,
+    refetchOnWindowFocus: false,
+  });
+
+  const [saveState, setSaveState] = useState<SaveState>('idle');
+  const pendingRef = useRef<CourseProgress | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const flush = async () => {
+    const pending = pendingRef.current;
+    if (!pending) return;
+    pendingRef.current = null;
+    if (timerRef.current) clearTimeout(timerRef.current);
+    setSaveState('saving');
+    try {
+      await makeSaveProgress().execute({ courseSlug, progress: pending });
+      setSaveState(pendingRef.current ? 'pending' : 'saved');
+    } catch (error) {
+      pendingRef.current ??= pending;
+      setSaveState('error');
+      if (error instanceof SessionExpiredError) {
+        session.reportSessionExpired();
+        return;
+      }
+      timerRef.current = setTimeout(() => void flush(), RETRY_DELAY_MS);
+    }
+  };
+
+  const flushRef = useRef(flush);
+  useEffect(() => {
+    flushRef.current = flush;
+  });
+
+  useEffect(() => {
+    const flushBeforeLeaving = () => void flushRef.current();
+    window.addEventListener('pagehide', flushBeforeLeaving);
+    return () => {
+      window.removeEventListener('pagehide', flushBeforeLeaving);
+      flushBeforeLeaving();
+    };
+  }, []);
+
+  const update = (change: (progress: CourseProgress) => CourseProgress) => {
+    const current = queryClient.getQueryData<LoadProgressOutputDto>(queryKey);
+    if (!userId || !current) return;
+    const next = change(current.progress);
+    if (next === current.progress) return;
+    queryClient.setQueryData<LoadProgressOutputDto>(queryKey, { progress: next });
+    pendingRef.current = next;
+    setSaveState('pending');
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => void flush(), SAVE_DELAY_MS);
+  };
+
+  return {
+    status: query.isError ? 'error' : query.data ? 'ready' : 'loading',
+    progress: query.data?.progress ?? null,
+    saveState,
+    actions: {
+      setItemCompleted: (itemId, completed) => update((progress) => setItemCompletion(progress, itemId, completed)),
+      setStudyDayDone: (date, done) => update((progress) => setStudyDayDone(progress, date, done)),
+      setModuleNote: (moduleId, text) => update((progress) => setModuleNote(progress, moduleId, text)),
+      setJournalEntry: (date, text) => update((progress) => setJournalEntry(progress, date, text)),
+      setStartDate: (date, source) => update((progress) => setStartDate(progress, date, source)),
+      replaceProgress: (progress) => update(() => progress),
+      eraseProgress: async () => {
+        if (!userId) return;
+        pendingRef.current = null;
+        if (timerRef.current) clearTimeout(timerRef.current);
+        await makeEraseProgress().execute({ courseSlug });
+        queryClient.setQueryData<LoadProgressOutputDto>(queryKey, { progress: createEmptyProgress() });
+        setSaveState('idle');
+      },
+      retryLoading: () => void query.refetch(),
+    },
+  };
+}
