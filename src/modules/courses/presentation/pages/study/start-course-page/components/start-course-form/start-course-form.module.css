@@ -1,0 +1,156 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 760px;
+  margin: 0 auto;
+  padding-top: 48px;
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.kicker {
+  margin: 0 0 6px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.title {
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-2xl);
+  background: var(--surface);
+}
+
+.stepTitle {
+  margin: 0 0 6px;
+  font-size: 24px;
+}
+
+.stepLead {
+  margin: 0;
+  color: var(--fg-2);
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 12px;
+}
+
+.dateField {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 260px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--fg-2);
+}
+
+.dateField input {
+  min-height: var(--control-md);
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--field);
+  color: var(--fg);
+  font: inherit;
+}
+
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: var(--accent-tint);
+}
+
+.summary strong {
+  font-family: var(--font-display);
+  font-size: 20px;
+}
+
+.summary span {
+  color: var(--fg-2);
+}
+
+.rhythm {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.rhythm li {
+  display: grid;
+  grid-template-columns: 56px 160px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 12px;
+  padding: 14px 16px;
+}
+
+.rhythm li + li {
+  border-top: 1px solid var(--line-soft);
+}
+
+.hours {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--accent);
+}
+
+.when {
+  font-weight: 600;
+}
+
+.what {
+  color: var(--muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+@media (max-width: 520px) {
+  .step {
+    padding: 22px;
+  }
+
+  .rhythm li {
+    grid-template-columns: 48px minmax(0, 1fr);
+  }
+
+  .what {
+    grid-column: 2;
+  }
+}

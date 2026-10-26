@@ -67,7 +67,7 @@ export function CourseDashboard({ details }: CourseDashboardProps) {
         <SectionHeading id="secao-plano" title="Plano de estudo" aside={dashboard.planMeta} />
         <DailyPlan
           today={dashboard.todayView}
-          week={dashboard.week}
+          week={dashboard.weekView}
           stats={dashboard.stats}
           onDayDoneChange={actions.setStudyDayDone}
           onItemDoneChange={actions.setItemCompleted}

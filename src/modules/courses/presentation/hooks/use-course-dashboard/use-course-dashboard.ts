@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import type { CourseProgressState, JournalExport } from '@/modules/progress';
 import { makeClock } from '@/shared/main/factories/make-clock.factory';
 import { formatDayMonth } from '@/shared/utils/date/format/format-day-month';
@@ -11,7 +11,9 @@ import { calculateCourseCompletion } from '../../../domain/rules/summary/complet
 import { calculateMonthsElapsed } from '../../../domain/rules/summary/pace/calculate-months-elapsed.rule';
 import { calculatePace } from '../../../domain/rules/summary/pace/calculate-pace.rule';
 import { findCurrentModuleIndex } from '../../../domain/rules/summary/completion/find-current-module-index.rule';
+import { findOldestOverdueDay } from '../../../domain/rules/summary/find-oldest-overdue-day.rule';
 import { summarizeStudyDays } from '../../../domain/rules/summary/summarize-study-days.rule';
+import { planWeek } from '../../../domain/rules/plan/plan-week.rule';
 import { describeCourseFacts } from '../../formatters/describe-course-facts';
 import { describePace } from '../../formatters/describe-pace';
 import { describeStudyDay } from '../../formatters/describe-study-day';
@@ -33,10 +35,6 @@ export function useCourseDashboard(details: CourseDetailsOutputDto, progressStat
   const startDate = progress?.startDate ?? suggestStartDate(today);
   const { setStartDate } = progressState.actions;
 
-  useEffect(() => {
-    if (progressState.status === 'ready' && progress && progress.startDate === null) setStartDate(suggestStartDate(today), 'suggested');
-  }, [progressState.status, progress, setStartDate, today]);
-
   // The plan has hundreds of days and is rebuilt only when the course or the start date changes.
   const plan = useMemo(() => makeBuildStudyPlan().execute({ course, startDate }), [course, startDate]);
   const isCompleted = (itemId: string) => (progress ? itemId in progress.completedItems : false);
@@ -50,13 +48,20 @@ export function useCourseDashboard(details: CourseDetailsOutputDto, progressStat
   const currentModuleIndex = findCurrentModuleIndex(course, isCompleted);
   const currentModule = course.modules[currentModuleIndex];
   const pace = calculatePace(course, isCompleted, monthsElapsed);
-  const days = summarizeStudyDays(plan, (date) => date in progress.studyDays, today);
+  const isDayDone = (date: string) => date in progress.studyDays;
+  const days = summarizeStudyDays(plan, isDayDone, today);
   const first = plan.days[0];
   const last = plan.days.at(-1);
 
   return {
+    course,
+    plan,
     today,
     startDate,
+    completion,
+    days,
+    oldestOverdueDate: findOldestOverdueDay(plan, isDayDone, today),
+    week: planWeek(plan, today),
     facts: describeCourseFacts(totals),
     currentModuleId: currentModule?.id ?? null,
     changeStartDate: (value: string) => {
@@ -71,7 +76,7 @@ export function useCourseDashboard(details: CourseDetailsOutputDto, progressStat
     } satisfies OverviewView,
     planMeta: first && last ? `${plan.days.length} dias · ${formatDayMonth(first.date)} ${first.date.slice(0, 4)} a ${formatDayMonth(last.date)} ${last.date.slice(0, 4)}` : '',
     todayView: buildTodayView(course, plan, progress, today),
-    week: { ...week, days: buildWeekDayViews(course, plan, progress, week.dates, today) } satisfies WeekView,
+    weekView: { ...week, days: buildWeekDayViews(course, plan, progress, week.dates, today) } satisfies WeekView,
     stats: [
       { text: `${days.completed} de ${days.total} dias feitos`, warning: false },
       { text: `Sequência atual: ${pluralize(days.streak, 'dia', 'dias')}`, warning: false },

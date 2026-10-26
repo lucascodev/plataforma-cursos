@@ -20,6 +20,7 @@ export function buildTodayView(course: Course, plan: StudyPlan, progress: Course
   const next = plan.days[day.index + 1];
 
   return {
+    kind: day.kind,
     kicker,
     reference: text.reference,
     hoursLabel: `${day.hours} h${day.weekday === 6 ? ' · sessão longa' : ''}`,
@@ -31,7 +32,7 @@ export function buildTodayView(course: Course, plan: StudyPlan, progress: Course
     itemLabel: text.itemLabel,
     isItemDone: day.itemId ? day.itemId in progress.completedItems : false,
     journalText: progress.journal[day.date] ?? '',
-    hint: progress.startDateSource === 'suggested' ? 'O plano começou na data sugerida. Para mudar, use o campo Início no topo da página.' : null,
+    hint: progress.startDateSource === 'suggested' ? 'O plano começou na data sugerida. Para mudar, use "Recomeçar de outra data" no Plano.' : null,
     next: next ? { title: describeStudyDay(course, next).title, when: `${WEEKDAY_SHORT_NAMES[next.weekday]} ${formatDayMonth(next.date)}` } : null,
   };
 }
