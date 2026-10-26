@@ -48,6 +48,10 @@ export const coursesRoutes: RouteObject[] = [
         path: 'cursos/:slug/dados',
         lazy: async () => ({ Component: (await import('../pages/study/data-page/data-page')).DataPage }),
       },
+      {
+        path: 'cursos/:slug/dia/:date',
+        lazy: async () => ({ Component: (await import('../pages/study/day-page/day-page')).DayPage }),
+      },
     ],
   },
 ];

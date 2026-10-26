@@ -26,7 +26,14 @@ export function TodayPage() {
 
       <div className={styles.top}>
         {study.todayView ? (
-          <TodayCard today={study.todayView} onDayDoneChange={actions.setStudyDayDone} onItemDoneChange={actions.setItemCompleted} onJournalChange={actions.setJournalEntry} />
+          <div className={styles.today}>
+            <TodayCard today={study.todayView} onDayDoneChange={actions.setStudyDayDone} onItemDoneChange={actions.setItemCompleted} onJournalChange={actions.setJournalEntry} />
+            {page.dayPath ? (
+              <Link className={styles.openDay} to={page.dayPath}>
+                Abrir o dia, com a aula e o cronômetro →
+              </Link>
+            ) : null}
+          </div>
         ) : null}
         <dl className={styles.stats}>
           {page.stats.map((stat) => (

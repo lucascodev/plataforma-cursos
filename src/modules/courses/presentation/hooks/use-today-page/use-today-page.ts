@@ -30,6 +30,7 @@ export function useTodayPage({ details, study }: StudyContext) {
         link: study.oldestOverdueDate ? `/cursos/${slug}/plano` : null,
       },
     ],
+    dayPath: study.todayView ? `/cursos/${slug}/dia/${study.todayView.date}` : null,
     moduleCards: study.modules.map((module) => ({
       id: module.id,
       to: `/cursos/${slug}/modulos/${module.id}`,

@@ -123,3 +123,17 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+.today {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.openDay {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-sm);
+  font-weight: 600;
+}
