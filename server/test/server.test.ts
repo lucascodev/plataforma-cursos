@@ -14,7 +14,7 @@ import { handlePutProgress } from '../modules/progress/handlers/handle-put-progr
 import { readServerConfig } from '../shared/env/read-server-config';
 import { isSameOriginRequest } from '../shared/http/is-same-origin-request';
 import { parseCookies } from '../shared/http/parse-cookies';
-import { accessToken, fakeJwt, json, makeFakeServices } from './fake-supabase';
+import { accessToken, fakeJwt, json, makeFakeServices, respondByPath } from './fake-supabase';
 
 const SITE = 'https://cursos.exemplo.dev';
 const setCookies = (response: Response) => response.headers.getSetCookie();
@@ -157,6 +157,19 @@ describe('sessão', () => {
     expect(setCookies(response).every((cookie) => cookie.includes('Max-Age=0'))).toBe(true);
   });
 
+  it('recusa refresh token malformado sem chamar o Supabase', async () => {
+    const { services, calls } = makeFakeServices(() => json({}));
+    const request = new Request(`${SITE}/api/me`, { headers: { Cookie: cookieHeader({ '__Host-ca-refresh': 'x'.repeat(600) }) } });
+    expect(await resolveSession(request, services)).toBeNull();
+    expect(calls.length).toBe(0);
+  });
+
+  it('limite de requisições do Supabase não derruba a sessão', async () => {
+    const { services } = makeFakeServices(() => json({ error: 'too many' }, 429));
+    const request = new Request(SITE, { headers: { Cookie: cookieHeader({ '__Host-ca-refresh': 'refresh-1' }) } });
+    await expect(resolveSession(request, services)).rejects.toMatchObject({ status: 429 });
+  });
+
   it('/api/me pergunta ao banco o papel e devolve só os campos do contrato', async () => {
     const { services, calls } = makeFakeServices(() =>
       json({ id: 'user-1', handle: 'ana', role: 'teacher', displayName: 'Ana', avatarUrl: null, email: 'ana@example.com' }),
@@ -184,6 +197,19 @@ describe('sessão', () => {
     expect(response.status).toBe(204);
     expect(calls[0]?.url).toContain('/auth/v1/logout');
     expect(setCookies(response).length).toBe(2);
+  });
+
+  it('logout de sessão parada renova o token para revogar no Supabase', async () => {
+    const { services, calls } = makeFakeServices(respondByPath({
+      token: () => json({ access_token: accessToken(), refresh_token: 'refresh-2', expires_in: 3600 }),
+      logout: () => new Response(null, { status: 204 }),
+    }));
+    const response = await handleLogout(
+      new Request(`${SITE}/api/auth/logout`, { method: 'POST', headers: { Cookie: cookieHeader({ '__Host-ca-refresh': 'refresh-1' }) } }),
+      services,
+    );
+    expect(calls.map((call) => new URL(call.url).pathname)).toEqual(['/auth/v1/token', '/auth/v1/logout']);
+    expect(setCookies(response).every((cookie) => cookie.includes('Max-Age=0'))).toBe(true);
   });
 });
 
@@ -256,6 +282,21 @@ describe('progresso', () => {
   it('curso inexistente vira 404', async () => {
     const { services } = makeFakeServices(() => json({ code: '23503' }, 409));
     expect((await handlePutProgress(authed('PUT', { progress: emptyProgress }), 'engenharia-de-ia', services)).status).toBe(404);
+  });
+
+  it('erro ao salvar ainda devolve os cookies renovados', async () => {
+    const { services } = makeFakeServices(respondByPath({
+      token: () => json({ access_token: accessToken(), refresh_token: 'refresh-2', expires_in: 3600 }),
+      course_progress: () => json({}, 500),
+    }));
+    const request = new Request(`${SITE}/api/progress/engenharia-de-ia`, {
+      method: 'PUT',
+      headers: { Cookie: cookieHeader({ '__Host-ca-refresh': 'refresh-1' }), 'Content-Type': 'application/json', Origin: SITE },
+      body: JSON.stringify({ progress: emptyProgress }),
+    });
+    const response = await handlePutProgress(request, 'engenharia-de-ia', services);
+    expect(response.status).toBe(502);
+    expect(setCookies(response).join(' ')).toContain('refresh-2');
   });
 
   it('apaga só o progresso da pessoa', async () => {

@@ -38,10 +38,12 @@ export class SupabaseAuthClient {
   }
 
   async signOut(accessToken: string): Promise<void> {
-    await this.fetcher(`${this.config.supabaseUrl}/auth/v1/logout?scope=local`, {
+    const response = await this.fetcher(`${this.config.supabaseUrl}/auth/v1/logout?scope=local`, {
       method: 'POST',
       headers: { apikey: this.config.publishableKey, Authorization: `Bearer ${accessToken}` },
     });
+    // 401 and 404 mean the session is already gone, which is what logging out wants.
+    if (!response.ok && response.status !== 401 && response.status !== 404) throw new SupabaseRequestError(response.status, 'logout');
   }
 
   private async requestSession(grantType: 'pkce' | 'refresh_token', body: Record<string, string>): Promise<SupabaseSession> {

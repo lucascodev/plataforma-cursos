@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { z } from 'zod';
 import { isProfileHandle } from '../shared/http/is-profile-handle';
 import { isUuid } from '../shared/http/is-uuid';
+import { readJsonBody } from '../shared/http/read-json-body';
 import { readPageOffset } from '../shared/http/read-page-offset';
 import { readValidatedBody } from '../shared/http/read-validated-body';
 import { upstreamProblem } from '../shared/http/upstream-problem';
@@ -20,6 +21,17 @@ describe('helpers do servidor', () => {
     expect(tooLarge.ok ? 0 : tooLarge.response.status).toBe(413);
     const wrongType = await readValidatedBody(post('name=Ana', 'text/plain'), schema, 100);
     expect(wrongType.ok ? 0 : wrongType.response.status).toBe(400);
+  });
+
+  it('para de ler o corpo sem Content-Length assim que passa do limite', async () => {
+    const chunk = new TextEncoder().encode('x'.repeat(60));
+    const stream = new ReadableStream<Uint8Array>({
+      pull(controller) {
+        controller.enqueue(chunk);
+      },
+    });
+    const chunked = new Request(SITE, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: stream, duplex: 'half' } as RequestInit);
+    await expect(readJsonBody(chunked, 100)).rejects.toMatchObject({ reason: 'too-large' });
   });
 
   it('traduz o hint do banco e nunca repassa o texto do Supabase', async () => {
