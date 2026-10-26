@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { courseContentSchema } from '../contracts/course-content.schema.ts';
 
 // Runs only on a maintainer's machine. The secret key comes from .env.local (git-ignored) and never reaches the site.
-const USAGE = 'Uso: npm run content:import -- supabase/seed/courses/<slug>.json [--publish]';
+const USAGE = 'Uso: pnpm content:import supabase/seed/courses/<slug>.json [--publish]';
 
 function fail(message: string): never {
   console.error(message);

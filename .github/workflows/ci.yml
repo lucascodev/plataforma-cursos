@@ -33,6 +33,10 @@ jobs:
         run: |
           pnpm content:schema
           git diff --exit-code contracts/course.schema.json
+      - name: Seed do banco local está atualizado
+        run: |
+          pnpm db:seed
+          git diff --exit-code supabase/seed.sql
       - name: Build (o postbuild procura chaves no resultado)
         run: pnpm build
       - name: Auditoria das dependências de produção
