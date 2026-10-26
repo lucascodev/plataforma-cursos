@@ -1,7 +1,6 @@
 import type { ModuleView } from '../../types/module/module-view.type';
 import { DrillList } from './components/drill-list/drill-list';
 import { LessonList } from './components/lesson-list/lesson-list';
-import { ModuleProjectCard } from './components/module-project-card/module-project-card';
 import { ModuleSidebar } from './components/module-sidebar/module-sidebar';
 import { SelfCheckList } from './components/self-check-list/self-check-list';
 import styles from './module-content.module.css';
@@ -31,7 +30,6 @@ export function ModuleContent({ module, onItemDoneChange, onNoteChange }: Module
         ) : null}
         <LessonList lessons={module.lessons} onDoneChange={onItemDoneChange} />
         {module.drills.length > 0 ? <DrillList drills={module.drills} onDoneChange={onItemDoneChange} /> : null}
-        <ModuleProjectCard project={module.project} onDoneChange={onItemDoneChange} />
         {module.selfCheck.length > 0 ? <SelfCheckList items={module.selfCheck} /> : null}
       </div>
       <ModuleSidebar resources={module.resources} note={module.note} onNoteChange={onNoteChange} />

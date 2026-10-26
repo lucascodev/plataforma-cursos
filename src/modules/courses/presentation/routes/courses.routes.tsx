@@ -32,6 +32,14 @@ export const coursesRoutes: RouteObject[] = [
         path: 'cursos/:slug/modulos/:moduleId',
         lazy: async () => ({ Component: (await import('../pages/study/module-page/module-page')).ModulePage }),
       },
+      {
+        path: 'cursos/:slug/projetos',
+        lazy: async () => ({ Component: (await import('../pages/study/projects-index-page/projects-index-page')).ProjectsIndexPage }),
+      },
+      {
+        path: 'cursos/:slug/projetos/:moduleId',
+        lazy: async () => ({ Component: (await import('../pages/study/project-page/project-page')).ProjectPage }),
+      },
     ],
   },
 ];

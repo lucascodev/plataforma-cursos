@@ -10,6 +10,8 @@ export function mergeProgress(base: CourseProgress, local: CourseProgress, remot
     studyDays: mergeRecord(base.studyDays, local.studyDays, remote.studyDays),
     moduleNotes: mergeRecord(base.moduleNotes, local.moduleNotes, remote.moduleNotes),
     journal: mergeRecord(base.journal, local.journal, remote.journal),
+    projectChecks: mergeRecord(base.projectChecks, local.projectChecks, remote.projectChecks),
+    projectDeliveries: mergeRecord(base.projectDeliveries, local.projectDeliveries, remote.projectDeliveries),
     startDate: changedStart ? local.startDate : remote.startDate,
     startDateSource: changedStart ? local.startDateSource : remote.startDateSource,
     updatedAt: mergeValue(base.updatedAt, local.updatedAt, remote.updatedAt),

@@ -10,6 +10,8 @@ import { mergeProgress } from '../../../domain/rules/merge/merge-progress.rule';
 import { setItemCompletion } from '../../../domain/rules/updates/set-item-completion.rule';
 import { setJournalEntry } from '../../../domain/rules/updates/set-journal-entry.rule';
 import { setModuleNote } from '../../../domain/rules/updates/set-module-note.rule';
+import { deliverProject } from '../../../domain/rules/updates/deliver-project.rule';
+import { setProjectCheck } from '../../../domain/rules/updates/set-project-check.rule';
 import { setStartDate } from '../../../domain/rules/updates/set-start-date.rule';
 import { setStudyDayDone } from '../../../domain/rules/updates/set-study-day-done.rule';
 import { makeEraseProgress } from '../../../main/factories/make-erase-progress.factory';
@@ -111,6 +113,8 @@ export function useCourseProgress(courseSlug: string): CourseProgressState {
       setModuleNote: (moduleId, text) => update((progress) => setModuleNote(progress, moduleId, text)),
       setJournalEntry: (date, text) => update((progress) => setJournalEntry(progress, date, text)),
       setStartDate: (date, source) => update((progress) => setStartDate(progress, date, source)),
+      setProjectCheck: (moduleId, kind, checkId, checked) => update((progress) => setProjectCheck(progress, moduleId, kind, checkId, checked)),
+      deliverProject: (moduleId, projectItemId, delivery) => update((progress) => deliverProject(progress, moduleId, projectItemId, delivery)),
       replaceProgress: (progress) => update(() => progress),
       eraseProgress: async () => {
         if (!userId) return;

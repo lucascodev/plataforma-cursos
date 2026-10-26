@@ -44,7 +44,7 @@ export function PrivacyPage() {
             <li>o e-mail principal da conta GitHub, que o serviço de autenticação registra no login (a plataforma não exibe nem usa esse e-mail);</li>
             <li>seu perfil: endereço (o login do GitHub), nome, texto sobre você, links e papel (estudante, professor ou admin);</li>
             <li>suas preferências de conta: tema, fuso horário e quais avisos você quer receber;</li>
-            <li>por curso: itens concluídos, dias feitos, data de início, anotações dos módulos e o diário;</li>
+            <li>por curso: itens concluídos, dias feitos, data de início, anotações dos módulos, o diário, os requisitos marcados nos projetos e a entrega de cada projeto (link do repositório, link da demonstração e os números que você escrever);</li>
             <li>as propostas de curso que você enviar e a resposta da equipe;</li>
             <li>um histórico das ações de administração (aprovações, trocas de papel, mudanças em cursos), com quem fez e quando.</li>
           </ul>
