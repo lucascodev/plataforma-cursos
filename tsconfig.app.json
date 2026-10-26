@@ -23,5 +23,6 @@
       "@contracts/*": ["./contracts/*"]
     }
   },
-  "include": ["src", "contracts"]
+  "include": ["src", "contracts"],
+  "exclude": ["src/**/*.test.ts", "src/test"]
 }

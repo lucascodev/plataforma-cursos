@@ -1,5 +1,5 @@
 -- Progress of each person in each course. One row per (user, course).
--- Security model: the browser only holds the publishable key, so every rule that matters lives here (RLS, checks, limits).
+-- Security model: the API uses only the publishable key plus each person's token, so every rule that matters lives here (RLS, checks, limits).
 
 create table if not exists public.course_progress (
   user_id uuid not null default auth.uid() references auth.users (id) on delete cascade,
