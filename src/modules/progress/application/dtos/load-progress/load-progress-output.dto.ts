@@ -2,4 +2,5 @@ import type { CourseProgress } from '../../../domain/entities/course-progress.en
 
 export interface LoadProgressOutputDto {
   readonly progress: CourseProgress;
+  readonly revision: number;
 }

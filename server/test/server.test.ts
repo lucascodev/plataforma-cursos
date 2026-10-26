@@ -269,9 +269,9 @@ describe('progresso', () => {
   });
 
   it('lê com o token da pessoa, para o RLS valer', async () => {
-    const { services, calls } = makeFakeServices(() => json([{ data: emptyProgress }]));
+    const { services, calls } = makeFakeServices(() => json([{ data: emptyProgress, revision: 7 }]));
     const response = await handleGetProgress(authed('GET'), 'engenharia-de-ia', services);
-    expect(((await response.json()) as { progress: unknown }).progress).toEqual(emptyProgress);
+    expect(await response.json()).toEqual({ progress: emptyProgress, revision: 7 });
     expect(calls[0]?.headers.authorization).toBe(`Bearer ${accessToken()}`);
     expect(calls[0]?.url).toContain('user_id=eq.user-1');
   });
@@ -283,18 +283,27 @@ describe('progresso', () => {
     expect(calls.length).toBe(0);
   });
 
-  it('salva com upsert em nome da pessoa', async () => {
-    const { services, calls } = makeFakeServices(() => new Response(null, { status: 201 }));
-    const response = await handlePutProgress(authed('PUT', { progress: emptyProgress }), 'engenharia-de-ia', services);
-    expect(response.status).toBe(204);
-    expect(calls[0]?.method).toBe('POST');
-    expect(calls[0]?.headers.prefer).toContain('merge-duplicates');
-    expect(calls[0]?.body).toEqual({ user_id: 'user-1', course_slug: 'engenharia-de-ia', data: emptyProgress });
+  it('salva pela função do banco, com a revisão de partida, e devolve a nova', async () => {
+    const { services, calls } = makeFakeServices(() => json(4));
+    const response = await handlePutProgress(authed('PUT', { progress: emptyProgress, baseRevision: 3 }), 'engenharia-de-ia', services);
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({ revision: 4 });
+    expect(calls[0]?.url).toContain('/rest/v1/rpc/save_course_progress');
+    expect(calls[0]?.headers.authorization).toBe(`Bearer ${accessToken()}`);
+    expect(calls[0]?.body).toEqual({ p_slug: 'engenharia-de-ia', p_data: emptyProgress, p_base_revision: 3 });
   });
 
-  it('curso inexistente vira 404', async () => {
-    const { services } = makeFakeServices(() => json({ code: '23503' }, 409));
-    expect((await handlePutProgress(authed('PUT', { progress: emptyProgress }), 'engenharia-de-ia', services)).status).toBe(404);
+  it('aba com código antigo, sem revisão, salva sem conferir', async () => {
+    const { services, calls } = makeFakeServices(() => json(1));
+    await handlePutProgress(authed('PUT', { progress: emptyProgress }), 'engenharia-de-ia', services);
+    expect((calls[0]?.body as { p_base_revision: unknown }).p_base_revision).toBeNull();
+  });
+
+  it('progresso salvo em outra aba depois da revisão de partida vira 409', async () => {
+    const { services } = makeFakeServices(() => json({ code: 'PT409', hint: 'progress-conflict' }, 409));
+    const response = await handlePutProgress(authed('PUT', { progress: emptyProgress, baseRevision: 1 }), 'engenharia-de-ia', services);
+    expect(response.status).toBe(409);
+    expect(((await response.json()) as { error: { code: string } }).error.code).toBe('progress-conflict');
   });
 
   it('curso não publicado também vira 404, sem revelar que existe', async () => {

@@ -8,11 +8,13 @@ import { progressPath } from '../progress-path';
 export async function handleGetProgress(request: Request, slug: string, services: Services): Promise<Response> {
   if (!isCourseSlug(slug)) return problemResponse(404, 'course-not-found', 'Curso não encontrado.');
   return withSession(request, services, async (session) => {
-    const response = await services.rest.request(`${progressPath(slug, session.userId)}&select=data&limit=1`, { accessToken: session.accessToken });
+    const response = await services.rest.request(`${progressPath(slug, session.userId)}&select=data,revision&limit=1`, {
+      accessToken: session.accessToken,
+    });
     if (response.status === 401) return response;
     if (!response.ok) return problemResponse(502, 'progress-unavailable', 'Não foi possível carregar seu progresso agora.');
     const rows: unknown = await response.json();
-    const first = Array.isArray(rows) ? (rows[0] as { data?: unknown } | undefined) : undefined;
-    return jsonResponse({ progress: first?.data ?? null });
+    const first = Array.isArray(rows) ? (rows[0] as { data?: unknown; revision?: unknown } | undefined) : undefined;
+    return jsonResponse({ progress: first?.data ?? null, revision: typeof first?.revision === 'number' ? first.revision : 0 });
   });
 }

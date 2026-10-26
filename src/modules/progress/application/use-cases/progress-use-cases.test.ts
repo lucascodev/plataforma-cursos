@@ -19,10 +19,25 @@ describe('LoadProgressUseCase', () => {
 });
 
 describe('SaveProgressUseCase', () => {
-  it('stamps the save time', async () => {
+  const empty = { progress: createEmptyProgress(), revision: 0 };
+
+  it('stamps the save time and returns the new revision', async () => {
     const repository = new InMemoryProgressRepository();
-    await new SaveProgressUseCase(repository, fixedClock).execute({ courseSlug: 'c', progress: createEmptyProgress() });
-    expect((await repository.load('c'))?.updatedAt).toBe('2026-10-26T13:00:00.000Z');
+    const saved = await new SaveProgressUseCase(repository, fixedClock).execute({ courseSlug: 'c', progress: createEmptyProgress(), base: empty });
+    expect(saved.revision).toBe(1);
+    expect((await repository.load('c'))?.progress.updatedAt).toBe('2026-10-26T13:00:00.000Z');
+  });
+
+  it('merges with what another tab saved instead of overwriting it', async () => {
+    const repository = new InMemoryProgressRepository();
+    const useCase = new SaveProgressUseCase(repository, fixedClock);
+    await useCase.execute({ courseSlug: 'c', progress: setItemCompletion(createEmptyProgress(), 'm1-t1', true), base: empty });
+
+    const saved = await useCase.execute({ courseSlug: 'c', progress: setItemCompletion(createEmptyProgress(), 'm1-t2', true), base: empty });
+
+    expect(saved.revision).toBe(2);
+    expect(Object.keys(saved.progress.completedItems).sort()).toEqual(['m1-t1', 'm1-t2']);
+    expect((await repository.load('c'))?.progress.completedItems).toEqual(saved.progress.completedItems);
   });
 });
 
