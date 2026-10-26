@@ -15,8 +15,8 @@ export function CatalogPage() {
       <header className={styles.header}>
         <h1 className={styles.title}>Cursos</h1>
         <p className={styles.lead}>
-          Cada curso tem plano diário, exercícios antes de cada projeto e um projeto prático por módulo. Comece sem conta: o progresso fica neste
-          navegador e pode ir para a sua conta quando você entrar.
+          Cada curso tem plano diário, exercícios antes de cada projeto e um projeto prático por módulo. Entre com o GitHub para
+          começar: o progresso fica salvo na sua conta e aparece em qualquer aparelho.
         </p>
       </header>
       {catalog.data.length === 0 ? (
