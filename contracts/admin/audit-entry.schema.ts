@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { profileCardSchema } from '../profile/profile-card.schema';
-import { timestampSchema } from '../date/timestamp.schema';
+import { profileCardSchema } from '../profile/profile-card.schema.ts';
+import { timestampSchema } from '../date/timestamp.schema.ts';
 
 export const auditActionSchema = z.enum([
   'proposal.submitted',

@@ -40,11 +40,11 @@ export function buildModuleViews(course: Course, plan: StudyPlan, progress: Cour
       caseStudy: module.caseStudy,
       lowSpecTip: module.lowSpecTip,
       lessons: module.lessons.map((lesson, lessonIndex) => {
-        const itemId = lessonItemId(module.id, lessonIndex);
+        const itemId = lessonItemId(module.id, lesson.id);
         return { itemId, number: `${number}.${lessonIndex + 1}`, title: lesson.title, summary: lesson.summary, exercise: lesson.exercise, isDone: isCompleted(itemId) };
       }),
       drills: module.drills.map((drill, drillIndex) => {
-        const itemId = drillItemId(module.id, drillIndex);
+        const itemId = drillItemId(module.id, drill.id);
         return { itemId, number: `${number}.${drillIndex + 1}`, title: drill.title, task: drill.task, isDone: isCompleted(itemId) };
       }),
       project: {

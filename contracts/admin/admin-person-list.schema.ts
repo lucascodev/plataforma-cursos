@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { adminPersonSchema } from './admin-person.schema';
+import { adminPersonSchema } from './admin-person.schema.ts';
 
 export const adminPersonListSchema = z.object({
   items: z.array(adminPersonSchema).max(100),

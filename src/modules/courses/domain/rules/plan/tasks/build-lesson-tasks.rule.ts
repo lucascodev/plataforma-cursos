@@ -13,6 +13,7 @@ export function buildLessonTasks(module: CourseModule, moduleIndex: number, less
     ...Array.from({ length: review }, () => createStudyTask({ ...base, kind: 'lesson-review' })),
   ];
   const last = tasks.at(-1);
-  if (last) tasks[tasks.length - 1] = { ...last, itemId: lessonItemId(module.id, lessonIndex) };
+  const lesson = module.lessons[lessonIndex];
+  if (last && lesson) tasks[tasks.length - 1] = { ...last, itemId: lessonItemId(module.id, lesson.id) };
   return tasks;
 }

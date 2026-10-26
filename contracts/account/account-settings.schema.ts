@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { isTimeZone } from './is-time-zone';
+import { isTimeZone } from './is-time-zone.ts';
 
 export const accountSettingsSchema = z.object({
   timezone: z

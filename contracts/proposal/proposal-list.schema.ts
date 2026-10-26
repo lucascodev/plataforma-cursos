@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { proposalSchema } from './proposal.schema';
+import { proposalSchema } from './proposal.schema.ts';
 
 export const proposalListSchema = z.object({
   items: z.array(proposalSchema).max(100),

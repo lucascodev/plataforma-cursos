@@ -1,4 +1,8 @@
 import { z } from 'zod';
+import { defaultDrillId } from './item-ids/default-drill-id.ts';
+import { defaultLessonId } from './item-ids/default-lesson-id.ts';
+import { drillIdSchema } from './item-ids/drill-id.schema.ts';
+import { lessonIdSchema } from './item-ids/lesson-id.schema.ts';
 
 const text = (max: number) => z.string().trim().min(1).max(max);
 const httpsUrl = z
@@ -7,8 +11,8 @@ const httpsUrl = z
   .refine((value) => value.startsWith('https://'), 'Use links https.');
 const identifier = z.string().regex(/^[a-z0-9-]{1,60}$/, 'Use letras minúsculas, números e hífens.');
 
-const lessonSchema = z.object({ title: text(120), summary: text(600), exercise: text(800) });
-const drillSchema = z.object({ title: text(120), task: text(800) });
+const lessonSchema = z.object({ id: lessonIdSchema.optional(), title: text(120), summary: text(600), exercise: text(800) });
+const drillSchema = z.object({ id: drillIdSchema.optional(), title: text(120), task: text(800) });
 const projectSchema = z.object({
   title: text(160),
   brief: text(800),
@@ -95,6 +99,13 @@ export const courseContentSchema = z
       context.addIssue({ code: 'custom', path: ['modules'], message: 'Há módulos com o mesmo id.' });
     }
     course.modules.forEach((module, index) => {
+      const itemIds = [
+        ...module.lessons.map((lesson, lessonIndex) => lesson.id ?? defaultLessonId(lessonIndex)),
+        ...module.drills.map((drill, drillIndex) => drill.id ?? defaultDrillId(drillIndex)),
+      ];
+      if (new Set(itemIds).size !== itemIds.length) {
+        context.addIssue({ code: 'custom', path: ['modules', index], message: 'Há aulas ou exercícios com o mesmo id neste módulo.' });
+      }
       const continuous = module.kind === 'continuous';
       if (continuous !== (module.months === 0)) {
         context.addIssue({

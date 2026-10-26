@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { accountSettingsSchema } from './account-settings.schema';
+import { accountSettingsSchema } from './account-settings.schema.ts';
 
 const valid = { timezone: 'America/Sao_Paulo', theme: 'system', notify: { proposalUpdates: true, weeklySummary: false } };
 

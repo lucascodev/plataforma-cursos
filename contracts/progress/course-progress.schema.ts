@@ -1,9 +1,9 @@
 import { z } from 'zod';
-import { isDateKey } from '../date/is-date-key';
-import { progressLimits } from './progress-limits';
+import { isDateKey } from '../date/is-date-key.ts';
+import { progressLimits } from './progress-limits.ts';
 
 const dateKey = z.string().refine(isDateKey, 'Data inválida.');
-const itemId = z.string().regex(/^[a-z0-9-]{1,60}-(t\d{1,3}|e\d{1,3}|cp)$/);
+const itemId = z.string().regex(/^[a-z0-9-]{1,60}-(t[a-z0-9]{1,12}|e[a-z0-9]{1,12}|cp)$/);
 const moduleId = z.string().regex(/^[a-z0-9-]{1,60}$/);
 const entryText = z.string().max(progressLimits.maxTextLength);
 const withinEntryLimit = (record: Record<string, unknown>) => Object.keys(record).length <= progressLimits.maxEntries;

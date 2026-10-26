@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { profileLinkSchema } from './profile-link.schema';
+import { profileLinkSchema } from './profile-link.schema.ts';
 
 export const profileUpdateSchema = z.object({
   displayName: z.string().trim().min(1, 'Informe um nome.').max(80),

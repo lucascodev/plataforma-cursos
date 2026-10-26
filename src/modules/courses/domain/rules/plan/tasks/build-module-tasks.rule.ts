@@ -20,8 +20,8 @@ export function buildModuleTasks(module: CourseModule, moduleIndex: number): Stu
     ...module.lessons.flatMap((_, lessonIndex) =>
       buildLessonTasks(module, moduleIndex, lessonIndex, baseDays + (lessonIndex < extraDays ? 1 : 0)),
     ),
-    ...module.drills.map((_, drillIndex) =>
-      createStudyTask({ kind: 'drill', moduleIndex, drillIndex, itemId: drillItemId(module.id, drillIndex) }),
+    ...module.drills.map((drill, drillIndex) =>
+      createStudyTask({ kind: 'drill', moduleIndex, drillIndex, itemId: drillItemId(module.id, drill.id) }),
     ),
     ...buildProjectTasks(module, moduleIndex, projectDays),
     createStudyTask({ kind: 'self-check', moduleIndex }),

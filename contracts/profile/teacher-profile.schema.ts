@@ -1,8 +1,8 @@
 import { z } from 'zod';
-import { avatarUrlSchema } from '../url/avatar-url.schema';
-import { courseSlugSchema } from '../course/course-slug.schema';
-import { PROFILE_HANDLE_PATTERN } from './profile-handle-pattern';
-import { profileLinkSchema } from './profile-link.schema';
+import { avatarUrlSchema } from '../url/avatar-url.schema.ts';
+import { courseSlugSchema } from '../course/course-slug.schema.ts';
+import { PROFILE_HANDLE_PATTERN } from './profile-handle-pattern.ts';
+import { profileLinkSchema } from './profile-link.schema.ts';
 
 export const teacherProfileSchema = z.object({
   handle: z.string().regex(PROFILE_HANDLE_PATTERN),

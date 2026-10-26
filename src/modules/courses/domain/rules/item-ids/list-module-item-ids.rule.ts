@@ -5,8 +5,8 @@ import { projectItemId } from './project-item-id.rule';
 
 export function listModuleItemIds(module: CourseModule): string[] {
   return [
-    ...module.lessons.map((_, index) => lessonItemId(module.id, index)),
-    ...module.drills.map((_, index) => drillItemId(module.id, index)),
+    ...module.lessons.map((lesson) => lessonItemId(module.id, lesson.id)),
+    ...module.drills.map((drill) => drillItemId(module.id, drill.id)),
     projectItemId(module.id),
   ];
 }

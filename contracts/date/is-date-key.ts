@@ -1,4 +1,4 @@
-import { DATE_KEY_PATTERN } from './date-key-pattern';
+import { DATE_KEY_PATTERN } from './date-key-pattern.ts';
 
 export function isDateKey(value: unknown): value is string {
   if (typeof value !== 'string' || !DATE_KEY_PATTERN.test(value)) return false;
