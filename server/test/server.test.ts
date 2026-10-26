@@ -297,6 +297,18 @@ describe('progresso', () => {
     expect((await handlePutProgress(authed('PUT', { progress: emptyProgress }), 'engenharia-de-ia', services)).status).toBe(404);
   });
 
+  it('curso não publicado também vira 404, sem revelar que existe', async () => {
+    const { services } = makeFakeServices(() => json({ code: '42501' }, 403));
+    expect((await handlePutProgress(authed('PUT', { progress: emptyProgress }), 'rascunho', services)).status).toBe(404);
+  });
+
+  it('limite de escrita do banco vira 429', async () => {
+    const { services } = makeFakeServices(() => json({ code: 'PT429', hint: 'rate-limited' }, 429));
+    const response = await handlePutProgress(authed('PUT', { progress: emptyProgress }), 'engenharia-de-ia', services);
+    expect(response.status).toBe(429);
+    expect(((await response.json()) as { error: { code: string } }).error.code).toBe('rate-limited');
+  });
+
   it('erro ao salvar ainda devolve os cookies renovados', async () => {
     const { services } = makeFakeServices(respondByPath({
       token: () => json({ access_token: accessToken(), refresh_token: 'refresh-2', expires_in: 3600 }),

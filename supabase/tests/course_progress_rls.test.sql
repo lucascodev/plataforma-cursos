@@ -3,8 +3,8 @@ begin;
 create extension if not exists pgtap with schema extensions;
 select plan(9);
 
--- Each test owns the rows it reads: the local seed is removed here and comes back when the transaction rolls back.
-delete from public.courses;
+-- The seed course is removed inside this transaction so the test only reads the rows it creates.
+delete from public.courses where slug = 'engenharia-de-ia';
 
 insert into auth.users (id, email, aud, role)
 values
@@ -39,9 +39,9 @@ select throws_ok(
 
 select throws_ok(
   $$ insert into public.course_progress (course_slug, data) values ('Slug Inválido!', '{}') $$,
-  '23514',
+  '42501',
   null,
-  'slug fora do formato é recusado'
+  'slug fora do formato é recusado (nenhum curso publicado tem esse slug)'
 );
 
 set local request.jwt.claims = '{"sub": "22222222-2222-2222-2222-222222222222", "role": "authenticated"}';

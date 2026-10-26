@@ -4,6 +4,7 @@ import { isCourseSlug } from '../../../shared/http/is-course-slug';
 import { problemResponse } from '../../../shared/http/problem-response';
 import { readJsonBody } from '../../../shared/http/read-json-body';
 import { RequestBodyError } from '../../../shared/http/request-body-error';
+import { upstreamProblem } from '../../../shared/http/upstream-problem';
 import { withSession } from '../../auth/with-session';
 import { MAX_PROGRESS_BODY_BYTES } from '../max-progress-body-bytes';
 
@@ -27,8 +28,9 @@ export async function handlePutProgress(request: Request, slug: string, services
       body: { user_id: session.userId, course_slug: slug, data: parsed.data },
     });
     if (response.status === 401) return response;
-    if (response.status === 409) return problemResponse(404, 'course-not-found', 'Curso não encontrado.');
-    if (!response.ok) return problemResponse(502, 'progress-unavailable', 'Não foi possível salvar seu progresso agora.');
+    // 409: the course does not exist (FK). 403: it exists but is not published (RLS). Both look the same from outside.
+    if (response.status === 409 || response.status === 403) return problemResponse(404, 'course-not-found', 'Curso não encontrado.');
+    if (!response.ok) return upstreamProblem(response, {}, 'Não foi possível salvar seu progresso agora.');
     return new Response(null, { status: 204, headers: { 'Cache-Control': 'no-store' } });
   });
 }

@@ -3,8 +3,8 @@ begin;
 create extension if not exists pgtap with schema extensions;
 select plan(11);
 
--- Each test owns the rows it reads: the local seed is removed here and comes back when the transaction rolls back.
-delete from public.courses;
+-- The seed course is removed inside this transaction so the test only reads the rows it creates.
+delete from public.courses where slug = 'engenharia-de-ia';
 
 insert into auth.users (id, email, aud, role)
 values
