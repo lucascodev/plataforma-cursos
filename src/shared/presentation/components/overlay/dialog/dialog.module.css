@@ -1,0 +1,75 @@
+.dialog {
+  border: 0;
+  padding: 0;
+  color: var(--fg);
+  background: var(--surface);
+  box-shadow: var(--shadow-modal);
+}
+
+.dialog::backdrop {
+  background: var(--overlay);
+}
+
+.center {
+  width: min(520px, calc(100% - 32px));
+  border-radius: var(--radius-2xl);
+}
+
+.sheet {
+  width: min(520px, calc(100% - 32px));
+  border-radius: var(--radius-2xl);
+}
+
+@media (max-width: 640px) {
+  .sheet {
+    width: 100%;
+    max-width: 100%;
+    margin: auto 0 0;
+    border-radius: 22px 22px 0 0;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+}
+
+.handle {
+  align-self: center;
+  width: 40px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--line-strong);
+}
+
+.title {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.description {
+  margin: 0;
+  color: var(--fg-2);
+}
+
+.description > p {
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+@media (max-width: 640px) {
+  .actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+}
