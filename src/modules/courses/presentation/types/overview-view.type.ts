@@ -1,4 +1,4 @@
-import type { PlanCurveView } from './plan-curve-view.type';
+import type { PlanCurveView } from './plan/plan-curve-view.type';
 
 export interface OverviewView {
   readonly percent: number;

@@ -1,13 +1,13 @@
 import { formatMonthYear } from '@/shared/utils/date/format/format-month-year';
 import type { CourseProgress } from '@/modules/progress';
-import type { Course } from '../../../domain/entities/course/course.entity';
-import type { StudyPlan } from '../../../domain/entities/plan/study-plan.entity';
-import { drillItemId } from '../../../domain/rules/item-ids/drill-item-id.rule';
-import { lessonItemId } from '../../../domain/rules/item-ids/lesson-item-id.rule';
-import { projectItemId } from '../../../domain/rules/item-ids/project-item-id.rule';
-import { weeksForModule } from '../../../domain/rules/plan/weeks-for-module.rule';
-import { calculateModuleCompletion } from '../../../domain/rules/summary/calculate-module-completion.rule';
-import type { ModuleView } from '../../types/module-view.type';
+import type { Course } from '../../../../domain/entities/course/course.entity';
+import type { StudyPlan } from '../../../../domain/entities/plan/study-plan.entity';
+import { drillItemId } from '../../../../domain/rules/item-ids/drill-item-id.rule';
+import { lessonItemId } from '../../../../domain/rules/item-ids/lesson-item-id.rule';
+import { projectItemId } from '../../../../domain/rules/item-ids/project-item-id.rule';
+import { weeksForModule } from '../../../../domain/rules/plan/schedule/weeks-for-module.rule';
+import { calculateModuleCompletion } from '../../../../domain/rules/summary/completion/calculate-module-completion.rule';
+import type { ModuleView } from '../../../types/module/module-view.type';
 
 export function buildModuleViews(course: Course, plan: StudyPlan, progress: CourseProgress, currentModuleIndex: number): ModuleView[] {
   const isCompleted = (itemId: string) => itemId in progress.completedItems;

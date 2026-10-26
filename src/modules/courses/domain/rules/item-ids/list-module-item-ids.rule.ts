@@ -1,4 +1,4 @@
-import type { CourseModule } from '../../entities/course/course-module.entity';
+import type { CourseModule } from '../../entities/course/module/course-module.entity';
 import { drillItemId } from './drill-item-id.rule';
 import { lessonItemId } from './lesson-item-id.rule';
 import { projectItemId } from './project-item-id.rule';

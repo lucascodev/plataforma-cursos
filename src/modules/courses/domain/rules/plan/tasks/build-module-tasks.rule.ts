@@ -1,11 +1,11 @@
-import { planTuning } from '../../constants/plan-tuning';
-import type { CourseModule } from '../../entities/course/course-module.entity';
-import type { StudyTask } from '../../entities/plan/study-task.entity';
-import { drillItemId } from '../item-ids/drill-item-id.rule';
+import { planTuning } from '../../../constants/plan-tuning';
+import type { CourseModule } from '../../../entities/course/module/course-module.entity';
+import type { StudyTask } from '../../../entities/plan/study-task.entity';
+import { drillItemId } from '../../item-ids/drill-item-id.rule';
 import { buildLessonTasks } from './build-lesson-tasks.rule';
 import { buildProjectTasks } from './build-project-tasks.rule';
 import { createStudyTask } from './create-study-task.rule';
-import { weeksForModule } from './weeks-for-module.rule';
+import { weeksForModule } from '../schedule/weeks-for-module.rule';
 
 export function buildModuleTasks(module: CourseModule, moduleIndex: number): StudyTask[] {
   const totalDays = weeksForModule(module) * planTuning.studyDaysPerWeek;

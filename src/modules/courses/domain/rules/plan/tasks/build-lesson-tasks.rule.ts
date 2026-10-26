@@ -1,6 +1,6 @@
-import type { CourseModule } from '../../entities/course/course-module.entity';
-import type { StudyTask } from '../../entities/plan/study-task.entity';
-import { lessonItemId } from '../item-ids/lesson-item-id.rule';
+import type { CourseModule } from '../../../entities/course/module/course-module.entity';
+import type { StudyTask } from '../../../entities/plan/study-task.entity';
+import { lessonItemId } from '../../item-ids/lesson-item-id.rule';
 import { createStudyTask } from './create-study-task.rule';
 import { splitLessonDays } from './split-lesson-days.rule';
 

@@ -1,5 +1,5 @@
-import type { Course } from '../../entities/course/course.entity';
-import { listModuleItemIds } from '../item-ids/list-module-item-ids.rule';
+import type { Course } from '../../../entities/course/course.entity';
+import { listModuleItemIds } from '../../item-ids/list-module-item-ids.rule';
 
 export function calculatePlannedRemainingShare(course: Course, monthsElapsed: number): number {
   const timedModules = course.modules.filter((module) => module.months > 0);

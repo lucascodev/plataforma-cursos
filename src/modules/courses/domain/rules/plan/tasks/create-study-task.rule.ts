@@ -1,4 +1,4 @@
-import type { StudyTask } from '../../entities/plan/study-task.entity';
+import type { StudyTask } from '../../../entities/plan/study-task.entity';
 
 type StudyTaskInput = Pick<StudyTask, 'kind'> & Partial<Omit<StudyTask, 'kind'>>;
 

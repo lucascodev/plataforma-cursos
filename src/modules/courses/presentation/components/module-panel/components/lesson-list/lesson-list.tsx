@@ -1,4 +1,4 @@
-import type { ModuleView } from '../../../../types/module-view.type';
+import type { ModuleView } from '../../../../types/module/module-view.type';
 import { CheckableItem } from '../checkable-item/checkable-item';
 import { ItemGroup } from '../item-group/item-group';
 import styles from './lesson-list.module.css';

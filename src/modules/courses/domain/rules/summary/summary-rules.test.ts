@@ -2,10 +2,10 @@ import { describe, expect, it } from 'vitest';
 import { listModuleItemIds } from '../item-ids/list-module-item-ids.rule';
 import { buildStudyPlan } from '../plan/build-study-plan.rule';
 import { loadTestCourse } from '@/test/fixtures/load-test-course.fixture';
-import { calculateCourseCompletion } from './calculate-course-completion.rule';
-import { calculateMonthsElapsed } from './calculate-months-elapsed.rule';
-import { calculatePace } from './calculate-pace.rule';
-import { findCurrentModuleIndex } from './find-current-module-index.rule';
+import { calculateCourseCompletion } from './completion/calculate-course-completion.rule';
+import { calculateMonthsElapsed } from './pace/calculate-months-elapsed.rule';
+import { calculatePace } from './pace/calculate-pace.rule';
+import { findCurrentModuleIndex } from './completion/find-current-module-index.rule';
 import { summarizeCourseTotals } from './summarize-course-totals.rule';
 import { summarizeStudyDays } from './summarize-study-days.rule';
 

@@ -6,11 +6,11 @@ import { formatFullDate } from '@/shared/utils/date/format/format-full-date';
 import { isDateKey } from '@contracts/date/is-date-key';
 import { pluralize } from '@/shared/utils/text/pluralize';
 import type { CourseDetailsOutputDto } from '../../../application/dtos/get-course-by-slug/course-details-output.dto';
-import { suggestStartDate } from '../../../domain/rules/plan/suggest-start-date.rule';
-import { calculateCourseCompletion } from '../../../domain/rules/summary/calculate-course-completion.rule';
-import { calculateMonthsElapsed } from '../../../domain/rules/summary/calculate-months-elapsed.rule';
-import { calculatePace } from '../../../domain/rules/summary/calculate-pace.rule';
-import { findCurrentModuleIndex } from '../../../domain/rules/summary/find-current-module-index.rule';
+import { suggestStartDate } from '../../../domain/rules/plan/schedule/suggest-start-date.rule';
+import { calculateCourseCompletion } from '../../../domain/rules/summary/completion/calculate-course-completion.rule';
+import { calculateMonthsElapsed } from '../../../domain/rules/summary/pace/calculate-months-elapsed.rule';
+import { calculatePace } from '../../../domain/rules/summary/pace/calculate-pace.rule';
+import { findCurrentModuleIndex } from '../../../domain/rules/summary/completion/find-current-module-index.rule';
 import { summarizeStudyDays } from '../../../domain/rules/summary/summarize-study-days.rule';
 import { describeCourseFacts } from '../../formatters/describe-course-facts';
 import { describePace } from '../../formatters/describe-pace';
@@ -19,12 +19,12 @@ import { makeBuildStudyPlan } from '../../../main/factories/make-build-study-pla
 import { usePlanCurve } from '../use-plan-curve/use-plan-curve';
 import { useWeekNavigation } from '../use-week-navigation/use-week-navigation';
 import type { OverviewView } from '../../types/overview-view.type';
-import type { PlanStatView } from '../../types/plan-stat-view.type';
-import type { WeekView } from '../../types/week-view.type';
-import { buildModuleViews } from './build-module-views';
-import { buildRhythmView } from './build-rhythm-view';
-import { buildTodayView } from './build-today-view';
-import { buildWeekDayViews } from './build-week-day-views';
+import type { PlanStatView } from '../../types/plan/plan-stat-view.type';
+import type { WeekView } from '../../types/plan/week-view.type';
+import { buildModuleViews } from './builders/build-module-views';
+import { buildRhythmView } from './builders/build-rhythm-view';
+import { buildTodayView } from './builders/build-today-view';
+import { buildWeekDayViews } from './builders/build-week-day-views';
 
 export function useCourseDashboard(details: CourseDetailsOutputDto, progressState: CourseProgressState) {
   const { course, totals } = details;

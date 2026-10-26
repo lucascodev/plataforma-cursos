@@ -1,5 +1,5 @@
 import { ExternalLink } from '@/shared/presentation/components/navigation/external-link/external-link';
-import type { Resource } from '../../../../../../../domain/entities/course/resource.entity';
+import type { Resource } from '../../../../../../../domain/entities/course/module/resource.entity';
 import styles from './resource-list.module.css';
 
 interface ResourceListProps {

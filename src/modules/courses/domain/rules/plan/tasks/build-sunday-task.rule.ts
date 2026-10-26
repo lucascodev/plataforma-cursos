@@ -1,6 +1,6 @@
-import type { Course } from '../../entities/course/course.entity';
-import type { StudyTask } from '../../entities/plan/study-task.entity';
-import { lessonItemId } from '../item-ids/lesson-item-id.rule';
+import type { Course } from '../../../entities/course/course.entity';
+import type { StudyTask } from '../../../entities/plan/study-task.entity';
+import { lessonItemId } from '../../item-ids/lesson-item-id.rule';
 import { createStudyTask } from './create-study-task.rule';
 import { resolveSundayIndex } from './resolve-sunday-index.rule';
 

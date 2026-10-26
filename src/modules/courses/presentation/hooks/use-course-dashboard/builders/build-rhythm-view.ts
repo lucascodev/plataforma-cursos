@@ -1,8 +1,8 @@
 import { WEEKDAY_SHORT_NAMES } from '@/shared/utils/date/names/weekday-short-names';
 import { pluralize } from '@/shared/utils/text/pluralize';
-import type { StudyRhythm } from '../../../domain/entities/course/study-rhythm.entity';
-import { hoursForWeekday } from '../../../domain/rules/plan/hours-for-weekday.rule';
-import type { RhythmView } from '../../types/rhythm-view.type';
+import type { StudyRhythm } from '../../../../domain/entities/course/study-rhythm.entity';
+import { hoursForWeekday } from '../../../../domain/rules/plan/schedule/hours-for-weekday.rule';
+import type { RhythmView } from '../../../types/plan/rhythm-view.type';
 
 const WIDTH = 280;
 const HEIGHT = 110;

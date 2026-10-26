@@ -1,4 +1,4 @@
-import type { CourseTaskText } from './course-task-text.entity';
+import type { CourseTaskText } from '../module/course-task-text.entity';
 import type { SundayMilestone } from './sunday-milestone.entity';
 
 export interface SundayTrack {

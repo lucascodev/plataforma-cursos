@@ -3,10 +3,10 @@ import type { DateKey } from '@/shared/domain/types/date-key.type';
 import { formatDayMonth } from '@/shared/utils/date/format/format-day-month';
 import { formatFullDate } from '@/shared/utils/date/format/format-full-date';
 import { WEEKDAY_SHORT_NAMES } from '@/shared/utils/date/names/weekday-short-names';
-import type { Course } from '../../../domain/entities/course/course.entity';
-import type { StudyPlan } from '../../../domain/entities/plan/study-plan.entity';
-import { describeStudyDay } from '../../formatters/describe-study-day';
-import type { TodayView } from '../../types/today-view.type';
+import type { Course } from '../../../../domain/entities/course/course.entity';
+import type { StudyPlan } from '../../../../domain/entities/plan/study-plan.entity';
+import { describeStudyDay } from '../../../formatters/describe-study-day';
+import type { TodayView } from '../../../types/plan/today-view.type';
 
 export function buildTodayView(course: Course, plan: StudyPlan, progress: CourseProgress, today: DateKey): TodayView | null {
   const first = plan.days[0];

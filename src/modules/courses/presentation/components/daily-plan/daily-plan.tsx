@@ -1,7 +1,7 @@
 import type { DateKey } from '@/shared/domain/types/date-key.type';
-import type { PlanStatView } from '../../types/plan-stat-view.type';
-import type { TodayView } from '../../types/today-view.type';
-import type { WeekView } from '../../types/week-view.type';
+import type { PlanStatView } from '../../types/plan/plan-stat-view.type';
+import type { TodayView } from '../../types/plan/today-view.type';
+import type { WeekView } from '../../types/plan/week-view.type';
 import styles from './daily-plan.module.css';
 import { PlanStats } from './components/plan-stats/plan-stats';
 import { TodayCard } from './components/today-card/today-card';

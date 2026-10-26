@@ -1,4 +1,4 @@
-import type { Resource } from '../../../../../domain/entities/course/resource.entity';
+import type { Resource } from '../../../../../domain/entities/course/module/resource.entity';
 import styles from './module-sidebar.module.css';
 import { ModuleNotes } from './components/module-notes/module-notes';
 import { ResourceList } from './components/resource-list/resource-list';

@@ -1,6 +1,6 @@
 import { Button } from '@/shared/presentation/components/actions/button/button';
 import type { DateKey } from '@/shared/domain/types/date-key.type';
-import type { TodayView } from '../../../../types/today-view.type';
+import type { TodayView } from '../../../../types/plan/today-view.type';
 import { ItemCheck } from '../../../item-check/item-check';
 import { JournalField } from '../journal-field/journal-field';
 import styles from './today-card.module.css';

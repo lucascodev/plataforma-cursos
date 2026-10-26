@@ -1,5 +1,5 @@
-import type { CourseModuleKind } from '../../domain/entities/course/course-module-kind.type';
-import type { Resource } from '../../domain/entities/course/resource.entity';
+import type { CourseModuleKind } from '../../../domain/entities/course/module/course-module-kind.type';
+import type { Resource } from '../../../domain/entities/course/module/resource.entity';
 import type { ModuleItemView } from './module-item-view.type';
 
 export interface ModuleView {

@@ -1,8 +1,8 @@
 import type { Course } from '../../../domain/entities/course/course.entity';
 import type { IsCompleted } from '../../../domain/rules/item-ids/is-completed.type';
-import { calculateActualRemainingShare } from '../../../domain/rules/summary/calculate-actual-remaining-share.rule';
-import { calculatePlannedRemainingShare } from '../../../domain/rules/summary/calculate-planned-remaining-share.rule';
-import type { PlanCurveView } from '../../types/plan-curve-view.type';
+import { calculateActualRemainingShare } from '../../../domain/rules/summary/pace/calculate-actual-remaining-share.rule';
+import { calculatePlannedRemainingShare } from '../../../domain/rules/summary/pace/calculate-planned-remaining-share.rule';
+import type { PlanCurveView } from '../../types/plan/plan-curve-view.type';
 
 const WIDTH = 340;
 const HEIGHT = 150;

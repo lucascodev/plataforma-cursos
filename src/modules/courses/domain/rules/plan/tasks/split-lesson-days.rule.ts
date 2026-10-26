@@ -1,4 +1,4 @@
-import { planTuning } from '../../constants/plan-tuning';
+import { planTuning } from '../../../constants/plan-tuning';
 
 export function splitLessonDays(dayCount: number): { study: number; exercise: number; review: number } {
   const review = dayCount >= planTuning.reviewThreshold ? 1 : 0;

@@ -6,10 +6,10 @@ import type { ModuleDateRange } from '../../entities/plan/module-date-range.enti
 import type { StudyDay } from '../../entities/plan/study-day.entity';
 import type { StudyPlan } from '../../entities/plan/study-plan.entity';
 import type { StudyTask } from '../../entities/plan/study-task.entity';
-import { buildModuleTasks } from './build-module-tasks.rule';
-import { buildSundayTask } from './build-sunday-task.rule';
-import { createStudyTask } from './create-study-task.rule';
-import { hoursForWeekday } from './hours-for-weekday.rule';
+import { buildModuleTasks } from './tasks/build-module-tasks.rule';
+import { buildSundayTask } from './tasks/build-sunday-task.rule';
+import { createStudyTask } from './tasks/create-study-task.rule';
+import { hoursForWeekday } from './schedule/hours-for-weekday.rule';
 
 interface DaySlot {
   readonly date: DateKey;

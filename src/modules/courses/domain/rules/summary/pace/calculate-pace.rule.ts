@@ -1,7 +1,7 @@
-import type { Course } from '../../entities/course/course.entity';
-import type { PaceSummary } from '../../entities/summary/pace-summary.entity';
-import type { IsCompleted } from '../item-ids/is-completed.type';
-import { listModuleItemIds } from '../item-ids/list-module-item-ids.rule';
+import type { Course } from '../../../entities/course/course.entity';
+import type { PaceSummary } from '../../../entities/summary/pace-summary.entity';
+import type { IsCompleted } from '../../item-ids/is-completed.type';
+import { listModuleItemIds } from '../../item-ids/list-module-item-ids.rule';
 import { calculateActualRemainingShare } from './calculate-actual-remaining-share.rule';
 import { calculatePlannedRemainingShare } from './calculate-planned-remaining-share.rule';
 

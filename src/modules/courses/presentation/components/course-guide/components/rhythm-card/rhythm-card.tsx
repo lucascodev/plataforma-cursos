@@ -1,4 +1,4 @@
-import type { RhythmView } from '../../../../types/rhythm-view.type';
+import type { RhythmView } from '../../../../types/plan/rhythm-view.type';
 import styles from './rhythm-card.module.css';
 
 interface RhythmCardProps {

@@ -1,5 +1,5 @@
-import type { CompletionSummary } from '../../entities/summary/completion-summary.entity';
-import type { IsCompleted } from '../item-ids/is-completed.type';
+import type { CompletionSummary } from '../../../entities/summary/completion-summary.entity';
+import type { IsCompleted } from '../../item-ids/is-completed.type';
 
 export function countCompletion(itemIds: readonly string[], isCompleted: IsCompleted): CompletionSummary {
   const completed = itemIds.filter(isCompleted).length;

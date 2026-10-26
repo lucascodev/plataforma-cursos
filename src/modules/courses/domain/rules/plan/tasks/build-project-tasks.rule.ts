@@ -1,6 +1,6 @@
-import type { CourseModule } from '../../entities/course/course-module.entity';
-import type { StudyTask } from '../../entities/plan/study-task.entity';
-import { projectItemId } from '../item-ids/project-item-id.rule';
+import type { CourseModule } from '../../../entities/course/module/course-module.entity';
+import type { StudyTask } from '../../../entities/plan/study-task.entity';
+import { projectItemId } from '../../item-ids/project-item-id.rule';
 import { createStudyTask } from './create-study-task.rule';
 
 export function buildProjectTasks(module: CourseModule, moduleIndex: number, dayCount: number): StudyTask[] {

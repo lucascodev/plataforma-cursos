@@ -4,10 +4,10 @@ import { dayOfWeek } from '@/shared/utils/date/calendar/day-of-week';
 import { formatDayMonth } from '@/shared/utils/date/format/format-day-month';
 import { WEEKDAY_LONG_NAMES } from '@/shared/utils/date/names/weekday-long-names';
 import { WEEKDAY_SHORT_NAMES } from '@/shared/utils/date/names/weekday-short-names';
-import type { Course } from '../../../domain/entities/course/course.entity';
-import type { StudyPlan } from '../../../domain/entities/plan/study-plan.entity';
-import { describeStudyDay } from '../../formatters/describe-study-day';
-import type { WeekDayView } from '../../types/week-day-view.type';
+import type { Course } from '../../../../domain/entities/course/course.entity';
+import type { StudyPlan } from '../../../../domain/entities/plan/study-plan.entity';
+import { describeStudyDay } from '../../../formatters/describe-study-day';
+import type { WeekDayView } from '../../../types/plan/week-day-view.type';
 
 export function buildWeekDayViews(
   course: Course,
