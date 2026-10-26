@@ -1,3 +1,4 @@
+import { ArrowRight, Check } from 'lucide-react';
 import { Link, Navigate, useParams } from 'react-router';
 import { ProgressMeter } from '@/shared/presentation/components/feedback/progress-meter/progress-meter';
 import { ModuleContent } from '../../../components/module-content/module-content';
@@ -23,10 +24,7 @@ export function ModulePage() {
             {chip.code}
             {chip.isComplete ? (
               <>
-                <span className={styles.check} aria-hidden="true">
-                  {' '}
-                  ✓
-                </span>
+                <Check className={styles.check} size={16} aria-hidden="true" />
                 <span className={hidden.visuallyHidden}> (concluído)</span>
               </>
             ) : null}
@@ -49,7 +47,10 @@ export function ModulePage() {
         <Link className={styles.project} to={page.projectPath}>
           <span className={styles.projectLabel}>Projeto do módulo</span>
           <span className={styles.projectTitle}>{module.project.title}</span>
-          <span className={styles.projectCta}>Ver requisitos e entregar →</span>
+          <span className={styles.projectCta}>
+            Ver requisitos e entregar
+            <ArrowRight size={18} aria-hidden="true" />
+          </span>
         </Link>
       ) : null}
 

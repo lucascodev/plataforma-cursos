@@ -88,6 +88,7 @@
 .days a {
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   min-height: var(--control-sm);
 }
 

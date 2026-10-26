@@ -1,3 +1,4 @@
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router';
 import { Button } from '@/shared/presentation/components/actions/button/button';
 import { Banner } from '@/shared/presentation/components/feedback/banner/banner';
@@ -32,13 +33,13 @@ export function PlanPage() {
 
       <div className={styles.toolbar}>
         <Button aria-label="Mês anterior" disabled={!page.canGoBack} onClick={page.previousMonth}>
-          ‹
+          <ChevronLeft size={18} aria-hidden="true" />
         </Button>
         <h2 className={styles.month} aria-live="polite">
           {page.monthTitle}
         </h2>
         <Button aria-label="Próximo mês" disabled={!page.canGoForward} onClick={page.nextMonth}>
-          ›
+          <ChevronRight size={18} aria-hidden="true" />
         </Button>
         <Button tone="ghost" onClick={page.goToToday}>
           Hoje

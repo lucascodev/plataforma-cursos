@@ -1,3 +1,4 @@
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link, Navigate, useParams } from 'react-router';
 import { Button } from '@/shared/presentation/components/actions/button/button';
 import { CheckboxField } from '@/shared/presentation/components/form/checkbox-field/checkbox-field';
@@ -58,8 +59,20 @@ export function DayPage() {
             </section>
           ) : null}
           <nav className={styles.days} aria-label="Outros dias">
-            {page.previousPath ? <Link to={page.previousPath}>← Dia anterior</Link> : <span />}
-            {page.nextPath ? <Link to={page.nextPath}>Próximo dia →</Link> : null}
+            {page.previousPath ? (
+              <Link to={page.previousPath}>
+                <ChevronLeft size={18} aria-hidden="true" />
+                Dia anterior
+              </Link>
+            ) : (
+              <span />
+            )}
+            {page.nextPath ? (
+              <Link to={page.nextPath}>
+                Próximo dia
+                <ChevronRight size={18} aria-hidden="true" />
+              </Link>
+            ) : null}
           </nav>
         </div>
 

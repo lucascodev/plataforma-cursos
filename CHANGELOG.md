@@ -45,6 +45,9 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 
 ### Alterado
 
+- Ícones do Lucide em todo o site.
+- A landing mostra "Meus estudos" em vez de "Entrar com GitHub" para quem já está logado.
+
 - A página do curso é a mesma para todos; o painel de estudo vira várias páginas e a data de início não é mais gravada sozinha: quem começa escolhe no Começar.
 - Sair da conta pede confirmação.
 

@@ -39,6 +39,10 @@
   color: var(--on-strong);
 }
 
+.chip {
+  gap: 4px;
+}
+
 .check {
   color: var(--accent);
 }
@@ -112,5 +116,8 @@
 }
 
 .projectCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--ink-fg-2);
 }

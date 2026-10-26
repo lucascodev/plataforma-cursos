@@ -1,3 +1,4 @@
+import { Check } from 'lucide-react';
 import { Button } from '@/shared/presentation/components/actions/button/button';
 import type { DateKey } from '@/shared/domain/types/date-key.type';
 import type { TodayView } from '../../types/plan/today-view.type';
@@ -27,7 +28,14 @@ export function TodayCard({ today, onDayDoneChange, onItemDoneChange, onJournalC
       <p className={styles.detail}>{today.detail}</p>
       <div className={styles.actions}>
         <Button tone={today.isDone ? 'default' : 'primary'} aria-pressed={today.isDone} onClick={() => onDayDoneChange(today.date, !today.isDone)}>
-          {today.isDone ? 'Dia feito ✓' : 'Marcar dia como feito'}
+          {today.isDone ? (
+            <>
+              <Check size={18} aria-hidden="true" />
+              Dia feito
+            </>
+          ) : (
+            'Marcar dia como feito'
+          )}
         </Button>
         {itemId && itemLabel ? <ItemCheck label={itemLabel} checked={today.isItemDone} onChange={(done) => onItemDoneChange(itemId, done)} /> : null}
       </div>
