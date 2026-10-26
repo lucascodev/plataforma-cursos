@@ -67,6 +67,19 @@ describe('proteções de requisição', () => {
     expect(response.headers.get('Cache-Control')).toBe('no-store');
   });
 
+  it('rota ou método sem function responde 404 em JSON, não o index.html', async () => {
+    const context = {
+      request: new Request(`${SITE}/api/nao-existe`),
+      env: {},
+      params: {},
+      next: async () => new Response('<!doctype html>', { headers: { 'Content-Type': 'text/html; charset=utf-8' } }),
+    };
+    const response = await handleApiMiddleware(context);
+    expect(response.status).toBe(404);
+    expect(response.headers.get('Content-Type')).toContain('application/json');
+    expect(response.headers.get('Content-Security-Policy')).toContain("default-src 'none'");
+  });
+
   it('middleware transforma erro inesperado em 500 sem vazar detalhes', async () => {
     const context = {
       request: new Request(`${SITE}/api/me`),

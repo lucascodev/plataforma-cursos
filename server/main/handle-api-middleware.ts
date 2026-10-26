@@ -3,6 +3,7 @@ import { isSameOriginRequest } from '../shared/http/is-same-origin-request';
 import { problemResponse } from '../shared/http/problem-response';
 import { API_SECURITY_HEADERS } from './api-security-headers';
 import { handleApiError } from './handle-api-errors';
+import { isStaticFallback } from './is-static-fallback';
 
 export async function handleApiMiddleware(context: RequestContext): Promise<Response> {
   let response: Response;
@@ -11,6 +12,7 @@ export async function handleApiMiddleware(context: RequestContext): Promise<Resp
   } else {
     try {
       response = await context.next();
+      if (isStaticFallback(response)) response = problemResponse(404, 'not-found', 'Endereço da API não encontrado.');
     } catch (error) {
       response = handleApiError(error);
     }
