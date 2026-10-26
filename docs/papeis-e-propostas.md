@@ -18,7 +18,7 @@ O site esconde telas conforme o papel, mas isso é só conforto. Quem garante a 
 
 - **Perfil de estudante é privado.** Só a própria pessoa vê.
 - **Perfil de professor é público** em `/professores/<endereco>`: nome, foto, texto, links e cursos publicados. A contagem de pessoas estudando só aparece se o professor marcar essa opção.
-- **Notas, diário e progresso individual** ficam só com a pessoa. Professores e admins recebem apenas números somados (quantas pessoas estudam um curso, quantas estudaram nos últimos 30 dias). Um teste automático (`supabase/tests/admin_rpcs.test.sql`) confere que nem um admin consegue ler o progresso de outra pessoa.
+- **Notas, diário e progresso individual** ficam só com a pessoa. Professores e admins recebem apenas números somados (quantas pessoas estudam um curso, quantas estudaram nos últimos 30 dias). Um teste automático (`supabase/tests/functions/admin_rpcs.test.sql`) confere que nem um admin consegue ler o progresso de outra pessoa.
 - **E-mail** nunca aparece em nenhuma tela, nem para admin.
 
 ## Fluxo de uma proposta

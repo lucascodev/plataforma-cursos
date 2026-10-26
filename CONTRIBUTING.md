@@ -18,6 +18,7 @@ Obrigado pelo interesse. Contribuições de código e de conteúdo são bem-vind
 ## Código
 
 - Siga a estrutura de camadas: `domain` não importa nada de fora; `presentation` usa as factories de `main`; um artefato por arquivo; páginas, componentes e hooks em pasta própria.
+- Pasta com mais de seis arquivos, ou com arquivos do mesmo contexto, ganha subpastas com o nome do assunto ([ADR 0004](docs/adr/0004-arquivos-agrupados-por-contexto.md)). Decisões de arquitetura ficam em `docs/adr/`.
 - Nomes de arquivos, pastas, símbolos e comentários de código em inglês. Documentação em português.
 - Sem comentários que repetem o código. Comente só o porquê de decisões não óbvias.
 - Toda regra de negócio nova vem com teste unitário.
