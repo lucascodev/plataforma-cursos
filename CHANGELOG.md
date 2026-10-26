@@ -6,6 +6,8 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 
 ### Adicionado
 
+- Título profissional e resumo curto no perfil de professor. O título aparece ao lado do nome nas páginas dos cursos e na página pública.
+
 - Progresso salvo com revisão. Duas abas ou dois aparelhos abertos no mesmo curso não apagam mais o que o outro marcou: num conflito, a tela recarrega e junta as mudanças.
 
 - Aulas e exercícios de fixação têm `id` fixo dentro do módulo. Reordenar aulas não move mais o progresso de lugar. Os ids que faltavam foram preenchidos pela posição, as mesmas chaves que o progresso já usava.

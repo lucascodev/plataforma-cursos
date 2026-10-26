@@ -8,6 +8,8 @@ export const teacherProfileSchema = z.object({
   handle: z.string().regex(PROFILE_HANDLE_PATTERN),
   displayName: z.string().min(1).max(80),
   avatarUrl: avatarUrlSchema,
+  headline: z.string().max(80),
+  shortBio: z.string().max(160),
   bio: z.string().max(1000),
   links: z.array(profileLinkSchema).max(5),
   courses: z.array(z.object({ slug: courseSlugSchema, title: z.string().max(200), tagline: z.string().max(400) })).max(200),

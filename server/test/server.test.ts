@@ -246,10 +246,10 @@ describe('cursos', () => {
 
   it('detalhe traz quem publicou, sem campos extras', async () => {
     const { services } = makeFakeServices(() =>
-      json([{ content: { slug: 'a' }, owner: { handle: 'ana', display_name: 'Ana', avatar_url: null, role: 'teacher' } }]),
+      json([{ content: { slug: 'a' }, owner: { handle: 'ana', display_name: 'Ana', avatar_url: null, headline: 'Engenheira de IA', role: 'teacher' } }]),
     );
     const body = (await (await handleGetCourse('a', services)).json()) as { author: unknown };
-    expect(body.author).toEqual({ handle: 'ana', displayName: 'Ana', avatarUrl: null });
+    expect(body.author).toEqual({ handle: 'ana', displayName: 'Ana', avatarUrl: null, headline: 'Engenheira de IA' });
   });
 });
 

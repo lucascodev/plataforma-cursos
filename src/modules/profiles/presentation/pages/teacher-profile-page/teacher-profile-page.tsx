@@ -30,6 +30,7 @@ export function TeacherProfilePage() {
         <div className={styles.identity}>
           <p className={styles.kicker}>Professor</p>
           <h1 className={styles.name}>{profile.displayName}</h1>
+          {profile.headline ? <p className={styles.headline}>{profile.headline}</p> : null}
           <p className={styles.meta}>
             <span className={styles.handle}>@{profile.handle}</span>
             {profile.studentCount !== null ? (

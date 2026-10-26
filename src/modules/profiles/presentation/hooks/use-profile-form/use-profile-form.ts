@@ -11,6 +11,8 @@ const EMPTY_LINK: ProfileLink = { label: '', url: '' };
 export function useProfileForm(profile: MyProfile) {
   const mutation = useUpdateProfileMutation();
   const [displayName, setDisplayName] = useState(profile.displayName);
+  const [headline, setHeadline] = useState(profile.headline);
+  const [shortBio, setShortBio] = useState(profile.shortBio);
   const [bio, setBio] = useState(profile.bio);
   const [links, setLinks] = useState<readonly ProfileLink[]>(profile.links);
   const [showStudentCount, setShowStudentCount] = useState(profile.showStudentCount);
@@ -20,17 +22,19 @@ export function useProfileForm(profile: MyProfile) {
 
   const submit = (event: FormEvent) => {
     event.preventDefault();
-    const parsed = profileUpdateSchema.safeParse({ displayName, bio, links: filledLinks, showStudentCount });
+    const parsed = profileUpdateSchema.safeParse({ displayName, headline, shortBio, bio, links: filledLinks, showStudentCount });
     if (!parsed.success) {
       setValidationError(parsed.error.issues[0]?.path[0] === 'links' ? 'Cada link precisa de um nome e de um endereço https.' : (parsed.error.issues[0]?.message ?? 'Confira os dados.'));
       return;
     }
     setValidationError(null);
-    mutation.mutate(parsed.data);
+    mutation.mutate({ ...parsed.data, headline: parsed.data.headline ?? '', shortBio: parsed.data.shortBio ?? '' });
   };
 
   return {
     displayName,
+    headline,
+    shortBio,
     bio,
     links,
     showStudentCount,
@@ -39,6 +43,8 @@ export function useProfileForm(profile: MyProfile) {
     saved: mutation.isSuccess,
     error: validationError ?? (mutation.isError ? readErrorMessage(mutation.error, 'Não foi possível salvar agora.') : null),
     setDisplayName,
+    setHeadline,
+    setShortBio,
     setBio,
     setShowStudentCount,
     addLink: () => setLinks((current) => (current.length < MAX_LINKS ? [...current, EMPTY_LINK] : current)),
