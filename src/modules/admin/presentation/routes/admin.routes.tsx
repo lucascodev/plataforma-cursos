@@ -1,0 +1,16 @@
+import type { RouteObject } from 'react-router';
+
+export const adminRoutes: RouteObject[] = [
+  {
+    path: 'admin',
+    lazy: async () => ({ Component: (await import('../pages/admin-layout/admin-layout')).AdminLayout }),
+    children: [
+      { index: true, lazy: async () => ({ Component: (await import('../pages/admin-overview-page/admin-overview-page')).AdminOverviewPage }) },
+      { path: 'propostas', lazy: async () => ({ Component: (await import('../pages/admin-proposals-page/admin-proposals-page')).AdminProposalsPage }) },
+      { path: 'propostas/:id', lazy: async () => ({ Component: (await import('../pages/admin-proposal-page/admin-proposal-page')).AdminProposalPage }) },
+      { path: 'cursos', lazy: async () => ({ Component: (await import('../pages/admin-courses-page/admin-courses-page')).AdminCoursesPage }) },
+      { path: 'pessoas', lazy: async () => ({ Component: (await import('../pages/admin-people-page/admin-people-page')).AdminPeoplePage }) },
+      { path: 'historico', lazy: async () => ({ Component: (await import('../pages/admin-history-page/admin-history-page')).AdminHistoryPage }) },
+    ],
+  },
+];

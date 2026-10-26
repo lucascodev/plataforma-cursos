@@ -16,7 +16,7 @@ export class HttpCourseRepository implements CourseRepository {
       try {
         return [parseCourseContent(`${COURSE_API_PATHS.list}[${index}]`, raw)];
       } catch (error) {
-        // A broken course must not take the whole catalog down; the import script validates before anything reaches the table.
+        // A broken course must not take the whole catalog down; the database only receives content checked by the same schema.
         console.error(error);
         return [];
       }
@@ -32,6 +32,7 @@ export class HttpCourseRepository implements CourseRepository {
       if (error instanceof HttpRequestError && error.status === 404) return null;
       throw error;
     }
-    return parseCourseContent(path, courseResponseSchema.parse(body).course);
+    const response = courseResponseSchema.parse(body);
+    return { ...parseCourseContent(path, response.course), author: response.author };
   }
 }

@@ -1,0 +1,18 @@
+export const PROPOSAL_COLUMNS = [
+  'id',
+  'status',
+  'title',
+  'summary',
+  'audience',
+  'area',
+  'language',
+  'outline',
+  'experience',
+  'sampleUrl:sample_url',
+  'suggestedSlug:suggested_slug',
+  'reviewNote:review_note',
+  'reviewedAt:reviewed_at',
+  'courseSlug:course_slug',
+  'createdAt:created_at',
+  'updatedAt:updated_at',
+].join(',');

@@ -1,4 +1,5 @@
 import type { CourseGuide } from '../guide/course-guide.entity';
+import type { CourseAuthor } from './course-author.entity';
 import type { CourseModule } from './course-module.entity';
 import type { CourseTaskText } from './course-task-text.entity';
 import type { StudyRhythm } from './study-rhythm.entity';
@@ -18,4 +19,5 @@ export interface Course {
   readonly sundayTrack: SundayTrack | null;
   readonly modules: readonly CourseModule[];
   readonly guide: CourseGuide;
+  readonly author: CourseAuthor | null;
 }

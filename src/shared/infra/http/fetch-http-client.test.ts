@@ -42,4 +42,16 @@ describe('FetchHttpClient', () => {
     await expect(clientReturning(new TypeError('offline')).client.request({ path: '/api/me' })).rejects.toThrow(HttpRequestError);
     await expect(clientReturning(new Response('<html>', { status: 200 })).client.request({ path: '/api/me' })).rejects.toThrow(HttpRequestError);
   });
+
+  it('keeps the message the API wrote for people', async () => {
+    const body = JSON.stringify({ error: { code: 'slug-taken', message: 'Esse endereço já é usado por outro curso.' } });
+    const { client } = clientReturning(new Response(body, { status: 409 }));
+    let caught: unknown = null;
+    try {
+      await client.request({ method: 'POST', path: '/api/admin/proposals/x/approve', body: {} });
+    } catch (error) {
+      caught = error;
+    }
+    expect(caught instanceof HttpRequestError ? caught.problem : null).toEqual({ code: 'slug-taken', message: 'Esse endereço já é usado por outro curso.' });
+  });
 });

@@ -6,6 +6,16 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 
 ### Adicionado
 
+- Papéis estudante, professor e admin na tabela `profiles`, com perfil criado no cadastro.
+- Propostas de curso pela plataforma (`/propor-curso`, `/minhas-propostas`): enviar, editar enquanto está aberta, retirar e acompanhar a resposta.
+- Área de admin (`/admin`): visão geral, fila de propostas com aprovar, pedir ajustes e recusar, cursos (dono, tirar do catálogo, apagar sem estudantes), pessoas e papéis, e histórico.
+- Aprovar uma proposta torna a pessoa professora e cria o curso rascunho na mesma transação.
+- Histórico de ações em `audit_log`, escrito só por funções do banco.
+- Meu perfil com as abas Perfil, Estudos e Conta (tema, fuso e avisos); página pública de professor em `/professores/<endereco>`.
+- O curso mostra quem o publicou, com link para a página do professor.
+- Mensagens de erro da API em português chegam até a tela.
+- Testes de banco para perfis, preferências, propostas e funções de admin.
+
 - Rotas `/api` no Cloudflare Pages Functions: login com GitHub por PKCE no servidor, sessão em cookies `__Host-` HttpOnly, renovação automática do token e logout.
 - Tabela `courses` no Supabase, com leitura pública dos cursos publicados e escrita só por admin.
 - Script `npm run content:import` para validar e importar cursos.
@@ -14,6 +24,13 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 - Testes das functions e do cliente HTTP.
 
 ### Alterado
+
+- Permissão de admin passa a vir de `profiles.role`; `app_metadata.role` deixa de ser usado nas políticas (quem já era admin é migrado).
+- A tabela `courses` não aceita mais escrita direta pela API, nem de admin; mudanças passam por funções com histórico.
+- `/api/me` devolve também `handle` e `role`.
+- O catálogo lista só cursos publicados e no catálogo; cursos fora do catálogo continuam abrindo pelo link.
+- Menu da conta vira um menu do avatar; Privacidade sai do menu principal e fica no rodapé.
+- O tema pode ser escolhido na conta (claro, escuro ou igual ao aparelho).
 
 - O navegador não fala mais com o Supabase: progresso, cursos e sessão passam por `/api`.
 - Hospedagem passa do GitHub Pages para o Cloudflare Pages.

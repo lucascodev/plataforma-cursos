@@ -2,6 +2,7 @@ import { HttpRequestError } from '@/shared/application/errors/http-request.error
 import { SessionExpiredError } from '@/shared/application/errors/session-expired.error';
 import type { HttpClient } from '@/shared/application/ports/http-client.interface';
 import type { HttpRequest } from '@/shared/application/ports/http-request.type';
+import { readHttpProblem } from './read-http-problem';
 
 // Browsers cap keepalive bodies at 64 KiB. Small writes keep the flag so a save started while the tab closes still lands.
 const KEEPALIVE_LIMIT_BYTES = 60_000;
@@ -25,7 +26,7 @@ export class FetchHttpClient implements HttpClient {
     }
 
     if (response.status === 401) throw new SessionExpiredError();
-    if (!response.ok) throw new HttpRequestError(response.status);
+    if (!response.ok) throw new HttpRequestError(response.status, { problem: readHttpProblem(await response.text().catch(() => '')) });
     const text = await response.text();
     if (!text) return null;
     try {

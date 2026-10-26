@@ -23,7 +23,14 @@ O navegador não recebe nenhuma delas. Ele fala só com `/api`, e as functions u
 As migrations ficam em `supabase/migrations/` e precisam rodar na ordem do nome:
 
 1. `20261026120000_course_progress.sql`: progresso de cada pessoa por curso.
-2. `20261026190000_courses.sql`: conteúdo dos cursos, leitura pública dos publicados e escrita só por admin.
+2. `20261026190000_courses.sql`: conteúdo dos cursos, leitura pública dos publicados.
+3. `20261026200000_profiles_and_roles.sql`: perfis, papéis, preferências da conta e o gatilho que cria o perfil no cadastro.
+4. `20261026200100_audit_log.sql`: histórico das ações de admin.
+5. `20261026200200_course_ownership.sql`: dono do curso, curso fora do catálogo e escrita em `courses` só por funções.
+6. `20261026200300_course_proposals.sql`: propostas de curso.
+7. `20261026200400_admin_rpcs.sql`: funções da análise de propostas e da área de admin.
+
+Se o projeto já estava no ar, aplique as migrations novas **antes** de publicar o código novo. O site antigo continua funcionando com o banco novo.
 
 Escolha um caminho:
 
@@ -111,17 +118,27 @@ O script valida o curso com o mesmo schema do site antes de enviar. Depois da pr
 alter table public.course_progress validate constraint course_progress_course_fk;
 ```
 
-### Pessoa admin (opcional)
+O script continua funcionando até o editor de cursos chegar: ele usa a chave secreta e não passa pelas regras de papel.
 
-A escrita na tabela `courses` pela API exige `app_metadata.role = 'admin'` no token. Hoje só o script de importação escreve, e ele usa a chave secreta, então isso não é necessário. Se um dia houver uma tela de edição, marque a pessoa pelo SQL Editor:
+## 8. Primeira pessoa admin
+
+Depois das migrations não existe nenhum admin. Entre no site uma vez com a sua conta do GitHub e rode no **SQL Editor** do Supabase, trocando pelo seu login do GitHub em minúsculas:
 
 ```sql
-update auth.users
-set raw_app_meta_data = raw_app_meta_data || '{"role": "admin"}'
-where id = 'ID_DA_PESSOA';
+update public.profiles set role = 'admin' where handle = 'seu-login-do-github';
 ```
 
-O `app_metadata` só muda com acesso de administrador ao banco; a própria pessoa não consegue se promover.
+Opcional, para aparecer como professor do curso que já existe:
+
+```sql
+update public.courses
+set owner_id = (select id from public.profiles where handle = 'seu-login-do-github')
+where slug = 'engenharia-de-ia';
+```
+
+O SQL Editor roda com o usuário dono do banco, por isso pode mudar o papel. Pela API ninguém consegue: a pessoa só edita nome, texto e links do próprio perfil. Depois disso, os outros papéis mudam pela tela **Admin > Pessoas e papéis**, e cada mudança fica no histórico.
+
+Quem já tinha `app_metadata.role = 'admin'` vira admin automaticamente na migration. O `app_metadata` deixa de ser usado nas políticas.
 
 ## Problemas comuns
 
@@ -130,6 +147,8 @@ O `app_metadata` só muda com acesso de administrador ao banco; a própria pesso
 | `/api/me` responde 503 | Variáveis ausentes no Cloudflare ou no `.dev.vars`, URL sem `https` ou chave secreta no lugar da publicável |
 | Volta do GitHub para `/entrar?erro=login` | Rota `/api/auth/callback` fora das **Redirect URLs**, login cancelado ou demora de mais de 10 minutos para concluir |
 | Login funciona mas o progresso não salva | Migrations não aplicadas, curso não importado ou RLS bloqueando (confira os logs da Data API) |
-| Catálogo vazio | Curso importado sem `--publish` |
+| Catálogo vazio | Curso importado sem `--publish` ou tirado do catálogo na área de admin |
+| Área de admin mostra "Você não tem acesso" | Papel ainda não é `admin` (rode o SQL da seção 8) ou o login foi feito antes da mudança; saia e entre de novo |
+| Erro ao enviar proposta | Limite de 3 propostas abertas atingido, ou migrations novas não aplicadas |
 | Login não fica salvo em `localhost` | Navegador que não aceita cookie `__Host-` sem HTTPS (use Chrome ou Firefox) ou site aberto na porta 8788 em vez de 5173 durante o `dev` |
 | Tudo parou de funcionar depois de dias sem uso | Projeto gratuito pausado; reative no painel |

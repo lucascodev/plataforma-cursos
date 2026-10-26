@@ -1,5 +1,7 @@
 # Criando um curso
 
+> Este é o caminho atual para quem mantém a instância. Pessoas de fora propõem cursos pela plataforma, em **Propor curso** (veja [papeis-e-propostas.md](papeis-e-propostas.md)). Quando o editor de cursos chegar, ele substitui a importação por JSON.
+
 Um curso é um arquivo JSON. Não é preciso mexer em código. O arquivo fica no repositório para revisão em pull request e, depois de aprovado, quem mantém a plataforma importa o curso para o Supabase.
 
 ## 1. Crie o arquivo

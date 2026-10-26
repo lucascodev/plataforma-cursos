@@ -1,0 +1,39 @@
+.list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.title {
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.percent {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.meta {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}

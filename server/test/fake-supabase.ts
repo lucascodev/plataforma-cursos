@@ -20,7 +20,16 @@ export function accessToken(offsetSeconds = 3600, sub = 'user-1'): string {
   return fakeJwt({ sub, exp: Math.floor(NOW_MS / 1000) + offsetSeconds, role: 'authenticated' });
 }
 
-type Responder = (call: RecordedCall) => Response;
+export type Responder = (call: RecordedCall) => Response;
+
+// Picks a response by the part of the URL after /rest/v1/ or /auth/v1/ (e.g. 'rpc/admin_overview', 'profiles').
+export function respondByPath(routes: Record<string, Responder>, fallback: Responder = () => json({}, 500)): Responder {
+  return (call) => {
+    const path = call.url.replace(/^https:\/\/[^/]+\/(rest|auth)\/v1\//, '').split('?')[0] ?? '';
+    const route = routes[path];
+    return route ? route(call) : fallback(call);
+  };
+}
 
 export function makeFakeServices(responder: Responder): { services: Services; calls: RecordedCall[] } {
   const calls: RecordedCall[] = [];
@@ -43,6 +52,10 @@ export function makeFakeServices(responder: Responder): { services: Services; ca
     calls,
     services: { config, auth: new SupabaseAuthClient(config, fetcher), rest: new SupabaseRestClient(config, fetcher), now: () => NOW_MS },
   };
+}
+
+export function postgrestError(status: number, code: string, hint: string | null = null): Response {
+  return json({ code, message: 'internal text that must not leak', details: null, hint }, status);
 }
 
 export function json(body: unknown, status = 200): Response {

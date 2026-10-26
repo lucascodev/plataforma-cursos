@@ -7,4 +7,5 @@ export interface AuthSession {
   signIn(returnPath: string): void;
   signOut(): Promise<void>;
   reportSessionExpired(): void;
+  refresh(): void;
 }

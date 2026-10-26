@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet, ScrollRestoration } from 'react-router';
-import { UserMenu } from '@/modules/auth';
+import { useAuthSession, UserMenu } from '@/modules/auth';
+import { ThemeSync } from '@/modules/profiles';
 import { makeSiteConfig } from '@/shared/main/factories/make-site-config.factory';
 import { ExternalLink } from '@/shared/presentation/components/navigation/external-link/external-link';
 import { SkipLink } from '@/shared/presentation/components/navigation/skip-link/skip-link';
@@ -7,9 +8,12 @@ import styles from './root-layout.module.css';
 
 export function RootLayout() {
   const site = makeSiteConfig();
+  const session = useAuthSession();
+  const navClass = ({ isActive }: { isActive: boolean }) => (isActive ? `${styles.navLink} ${styles.active}` : styles.navLink);
 
   return (
     <div className={styles.shell}>
+      <ThemeSync />
       <SkipLink targetId="conteudo" label="Pular para o conteúdo" />
       <header className={styles.header}>
         <div className={styles.bar}>
@@ -17,12 +21,17 @@ export function RootLayout() {
             {site.name}
           </Link>
           <nav className={styles.nav} aria-label="Principal">
-            <NavLink to="/" end className={({ isActive }) => (isActive ? `${styles.navLink} ${styles.active}` : styles.navLink)}>
+            <NavLink to="/" end className={navClass}>
               Cursos
             </NavLink>
-            <NavLink to="/privacidade" className={({ isActive }) => (isActive ? `${styles.navLink} ${styles.active}` : styles.navLink)}>
-              Privacidade
+            <NavLink to="/propor-curso" className={navClass}>
+              Propor curso
             </NavLink>
+            {session.user?.role === 'admin' ? (
+              <NavLink to="/admin" className={navClass}>
+                Admin
+              </NavLink>
+            ) : null}
           </nav>
           <UserMenu />
         </div>

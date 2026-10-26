@@ -1,14 +1,19 @@
+import { authUserSchema } from '../../../../contracts/auth-user.schema';
 import type { Services } from '../../../main/services.type';
 import { jsonResponse } from '../../../shared/http/json-response';
-import { withCookies } from '../../../shared/http/with-cookies';
-import { mapSupabaseUser } from '../map-supabase-user';
-import { resolveSession } from '../resolve-session';
-import { unauthorizedResponse } from '../unauthorized-response';
+import { problemResponse } from '../../../shared/http/problem-response';
+import { readUpstreamJson } from '../../../shared/http/read-upstream-json';
+import { callRpc } from '../../../shared/supabase/call-rpc';
+import { withSession } from '../with-session';
 
-export async function handleMe(request: Request, services: Services): Promise<Response> {
-  const session = await resolveSession(request, services);
-  if (!session) return unauthorizedResponse();
-  const user = await services.auth.getUser(session.accessToken);
-  if (!user) return unauthorizedResponse();
-  return withCookies(jsonResponse({ user: mapSupabaseUser(user) }), session.cookies);
+// ensure_profile also validates the token in Supabase and creates the profile if sign-up could not.
+export function handleMe(request: Request, services: Services): Promise<Response> {
+  return withSession(request, services, async (session) => {
+    const response = await callRpc(services, 'ensure_profile', {}, session.accessToken);
+    if (response.status === 401) return response;
+    if (!response.ok) return problemResponse(502, 'unavailable', 'Não foi possível carregar sua conta agora.');
+    const user = await readUpstreamJson(response, authUserSchema);
+    if (!user) return problemResponse(502, 'unavailable', 'Não foi possível carregar sua conta agora.');
+    return jsonResponse({ user });
+  });
 }

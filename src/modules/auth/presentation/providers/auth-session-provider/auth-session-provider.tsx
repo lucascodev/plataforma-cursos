@@ -32,6 +32,9 @@ export function AuthSessionProvider({ children }: { children: ReactNode }) {
     user,
     errorMessage: errorMessage ?? (currentUser.isError ? MESSAGES.checkFailed : null),
     reportSessionExpired,
+    refresh() {
+      void queryClient.invalidateQueries({ queryKey: authQueryKeys.currentUser() });
+    },
     signIn(returnPath) {
       setErrorMessage(null);
       makeSignInWithGitHub().execute({ returnPath });

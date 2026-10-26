@@ -6,7 +6,10 @@ O primeiro curso publicado é **Engenharia de IA**: 9 módulos, 75 aulas, 38 exe
 
 ## O que a plataforma faz
 
-- **Catálogo de cursos**: o conteúdo fica numa tabela do Supabase. Cada curso é escrito em JSON, validado por schema e importado por quem mantém a plataforma.
+- **Catálogo de cursos**: o conteúdo fica numa tabela do Supabase, validado por schema. Cada curso mostra quem o publicou.
+- **Propostas de curso**: qualquer pessoa logada propõe um curso pela plataforma. Um admin aprova, pede ajustes ou recusa; com a aprovação, a pessoa vira professor e recebe um rascunho do curso.
+- **Perfis**: perfil de estudante privado (com resumo dos estudos e preferências da conta) e página pública de professor.
+- **Área de admin**: fila de propostas, cursos (dono, catálogo), pessoas e papéis, e um histórico de cada ação.
 - **Plano diário**: a partir da data de início, a plataforma distribui aulas, exercícios, etapas do projeto e autoavaliação pelos dias da semana, com sessões mais longas no sábado e uma trilha leve aos domingos.
 - **Progresso**: itens concluídos, dias feitos, anotações por módulo e diário de estudo, com curva de ritmo (à frente, no ritmo ou atrás do plano).
 - **Conta com GitHub**: login pelo Supabase, com a sessão guardada em cookies HttpOnly. O navegador nunca recebe tokens nem chaves do Supabase.
@@ -63,23 +66,27 @@ src/
   modules/
     courses/             catálogo, plano de estudo, painel do curso
     progress/            progresso, backup, diário
-    auth/                sessão, login e página de entrar
+    auth/                sessão, papel, login e página de entrar
+    profiles/            meu perfil, página pública de professor, tema
+    proposals/           propor curso e acompanhar propostas
+    admin/               área de administração
     legal/               página de privacidade
   shared/                cliente HTTP, utilitários e componentes genéricos
 public/                  _headers (segurança), _routes.json e ícone
 supabase/
-  migrations/            tabelas de progresso e de cursos, com RLS
+  migrations/            tabelas, políticas RLS e funções do banco
   seed/courses/          cursos em JSON, prontos para importar
-  tests/                 testes de RLS (pgTAP)
+  tests/                 testes de RLS e das funções (pgTAP)
 scripts/                 schema JSON, importação de cursos, varredura de chaves
 docs/                    arquitetura e guias
 ```
 
-O site segue Clean Architecture por módulo (`domain`, `application`, `infra`, `main/factories`, `presentation`). O servidor é organizado pelos mesmos módulos (`auth`, `courses`, `progress`), com o código comum em `server/shared`.
+O site segue Clean Architecture por módulo (`domain`, `application`, `infra`, `main/factories`, `presentation`). O servidor é organizado pelos mesmos módulos (`auth`, `courses`, `progress`, `profiles`, `proposals`, `admin`), com o código comum em `server/shared`.
 
 ## Documentação
 
 - [Arquitetura](docs/arquitetura.md)
+- [Papéis e propostas de curso](docs/papeis-e-propostas.md)
 - [Criando um curso](docs/criando-um-curso.md)
 - [Configurando contas com Supabase e GitHub](docs/configurando-contas.md)
 - [Deploy no Cloudflare Pages](docs/deploy.md)

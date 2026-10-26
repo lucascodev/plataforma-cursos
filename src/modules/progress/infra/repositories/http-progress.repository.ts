@@ -2,11 +2,14 @@ import { SessionExpiredError } from '@/shared/application/errors/session-expired
 import type { HttpClient } from '@/shared/application/ports/http-client.interface';
 import type { HttpRequest } from '@/shared/application/ports/http-request.type';
 import type { CourseProgress } from '../../domain/entities/course-progress.entity';
+import type { ProgressSummary } from '../../domain/entities/progress-summary.entity';
 import { ProgressStorageError } from '../../domain/errors/progress-storage.error';
 import type { ProgressRepository } from '../../domain/repositories/progress.repository';
 import { progressApiPath } from '../constants/progress-api-path';
+import { PROGRESS_LIST_API_PATH } from '../constants/progress-list-api-path';
 import { mapProgressRecordToEntity } from '../mappers/progress-record-to-entity.mapper';
 import { progressResponseSchema } from '../schemas/progress-response.schema';
+import { progressSummaryListResponseSchema } from '../schemas/progress-summary-list-response.schema';
 
 // The server knows who is signed in from the session cookie, so no user id travels from here.
 export class HttpProgressRepository implements ProgressRepository {
@@ -26,6 +29,17 @@ export class HttpProgressRepository implements ProgressRepository {
 
   async clear(courseSlug: string): Promise<void> {
     await this.send('clear', { method: 'DELETE', path: progressApiPath(courseSlug) });
+  }
+
+  async listSummaries(): Promise<ProgressSummary[]> {
+    const parsed = progressSummaryListResponseSchema.safeParse(await this.send('load', { path: PROGRESS_LIST_API_PATH }));
+    if (!parsed.success) throw new ProgressStorageError('load', { cause: parsed.error });
+    return parsed.data.items.map((item) => ({
+      courseSlug: item.courseSlug,
+      updatedAt: item.updatedAt,
+      completedItemIds: Object.keys(item.completedItems),
+      studyDayCount: Object.keys(item.studyDays).length,
+    }));
   }
 
   private async send(operation: ProgressStorageError['operation'], request: HttpRequest): Promise<unknown> {

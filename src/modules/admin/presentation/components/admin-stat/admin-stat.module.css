@@ -1,0 +1,31 @@
+.stat {
+  display: grid;
+  gap: 2px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--fg);
+  text-decoration: none;
+}
+
+a.stat:hover {
+  border-color: var(--accent);
+}
+
+.highlight {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.value {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.label {
+  font-size: 13px;
+  color: var(--muted);
+}

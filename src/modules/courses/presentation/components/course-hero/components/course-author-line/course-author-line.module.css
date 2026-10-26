@@ -1,0 +1,13 @@
+.line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.avatar {
+  border-radius: 50%;
+  border: 1px solid var(--line);
+}

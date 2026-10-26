@@ -1,4 +1,5 @@
 import type { CourseProgress } from '../../domain/entities/course-progress.entity';
+import type { ProgressSummary } from '../../domain/entities/progress-summary.entity';
 import type { ProgressRepository } from '../../domain/repositories/progress.repository';
 
 export class InMemoryProgressRepository implements ProgressRepository {
@@ -14,5 +15,14 @@ export class InMemoryProgressRepository implements ProgressRepository {
 
   async clear(courseSlug: string): Promise<void> {
     this.records.delete(courseSlug);
+  }
+
+  async listSummaries(): Promise<ProgressSummary[]> {
+    return [...this.records].map(([courseSlug, progress]) => ({
+      courseSlug,
+      updatedAt: progress.updatedAt ?? '',
+      completedItemIds: Object.keys(progress.completedItems),
+      studyDayCount: Object.keys(progress.studyDays).length,
+    }));
   }
 }

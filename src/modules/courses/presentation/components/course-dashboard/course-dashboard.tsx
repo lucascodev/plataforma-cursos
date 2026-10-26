@@ -52,6 +52,7 @@ export function CourseDashboard({ details }: CourseDashboardProps) {
         tagline={course.tagline}
         description={course.description}
         facts={dashboard.facts}
+        author={course.author}
       >
         <StartDateField value={dashboard.startDate} onChange={dashboard.changeStartDate} />
         <SaveStatus saveState={progressState.saveState} />

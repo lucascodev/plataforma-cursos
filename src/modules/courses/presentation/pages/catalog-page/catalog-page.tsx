@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import { PageStatus } from '@/shared/presentation/components/feedback/page-status/page-status';
 import { CourseCard } from '../../components/course-card/course-card';
 import { describeCourseFacts } from '../../formatters/describe-course-facts';
@@ -17,6 +18,9 @@ export function CatalogPage() {
         <p className={styles.lead}>
           Cada curso tem plano diário, exercícios antes de cada projeto e um projeto prático por módulo. Entre com o GitHub para
           começar: o progresso fica salvo na sua conta e aparece em qualquer aparelho.
+        </p>
+        <p className={styles.teach}>
+          Quer ensinar? <Link to="/propor-curso">Proponha um curso</Link> e, depois da aprovação, monte tudo pela plataforma.
         </p>
       </header>
       {catalog.data.length === 0 ? (

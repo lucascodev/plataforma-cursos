@@ -1,0 +1,29 @@
+.notice {
+  border-radius: var(--radius-small);
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.notice > :first-child {
+  margin-top: 0;
+}
+
+.notice > :last-child {
+  margin-bottom: 0;
+}
+
+.info {
+  border-color: var(--line);
+}
+
+.success {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.warning {
+  border-color: var(--warning);
+  background: var(--warning-soft);
+}

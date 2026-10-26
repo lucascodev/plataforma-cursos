@@ -6,3 +6,5 @@ export { SaveStatus } from './presentation/components/save-status/save-status';
 export { useBackupActions } from './presentation/hooks/use-backup-actions/use-backup-actions';
 export { useCourseProgress } from './presentation/hooks/use-course-progress/use-course-progress';
 export type { CourseProgressState } from './presentation/hooks/use-course-progress/course-progress-state.type';
+export type { ProgressSummary } from './domain/entities/progress-summary.entity';
+export { useProgressSummariesQuery } from './presentation/hooks/use-progress-summaries-query/use-progress-summaries-query';

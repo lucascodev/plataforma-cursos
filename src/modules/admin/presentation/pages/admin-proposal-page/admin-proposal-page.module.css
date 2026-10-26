@@ -1,0 +1,45 @@
+.back {
+  margin: 0;
+  font-size: 14px;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.details {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  max-width: 72ch;
+}
+
+.details dt {
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.details dd {
+  margin: 0;
+  white-space: pre-line;
+}
+
+.details ol {
+  margin: 0;
+  padding-left: 22px;
+}

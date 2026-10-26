@@ -1,0 +1,57 @@
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+  padding-top: 20px;
+}
+
+.back {
+  margin: 0;
+  font-size: 14px;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(28px, 5vw, 42px);
+  line-height: 1.05;
+}
+
+.withdraw {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.summary {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  max-width: 68ch;
+}
+
+.summary dt {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.summary dd {
+  margin: 0;
+}
+
+.outline {
+  margin: 0;
+  padding-left: 22px;
+}

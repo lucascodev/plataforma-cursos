@@ -1,5 +1,4 @@
 import { Link, useLocation } from 'react-router';
-import { Button } from '@/shared/presentation/components/actions/button/button';
 import { useAuthSession } from '../../hooks/use-auth-session/use-auth-session';
 import styles from './user-menu.module.css';
 
@@ -11,13 +10,27 @@ export function UserMenu() {
   return (
     <div className={styles.menu}>
       {session.user ? (
-        <>
-          {session.user.avatarUrl ? (
-            <img className={styles.avatar} src={session.user.avatarUrl} alt="" width={28} height={28} referrerPolicy="no-referrer" />
-          ) : null}
-          <span className={styles.name}>{session.user.displayName}</span>
-          <Button onClick={() => void session.signOut()}>Sair</Button>
-        </>
+        // Keyed by path so the menu closes after following one of its links.
+        <details key={location.pathname} className={styles.dropdown}>
+          <summary className={styles.trigger}>
+            {session.user.avatarUrl ? (
+              <img className={styles.avatar} src={session.user.avatarUrl} alt="" width={28} height={28} referrerPolicy="no-referrer" />
+            ) : (
+              <span className={styles.initial} aria-hidden="true">
+                {session.user.displayName.slice(0, 1).toUpperCase()}
+              </span>
+            )}
+            <span className={styles.name}>{session.user.displayName}</span>
+          </summary>
+          <nav className={styles.panel} aria-label="Sua conta">
+            <Link to="/perfil">Meu perfil</Link>
+            <Link to="/minhas-propostas">Minhas propostas</Link>
+            {session.user.role === 'admin' ? <Link to="/admin">Administração</Link> : null}
+            <button type="button" className={styles.signOut} onClick={() => void session.signOut()}>
+              Sair
+            </button>
+          </nav>
+        </details>
       ) : location.pathname === '/entrar' ? null : (
         <Link className={styles.signIn} to="/entrar">
           Entrar

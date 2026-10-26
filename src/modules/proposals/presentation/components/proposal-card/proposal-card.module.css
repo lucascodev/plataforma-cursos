@@ -1,0 +1,35 @@
+.card {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.title {
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.meta {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.note {
+  margin: 0;
+  padding: 8px 10px;
+  border-left: 3px solid var(--warning);
+  background: var(--warning-soft);
+  font-size: 14px;
+}

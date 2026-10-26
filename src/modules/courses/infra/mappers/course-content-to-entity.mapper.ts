@@ -60,5 +60,6 @@ export function mapCourseContentToEntity(content: CourseContent): Course {
         link: section.link ?? null,
       })),
     },
+    author: null,
   };
 }

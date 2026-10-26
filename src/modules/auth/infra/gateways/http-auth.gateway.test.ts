@@ -18,7 +18,7 @@ function gatewayWith(answer: (request: HttpRequest) => unknown) {
   return { gateway: new HttpAuthGateway(client, (url) => visited.push(url)), requests, visited };
 }
 
-const user = { id: 'user-1', displayName: 'Ana', avatarUrl: 'https://avatars.githubusercontent.com/u/1' };
+const user = { id: 'user-1', handle: 'ana', role: 'student', displayName: 'Ana', avatarUrl: 'https://avatars.githubusercontent.com/u/1' };
 
 describe('HttpAuthGateway', () => {
   it('returns the signed in user', async () => {

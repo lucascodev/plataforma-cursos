@@ -1,0 +1,109 @@
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+  padding-top: 28px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.avatar {
+  border-radius: 50%;
+  border: 1px solid var(--line);
+}
+
+.identity {
+  display: grid;
+  gap: 4px;
+}
+
+.kicker {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.name {
+  margin: 0;
+  font-size: clamp(30px, 6vw, 46px);
+  line-height: 1.02;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.handle {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.bio {
+  margin: 0;
+  max-width: 68ch;
+  white-space: pre-line;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+}
+
+.section {
+  display: grid;
+  gap: 10px;
+}
+
+.empty {
+  margin: 0;
+  color: var(--muted);
+}
+
+.courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.course {
+  display: grid;
+  gap: 6px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.courseTitle {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.tagline {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}

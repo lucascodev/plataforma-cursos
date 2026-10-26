@@ -157,13 +157,22 @@ describe('sessão', () => {
     expect(setCookies(response).every((cookie) => cookie.includes('Max-Age=0'))).toBe(true);
   });
 
-  it('/api/me devolve só nome, foto confiável e id', async () => {
-    const { services } = makeFakeServices(() =>
-      json({ id: 'user-1', email: 'ana@example.com', user_metadata: { full_name: 'Ana', avatar_url: 'https://evil.example/a.png' } }),
+  it('/api/me pergunta ao banco o papel e devolve só os campos do contrato', async () => {
+    const { services, calls } = makeFakeServices(() =>
+      json({ id: 'user-1', handle: 'ana', role: 'teacher', displayName: 'Ana', avatarUrl: null, email: 'ana@example.com' }),
     );
     const response = await handleMe(new Request(`${SITE}/api/me`, { headers: { Cookie: cookieHeader({ '__Host-ca-access': accessToken() }) } }), services);
     const body = (await response.json()) as { user: Record<string, unknown> };
-    expect(body.user).toEqual({ id: 'user-1', displayName: 'Ana', avatarUrl: null });
+    expect(calls[0]?.url).toContain('/rest/v1/rpc/ensure_profile');
+    expect(calls[0]?.headers.authorization).toBe(`Bearer ${accessToken()}`);
+    expect(body.user).toEqual({ id: 'user-1', handle: 'ana', role: 'teacher', displayName: 'Ana', avatarUrl: null });
+  });
+
+  it('/api/me encerra a sessão quando o Supabase recusa o token', async () => {
+    const { services } = makeFakeServices(() => json({ message: 'JWT expired' }, 401));
+    const response = await handleMe(new Request(`${SITE}/api/me`, { headers: { Cookie: cookieHeader({ '__Host-ca-access': accessToken() }) } }), services);
+    expect(response.status).toBe(401);
+    expect(setCookies(response).every((cookie) => cookie.includes('Max-Age=0'))).toBe(true);
   });
 
   it('logout encerra no Supabase e apaga os cookies', async () => {
@@ -184,6 +193,7 @@ describe('cursos', () => {
     const response = await handleListCourses(services);
     expect(((await response.json()) as { courses: unknown[] }).courses.length).toBe(2);
     expect(calls[0]?.url).toContain('published=eq.true');
+    expect(calls[0]?.url).toContain('listed=eq.true');
     expect(calls[0]?.headers.authorization).toBeUndefined();
     expect(response.headers.get('Cache-Control')).toContain('public');
   });
@@ -193,6 +203,14 @@ describe('cursos', () => {
     expect((await handleGetCourse('../etc', services)).status).toBe(404);
     expect(calls.length).toBe(0);
     expect((await handleGetCourse('nao-existe', services)).status).toBe(404);
+  });
+
+  it('detalhe traz quem publicou, sem campos extras', async () => {
+    const { services } = makeFakeServices(() =>
+      json([{ content: { slug: 'a' }, owner: { handle: 'ana', display_name: 'Ana', avatar_url: null, role: 'teacher' } }]),
+    );
+    const body = (await (await handleGetCourse('a', services)).json()) as { author: unknown };
+    expect(body.author).toEqual({ handle: 'ana', displayName: 'Ana', avatarUrl: null });
   });
 });
 

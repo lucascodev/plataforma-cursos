@@ -19,7 +19,7 @@ export function CoursePreview({ details, isCheckingSession, onSignIn }: CoursePr
   return (
     <div className={styles.preview}>
       <title>{course.title}</title>
-      <CourseHero title={course.title} tagline={course.tagline} description={course.description} facts={preview.facts}>
+      <CourseHero title={course.title} tagline={course.tagline} description={course.description} facts={preview.facts} author={course.author}>
         <Button tone="primary" disabled={isCheckingSession} onClick={onSignIn}>
           Entrar com GitHub para começar
         </Button>

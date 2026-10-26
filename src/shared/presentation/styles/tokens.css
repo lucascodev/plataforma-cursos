@@ -16,8 +16,9 @@
   --radius-small: 6px;
 }
 
+/* data-theme comes from the account settings; without it (or with "system") the device decides. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme='light']) {
     color-scheme: dark;
     --bg: #0c1317;
     --surface: #121c22;
@@ -29,4 +30,17 @@
     --warning: #e9b23a;
     --warning-soft: #332910;
   }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0c1317;
+  --surface: #121c22;
+  --line: #24333c;
+  --fg: #dce6eb;
+  --muted: #8e9da7;
+  --accent: #3cc4b8;
+  --accent-soft: #11302d;
+  --warning: #e9b23a;
+  --warning-soft: #332910;
 }

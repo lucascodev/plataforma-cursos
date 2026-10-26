@@ -52,4 +52,14 @@ describe('HttpProgressRepository', () => {
     });
     await expect(failing.repository.save('c', saved)).rejects.toThrow(ProgressStorageError);
   });
+
+  it('lists only completion flags and study days for the profile page', async () => {
+    const { repository, requests } = repositoryWith(() => ({
+      items: [{ courseSlug: 'engenharia-de-ia', updatedAt: '2026-11-02T12:00:00+00:00', completedItems: { 'm1-t0': true, 'm1-cp': true }, studyDays: { '2026-11-01': true } }],
+    }));
+    expect(await repository.listSummaries()).toEqual([
+      { courseSlug: 'engenharia-de-ia', updatedAt: '2026-11-02T12:00:00+00:00', completedItemIds: ['m1-t0', 'm1-cp'], studyDayCount: 1 },
+    ]);
+    expect(requests).toEqual([{ path: '/api/progress' }]);
+  });
 });
