@@ -5,11 +5,11 @@ import { SessionExpiredError } from '@/shared/application/errors/session-expired
 import type { LoadProgressOutputDto } from '../../../application/dtos/load-progress/load-progress-output.dto';
 import type { CourseProgress } from '../../../domain/entities/course-progress.entity';
 import { createEmptyProgress } from '../../../domain/rules/create-empty-progress.rule';
-import { setItemCompletion } from '../../../domain/rules/set-item-completion.rule';
-import { setJournalEntry } from '../../../domain/rules/set-journal-entry.rule';
-import { setModuleNote } from '../../../domain/rules/set-module-note.rule';
-import { setStartDate } from '../../../domain/rules/set-start-date.rule';
-import { setStudyDayDone } from '../../../domain/rules/set-study-day-done.rule';
+import { setItemCompletion } from '../../../domain/rules/updates/set-item-completion.rule';
+import { setJournalEntry } from '../../../domain/rules/updates/set-journal-entry.rule';
+import { setModuleNote } from '../../../domain/rules/updates/set-module-note.rule';
+import { setStartDate } from '../../../domain/rules/updates/set-start-date.rule';
+import { setStudyDayDone } from '../../../domain/rules/updates/set-study-day-done.rule';
 import { makeEraseProgress } from '../../../main/factories/make-erase-progress.factory';
 import { makeLoadProgress } from '../../../main/factories/make-load-progress.factory';
 import { makeSaveProgress } from '../../../main/factories/make-save-progress.factory';

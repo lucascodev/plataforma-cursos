@@ -4,9 +4,9 @@ import type { CourseProgress } from '../../../domain/entities/course-progress.en
 import { progressLimits } from '@contracts/progress/progress-limits';
 import type { JournalExport } from '../../../domain/entities/journal-export.entity';
 import { InvalidBackupError } from '../../../domain/errors/invalid-backup.error';
-import { makeExportBackup } from '../../../main/factories/make-export-backup.factory';
-import { makeExportJournal } from '../../../main/factories/make-export-journal.factory';
-import { makeReadBackup } from '../../../main/factories/make-read-backup.factory';
+import { makeExportBackup } from '../../../main/factories/backup/make-export-backup.factory';
+import { makeExportJournal } from '../../../main/factories/backup/make-export-journal.factory';
+import { makeReadBackup } from '../../../main/factories/backup/make-read-backup.factory';
 import type { CourseProgressActions } from '../use-course-progress/course-progress-actions.type';
 import type { BackupMessage } from './backup-message.type';
 

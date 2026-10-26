@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { progressLimits } from '@contracts/progress/progress-limits';
 import { buildJournalMarkdown } from './build-journal-markdown.rule';
 import { createEmptyProgress } from './create-empty-progress.rule';
-import { setItemCompletion } from './set-item-completion.rule';
-import { setJournalEntry } from './set-journal-entry.rule';
+import { setItemCompletion } from './updates/set-item-completion.rule';
+import { setJournalEntry } from './updates/set-journal-entry.rule';
 
 describe('progress rules', () => {
   it('toggles items without mutating the original', () => {

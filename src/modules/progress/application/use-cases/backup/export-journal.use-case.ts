@@ -1,6 +1,6 @@
 import type { FileDownloader } from '@/shared/application/ports/files/file-downloader.interface';
-import { buildJournalMarkdown } from '../../domain/rules/build-journal-markdown.rule';
-import type { ExportJournalInputDto } from '../dtos/export-journal/export-journal-input.dto';
+import { buildJournalMarkdown } from '../../../domain/rules/build-journal-markdown.rule';
+import type { ExportJournalInputDto } from '../../dtos/export-journal/export-journal-input.dto';
 
 export class ExportJournalUseCase {
   constructor(private readonly fileDownloader: FileDownloader) {}

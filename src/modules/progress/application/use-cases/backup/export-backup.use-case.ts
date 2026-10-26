@@ -1,7 +1,7 @@
 import type { Clock } from '@/shared/application/ports/clock.interface';
 import type { FileDownloader } from '@/shared/application/ports/files/file-downloader.interface';
-import type { BackupCodec } from '../ports/backup-codec.interface';
-import type { ExportBackupInputDto } from '../dtos/export-backup/export-backup-input.dto';
+import type { BackupCodec } from '../../ports/backup-codec.interface';
+import type { ExportBackupInputDto } from '../../dtos/export-backup/export-backup-input.dto';
 
 export class ExportBackupUseCase {
   constructor(

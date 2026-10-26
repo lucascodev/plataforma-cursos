@@ -5,7 +5,7 @@ import type { HttpClient } from '@/shared/application/ports/http/http-client.int
 import type { HttpRequest } from '@/shared/application/ports/http/http-request.type';
 import { ProgressStorageError } from '../../domain/errors/progress-storage.error';
 import { createEmptyProgress } from '../../domain/rules/create-empty-progress.rule';
-import { setItemCompletion } from '../../domain/rules/set-item-completion.rule';
+import { setItemCompletion } from '../../domain/rules/updates/set-item-completion.rule';
 import { HttpProgressRepository } from './http-progress.repository';
 
 function repositoryWith(answer: (request: HttpRequest) => unknown) {
