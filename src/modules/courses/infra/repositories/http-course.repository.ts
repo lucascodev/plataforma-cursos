@@ -11,10 +11,11 @@ export class HttpCourseRepository implements CourseRepository {
   constructor(private readonly httpClient: HttpClient) {}
 
   async listAll(): Promise<Course[]> {
-    const { courses } = courseListResponseSchema.parse(await this.httpClient.request({ path: COURSE_API_PATHS.list }));
+    const { courses, authors } = courseListResponseSchema.parse(await this.httpClient.request({ path: COURSE_API_PATHS.list }));
     return courses.flatMap((raw, index) => {
       try {
-        return [parseCourseContent(`${COURSE_API_PATHS.list}[${index}]`, raw)];
+        const course = parseCourseContent(`${COURSE_API_PATHS.list}[${index}]`, raw);
+        return [{ ...course, author: authors[course.slug] ?? null }];
       } catch (error) {
         // A broken course must not take the whole catalog down; the database only receives content checked by the same schema.
         console.error(error);

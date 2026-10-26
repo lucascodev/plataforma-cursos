@@ -18,7 +18,7 @@ export function StudiesTabPage() {
         <SectionHeading id="perfil-cursos" title="Seus cursos" />
         {summary.courses.length === 0 ? (
           <p className={styles.status}>
-            Você ainda não começou nenhum curso. <Link to="/">Ver cursos</Link>
+            Você ainda não começou nenhum curso. <Link to="/cursos">Ver cursos</Link>
           </p>
         ) : (
           <StudyCourseList courses={summary.courses} />

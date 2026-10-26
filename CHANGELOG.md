@@ -6,6 +6,10 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 
 ### Adicionado
 
+- Novo design nas páginas públicas: landing em `/`, catálogo em `/cursos` com busca e filtro de nível, página do curso com "Monte o seu plano", Entrar em tela dividida e Privacidade com navegação lateral.
+- Começar o curso (`/cursos/<curso>/comecar`): data de início, ritmo da semana e os horários como evento recorrente (`.ics`).
+- Telas de estudo com menu lateral (barra inferior no celular): Hoje, Plano (mês e lista, recomeçar de outra data), Módulo, Projetos (requisitos, critérios e entrega com link do repositório), Diário (busca e filtro por módulo), Seus dados (backup, diário, importação comparada e apagar com confirmação digitada) e a página do dia com cronômetro.
+
 - Aviso de versão nova: depois de um deploy, as abas abertas mostram "Saiu uma versão nova do site" com o botão Recarregar.
 - Base do novo design: paleta clara e escura, botões de 44 a 52 px e os componentes Dialog, BottomSheet, confirmação digitada, Toast com desfazer, Banner, Skeleton, EmptyState, Tabs, Breadcrumb, Sidebar, barra inferior no celular, Stepper, RadioCard, StatTile e bloco de código com copiar.
 
@@ -40,6 +44,9 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 - Testes das functions e do cliente HTTP.
 
 ### Alterado
+
+- A página do curso é a mesma para todos; o painel de estudo vira várias páginas e a data de início não é mais gravada sozinha: quem começa escolhe no Começar.
+- Sair da conta pede confirmação.
 
 - O projeto usa pnpm. O CI usava `npm ci` sem `package-lock.json` e falhava em todo push.
 - A validação da ligação entre progresso e cursos virou migration; não há mais SQL manual depois de importar os cursos.

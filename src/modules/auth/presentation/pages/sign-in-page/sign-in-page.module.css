@@ -1,43 +1,125 @@
 .page {
   display: grid;
-  gap: 14px;
-  max-width: 480px;
-  margin: 48px auto;
-  padding: 28px;
-  background: var(--surface);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 0;
+  margin-top: 56px;
+  overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: var(--radius-2xl);
+  background: var(--surface);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 48px;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .title {
   margin: 0;
-  font-size: clamp(28px, 5vw, 36px);
-  line-height: 1.05;
+  font-weight: 800;
+  font-size: clamp(30px, 4vw, 40px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
 }
 
 .lead {
   margin: 0;
-  color: var(--muted);
-}
-
-.alert {
-  margin: 0;
-  padding: 10px 14px;
-  border-radius: var(--radius-small);
-  background: var(--warning-soft);
-  color: var(--warning);
-  font-size: 14px;
+  font-size: 18px;
+  color: var(--fg-2);
 }
 
 .action {
-  justify-self: start;
+  align-self: flex-start;
 }
 
 .facts {
-  margin: 4px 0 0;
-  padding-left: 18px;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  background: var(--surface-2);
+}
+
+.factsTitle {
+  margin: 0;
+  font-weight: 600;
+}
+
+.facts ul {
+  display: flex;
+  flex-direction: column;
   gap: 6px;
+  margin: 0;
+  padding-left: 20px;
+  color: var(--fg-2);
+}
+
+.legal {
+  margin: 0;
   font-size: 14px;
   color: var(--muted);
+}
+
+.aside {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 48px;
+  background: var(--ink-bg);
+  color: var(--ink-fg);
+}
+
+.asideTitle {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-accent);
+}
+
+.benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.benefitTitle {
+  margin: 0 0 4px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.benefitText {
+  margin: 0;
+  color: var(--ink-fg-2);
+}
+
+.dialogList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding-left: 20px;
+  color: var(--fg-2);
+}
+
+@media (max-width: 520px) {
+  .main,
+  .aside {
+    padding: 28px 24px;
+  }
 }

@@ -1,11 +1,3 @@
-.menu {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
 .dropdown {
   position: relative;
 }
@@ -14,10 +6,10 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  min-height: 36px;
-  padding: 3px 8px 3px 4px;
+  min-height: var(--control-sm);
+  padding: 4px 10px 4px 4px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--surface);
   cursor: pointer;
   list-style: none;
@@ -38,8 +30,8 @@
 
 .avatar,
 .initial {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: 1px solid var(--line);
 }
@@ -47,14 +39,14 @@
 .initial {
   display: grid;
   place-items: center;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   background: var(--accent-soft);
-  color: var(--accent);
+  color: var(--accent-hover);
 }
 
 .name {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   max-width: 18ch;
   overflow: hidden;
@@ -68,23 +60,25 @@
   top: calc(100% + 6px);
   z-index: 10;
   display: grid;
-  min-width: 200px;
+  min-width: 220px;
   padding: 6px;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: var(--radius-md);
   background: var(--surface);
-  box-shadow: 0 12px 28px rgb(0 0 0 / 12%);
+  box-shadow: var(--shadow-menu);
 }
 
 .panel a,
 .signOut {
-  display: block;
-  padding: 9px 10px;
-  border-radius: var(--radius-small);
+  display: flex;
+  align-items: center;
+  min-height: var(--control-sm);
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
   color: var(--fg);
   text-decoration: none;
   font: inherit;
-  font-size: 14px;
+  font-size: 15px;
   text-align: left;
   background: none;
   border: 0;
@@ -93,38 +87,32 @@
 
 .panel a:hover,
 .signOut:hover {
-  background: var(--bg);
+  background: var(--surface-2);
 }
 
 .signOut {
   border-top: 1px solid var(--line);
-  border-radius: 0 0 var(--radius-small) var(--radius-small);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
   margin-top: 4px;
-}
-
-.error {
-  flex-basis: 100%;
-  margin: 0;
-  font-size: 13px;
-  color: var(--warning);
-  text-align: right;
 }
 
 .signIn {
   display: inline-flex;
   align-items: center;
-  padding: 5px 11px;
-  border: 1px solid var(--accent);
-  border-radius: var(--radius-small);
-  background: var(--accent);
-  color: var(--surface);
-  font-size: 13px;
+  gap: 8px;
+  min-height: var(--control-sm);
+  padding: 0 18px;
+  border-radius: var(--radius-sm);
+  background: var(--strong);
+  color: var(--on-strong);
+  font-size: 15px;
   font-weight: 500;
   text-decoration: none;
 }
 
 .signIn:hover {
-  filter: brightness(0.92);
+  color: var(--on-strong);
+  opacity: 0.9;
 }
 
 @media (max-width: 520px) {

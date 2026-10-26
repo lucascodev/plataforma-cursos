@@ -1,0 +1,116 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--fg);
+}
+
+.active {
+  border-color: var(--strong);
+  background: var(--strong);
+  color: var(--on-strong);
+}
+
+.active:hover {
+  color: var(--on-strong);
+}
+
+.check {
+  color: var(--accent);
+}
+
+.active .check {
+  color: var(--ink-accent);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.kicker {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.title {
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 420px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.progress progress {
+  flex: 1;
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px 24px;
+  border-radius: var(--radius-xl);
+  background: var(--ink-bg);
+  color: var(--ink-fg);
+  text-decoration: none;
+}
+
+.project:hover {
+  color: var(--ink-fg);
+  outline: 2px solid var(--ink-accent);
+}
+
+.projectLabel {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-accent);
+}
+
+.projectTitle {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.projectCta {
+  color: var(--ink-fg-2);
+}

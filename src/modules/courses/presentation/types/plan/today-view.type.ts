@@ -1,6 +1,8 @@
 import type { DateKey } from '@/shared/domain/types/date-key.type';
+import type { StudyTaskKind } from '../../../domain/entities/plan/study-task-kind.type';
 
 export interface TodayView {
+  readonly kind: StudyTaskKind;
   readonly kicker: string;
   readonly reference: string;
   readonly hoursLabel: string;

@@ -5,7 +5,7 @@ export function NotFoundPage() {
   return (
     <PageStatus title="Página não encontrada">
       <p>
-        O endereço pode ter mudado. <Link to="/">Voltar para os cursos</Link>
+        O endereço pode ter mudado. <Link to="/cursos">Voltar para os cursos</Link>
       </p>
     </PageStatus>
   );

@@ -1,0 +1,5 @@
+.wrapper {
+  width: min(var(--container), 100%);
+  margin: 16px auto 0;
+  padding: 0 var(--gutter);
+}

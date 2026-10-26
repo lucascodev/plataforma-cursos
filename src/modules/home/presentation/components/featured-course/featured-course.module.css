@@ -1,0 +1,151 @@
+.section {
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 48px;
+  width: min(var(--container), 100%);
+  margin: 0 auto;
+  padding: 88px var(--gutter);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.kicker {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.title {
+  margin: 0;
+  font-weight: 800;
+  font-size: clamp(34px, 5vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.tagline {
+  margin: 0;
+  font-size: 18px;
+  color: var(--fg-2);
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.facts li {
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  font-size: 14px;
+  color: var(--fg-2);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-md);
+  padding: 0 22px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.primary:hover {
+  background: var(--accent-hover);
+  color: var(--on-accent);
+}
+
+.secondary {
+  border: 1px solid var(--line-strong);
+  color: var(--fg);
+  font-weight: 500;
+}
+
+.secondary:hover {
+  border-color: var(--accent);
+  color: var(--fg);
+}
+
+.trail {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.trailTitle {
+  margin: 0;
+  font-weight: 600;
+}
+
+.modules {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.module {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: baseline;
+  padding: 12px 16px;
+}
+
+.module + .module {
+  border-top: 1px solid var(--line-soft);
+}
+
+.code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.capstone {
+  color: var(--warning);
+}
+
+.moduleTitle {
+  font-weight: 500;
+}
+
+.meta {
+  font-size: 13px;
+  color: var(--muted);
+}

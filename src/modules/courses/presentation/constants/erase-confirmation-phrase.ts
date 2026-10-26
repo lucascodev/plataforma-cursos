@@ -1,0 +1,1 @@
+export const ERASE_CONFIRMATION_PHRASE = 'APAGAR';

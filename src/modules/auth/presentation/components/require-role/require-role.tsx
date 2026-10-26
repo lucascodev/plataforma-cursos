@@ -29,7 +29,7 @@ export function RequireRole({ roles, returnPath, children }: RequireRoleProps) {
     return (
       <PageStatus title="Você não tem acesso a esta área">
         <p>
-          <Link to="/">Voltar para os cursos</Link>
+          <Link to="/cursos">Voltar para os cursos</Link>
         </p>
       </PageStatus>
     );

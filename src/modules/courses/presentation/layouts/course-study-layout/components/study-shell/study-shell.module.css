@@ -1,0 +1,83 @@
+.shell {
+  display: grid;
+  grid-template-columns: 248px minmax(0, 1fr);
+  align-items: start;
+  gap: 32px;
+  padding-top: 32px;
+}
+
+.side {
+  position: sticky;
+  top: 96px;
+}
+
+.course {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.courseLabel {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.course a {
+  font-weight: 600;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.course a:hover {
+  text-decoration: underline;
+}
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.progressHeading {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.progressHeading strong {
+  color: var(--fg);
+}
+
+.progressCount {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.status {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 720px) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: 16px;
+    padding-bottom: 96px;
+  }
+
+  .side {
+    display: none;
+  }
+}
