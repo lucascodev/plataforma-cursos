@@ -6,6 +6,8 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 
 ### Adicionado
 
+- Aulas e exercícios de fixação têm `id` fixo dentro do módulo. Reordenar aulas não move mais o progresso de lugar. Os ids que faltavam foram preenchidos pela posição, as mesmas chaves que o progresso já usava.
+
 - Migrations aplicadas pelo CI: a cada push na `main`, o job `release` roda `supabase db push` e só depois pede o deploy ao Cloudflare por Deploy Hook. Guia em `docs/migracoes.md`.
 - Comandos `pnpm db:*` (Supabase CLI no projeto) e `supabase/config.toml` para subir o banco local.
 - CI aplica todas as migrations do zero, carrega o seed e roda os testes pgTAP e o lint do banco a cada push.
