@@ -1,5 +1,5 @@
-import type { AdminRole } from '../../domain/types/admin-role.type';
-import type { AdminGateway } from '../ports/admin-gateway.interface';
+import type { AdminRole } from '../../../domain/types/admin-role.type';
+import type { AdminGateway } from '../../ports/admin-gateway.interface';
 
 export class SetRoleUseCase {
   constructor(private readonly adminGateway: AdminGateway) {}

@@ -1,4 +1,4 @@
-import type { AdminGateway } from '../ports/admin-gateway.interface';
+import type { AdminGateway } from '../../ports/admin-gateway.interface';
 
 export class SetCourseListedUseCase {
   constructor(private readonly adminGateway: AdminGateway) {}

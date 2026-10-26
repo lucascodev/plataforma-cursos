@@ -1,5 +1,5 @@
-import type { ApproveProposalInputDto } from '../dtos/approve-proposal-input.dto';
-import type { AdminGateway } from '../ports/admin-gateway.interface';
+import type { ApproveProposalInputDto } from '../../dtos/approve-proposal-input.dto';
+import type { AdminGateway } from '../../ports/admin-gateway.interface';
 
 export class ApproveProposalUseCase {
   constructor(private readonly adminGateway: AdminGateway) {}

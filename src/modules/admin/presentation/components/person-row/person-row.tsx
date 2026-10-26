@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/shared/presentation/components/actions/button/button';
 import { Notice } from '@/shared/presentation/components/feedback/notice/notice';
 import { readErrorMessage } from '@/shared/presentation/formatters/read-error-message';
-import type { AdminPerson } from '../../../domain/entities/admin-person.entity';
+import type { AdminPerson } from '../../../domain/entities/people/admin-person.entity';
 import type { AdminRole } from '../../../domain/types/admin-role.type';
 import { ROLE_LABELS } from '../../formatters/describe-role';
 import { formatDateTime } from '../../formatters/format-date-time';

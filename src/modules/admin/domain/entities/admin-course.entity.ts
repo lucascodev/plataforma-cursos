@@ -1,4 +1,4 @@
-import type { PersonCard } from './person-card.entity';
+import type { PersonCard } from './people/person-card.entity';
 
 export interface AdminCourse {
   readonly slug: string;

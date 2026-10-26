@@ -1,4 +1,4 @@
-import type { AuditPage } from '../../domain/entities/audit-page.entity';
+import type { AuditPage } from '../../domain/entities/audit/audit-page.entity';
 import type { AdminGateway } from '../ports/admin-gateway.interface';
 
 export class ListAuditUseCase {

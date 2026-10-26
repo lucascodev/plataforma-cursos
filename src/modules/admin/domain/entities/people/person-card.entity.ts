@@ -1,4 +1,4 @@
-import type { AdminRole } from '../types/admin-role.type';
+import type { AdminRole } from '../../types/admin-role.type';
 
 export interface PersonCard {
   readonly id: string;

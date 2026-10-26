@@ -1,5 +1,5 @@
-import type { AdminProposal } from '../../domain/entities/admin-proposal.entity';
-import type { AdminGateway } from '../ports/admin-gateway.interface';
+import type { AdminProposal } from '../../../domain/entities/admin-proposal.entity';
+import type { AdminGateway } from '../../ports/admin-gateway.interface';
 
 export class GetAdminProposalUseCase {
   constructor(private readonly adminGateway: AdminGateway) {}

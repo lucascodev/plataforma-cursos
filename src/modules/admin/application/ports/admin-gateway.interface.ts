@@ -1,8 +1,8 @@
 import type { AdminCourse } from '../../domain/entities/admin-course.entity';
 import type { AdminOverview } from '../../domain/entities/admin-overview.entity';
-import type { AdminPerson } from '../../domain/entities/admin-person.entity';
+import type { AdminPerson } from '../../domain/entities/people/admin-person.entity';
 import type { AdminProposal } from '../../domain/entities/admin-proposal.entity';
-import type { AuditPage } from '../../domain/entities/audit-page.entity';
+import type { AuditPage } from '../../domain/entities/audit/audit-page.entity';
 import type { PagedList } from '../../domain/entities/paged-list.entity';
 import type { AdminRole } from '../../domain/types/admin-role.type';
 import type { ApproveProposalInputDto } from '../dtos/approve-proposal-input.dto';

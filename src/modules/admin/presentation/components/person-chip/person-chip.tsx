@@ -1,4 +1,4 @@
-import type { PersonCard } from '../../../domain/entities/person-card.entity';
+import type { PersonCard } from '../../../domain/entities/people/person-card.entity';
 import styles from './person-chip.module.css';
 
 export function PersonChip({ person }: { person: PersonCard | null }) {

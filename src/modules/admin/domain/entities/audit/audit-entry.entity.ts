@@ -1,5 +1,5 @@
-import type { AuditAction } from '../types/audit-action.type';
-import type { PersonCard } from './person-card.entity';
+import type { AuditAction } from '../../types/audit-action.type';
+import type { PersonCard } from '../people/person-card.entity';
 
 export interface AuditEntry {
   readonly id: number;

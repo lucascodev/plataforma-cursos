@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import type { AdminRole } from '../../../domain/types/admin-role.type';
-import { makeListPeople } from '../../../main/factories/make-list-people.factory';
+import { makeListPeople } from '../../../main/factories/people/make-list-people.factory';
 import { adminQueryKeys } from '../../query-keys/admin-query-keys';
 
 export function useAdminPeopleQuery(query: string, role: AdminRole | null, page: number) {
