@@ -6,6 +6,15 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 
 ### Adicionado
 
+- Aviso de versão nova: depois de um deploy, as abas abertas mostram "Saiu uma versão nova do site" com o botão Recarregar.
+- Base do novo design: paleta clara e escura, botões de 44 a 52 px e os componentes Dialog, BottomSheet, confirmação digitada, Toast com desfazer, Banner, Skeleton, EmptyState, Tabs, Breadcrumb, Sidebar, barra inferior no celular, Stepper, RadioCard, StatTile e bloco de código com copiar.
+
+- Título profissional e resumo curto no perfil de professor. O título aparece ao lado do nome nas páginas dos cursos e na página pública.
+
+- Progresso salvo com revisão. Duas abas ou dois aparelhos abertos no mesmo curso não apagam mais o que o outro marcou: num conflito, a tela recarrega e junta as mudanças.
+
+- Aulas e exercícios de fixação têm `id` fixo dentro do módulo. Reordenar aulas não move mais o progresso de lugar. Os ids que faltavam foram preenchidos pela posição, as mesmas chaves que o progresso já usava.
+
 - Migrations aplicadas pelo CI: a cada push na `main`, o job `release` roda `supabase db push` e só depois pede o deploy ao Cloudflare por Deploy Hook. Guia em `docs/migracoes.md`.
 - Comandos `pnpm db:*` (Supabase CLI no projeto) e `supabase/config.toml` para subir o banco local.
 - CI aplica todas as migrations do zero, carrega o seed e roda os testes pgTAP e o lint do banco a cada push.

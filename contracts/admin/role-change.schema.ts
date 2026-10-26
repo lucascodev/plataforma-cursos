@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { userRoleSchema } from '../profile/user-role.schema';
+import { userRoleSchema } from '../profile/user-role.schema.ts';
 
 export const roleChangeSchema = z.object({ role: userRoleSchema });
 

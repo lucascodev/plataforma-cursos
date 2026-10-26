@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import styles from './badge.module.css';
 
 interface BadgeProps {
-  tone?: 'neutral' | 'accent' | 'warning';
+  tone?: 'neutral' | 'accent' | 'warning' | 'danger';
   children: ReactNode;
 }
 

@@ -82,41 +82,49 @@
       "lowSpecTip": "Faça as chamadas de modelo (aulas 1.2 e 1.8) pela API da DeepSeek e use um modelo de embedding pequeno na CPU. Treine o Mini GPT na GPU gratuita do Google Colab.",
       "lessons": [
         {
+          "id": "t0",
           "title": "Python para devs",
           "summary": "Tipagem, async, pydantic, pytest e ambientes com uv.",
           "exercise": "Escreva um script que lê um CSV de mensagens de clientes, valida cada linha com pydantic e tem testes com pytest."
         },
         {
+          "id": "t1",
           "title": "Ambiente local de IA",
           "summary": "Ollama, modelos abertos, quantização básica, a API local compatível com OpenAI e a DeepSeek como alternativa barata.",
           "exercise": "Instale o Ollama, baixe um modelo de 3B e outro de 7 a 8B e chame os dois pela API local num script. Sem GPU, chame um modelo de 1 a 3B local e o deepseek-flash pela mesma biblioteca."
         },
         {
+          "id": "t2",
           "title": "Vetores e similaridade",
           "summary": "Vetores, produto escalar, norma e similaridade de cosseno.",
           "exercise": "Gere embeddings de 20 frases sobre atendimento com um modelo local e encontre os pares mais parecidos calculando o cosseno à mão."
         },
         {
+          "id": "t3",
           "title": "Probabilidade e amostragem",
           "summary": "Distribuições, softmax, temperatura e top-p.",
           "exercise": "Implemente softmax com temperatura e top-p em NumPy e amostre mil vezes para ver a distribuição mudar."
         },
         {
+          "id": "t4",
           "title": "Gradiente e treino",
           "summary": "Derivada, regra da cadeia e gradiente descendente.",
           "exercise": "Construa o micrograd acompanhando a primeira aula do Karpathy."
         },
         {
+          "id": "t5",
           "title": "PyTorch e GPU",
           "summary": "Tensores, autograd, loop de treino e uso da GPU local ou do Google Colab gratuito.",
           "exercise": "Treine uma rede pequena no MNIST e compare o tempo na CPU e na GPU."
         },
         {
+          "id": "t6",
           "title": "Transformers por dentro",
           "summary": "Tokenização, embeddings e atenção.",
           "exercise": "Conte os tokens do mesmo texto em português e em inglês em dois tokenizadores do Hugging Face e explique a diferença."
         },
         {
+          "id": "t7",
           "title": "Por que o modelo erra",
           "summary": "Pré-treino, pós-treino, alucinação e limites do contexto.",
           "exercise": "Faça 20 perguntas difíceis a um modelo local, registre as respostas erradas e classifique a causa de cada uma."
@@ -124,22 +132,27 @@
       ],
       "drills": [
         {
+          "id": "e0",
           "title": "Similaridade sem biblioteca",
           "task": "Implemente busca por similaridade de cosseno em 200 frases usando só NumPy e compare com uma biblioteca pronta."
         },
         {
+          "id": "e1",
           "title": "Temperatura na prática",
           "task": "Gere 10 respostas para o mesmo prompt em três temperaturas, num modelo local, e descreva o que mudou em variedade e acerto."
         },
         {
+          "id": "e2",
           "title": "Gradiente à mão",
           "task": "Calcule no papel o gradiente de uma rede de duas camadas para um exemplo e confira com o autograd do PyTorch."
         },
         {
+          "id": "e3",
           "title": "Tokens e custo equivalente",
           "task": "Conte os tokens de mil mensagens de 300 palavras e estime quanto custariam em três APIs pagas, pela tabela pública de preços."
         },
         {
+          "id": "e4",
           "title": "Explique para alguém",
           "task": "Escreva uma página explicando atenção para um dev que nunca estudou ML, sem fórmulas."
         }
@@ -215,46 +228,55 @@
       "lowSpecTip": "Gere as respostas com a DeepSeek e mantenha embeddings e reranker pequenos na CPU, porque a DeepSeek não oferece embeddings. O Postgres com pgvector roda bem em qualquer máquina.",
       "lessons": [
         {
+          "id": "t0",
           "title": "Quando usar RAG",
           "summary": "Documento inteiro no prompt, RAG ou fine-tuning: contexto, tempo de resposta e atualização.",
           "exercise": "Responda 10 perguntas colocando um documento inteiro no prompt de um modelo local e anote tokens e tempo de cada uma."
         },
         {
+          "id": "t1",
           "title": "Modelos de embedding locais",
           "summary": "Dimensão, idioma, qualidade e uso de memória.",
           "exercise": "Compare dois modelos de embedding locais em 20 perguntas em português."
         },
         {
+          "id": "t2",
           "title": "Banco vetorial com pgvector",
           "summary": "Extensão, tipo vector, índice HNSW e consultas por similaridade.",
           "exercise": "Suba um Postgres com pgvector em Docker e indexe mil frases."
         },
         {
+          "id": "t3",
           "title": "Chunking e ingestão",
           "summary": "Tamanho de trecho, sobreposição e reprocessamento quando a fonte muda.",
           "exercise": "Divida a mesma lei em trechos de três tamanhos e veja qual responde melhor a 10 perguntas."
         },
         {
+          "id": "t4",
           "title": "Metadados e filtros",
           "summary": "Fonte, data, seção e isolamento por usuário ou cliente.",
           "exercise": "Adicione filtro por coleção e prove com testes que a busca nunca mistura coleções."
         },
         {
+          "id": "t5",
           "title": "Busca híbrida e reranking",
           "summary": "Busca textual em português com tsvector, combinada à vetorial, e reranker local.",
           "exercise": "Compare busca vetorial, textual e híbrida em 30 perguntas."
         },
         {
+          "id": "t6",
           "title": "Engenharia de contexto",
           "summary": "O que entra no prompt, em que ordem e com que tamanho.",
           "exercise": "Monte o prompt final com os trechos e corte o tamanho pela metade sem perder qualidade."
         },
         {
+          "id": "t7",
           "title": "Recall e citação",
           "summary": "Medir se a busca traz o trecho certo e responder indicando a fonte.",
           "exercise": "Monte 30 perguntas com o trecho correto e meça o recall@5."
         },
         {
+          "id": "t8",
           "title": "Quando não sabe",
           "summary": "Responder que não sabe em vez de inventar.",
           "exercise": "Crie 10 perguntas sem resposta nos documentos e garanta que o assistente diga que não sabe."
@@ -262,22 +284,27 @@
       ],
       "drills": [
         {
+          "id": "e0",
           "title": "Chunking comparado",
           "task": "Gere um relatório com o recall@5 de três estratégias de chunking no mesmo conjunto de perguntas."
         },
         {
+          "id": "e1",
           "title": "Busca sem framework",
           "task": "Implemente a busca híbrida com SQL puro, sem framework, e compare com uma versão em LangChain."
         },
         {
+          "id": "e2",
           "title": "Reranking",
           "task": "Adicione um reranker local e meça quanto o recall@3 melhora."
         },
         {
+          "id": "e3",
           "title": "Citação verificável",
           "task": "Faça cada resposta trazer o trecho citado e valide por código que o trecho existe no documento."
         },
         {
+          "id": "e4",
           "title": "Fora do escopo",
           "task": "Escreva 10 perguntas fora do tema e garanta que nenhuma recebe resposta inventada."
         }
@@ -349,41 +376,49 @@
       "lowSpecTip": "A DeepSeek tem tool calling e usa o formato da API da OpenAI: troque só a URL base e o nome do modelo. Para o uso de computador, o deepseek-flash aceita imagens.",
       "lessons": [
         {
+          "id": "t0",
           "title": "Tool calling nativo",
           "summary": "Como os modelos descrevem ferramentas e devolvem chamadas estruturadas, usando modelos locais com suporte a ferramentas.",
           "exercise": "Crie uma ferramenta de consulta de horários e faça dois modelos locais diferentes chamá-la pelo Ollama."
         },
         {
+          "id": "t1",
           "title": "Saída estruturada e validação",
           "summary": "Schemas com Zod ou pydantic, validação e nova tentativa.",
           "exercise": "Valide os argumentos de cada chamada e trate o erro quando o modelo mandar dados inválidos."
         },
         {
+          "id": "t2",
           "title": "Guardas de ação",
           "summary": "Permissões, confirmação humana e idempotência em ações que mudam dados.",
           "exercise": "Exija confirmação do usuário antes de cancelar uma consulta e use chave de idempotência."
         },
         {
+          "id": "t3",
           "title": "Padrões de fluxo",
           "summary": "Encadeamento, roteamento, paralelização, orquestrador e avaliador-otimizador.",
           "exercise": "Resolva o mesmo caso com roteamento e com um agente livre e compare acerto, tokens e tempo."
         },
         {
+          "id": "t4",
           "title": "Memória e estado",
           "summary": "Memória de conversa, resumo e o que persistir entre sessões.",
           "exercise": "Faça o agente lembrar do paciente durante a conversa sem reenviar o histórico inteiro."
         },
         {
+          "id": "t5",
           "title": "Servidor MCP",
           "summary": "Especificação 2026-07-28: núcleo sem estado, ferramentas, recursos e autorização.",
           "exercise": "Exponha a agenda da clínica num servidor MCP local somente leitura e conecte a um cliente."
         },
         {
+          "id": "t6",
           "title": "Orquestração multiagente",
           "summary": "Orquestrador, subagentes, delegação e limites de passos e de tokens.",
           "exercise": "Crie um orquestrador que delega a um subagente de triagem e a outro de agendamento."
         },
         {
+          "id": "t7",
           "title": "Uso de computador com sandbox",
           "summary": "Loop de visão e ação com modelo multimodal local, isolamento e mecanismo de parada.",
           "exercise": "Faça um agente preencher um formulário de teste dentro de um contêiner isolado."
@@ -391,22 +426,27 @@
       ],
       "drills": [
         {
+          "id": "e0",
           "title": "Ferramenta com erro",
           "task": "Simule falhas da API de agenda e garanta que o agente avisa o usuário em vez de inventar um horário."
         },
         {
+          "id": "e1",
           "title": "Injeção pela conversa",
           "task": "Tente fazer o agente cancelar a consulta de outro paciente e corrija o que passar."
         },
         {
+          "id": "e2",
           "title": "Limite de passos",
           "task": "Coloque um limite de iterações e um orçamento de tokens no loop do agente."
         },
         {
+          "id": "e3",
           "title": "Cliente MCP próprio",
           "task": "Escreva um cliente MCP mínimo que lista e chama as ferramentas do seu servidor."
         },
         {
+          "id": "e4",
           "title": "Fluxo ou agente",
           "task": "Escreva um ADR curto decidindo entre fluxo fixo e agente para o agendamento."
         }
@@ -474,46 +514,55 @@
       "lowSpecTip": "O juiz pode rodar na DeepSeek. Mande só os dados fictícios do curso, porque a API processa os dados fora do Brasil, e registre o custo real de cada rodada do eval.",
       "lessons": [
         {
+          "id": "t0",
           "title": "Análise de erros",
           "summary": "Revisar conversas e agrupar as falhas em categorias.",
           "exercise": "Gere 100 conversas com o agente da clínica, revise e monte a taxonomia de falhas com contagem."
         },
         {
+          "id": "t1",
           "title": "Dataset de avaliação",
           "summary": "Transformar cada categoria de falha em casos de teste.",
           "exercise": "Escreva casos de teste com a resposta esperada para cada categoria de falha."
         },
         {
+          "id": "t2",
           "title": "Checagens por código",
           "summary": "Asserts, regex e validação estrutural antes de qualquer juiz.",
           "exercise": "Escreva checagens por código para ações indevidas e campos obrigatórios."
         },
         {
+          "id": "t3",
           "title": "Juiz validado",
           "summary": "Modelo local como juiz, rótulos binários e concordância com humanos.",
           "exercise": "Rotule 100 casos, crie um juiz local para o tom das respostas e meça acertos e falsos positivos."
         },
         {
+          "id": "t4",
           "title": "Eval automatizado",
           "summary": "Rodar a avaliação a cada mudança com um script local e um hook de pre-push no Git.",
           "exercise": "Crie o script de eval e o hook que bloqueia o push abaixo da nota mínima."
         },
         {
+          "id": "t5",
           "title": "OWASP Top 10 para LLM",
           "summary": "As dez categorias de risco aplicadas a um agente.",
           "exercise": "Monte a matriz das dez categorias para o agente da clínica."
         },
         {
+          "id": "t6",
           "title": "Red teaming",
           "summary": "Atacar o próprio sistema antes que alguém ataque.",
           "exercise": "Escreva 20 ataques de injeção e transforme os que passarem em casos do eval."
         },
         {
+          "id": "t7",
           "title": "Dados pessoais e LGPD",
           "summary": "Mascaramento, retenção e purga, pensando no dia em que o sistema usar um provedor externo.",
           "exercise": "Mascare CPF e telefone antes de gravar logs e de enviar ao modelo, e prove com testes."
         },
         {
+          "id": "t8",
           "title": "Tracing e alertas",
           "summary": "Convenções GenAI do OpenTelemetry com Jaeger ou Langfuse auto-hospedado em Docker.",
           "exercise": "Instrumente o agente e veja uma conversa inteira num único trace local."
@@ -521,22 +570,27 @@
       ],
       "drills": [
         {
+          "id": "e0",
           "title": "Taxonomia revisada",
           "task": "Reclassifique 30 conversas uma semana depois e compare com a primeira rodada."
         },
         {
+          "id": "e1",
           "title": "Juiz contra juiz",
           "task": "Compare dois prompts de juiz no mesmo conjunto rotulado e escolha pelo número."
         },
         {
+          "id": "e2",
           "title": "Regressão proposital",
           "task": "Introduza um bug no prompt e confirme que o hook bloqueia o push."
         },
         {
+          "id": "e3",
           "title": "Vazamento de dados",
           "task": "Tente extrair dados de outro paciente e registre o resultado."
         },
         {
+          "id": "e4",
           "title": "Painel mínimo",
           "task": "Monte um painel local com taxa de aprovação, transferências, tokens e tempo por conversa."
         }
@@ -607,46 +661,55 @@
       "lowSpecTip": "Arquitetura não exige hardware. Tudo aqui roda em qualquer máquina, e o esqueleto executável pode chamar a DeepSeek.",
       "lessons": [
         {
+          "id": "t0",
           "title": "Fundamentos de arquitetura",
           "summary": "Atributos de qualidade, trade-offs e decisões difíceis de reverter.",
           "exercise": "Liste os atributos de qualidade do Consultor de LGPD e ordene por prioridade, justificando cada posição."
         },
         {
+          "id": "t1",
           "title": "Documentar arquitetura",
           "summary": "Modelo C4, diagramas como código em Mermaid ou Structurizr, e ADRs.",
           "exercise": "Desenhe os diagramas de contexto e de contêineres do agente da clínica em Mermaid."
         },
         {
+          "id": "t2",
           "title": "Arquitetura hexagonal para LLMs",
           "summary": "Portas e adaptadores para isolar modelo, banco vetorial e ferramentas das regras de negócio.",
           "exercise": "Refatore o agente da clínica para trocar Ollama por DeepSeek mudando só um adaptador."
         },
         {
+          "id": "t3",
           "title": "Padrões de confiabilidade",
           "summary": "Timeout, retry com backoff, circuit breaker, idempotência e degradação graciosa.",
           "exercise": "Adicione um circuit breaker na chamada ao modelo e uma resposta degradada quando ele abrir."
         },
         {
+          "id": "t4",
           "title": "Processamento assíncrono e eventos",
           "summary": "Filas, workers e eventos para ingestão, avaliação e tarefas longas.",
           "exercise": "Mova a ingestão de documentos do Consultor de LGPD para uma fila com Redis e um worker."
         },
         {
+          "id": "t5",
           "title": "Dados em sistemas de IA",
           "summary": "Onde guardar documentos, vetores, conversas, traces e versões de prompt, e por quanto tempo.",
           "exercise": "Modele o banco do agente da clínica com conversas, mensagens, chamadas de ferramenta e versões de prompt."
         },
         {
+          "id": "t6",
           "title": "Multi-tenant e fronteiras de confiança",
           "summary": "Isolamento por cliente, permissões e onde o texto do usuário nunca pode chegar sem filtro.",
           "exercise": "Desenhe as fronteiras de confiança do agente e marque cada ponto onde entra texto não confiável."
         },
         {
+          "id": "t7",
           "title": "Monólito modular ou serviços",
           "summary": "Quando separar, o custo operacional de cada escolha e como o LLM muda a conta de escala.",
           "exercise": "Escreva um ADR decidindo entre monólito modular e serviços para o Voltz Atende."
         },
         {
+          "id": "t8",
           "title": "System design com LLM",
           "summary": "Estimativas de carga, latência, capacidade de GPU e custo, no formato das entrevistas.",
           "exercise": "Resolva o system design de um assistente para 10 mil usuários: requisições por segundo, GPUs ou cota de API, cache e custo."
@@ -654,22 +717,27 @@
       ],
       "drills": [
         {
+          "id": "e0",
           "title": "Revisão de ADR",
           "task": "Revise um ADR seu: alternativas consideradas, consequências e o que faria você mudar de ideia."
         },
         {
+          "id": "e1",
           "title": "Troca de modelo cronometrada",
           "task": "Troque o modelo de um projeto anterior marcando o tempo. Se passar de 10 minutos, o acoplamento está alto."
         },
         {
+          "id": "e2",
           "title": "Falha em cascata",
           "task": "Deixe o modelo lento de propósito e veja se o resto do sistema trava. Corrija com timeout e fila."
         },
         {
+          "id": "e3",
           "title": "Estimativa de capacidade",
           "task": "Calcule quantos usuários simultâneos a sua GPU, ou a sua cota na DeepSeek, aguenta num caso de uso real."
         },
         {
+          "id": "e4",
           "title": "System design cronometrado",
           "task": "Resolva em 45 minutos o system design de um RAG para 50 empresas e grave a sua explicação."
         }
@@ -756,51 +824,61 @@
       "lowSpecTip": "Este módulo é sobre modelos locais. Faça o fine-tuning e o GRPO no Colab gratuito, rode modelos de 1B na CPU e use a DeepSeek como o modelo maior que rotula os dados.",
       "lessons": [
         {
+          "id": "t0",
           "title": "O que cabe na sua máquina",
           "summary": "VRAM, RAM, tamanho do modelo, quantização e offload.",
           "exercise": "Rode modelos quantizados de 3B, 8B e o maior que couber e meça tokens por segundo em cada um."
         },
         {
+          "id": "t1",
           "title": "Quantização",
           "summary": "Q4, Q5 e Q8, perda de qualidade e uso de memória.",
           "exercise": "Compare Q4 e Q8 do mesmo modelo em 50 perguntas."
         },
         {
+          "id": "t2",
           "title": "Embeddings na GPU e na CPU",
           "summary": "Velocidade e qualidade de embeddings locais em cada hardware.",
           "exercise": "Rode o recall do módulo 2 com dois embeddings locais e compare tempo e acerto."
         },
         {
+          "id": "t3",
           "title": "Transcrição local",
           "summary": "Whisper local para áudios em português.",
           "exercise": "Compare dois tamanhos do Whisper em 20 áudios: acerto, tempo e memória."
         },
         {
+          "id": "t4",
           "title": "Engenharia de dados",
           "summary": "Dados sintéticos gerados por um modelo local, anonimização e divisão entre treino e teste.",
           "exercise": "Gere com um modelo local e filtre mil mensagens de atendimento rotuladas por intenção e urgência."
         },
         {
+          "id": "t5",
           "title": "Fine-tuning QLoRA",
           "summary": "LoRA e QLoRA com Unsloth em modelos de 1 a 3B.",
           "exercise": "Ajuste um modelo pequeno na tarefa de classificação, na GPU local ou no Colab gratuito."
         },
         {
+          "id": "t6",
           "title": "Destilação",
           "summary": "Um modelo local maior rotula, um pequeno aprende.",
           "exercise": "Use um modelo de 7 a 8B para rotular o dataset e destile para um de 1 a 3B."
         },
         {
+          "id": "t7",
           "title": "RL com recompensas verificáveis",
           "summary": "RLVR, GRPO e o risco de reward hacking.",
           "exercise": "Rode um exemplo pequeno de GRPO com recompensa verificável, na GPU local ou no Colab gratuito."
         },
         {
+          "id": "t8",
           "title": "Servir o modelo",
           "summary": "Ollama, servidor do llama.cpp e vLLM.",
           "exercise": "Sirva o modelo ajustado e meça a latência sob carga."
         },
         {
+          "id": "t9",
           "title": "Prompt, RAG ou fine-tuning",
           "summary": "Critérios para escolher a abordagem.",
           "exercise": "Escreva um ADR com a decisão para o classificador de atendimento."
@@ -808,22 +886,27 @@
       ],
       "drills": [
         {
+          "id": "e0",
           "title": "Linha de base",
           "task": "Meça acerto, latência e memória de um modelo local de 7 a 8B com poucos exemplos no prompt, na mesma tarefa."
         },
         {
+          "id": "e1",
           "title": "Treino contaminado",
           "task": "Procure mensagens quase iguais entre treino e teste e corrija a divisão."
         },
         {
+          "id": "e2",
           "title": "Matriz de confusão",
           "task": "Analise quais intenções o modelo confunde e ajuste o dataset."
         },
         {
+          "id": "e3",
           "title": "Tempo por mil mensagens",
           "task": "Compare tempo, memória e custo equivalente em API de classificar mil mensagens no modelo grande e no pequeno."
         },
         {
+          "id": "e4",
           "title": "Falha graciosa",
           "task": "Faça o sistema cair para o modelo maior quando a confiança do pequeno for baixa."
         }
@@ -899,36 +982,43 @@
       "lowSpecTip": "Coloque a DeepSeek como um dos backends do gateway, com fallback para um modelo local pequeno. O custo deixa de ser estimado e passa a ser real, em centavos.",
       "lessons": [
         {
+          "id": "t0",
           "title": "Do protótipo à produção",
           "summary": "SLOs, limites de uso, runbook e o que precisa existir antes do primeiro usuário.",
           "exercise": "Escreva os SLOs de latência e disponibilidade do gateway e um runbook para quando um backend cair."
         },
         {
+          "id": "t1",
           "title": "Vários backends e fallback",
           "summary": "Ollama, llama.cpp e vLLM atrás de uma API compatível com OpenAI, com tempo limite e troca automática.",
           "exercise": "Implemente fallback automático quando o backend principal cair ou estourar o tempo."
         },
         {
+          "id": "t2",
           "title": "Roteamento por complexidade",
           "summary": "Mandar o simples para o modelo menor com base na nota do eval.",
           "exercise": "Mande perguntas simples para um modelo de 3B e prove no eval que a nota não caiu."
         },
         {
+          "id": "t3",
           "title": "Cache de prompt e cache semântico",
           "summary": "Reaproveitar contexto fixo e respostas para perguntas parecidas.",
           "exercise": "Meça a taxa de acerto de um cache semântico em perguntas frequentes."
         },
         {
+          "id": "t4",
           "title": "Métricas de inferência",
           "summary": "Tempo até o primeiro token, tokens por segundo, uso de GPU e custo equivalente em API.",
           "exercise": "Meça as métricas em três modelos locais e calcule quanto cada um custaria numa API paga."
         },
         {
+          "id": "t5",
           "title": "Limites e concorrência",
           "summary": "Rate limiting, cota por usuário, fila e o que fazer quando a GPU satura.",
           "exercise": "Crie um limite por usuário e uma fila que responde com tempo estimado quando a GPU estiver ocupada."
         },
         {
+          "id": "t6",
           "title": "Interface de IA no front",
           "summary": "Streaming, respostas parciais, estados de erro e feedback do usuário.",
           "exercise": "Mostre respostas em streaming num chat em Next.js, com botão de útil ou não útil."
@@ -936,18 +1026,22 @@
       ],
       "drills": [
         {
+          "id": "e0",
           "title": "Caos controlado",
           "task": "Derrube um backend no meio de um teste de carga e confira o fallback."
         },
         {
+          "id": "e1",
           "title": "Cache que erra",
           "task": "Encontre um caso em que o cache semântico devolve a resposta errada e ajuste o limiar."
         },
         {
+          "id": "e2",
           "title": "Versão de prompt",
           "task": "Versione dois prompts e compare a nota do eval de cada um."
         },
         {
+          "id": "e3",
           "title": "Uso por funcionalidade",
           "task": "Atribua tokens, tempo de GPU e custo equivalente de cada requisição a um usuário e a uma funcionalidade."
         }
@@ -1010,41 +1104,49 @@
       "lowSpecTip": "Escolha o backend por variável de ambiente: modelos locais por padrão e DeepSeek como opção. O compose continua subindo o resto do sistema sem GPU.",
       "lessons": [
         {
+          "id": "t0",
           "title": "Revisão da arquitetura",
           "summary": "Atualizar o documento de arquitetura do módulo 5 com o que você aprendeu nos módulos 6 e 7.",
           "exercise": "Revise os ADRs, registre o que mudou e por quê, e atualize os diagramas C4."
         },
         {
+          "id": "t1",
           "title": "Dados simulados",
           "summary": "Catálogo, pedidos, políticas de troca e manuais de produto.",
           "exercise": "Gere a base simulada com um modelo local: 200 produtos, mil pedidos e os documentos de política."
         },
         {
+          "id": "t2",
           "title": "Base de conhecimento",
           "summary": "RAG sobre políticas e manuais, reaproveitando o módulo 2.",
           "exercise": "Indexe políticas e manuais e meça o recall@5 em 40 perguntas."
         },
         {
+          "id": "t3",
           "title": "Agente e ferramentas",
           "summary": "Status do pedido, troca, devolução e agendamento de assistência técnica.",
           "exercise": "Implemente as ferramentas com confirmação nas ações que mudam dados."
         },
         {
+          "id": "t4",
           "title": "Triagem local",
           "summary": "O classificador do módulo 6 roteando intenção e urgência.",
           "exercise": "Integre o classificador e mande os casos urgentes direto para um humano."
         },
         {
+          "id": "t5",
           "title": "Gateway e desempenho",
           "summary": "O gateway do módulo 7 na frente de todas as chamadas.",
           "exercise": "Ligue o gateway e registre tokens, tempo e custo equivalente por atendimento."
         },
         {
+          "id": "t6",
           "title": "Qualidade e segurança",
           "summary": "Eval, red teaming e mascaramento de dados, como no módulo 4.",
           "exercise": "Monte 80 casos de teste e o red teaming das ações de troca e devolução."
         },
         {
+          "id": "t7",
           "title": "Interface e painel",
           "summary": "Chat com streaming para o cliente e painel para a equipe.",
           "exercise": "Entregue o chat do cliente e o painel com conversas, transferências e desempenho."
@@ -1052,18 +1154,22 @@
       ],
       "drills": [
         {
+          "id": "e0",
           "title": "Revisão de arquitetura",
           "task": "Peça para outra pessoa revisar o diagrama e responda cada dúvida por escrito."
         },
         {
+          "id": "e1",
           "title": "Testes de ponta a ponta",
           "task": "Escreva 10 testes de ponta a ponta cobrindo os fluxos principais."
         },
         {
+          "id": "e2",
           "title": "Ensaio de falha",
           "task": "Derrube a busca, o classificador e um backend de modelo, um de cada vez, e confira o comportamento."
         },
         {
+          "id": "e3",
           "title": "Ensaio de apresentação",
           "task": "Apresente o sistema em 10 minutos para alguém e anote as perguntas."
         }
@@ -1122,36 +1228,43 @@
       "caseStudy": "O seu próprio portfólio: os sete projetos dos módulos e o projeto de conclusão.",
       "lessons": [
         {
+          "id": "t0",
           "title": "Portfólio público",
           "summary": "Repositórios organizados, README com números e demos gravadas.",
           "exercise": "Publique os projetos dos módulos com README, prints, vídeo curto e resultados."
         },
         {
+          "id": "t1",
           "title": "Estudo de caso",
           "summary": "Contar com números como um sistema de IA funciona.",
           "exercise": "Escreva o estudo de caso do projeto de conclusão, com arquitetura, desempenho e notas de avaliação."
         },
         {
+          "id": "t2",
           "title": "Leitura de papers",
           "summary": "Um paper por semana, com resumo curto.",
           "exercise": "Mantenha um resumo de um parágrafo para cada paper lido."
         },
         {
+          "id": "t3",
           "title": "Escrita técnica",
           "summary": "Artigos sobre o que você constrói.",
           "exercise": "Publique um artigo por mês sobre um dos projetos."
         },
         {
+          "id": "t4",
           "title": "Open source",
           "summary": "Contribuir com projetos de IA.",
           "exercise": "Tenha uma contribuição aceita num projeto de IA."
         },
         {
+          "id": "t5",
           "title": "Modelos de ponta",
           "summary": "Acompanhar lançamentos de modelos abertos e pagos, preços e capacidades.",
           "exercise": "Mantenha uma tabela de modelos com tamanho, contexto, licença, preço e pontos fortes."
         },
         {
+          "id": "t6",
           "title": "IA no trabalho",
           "summary": "Levar uma melhoria com IA para o seu time.",
           "exercise": "Proponha ao seu time um uso concreto de IA, com custo e riscos estimados."

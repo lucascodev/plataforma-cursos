@@ -234,15 +234,19 @@ sequenceDiagram
   UI->>Hook: marcar item
   Hook->>Cache: atualiza na hora (otimista)
   Hook->>Hook: agenda gravação em 600 ms
-  Hook->>API: progresso inteiro
-  API->>API: valida com o schema e grava com o token da pessoa
-  alt erro de rede ou 5xx
+  Hook->>API: progresso inteiro e a revisão de partida
+  API->>API: valida com o schema e chama save_course_progress com o token da pessoa
+  alt outra aba ou aparelho salvou antes (409)
+    Hook->>API: recarrega, junta as mudanças desta aba por cima e salva de novo
+  else erro de rede ou 5xx
     Hook->>Hook: "Não foi possível salvar", tenta de novo em 15 s
   else 401
     Hook->>Hook: avisa que a sessão terminou e volta para a prévia
   end
   Note over Hook: pagehide e desmontagem forçam a gravação pendente (keepalive até 60 KB)
 ```
+
+A função `save_course_progress` junta os campos recebidos ao documento salvo (`data || novo`), então um campo que uma aba com código antigo não conhece não se perde. A junção de três vias (`mergeProgress`) parte do que a outra aba salvou e reaplica só as chaves que esta aba mudou desde a última gravação: marcar e desmarcar itens, textos do diário e das notas, e a data de início.
 
 ## 7. Modelo de dados
 

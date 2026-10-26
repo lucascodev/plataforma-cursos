@@ -22,6 +22,8 @@ const profile = {
   role: 'teacher',
   displayName: 'Ana',
   avatarUrl: null,
+  headline: 'Engenheira de IA',
+  shortBio: '',
   bio: '',
   links: [],
   showStudentCount: false,
@@ -33,7 +35,7 @@ describe('HttpProfileGateway', () => {
   it('reads and saves the profile through /api/me/profile', async () => {
     const { gateway, requests } = gatewayWith(() => ({ profile }));
     expect(await gateway.getMyProfile()).toEqual(profile);
-    const input = { displayName: 'Ana', bio: 'Oi', links: [], showStudentCount: true };
+    const input = { displayName: 'Ana', headline: 'Engenheira de IA', shortBio: '', bio: 'Oi', links: [], showStudentCount: true };
     await gateway.updateMyProfile(input);
     expect(requests[1]).toEqual({ method: 'PUT', path: '/api/me/profile', body: input });
   });

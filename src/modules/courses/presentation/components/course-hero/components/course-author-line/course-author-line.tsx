@@ -8,6 +8,7 @@ export function CourseAuthorLine({ author }: { author: CourseAuthor }) {
       {author.avatarUrl ? <img className={styles.avatar} src={author.avatarUrl} alt="" width={24} height={24} referrerPolicy="no-referrer" /> : null}
       <span>
         Curso de <Link to={`/professores/${author.handle}`}>{author.displayName}</Link>
+        {author.headline ? <span className={styles.headline}> · {author.headline}</span> : null}
       </span>
     </p>
   );

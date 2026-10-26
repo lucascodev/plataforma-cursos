@@ -1,7 +1,7 @@
 .notice {
-  border-radius: var(--radius-small);
-  padding: 10px 12px;
-  font-size: 14px;
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font-size: 15px;
   border: 1px solid var(--line);
   background: var(--surface);
 }
@@ -24,6 +24,13 @@
 }
 
 .warning {
-  border-color: var(--warning);
+  border-color: var(--warning-line);
   background: var(--warning-soft);
+  color: var(--warning-ink);
+}
+
+.danger {
+  border-color: var(--danger-line);
+  background: var(--danger-soft);
+  color: var(--danger-ink);
 }

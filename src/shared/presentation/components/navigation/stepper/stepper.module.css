@@ -1,0 +1,39 @@
+.stepper {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 4px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.done {
+  border-top-color: var(--accent);
+}
+
+.current {
+  border-top-color: var(--accent);
+  color: var(--fg);
+  font-weight: 600;
+}
+
+@media (max-width: 520px) {
+  .label {
+    display: none;
+  }
+
+  .current .label {
+    display: inline;
+  }
+}

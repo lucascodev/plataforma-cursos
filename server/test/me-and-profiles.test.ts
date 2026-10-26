@@ -14,6 +14,8 @@ const profileRow = {
   role: 'student',
   displayName: 'Ana',
   avatarUrl: null,
+  headline: '',
+  shortBio: '',
   bio: '',
   links: [],
   showStudentCount: false,
@@ -50,6 +52,13 @@ describe('perfil e conta', () => {
     expect(good.status).toBe(200);
     expect(calls[0]?.method).toBe('PATCH');
     expect(calls[0]?.body).toEqual({ display_name: 'Ana Souza', bio: 'Estudo IA.', links: validProfile.links, show_student_count: true });
+  });
+
+  it('salva título e resumo curto quando vêm no pedido', async () => {
+    const { services, calls } = makeFakeServices(() => json([{ ...profileRow, headline: 'Engenheira de IA' }]));
+    const body = { ...validProfile, headline: ' Engenheira de IA ', shortBio: 'Ensino IA aplicada.' };
+    expect((await handlePutMyProfile(signedIn('/api/me/profile', { method: 'PUT', body }), services)).status).toBe(200);
+    expect(calls[0]?.body).toMatchObject({ headline: 'Engenheira de IA', short_bio: 'Ensino IA aplicada.' });
   });
 
   it('preferências: padrão quando não existem e fuso inválido é recusado', async () => {
@@ -97,7 +106,7 @@ describe('perfil público de professor', () => {
 
   it('responde com cache público e sem token', async () => {
     const { services, calls } = makeFakeServices(() =>
-      json({ handle: 'ana', displayName: 'Ana', avatarUrl: null, bio: '', links: [], courses: [], studentCount: null }),
+      json({ handle: 'ana', displayName: 'Ana', avatarUrl: null, headline: '', shortBio: '', bio: '', links: [], courses: [], studentCount: null }),
     );
     const response = await handleGetTeacherProfile('ana', services);
     expect(response.status).toBe(200);

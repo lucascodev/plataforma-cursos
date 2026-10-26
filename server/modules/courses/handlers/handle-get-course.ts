@@ -9,7 +9,7 @@ import { readCourseRows } from '../read-course-rows';
 export async function handleGetCourse(slug: string, services: Services): Promise<Response> {
   if (!isCourseSlug(slug)) return problemResponse(404, 'course-not-found', 'Curso não encontrado.');
   const response = await services.rest.request(
-    `courses?select=content,owner:profiles(handle,display_name,avatar_url)&published=eq.true&slug=eq.${slug}&limit=1`,
+    `courses?select=content,owner:profiles(handle,display_name,avatar_url,headline)&published=eq.true&slug=eq.${slug}&limit=1`,
   );
   if (!response.ok) return problemResponse(502, 'courses-unavailable', 'Não foi possível carregar o curso agora.');
   const rows: unknown = await response.json();

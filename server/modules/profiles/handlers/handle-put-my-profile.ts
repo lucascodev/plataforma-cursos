@@ -21,6 +21,8 @@ export function handlePutMyProfile(request: Request, services: Services): Promis
       prefer: 'return=representation',
       body: {
         display_name: body.data.displayName,
+        ...(body.data.headline === undefined ? {} : { headline: body.data.headline }),
+        ...(body.data.shortBio === undefined ? {} : { short_bio: body.data.shortBio }),
         bio: body.data.bio,
         links: body.data.links,
         show_student_count: body.data.showStudentCount,

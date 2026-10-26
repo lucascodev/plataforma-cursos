@@ -1,0 +1,31 @@
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 48px 24px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-2xl);
+  background: var(--surface);
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.text {
+  max-width: 32em;
+  color: var(--muted);
+}
+
+.text > p {
+  margin: 0;
+}
+
+.action {
+  margin-top: 6px;
+}

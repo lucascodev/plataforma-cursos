@@ -1,46 +1,179 @@
 :root {
   color-scheme: light;
-  --bg: #edf1f3;
+
+  --bg: #f4f6f5;
   --surface: #ffffff;
-  --line: #d3dbe0;
-  --fg: #12202a;
-  --muted: #566570;
-  --accent: #0a7a72;
-  --accent-soft: #d3ece9;
-  --warning: #9a6a00;
-  --warning-soft: #f5e9c6;
+  --surface-2: #eef2f1;
+  --field: #f9fbfa;
+  --code: #f1f4f3;
+  --disabled: #e6ecea;
+
+  --line: #d6dedb;
+  --line-soft: #e5ebe9;
+  --line-strong: #c2cdc9;
+
+  --fg: #13211f;
+  --fg-2: #3e4b48;
+  --muted: #55625f;
+
+  --accent: #0b6e66;
+  --accent-hover: #08524c;
+  --accent-soft: #ddefec;
+  --accent-tint: #f2f9f8;
+  --today: #eef7f5;
+  --on-accent: #ffffff;
+
+  --strong: #13211f;
+  --on-strong: #ffffff;
+
+  --warning: #6b4600;
+  --warning-soft: #fbefd9;
+  --warning-line: #f2d9a6;
+  --warning-strong: #c98a12;
+  --warning-ink: #4d3300;
+  --highlight: #f2b84b;
+
+  --danger: #9a3412;
+  --danger-soft: #fdece5;
+  --danger-line: #b4441b;
+  --danger-ink: #7a2e12;
+  --danger-solid: #8a4f00;
+
+  /* Dark sections inside light pages (hero, code panels) keep their colors in both themes. */
+  --ink-bg: #0f1b19;
+  --ink-surface: #16302c;
+  --ink-line: #22322f;
+  --ink-line-strong: #3a4e4a;
+  --ink-fg: #e8efed;
+  --ink-fg-2: #c4d2ce;
+  --ink-muted: #b5c5c1;
+  --ink-accent: #5fd4c6;
+
+  --overlay: rgba(15, 27, 25, 0.55);
+  --shadow-menu: 0 8px 24px rgba(15, 27, 25, 0.14);
+  --shadow-toast: 0 12px 32px rgba(15, 27, 25, 0.28);
+  --shadow-modal: 0 24px 64px rgba(15, 27, 25, 0.3);
+
   --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
   --font-body: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --radius-xs: 6px;
+  --radius-sm: 8px;
   --radius: 10px;
-  --radius-small: 6px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --radius-xl: 16px;
+  --radius-2xl: 18px;
+  --radius-pill: 999px;
+  --radius-small: var(--radius-xs);
+
+  --container: 1200px;
+  --gutter: 24px;
+  --control-sm: 44px;
+  --control-md: 48px;
+  --control-lg: 52px;
 }
 
 /* data-theme comes from the account settings; without it (or with "system") the device decides. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     color-scheme: dark;
-    --bg: #0c1317;
-    --surface: #121c22;
-    --line: #24333c;
-    --fg: #dce6eb;
-    --muted: #8e9da7;
+
+    --bg: #0c1514;
+    --surface: #121d1b;
+    --surface-2: #172421;
+    --field: #0f1918;
+    --code: #17221f;
+    --disabled: #1e2b28;
+
+    --line: #24332f;
+    --line-soft: #1c2926;
+    --line-strong: #34463f;
+
+    --fg: #e3ece9;
+    --fg-2: #c2cfcb;
+    --muted: #91a39e;
+
     --accent: #3cc4b8;
+    --accent-hover: #63d6cb;
     --accent-soft: #11302d;
+    --accent-tint: #0f2523;
+    --today: #12302c;
+    --on-accent: #06201d;
+
+    --strong: #e3ece9;
+    --on-strong: #0c1514;
+
     --warning: #e9b23a;
-    --warning-soft: #332910;
+    --warning-soft: #33290f;
+    --warning-line: #5a4718;
+    --warning-strong: #e9b23a;
+    --warning-ink: #f3d28a;
+    --highlight: #f2b84b;
+
+    --danger: #f08a62;
+    --danger-soft: #3a1c12;
+    --danger-line: #c2603c;
+    --danger-ink: #f5b49a;
+    --danger-solid: #c9853a;
+
+    --ink-bg: #10201e;
+    --ink-surface: #183531;
+
+    --overlay: rgba(0, 0, 0, 0.6);
+    --shadow-menu: 0 8px 24px rgba(0, 0, 0, 0.45);
+    --shadow-toast: 0 12px 32px rgba(0, 0, 0, 0.55);
+    --shadow-modal: 0 24px 64px rgba(0, 0, 0, 0.6);
   }
 }
 
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --bg: #0c1317;
-  --surface: #121c22;
-  --line: #24333c;
-  --fg: #dce6eb;
-  --muted: #8e9da7;
+
+  --bg: #0c1514;
+  --surface: #121d1b;
+  --surface-2: #172421;
+  --field: #0f1918;
+  --code: #17221f;
+  --disabled: #1e2b28;
+
+  --line: #24332f;
+  --line-soft: #1c2926;
+  --line-strong: #34463f;
+
+  --fg: #e3ece9;
+  --fg-2: #c2cfcb;
+  --muted: #91a39e;
+
   --accent: #3cc4b8;
+  --accent-hover: #63d6cb;
   --accent-soft: #11302d;
+  --accent-tint: #0f2523;
+  --today: #12302c;
+  --on-accent: #06201d;
+
+  --strong: #e3ece9;
+  --on-strong: #0c1514;
+
   --warning: #e9b23a;
-  --warning-soft: #332910;
+  --warning-soft: #33290f;
+  --warning-line: #5a4718;
+  --warning-strong: #e9b23a;
+  --warning-ink: #f3d28a;
+  --highlight: #f2b84b;
+
+  --danger: #f08a62;
+  --danger-soft: #3a1c12;
+  --danger-line: #c2603c;
+  --danger-ink: #f5b49a;
+  --danger-solid: #c9853a;
+
+  --ink-bg: #10201e;
+  --ink-surface: #183531;
+
+  --overlay: rgba(0, 0, 0, 0.6);
+  --shadow-menu: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-toast: 0 12px 32px rgba(0, 0, 0, 0.55);
+  --shadow-modal: 0 24px 64px rgba(0, 0, 0, 0.6);
 }

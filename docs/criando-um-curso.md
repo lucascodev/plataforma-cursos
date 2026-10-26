@@ -51,7 +51,11 @@ Com ela, o VS Code autocompleta os campos e sublinha erros enquanto você escrev
 | `selfCheck` | Perguntas de autoavaliação |
 | `resources` | Materiais: `type` (ex.: `vídeo`, `docs`), `label`, `url` (sempre `https://`) |
 
-Itens marcados pelas pessoas usam o id do módulo e a **posição** da aula ou do exercício (`m1-t0`, `m1-e2`, `m1-cp`). Para não bagunçar o progresso de quem já estuda, acrescente aulas e exercícios **no fim** da lista e evite remover itens do meio.
+Cada aula e cada exercício de fixação tem um `id` fixo dentro do módulo: aulas começam com `t` e exercícios com `e`, seguidos de letras minúsculas ou números (`t0`, `tpgvector`, `e3`). O progresso de quem estuda é guardado por esse id (`m1-t0`, `m1-e2`, e `m1-cp` para o projeto), então dá para reordenar aulas sem mexer no que as pessoas já concluíram.
+
+- Nunca troque o id de uma aula que já foi publicada: quem a concluiu perde a marcação.
+- Aula nova ganha um id novo, que ainda não foi usado no módulo.
+- Sem `id`, a aula usa a posição (`t0`, `t1`…). É assim que os cursos antigos continuam funcionando, mas um id explícito é mais seguro.
 
 ## 4. Como o plano diário é montado
 

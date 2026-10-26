@@ -107,3 +107,9 @@
   font-size: 14px;
   color: var(--muted);
 }
+
+.headline {
+  margin: 0;
+  font-size: 16px;
+  color: var(--fg);
+}

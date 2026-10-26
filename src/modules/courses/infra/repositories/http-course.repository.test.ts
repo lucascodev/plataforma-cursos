@@ -34,7 +34,7 @@ describe('HttpCourseRepository', () => {
   });
 
   it('keeps who published the course and ignores a malformed author', async () => {
-    const author = { handle: 'ana', displayName: 'Ana', avatarUrl: null };
+    const author = { handle: 'ana', displayName: 'Ana', avatarUrl: null, headline: '' };
     expect((await repositoryWith(() => ({ course: seed, author })).findBySlug('engenharia-de-ia'))?.author).toEqual(author);
     expect((await repositoryWith(() => ({ course: seed, author: { handle: 'X Y' } })).findBySlug('engenharia-de-ia'))?.author).toBeNull();
   });

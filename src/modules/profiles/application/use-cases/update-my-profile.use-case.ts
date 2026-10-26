@@ -8,6 +8,8 @@ export class UpdateMyProfileUseCase {
   execute(input: UpdateMyProfileInputDto): Promise<MyProfile> {
     return this.profileGateway.updateMyProfile({
       displayName: input.displayName.trim(),
+      headline: input.headline.trim(),
+      shortBio: input.shortBio.trim(),
       bio: input.bio.trim(),
       links: input.links.map((link) => ({ label: link.label.trim(), url: link.url.trim() })).filter((link) => link.label || link.url),
       showStudentCount: input.showStudentCount,

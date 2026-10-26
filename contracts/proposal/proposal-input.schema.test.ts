@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { proposalInputSchema } from './proposal-input.schema';
+import { proposalInputSchema } from './proposal-input.schema.ts';
 
 const valid = {
   title: 'Python do zero',

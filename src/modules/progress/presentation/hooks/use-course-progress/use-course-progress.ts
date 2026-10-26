@@ -4,7 +4,9 @@ import { useAuthSession } from '@/modules/auth';
 import { SessionExpiredError } from '@/shared/application/errors/session-expired.error';
 import type { LoadProgressOutputDto } from '../../../application/dtos/load-progress/load-progress-output.dto';
 import type { CourseProgress } from '../../../domain/entities/course-progress.entity';
+import type { ProgressSnapshot } from '../../../domain/entities/progress-snapshot.entity';
 import { createEmptyProgress } from '../../../domain/rules/create-empty-progress.rule';
+import { mergeProgress } from '../../../domain/rules/merge/merge-progress.rule';
 import { setItemCompletion } from '../../../domain/rules/updates/set-item-completion.rule';
 import { setJournalEntry } from '../../../domain/rules/updates/set-journal-entry.rule';
 import { setModuleNote } from '../../../domain/rules/updates/set-module-note.rule';
@@ -37,16 +39,25 @@ export function useCourseProgress(courseSlug: string): CourseProgressState {
 
   const [saveState, setSaveState] = useState<SaveState>('idle');
   const pendingRef = useRef<CourseProgress | null>(null);
+  // What the server holds as far as this tab knows: the base for the next save and for merging a conflict.
+  const syncedRef = useRef<ProgressSnapshot | null>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const flush = async () => {
     const pending = pendingRef.current;
-    if (!pending) return;
+    const base = syncedRef.current;
+    if (!pending || !base) return;
     pendingRef.current = null;
     if (timerRef.current) clearTimeout(timerRef.current);
     setSaveState('saving');
     try {
-      await makeSaveProgress().execute({ courseSlug, progress: pending });
+      const saved = await makeSaveProgress().execute({ courseSlug, progress: pending, base });
+      syncedRef.current = saved;
+      const newer = pendingRef.current;
+      // Merged with another tab: changes made here while the save was in flight are re-applied on top of the merged copy.
+      const shown = newer ? mergeProgress(pending, newer, saved.progress) : saved.progress;
+      if (newer) pendingRef.current = shown;
+      if (saved.progress !== pending || newer) queryClient.setQueryData<LoadProgressOutputDto>(queryKey, { progress: shown, revision: saved.revision });
       setSaveState(pendingRef.current ? 'pending' : 'saved');
     } catch (error) {
       pendingRef.current ??= pending;
@@ -58,6 +69,10 @@ export function useCourseProgress(courseSlug: string): CourseProgressState {
       timerRef.current = setTimeout(() => void flush(), RETRY_DELAY_MS);
     }
   };
+
+  useEffect(() => {
+    syncedRef.current = null;
+  }, [courseSlug, userId]);
 
   const flushRef = useRef(flush);
   useEffect(() => {
@@ -76,9 +91,10 @@ export function useCourseProgress(courseSlug: string): CourseProgressState {
   const update = (change: (progress: CourseProgress) => CourseProgress) => {
     const current = queryClient.getQueryData<LoadProgressOutputDto>(queryKey);
     if (!userId || !current) return;
+    syncedRef.current ??= current;
     const next = change(current.progress);
     if (next === current.progress) return;
-    queryClient.setQueryData<LoadProgressOutputDto>(queryKey, { progress: next });
+    queryClient.setQueryData<LoadProgressOutputDto>(queryKey, { ...current, progress: next });
     pendingRef.current = next;
     setSaveState('pending');
     if (timerRef.current) clearTimeout(timerRef.current);
@@ -101,7 +117,9 @@ export function useCourseProgress(courseSlug: string): CourseProgressState {
         pendingRef.current = null;
         if (timerRef.current) clearTimeout(timerRef.current);
         await makeEraseProgress().execute({ courseSlug });
-        queryClient.setQueryData<LoadProgressOutputDto>(queryKey, { progress: createEmptyProgress() });
+        const empty = { progress: createEmptyProgress(), revision: 0 };
+        syncedRef.current = empty;
+        queryClient.setQueryData<LoadProgressOutputDto>(queryKey, empty);
         setSaveState('idle');
       },
       retryLoading: () => void query.refetch(),

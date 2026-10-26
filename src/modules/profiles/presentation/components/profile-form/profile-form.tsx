@@ -15,6 +15,24 @@ export function ProfileForm({ profile }: { profile: MyProfile }) {
   return (
     <form className={styles.form} onSubmit={form.submit} noValidate>
       <TextField label="Nome" value={form.displayName} maxLength={80} required onChange={(event) => form.setDisplayName(event.target.value)} />
+      {isTeacher ? (
+        <>
+          <TextField
+            label="Título profissional"
+            hint="Aparece ao lado do seu nome nas páginas dos cursos. Ex.: Engenheira de software na Empresa X."
+            value={form.headline}
+            maxLength={80}
+            onChange={(event) => form.setHeadline(event.target.value)}
+          />
+          <TextAreaField
+            label="Resumo curto"
+            hint="Até 160 letras, para os cartões de professor."
+            value={form.shortBio}
+            maxLength={160}
+            onChange={(event) => form.setShortBio(event.target.value)}
+          />
+        </>
+      ) : null}
       <TextAreaField
         label="Sobre você"
         hint={isTeacher ? 'Aparece na sua página pública de professor.' : 'Só você vê. Vira público se um dia você der um curso.'}

@@ -2,8 +2,8 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 2px 8px;
-  border-radius: 999px;
+  padding: 3px 10px;
+  border-radius: var(--radius-xs);
   font-size: 12px;
   font-weight: 500;
   white-space: nowrap;
@@ -11,9 +11,9 @@
 }
 
 .neutral {
-  background: var(--bg);
+  background: var(--surface-2);
   border-color: var(--line);
-  color: var(--muted);
+  color: var(--fg-2);
 }
 
 .accent {
@@ -23,5 +23,10 @@
 
 .warning {
   background: var(--warning-soft);
-  color: var(--warning);
+  color: var(--warning-ink);
+}
+
+.danger {
+  background: var(--danger-soft);
+  color: var(--danger-ink);
 }

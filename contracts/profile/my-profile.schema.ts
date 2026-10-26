@@ -1,9 +1,9 @@
 import { z } from 'zod';
-import { avatarUrlSchema } from '../url/avatar-url.schema';
-import { PROFILE_HANDLE_PATTERN } from './profile-handle-pattern';
-import { profileLinkSchema } from './profile-link.schema';
-import { timestampSchema } from '../date/timestamp.schema';
-import { userRoleSchema } from './user-role.schema';
+import { avatarUrlSchema } from '../url/avatar-url.schema.ts';
+import { PROFILE_HANDLE_PATTERN } from './profile-handle-pattern.ts';
+import { profileLinkSchema } from './profile-link.schema.ts';
+import { timestampSchema } from '../date/timestamp.schema.ts';
+import { userRoleSchema } from './user-role.schema.ts';
 
 export const myProfileSchema = z.object({
   id: z.string().min(1).max(100),
@@ -11,6 +11,8 @@ export const myProfileSchema = z.object({
   role: userRoleSchema,
   displayName: z.string().min(1).max(80),
   avatarUrl: avatarUrlSchema,
+  headline: z.string().max(80),
+  shortBio: z.string().max(160),
   bio: z.string().max(1000),
   links: z.array(profileLinkSchema).max(5),
   showStudentCount: z.boolean(),

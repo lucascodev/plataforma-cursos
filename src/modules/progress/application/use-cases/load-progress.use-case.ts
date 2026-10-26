@@ -7,7 +7,7 @@ export class LoadProgressUseCase {
   constructor(private readonly progressRepository: ProgressRepository) {}
 
   async execute(input: LoadProgressInputDto): Promise<LoadProgressOutputDto> {
-    const progress = await this.progressRepository.load(input.courseSlug);
-    return { progress: progress ?? createEmptyProgress() };
+    const snapshot = await this.progressRepository.load(input.courseSlug);
+    return snapshot ?? { progress: createEmptyProgress(), revision: 0 };
   }
 }

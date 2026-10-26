@@ -1,5 +1,7 @@
 import type { Course } from '../../domain/entities/course/course.entity';
 import type { CourseContent } from '@contracts/course/course-content.schema';
+import { defaultDrillId } from '@contracts/course/item-ids/default-drill-id';
+import { defaultLessonId } from '@contracts/course/item-ids/default-lesson-id';
 
 export function mapCourseContentToEntity(content: CourseContent): Course {
   return {
@@ -36,8 +38,8 @@ export function mapCourseContentToEntity(content: CourseContent): Course {
       goal: module.goal,
       caseStudy: module.caseStudy,
       lowSpecTip: module.lowSpecTip ?? null,
-      lessons: module.lessons,
-      drills: module.drills,
+      lessons: module.lessons.map((lesson, index) => ({ ...lesson, id: lesson.id ?? defaultLessonId(index) })),
+      drills: module.drills.map((drill, index) => ({ ...drill, id: drill.id ?? defaultDrillId(index) })),
       project: module.project,
       selfCheck: module.selfCheck,
       resources: module.resources,

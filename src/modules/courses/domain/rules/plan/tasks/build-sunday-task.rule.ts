@@ -14,6 +14,7 @@ export function buildSundayTask(course: Course, sundayIndex: number, totalSunday
     (milestone) => resolveSundayIndex(milestone.sunday, totalSundays) === sundayIndex,
   );
   const milestone = track.milestones[milestoneIndex];
+  const milestoneLesson = milestone && milestone.lessonIndex !== null ? trackModule?.lessons[milestone.lessonIndex] : undefined;
 
   if (milestone) {
     return createStudyTask({
@@ -22,7 +23,7 @@ export function buildSundayTask(course: Course, sundayIndex: number, totalSunday
       sundayIndex,
       trackEntryIndex: milestoneIndex,
       lessonIndex: milestone.lessonIndex,
-      itemId: trackModule && milestone.lessonIndex !== null ? lessonItemId(trackModule.id, milestone.lessonIndex) : null,
+      itemId: trackModule && milestoneLesson ? lessonItemId(trackModule.id, milestoneLesson.id) : null,
     });
   }
 

@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { avatarUrlSchema } from '../url/avatar-url.schema';
-import { PROFILE_HANDLE_PATTERN } from './profile-handle-pattern';
-import { userRoleSchema } from './user-role.schema';
+import { avatarUrlSchema } from '../url/avatar-url.schema.ts';
+import { PROFILE_HANDLE_PATTERN } from './profile-handle-pattern.ts';
+import { userRoleSchema } from './user-role.schema.ts';
 
 export const profileCardSchema = z.object({
   id: z.string().min(1).max(100),

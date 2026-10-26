@@ -1,3 +1,3 @@
-export function drillItemId(moduleId: string, drillIndex: number): string {
-  return `${moduleId}-e${drillIndex}`;
+export function drillItemId(moduleId: string, drillId: string): string {
+  return `${moduleId}-${drillId}`;
 }

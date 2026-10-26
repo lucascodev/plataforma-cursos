@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { courseSlugSchema } from '../course/course-slug.schema';
-import { profileCardSchema } from '../profile/profile-card.schema';
-import { timestampSchema } from '../date/timestamp.schema';
+import { courseSlugSchema } from '../course/course-slug.schema.ts';
+import { profileCardSchema } from '../profile/profile-card.schema.ts';
+import { timestampSchema } from '../date/timestamp.schema.ts';
 
 export const adminCourseSchema = z.object({
   slug: courseSlugSchema,
