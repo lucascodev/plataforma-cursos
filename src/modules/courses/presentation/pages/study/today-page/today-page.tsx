@@ -1,8 +1,8 @@
 import { Link } from 'react-router';
 import { StatTile } from '@/shared/presentation/components/data/stat-tile/stat-tile';
 import { ProgressMeter } from '@/shared/presentation/components/feedback/progress-meter/progress-meter';
-import { TodayCard } from '../../../components/daily-plan/components/today-card/today-card';
-import { WeekCalendar } from '../../../components/daily-plan/components/week-calendar/week-calendar';
+import { TodayCard } from '../../../components/today-card/today-card';
+import { WeekCalendar } from '../../../components/week-calendar/week-calendar';
 import { useStudyContext } from '../../../hooks/use-study-context/use-study-context';
 import { useTodayPage } from '../../../hooks/use-today-page/use-today-page';
 import styles from './today-page.module.css';

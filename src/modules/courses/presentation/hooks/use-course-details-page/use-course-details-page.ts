@@ -12,7 +12,7 @@ import { suggestStartDate } from '../../../domain/rules/plan/schedule/suggest-st
 import { makeBuildStudyPlan } from '../../../main/factories/make-build-study-plan.factory';
 import { describeCourseFacts } from '../../formatters/describe-course-facts';
 import type { ModuleAccordionView } from '../../types/module/module-accordion-view.type';
-import { buildRhythmView } from '../use-course-dashboard/builders/build-rhythm-view';
+import { buildRhythmView } from './builders/build-rhythm-view';
 
 export function useCourseDetailsPage({ course, totals }: CourseDetailsOutputDto) {
   const session = useAuthSession();

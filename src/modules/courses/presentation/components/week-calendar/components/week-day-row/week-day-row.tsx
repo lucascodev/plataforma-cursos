@@ -1,6 +1,6 @@
 import type { DateKey } from '@/shared/domain/types/date-key.type';
-import type { WeekDayView } from '../../../../../../types/plan/week-day-view.type';
-import { ItemCheck } from '../../../../../item-check/item-check';
+import type { WeekDayView } from '../../../../types/plan/week-day-view.type';
+import { ItemCheck } from '../../../item-check/item-check';
 import { JournalField } from '../../../journal-field/journal-field';
 import styles from './week-day-row.module.css';
 
