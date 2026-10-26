@@ -1,0 +1,98 @@
+.sample {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px;
+  border-radius: var(--radius-2xl);
+  background: var(--surface);
+  color: var(--fg);
+  border-top: 4px solid var(--accent);
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.course {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.detail {
+  margin: 0;
+  color: var(--fg-2);
+}
+
+.fakeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  min-height: var(--control-sm);
+  padding: 0 18px;
+  margin-top: 6px;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.week li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 0;
+  border: 1px solid var(--ink-line-strong);
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+
+.week .today {
+  border-color: var(--ink-accent);
+  color: var(--ink-fg);
+}
+
+.day {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--ink-fg);
+}
+
+.caption {
+  font-size: 14px;
+  color: var(--ink-muted);
+}
