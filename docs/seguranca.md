@@ -8,7 +8,7 @@ Para relatar uma vulnerabilidade, veja o [SECURITY.md](../SECURITY.md). Este doc
 |---|---|---|
 | Navegador | CSP só com `'self'` (mais os avatares do GitHub), Trusted Types obrigatório, `frame-ancestors 'none'`, HSTS, COOP e CORP `same-origin`, `Permissions-Policy` fechada, sem `Access-Control-Allow-Origin` | `public/_headers` |
 | API | Respostas JSON com `default-src 'none'`, `nosniff`, `no-referrer` e `no-store` por padrão. Rota ou método inexistente responde 404 em JSON | `server/main/` |
-| Escrita | Toda rota que muda dados exige pedido do próprio site (`Sec-Fetch-Site` ou `Origin`), corpo `application/json` lido com limite de bytes e validado por um schema de `contracts/` | `server/main/handle-api-middleware.ts`, `server/shared/http/` |
+| Escrita | Toda rota que muda dados exige pedido do próprio site (`Sec-Fetch-Site` ou `Origin`), corpo `application/json` lido com limite de bytes e validado por um schema de `contracts/` | `server/main/middleware/handle-api-middleware.ts`, `server/shared/http/` |
 | Sessão | Tokens só em cookies `__Host-` HttpOnly. Login por PKCE no servidor. Cookies renovados voltam em toda resposta, inclusive de erro. Logout revoga a sessão no Supabase mesmo depois de uma hora parada | `server/modules/auth/` |
 | Chaves | As functions usam só a chave publicável e recusam a secreta. O build falha se achar chave, URL do projeto ou `SEU-USUARIO` no `dist/` | `server/shared/env/`, `scripts/check-build-secrets.mjs` |
 | Banco | RLS forçado em todas as tabelas, column grants, funções `security definer` com `search_path` vazio. Checks iguais aos schemas da API, limites de linhas com trava por pessoa e limite de escrita por pessoa (`rate_limits`) | `supabase/migrations/`, testado em `supabase/tests/` |

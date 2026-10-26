@@ -1,5 +1,5 @@
-import { ServerMisconfiguredError } from '../shared/env/server-misconfigured.error';
-import { problemResponse } from '../shared/http/problem-response';
+import { ServerMisconfiguredError } from '../../env/server-misconfigured.error';
+import { problemResponse } from './problem-response';
 
 export function handleApiError(error: unknown): Response {
   if (error instanceof ServerMisconfiguredError) {

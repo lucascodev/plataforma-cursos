@@ -1,6 +1,6 @@
-import { handleApiError } from '../../main/handle-api-errors';
-import type { Services } from '../../main/services.type';
-import { withCookies } from '../../shared/http/with-cookies';
+import { handleApiError } from '../../../shared/http/responses/handle-api-error';
+import type { Services } from '../../../main/services.type';
+import { withCookies } from '../../../shared/http/cookies/with-cookies';
 import { resolveSession } from './resolve-session';
 import type { ResolvedSession } from './resolved-session.type';
 import { unauthorizedResponse } from './unauthorized-response';

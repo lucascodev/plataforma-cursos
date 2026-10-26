@@ -1,7 +1,7 @@
 import type { Services } from '../../../main/services.type';
-import { clearCookies } from '../clear-cookies';
-import { resolveSession } from '../resolve-session';
-import { SESSION_COOKIES } from '../session-cookie-names';
+import { clearCookies } from '../cookies/clear-cookies';
+import { resolveSession } from '../session/resolve-session';
+import { SESSION_COOKIES } from '../cookies/session-cookie-names';
 
 // The access cookie lives one hour but the refresh token lives 30 days, so an idle session is refreshed first:
 // otherwise only the cookies would go away and the refresh token would stay valid at Supabase.

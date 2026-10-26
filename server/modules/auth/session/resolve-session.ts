@@ -1,11 +1,11 @@
-import type { Services } from '../../main/services.type';
-import { decodeJwtPayload } from '../../shared/crypto/decode-jwt-payload';
-import { parseCookies } from '../../shared/http/parse-cookies';
-import { SupabaseRequestError } from '../../shared/supabase/supabase-request-error';
-import { buildSessionCookies } from './build-session-cookies';
+import type { Services } from '../../../main/services.type';
+import { decodeJwtPayload } from '../../../shared/crypto/decode-jwt-payload';
+import { parseCookies } from '../../../shared/http/cookies/parse-cookies';
+import { SupabaseRequestError } from '../../../shared/supabase/supabase-request-error';
+import { buildSessionCookies } from '../cookies/build-session-cookies';
 import { isPlausibleRefreshToken } from './is-plausible-refresh-token';
 import type { ResolvedSession } from './resolved-session.type';
-import { SESSION_COOKIES } from './session-cookie-names';
+import { SESSION_COOKIES } from '../cookies/session-cookie-names';
 import { SESSION_DURATIONS } from './session-durations';
 
 const TOO_MANY_REQUESTS = 429;

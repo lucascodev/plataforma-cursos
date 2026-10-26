@@ -1,10 +1,10 @@
 import { accountSettingsSchema } from '../../../../contracts/account-settings.schema';
 import type { Services } from '../../../main/services.type';
-import { jsonResponse } from '../../../shared/http/json-response';
-import { MAX_FORM_BODY_BYTES } from '../../../shared/http/max-form-body-bytes';
-import { readValidatedBody } from '../../../shared/http/read-validated-body';
-import { upstreamProblem } from '../../../shared/http/upstream-problem';
-import { withSession } from '../../auth/with-session';
+import { jsonResponse } from '../../../shared/http/responses/json-response';
+import { MAX_FORM_BODY_BYTES } from '../../../shared/http/request-body/max-form-body-bytes';
+import { readValidatedBody } from '../../../shared/http/request-body/read-validated-body';
+import { upstreamProblem } from '../../../shared/http/upstream/upstream-problem';
+import { withSession } from '../../auth/session/with-session';
 
 export function handlePutMySettings(request: Request, services: Services): Promise<Response> {
   return withSession(request, services, async (session) => {

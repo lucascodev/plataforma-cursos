@@ -1,9 +1,9 @@
-import { proposalListSchema } from '../../../../contracts/proposal-list.schema';
-import { proposalStatusSchema } from '../../../../contracts/proposal-status.schema';
-import type { Services } from '../../../main/services.type';
-import { readPageOffset } from '../../../shared/http/read-page-offset';
-import { withSession } from '../../auth/with-session';
-import { adminRpc } from '../admin-rpc';
+import { proposalListSchema } from '../../../../../contracts/proposal-list.schema';
+import { proposalStatusSchema } from '../../../../../contracts/proposal-status.schema';
+import type { Services } from '../../../../main/services.type';
+import { readPageOffset } from '../../../../shared/http/params/read-page-offset';
+import { withSession } from '../../../auth/session/with-session';
+import { adminRpc } from '../../admin-rpc';
 
 const PAGE_SIZE = 50;
 

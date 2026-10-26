@@ -1,11 +1,11 @@
-import { proposalReviewSchema } from '../../../../contracts/proposal-review.schema';
-import type { Services } from '../../../main/services.type';
-import { isUuid } from '../../../shared/http/is-uuid';
-import { MAX_FORM_BODY_BYTES } from '../../../shared/http/max-form-body-bytes';
-import { problemResponse } from '../../../shared/http/problem-response';
-import { readValidatedBody } from '../../../shared/http/read-validated-body';
-import { withSession } from '../../auth/with-session';
-import { adminRpc } from '../admin-rpc';
+import { proposalReviewSchema } from '../../../../../contracts/proposal-review.schema';
+import type { Services } from '../../../../main/services.type';
+import { isUuid } from '../../../../shared/http/params/is-uuid';
+import { MAX_FORM_BODY_BYTES } from '../../../../shared/http/request-body/max-form-body-bytes';
+import { problemResponse } from '../../../../shared/http/responses/problem-response';
+import { readValidatedBody } from '../../../../shared/http/request-body/read-validated-body';
+import { withSession } from '../../../auth/session/with-session';
+import { adminRpc } from '../../admin-rpc';
 
 export type ProposalDecision = 'changes_requested' | 'refused';
 

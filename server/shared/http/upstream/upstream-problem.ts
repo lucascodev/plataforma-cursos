@@ -1,6 +1,6 @@
-import { readPostgrestError } from '../supabase/read-postgrest-error';
-import type { ProblemMessages } from './problem-message.type';
-import { problemResponse } from './problem-response';
+import { readPostgrestError } from '../../supabase/rest/read-postgrest-error';
+import type { ProblemMessages } from '../responses/problem-message.type';
+import { problemResponse } from '../responses/problem-response';
 
 // Turns a Supabase error into a response in Portuguese. The text Supabase sent never reaches the browser.
 export async function upstreamProblem(response: Response, messages: ProblemMessages, unavailableMessage: string): Promise<Response> {

@@ -1,6 +1,6 @@
 import { auditPageSchema } from '../../../../contracts/audit-page.schema';
 import type { Services } from '../../../main/services.type';
-import { withSession } from '../../auth/with-session';
+import { withSession } from '../../auth/session/with-session';
 import { adminRpc } from '../admin-rpc';
 
 function readBefore(url: URL): number | null {

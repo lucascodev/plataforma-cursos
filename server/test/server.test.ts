@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { handleApiMiddleware } from '../main/handle-api-middleware';
+import { handleApiMiddleware } from '../main/middleware/handle-api-middleware';
 import { handleCallback } from '../modules/auth/handlers/handle-callback';
 import { handleLogin } from '../modules/auth/handlers/handle-login';
 import { handleLogout } from '../modules/auth/handlers/handle-logout';
 import { handleMe } from '../modules/auth/handlers/handle-me';
-import { resolveSession } from '../modules/auth/resolve-session';
+import { resolveSession } from '../modules/auth/session/resolve-session';
 import { sanitizeReturnPath } from '../modules/auth/sanitize-return-path';
 import { handleGetCourse } from '../modules/courses/handlers/handle-get-course';
 import { handleListCourses } from '../modules/courses/handlers/handle-list-courses';
@@ -13,8 +13,8 @@ import { handleGetProgress } from '../modules/progress/handlers/handle-get-progr
 import { handlePutProgress } from '../modules/progress/handlers/handle-put-progress';
 import { readServerConfig } from '../shared/env/read-server-config';
 import { isSameOriginRequest } from '../shared/http/is-same-origin-request';
-import { parseCookies } from '../shared/http/parse-cookies';
-import { accessToken, fakeJwt, json, makeFakeServices, respondByPath } from './fake-supabase';
+import { parseCookies } from '../shared/http/cookies/parse-cookies';
+import { accessToken, fakeJwt, json, makeFakeServices, respondByPath } from './fakes/fake-supabase';
 
 const SITE = 'https://cursos.exemplo.dev';
 const setCookies = (response: Response) => response.headers.getSetCookie();

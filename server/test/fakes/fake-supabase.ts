@@ -1,6 +1,6 @@
-import type { Services } from '../main/services.type';
-import { SupabaseAuthClient } from '../shared/supabase/supabase-auth-client';
-import { SupabaseRestClient } from '../shared/supabase/supabase-rest-client';
+import type { Services } from '../../main/services.type';
+import { SupabaseAuthClient } from '../../shared/supabase/auth/supabase-auth-client';
+import { SupabaseRestClient } from '../../shared/supabase/rest/supabase-rest-client';
 
 export interface RecordedCall {
   readonly url: string;

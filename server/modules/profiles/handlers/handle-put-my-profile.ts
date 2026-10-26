@@ -2,13 +2,13 @@ import { z } from 'zod';
 import { myProfileSchema } from '../../../../contracts/my-profile.schema';
 import { profileUpdateSchema } from '../../../../contracts/profile-update.schema';
 import type { Services } from '../../../main/services.type';
-import { jsonResponse } from '../../../shared/http/json-response';
-import { MAX_FORM_BODY_BYTES } from '../../../shared/http/max-form-body-bytes';
-import { problemResponse } from '../../../shared/http/problem-response';
-import { readUpstreamJson } from '../../../shared/http/read-upstream-json';
-import { readValidatedBody } from '../../../shared/http/read-validated-body';
-import { upstreamProblem } from '../../../shared/http/upstream-problem';
-import { withSession } from '../../auth/with-session';
+import { jsonResponse } from '../../../shared/http/responses/json-response';
+import { MAX_FORM_BODY_BYTES } from '../../../shared/http/request-body/max-form-body-bytes';
+import { problemResponse } from '../../../shared/http/responses/problem-response';
+import { readUpstreamJson } from '../../../shared/http/upstream/read-upstream-json';
+import { readValidatedBody } from '../../../shared/http/request-body/read-validated-body';
+import { upstreamProblem } from '../../../shared/http/upstream/upstream-problem';
+import { withSession } from '../../auth/session/with-session';
 import { MY_PROFILE_COLUMNS } from '../profile-columns';
 
 export function handlePutMyProfile(request: Request, services: Services): Promise<Response> {

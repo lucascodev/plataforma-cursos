@@ -3,8 +3,8 @@ import { handleCreateProposal } from '../modules/proposals/handlers/handle-creat
 import { handleGetProposal } from '../modules/proposals/handlers/handle-get-proposal';
 import { handleUpdateProposal } from '../modules/proposals/handlers/handle-update-proposal';
 import { handleWithdrawProposal } from '../modules/proposals/handlers/handle-withdraw-proposal';
-import { json, makeFakeServices, postgrestError } from './fake-supabase';
-import { signedIn, signedOut } from './test-requests';
+import { json, makeFakeServices, postgrestError } from './fakes/fake-supabase';
+import { signedIn, signedOut } from './fakes/test-requests';
 
 const ID = 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa';
 const input = {

@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { z } from 'zod';
-import { isProfileHandle } from '../shared/http/is-profile-handle';
-import { isUuid } from '../shared/http/is-uuid';
-import { readJsonBody } from '../shared/http/read-json-body';
-import { readPageOffset } from '../shared/http/read-page-offset';
-import { readValidatedBody } from '../shared/http/read-validated-body';
-import { upstreamProblem } from '../shared/http/upstream-problem';
-import { postgrestError } from './fake-supabase';
-import { SITE } from './test-requests';
+import { isProfileHandle } from '../shared/http/params/is-profile-handle';
+import { isUuid } from '../shared/http/params/is-uuid';
+import { readJsonBody } from '../shared/http/request-body/read-json-body';
+import { readPageOffset } from '../shared/http/params/read-page-offset';
+import { readValidatedBody } from '../shared/http/request-body/read-validated-body';
+import { upstreamProblem } from '../shared/http/upstream/upstream-problem';
+import { postgrestError } from './fakes/fake-supabase';
+import { SITE } from './fakes/test-requests';
 
 const post = (body: string, type = 'application/json') => new Request(SITE, { method: 'POST', headers: { 'Content-Type': type }, body });
 

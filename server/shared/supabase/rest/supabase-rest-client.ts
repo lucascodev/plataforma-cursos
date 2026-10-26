@@ -1,4 +1,4 @@
-import type { ServerConfig } from '../env/server-config.type';
+import type { ServerConfig } from '../../env/server-config.type';
 import type { RestRequestOptions } from './rest-request-options.type';
 
 export class SupabaseRestClient {

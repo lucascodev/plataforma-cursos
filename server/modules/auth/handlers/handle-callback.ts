@@ -1,10 +1,10 @@
 import type { Services } from '../../../main/services.type';
-import { parseCookies } from '../../../shared/http/parse-cookies';
-import { redirectResponse } from '../../../shared/http/redirect-response';
-import { buildSessionCookies } from '../build-session-cookies';
-import { clearCookies } from '../clear-cookies';
+import { parseCookies } from '../../../shared/http/cookies/parse-cookies';
+import { redirectResponse } from '../../../shared/http/responses/redirect-response';
+import { buildSessionCookies } from '../cookies/build-session-cookies';
+import { clearCookies } from '../cookies/clear-cookies';
 import { sanitizeReturnPath } from '../sanitize-return-path';
-import { SESSION_COOKIES } from '../session-cookie-names';
+import { SESSION_COOKIES } from '../cookies/session-cookie-names';
 
 const LOGIN_FAILED_PATH = '/entrar?erro=login';
 

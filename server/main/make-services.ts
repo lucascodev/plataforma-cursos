@@ -1,7 +1,7 @@
 import { readServerConfig } from '../shared/env/read-server-config';
 import type { ServerEnv } from '../shared/env/server-env.type';
-import { SupabaseAuthClient } from '../shared/supabase/supabase-auth-client';
-import { SupabaseRestClient } from '../shared/supabase/supabase-rest-client';
+import { SupabaseAuthClient } from '../shared/supabase/auth/supabase-auth-client';
+import { SupabaseRestClient } from '../shared/supabase/rest/supabase-rest-client';
 import type { Services } from './services.type';
 
 export function makeServices(env: ServerEnv): Services {

@@ -1,5 +1,5 @@
 import type { z } from 'zod';
-import { problemResponse } from './problem-response';
+import { problemResponse } from '../responses/problem-response';
 import { readJsonBody } from './read-json-body';
 import { RequestBodyError } from './request-body-error';
 

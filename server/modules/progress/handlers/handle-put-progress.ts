@@ -1,11 +1,11 @@
 import { courseProgressSchema } from '../../../../contracts/course-progress.schema';
 import type { Services } from '../../../main/services.type';
-import { isCourseSlug } from '../../../shared/http/is-course-slug';
-import { problemResponse } from '../../../shared/http/problem-response';
-import { readJsonBody } from '../../../shared/http/read-json-body';
-import { RequestBodyError } from '../../../shared/http/request-body-error';
-import { upstreamProblem } from '../../../shared/http/upstream-problem';
-import { withSession } from '../../auth/with-session';
+import { isCourseSlug } from '../../../shared/http/params/is-course-slug';
+import { problemResponse } from '../../../shared/http/responses/problem-response';
+import { readJsonBody } from '../../../shared/http/request-body/read-json-body';
+import { RequestBodyError } from '../../../shared/http/request-body/request-body-error';
+import { upstreamProblem } from '../../../shared/http/upstream/upstream-problem';
+import { withSession } from '../../auth/session/with-session';
 import { MAX_PROGRESS_BODY_BYTES } from '../max-progress-body-bytes';
 
 export async function handlePutProgress(request: Request, slug: string, services: Services): Promise<Response> {

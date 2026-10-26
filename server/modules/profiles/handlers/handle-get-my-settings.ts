@@ -1,9 +1,9 @@
 import { z } from 'zod';
 import { accountSettingsSchema } from '../../../../contracts/account-settings.schema';
 import type { Services } from '../../../main/services.type';
-import { jsonResponse } from '../../../shared/http/json-response';
-import { problemResponse } from '../../../shared/http/problem-response';
-import { withSession } from '../../auth/with-session';
+import { jsonResponse } from '../../../shared/http/responses/json-response';
+import { problemResponse } from '../../../shared/http/responses/problem-response';
+import { withSession } from '../../auth/session/with-session';
 import { DEFAULT_ACCOUNT_SETTINGS } from '../default-account-settings';
 
 // Settings saved under older rules (or never saved) fall back field by field to the defaults.

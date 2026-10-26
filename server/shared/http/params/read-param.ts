@@ -1,4 +1,4 @@
-import type { RequestContext } from './request-context.type';
+import type { RequestContext } from '../request-context.type';
 
 export function readParam(context: RequestContext, name: string): string {
   const value = context.params[name];

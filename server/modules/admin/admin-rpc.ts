@@ -1,11 +1,11 @@
 import type { z } from 'zod';
 import type { Services } from '../../main/services.type';
-import { jsonResponse } from '../../shared/http/json-response';
-import { problemResponse } from '../../shared/http/problem-response';
-import { readUpstreamJson } from '../../shared/http/read-upstream-json';
-import { upstreamProblem } from '../../shared/http/upstream-problem';
-import { callRpc } from '../../shared/supabase/call-rpc';
-import type { ResolvedSession } from '../auth/resolved-session.type';
+import { jsonResponse } from '../../shared/http/responses/json-response';
+import { problemResponse } from '../../shared/http/responses/problem-response';
+import { readUpstreamJson } from '../../shared/http/upstream/read-upstream-json';
+import { upstreamProblem } from '../../shared/http/upstream/upstream-problem';
+import { callRpc } from '../../shared/supabase/rest/call-rpc';
+import type { ResolvedSession } from '../auth/session/resolved-session.type';
 import { ADMIN_ERROR_MESSAGES } from './admin-error-messages';
 
 const UNAVAILABLE = 'Não foi possível concluir agora. Tente de novo em instantes.';

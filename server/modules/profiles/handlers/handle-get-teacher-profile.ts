@@ -1,10 +1,10 @@
 import { teacherProfileSchema } from '../../../../contracts/teacher-profile.schema';
 import type { Services } from '../../../main/services.type';
-import { isProfileHandle } from '../../../shared/http/is-profile-handle';
-import { jsonResponse } from '../../../shared/http/json-response';
-import { problemResponse } from '../../../shared/http/problem-response';
-import { PUBLIC_CACHE_HEADERS } from '../../../shared/http/public-cache-headers';
-import { callRpc } from '../../../shared/supabase/call-rpc';
+import { isProfileHandle } from '../../../shared/http/params/is-profile-handle';
+import { jsonResponse } from '../../../shared/http/responses/json-response';
+import { problemResponse } from '../../../shared/http/responses/problem-response';
+import { PUBLIC_CACHE_HEADERS } from '../../../shared/http/responses/public-cache-headers';
+import { callRpc } from '../../../shared/supabase/rest/call-rpc';
 
 const notFound = () => problemResponse(404, 'teacher-not-found', 'Perfil não encontrado.');
 

@@ -1,6 +1,6 @@
-import type { ServerConfig } from '../env/server-config.type';
+import type { ServerConfig } from '../../env/server-config.type';
 import { readSession } from './read-session';
-import { SupabaseRequestError } from './supabase-request-error';
+import { SupabaseRequestError } from '../supabase-request-error';
 import type { SupabaseSession } from './supabase-session.type';
 import type { SupabaseUser } from './supabase-user.type';
 

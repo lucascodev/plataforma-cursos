@@ -1,8 +1,8 @@
-import type { RequestContext } from '../shared/http/request-context.type';
-import { isSameOriginRequest } from '../shared/http/is-same-origin-request';
-import { problemResponse } from '../shared/http/problem-response';
+import type { RequestContext } from '../../shared/http/request-context.type';
+import { isSameOriginRequest } from '../../shared/http/is-same-origin-request';
+import { problemResponse } from '../../shared/http/responses/problem-response';
 import { API_SECURITY_HEADERS } from './api-security-headers';
-import { handleApiError } from './handle-api-errors';
+import { handleApiError } from '../../shared/http/responses/handle-api-error';
 import { isStaticFallback } from './is-static-fallback';
 
 export async function handleApiMiddleware(context: RequestContext): Promise<Response> {

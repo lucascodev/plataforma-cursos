@@ -1,9 +1,9 @@
-import { adminPersonListSchema } from '../../../../contracts/admin-person-list.schema';
-import { userRoleSchema } from '../../../../contracts/user-role.schema';
-import type { Services } from '../../../main/services.type';
-import { readPageOffset } from '../../../shared/http/read-page-offset';
-import { withSession } from '../../auth/with-session';
-import { adminRpc } from '../admin-rpc';
+import { adminPersonListSchema } from '../../../../../contracts/admin-person-list.schema';
+import { userRoleSchema } from '../../../../../contracts/user-role.schema';
+import type { Services } from '../../../../main/services.type';
+import { readPageOffset } from '../../../../shared/http/params/read-page-offset';
+import { withSession } from '../../../auth/session/with-session';
+import { adminRpc } from '../../admin-rpc';
 
 const PAGE_SIZE = 50;
 

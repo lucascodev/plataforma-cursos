@@ -1,6 +1,6 @@
 import type { ServerConfig } from '../shared/env/server-config.type';
-import type { SupabaseAuthClient } from '../shared/supabase/supabase-auth-client';
-import type { SupabaseRestClient } from '../shared/supabase/supabase-rest-client';
+import type { SupabaseAuthClient } from '../shared/supabase/auth/supabase-auth-client';
+import type { SupabaseRestClient } from '../shared/supabase/rest/supabase-rest-client';
 
 export interface Services {
   readonly config: ServerConfig;

@@ -1,8 +1,8 @@
 import type { Services } from '../../../main/services.type';
-import { isCourseSlug } from '../../../shared/http/is-course-slug';
-import { jsonResponse } from '../../../shared/http/json-response';
-import { problemResponse } from '../../../shared/http/problem-response';
-import { withSession } from '../../auth/with-session';
+import { isCourseSlug } from '../../../shared/http/params/is-course-slug';
+import { jsonResponse } from '../../../shared/http/responses/json-response';
+import { problemResponse } from '../../../shared/http/responses/problem-response';
+import { withSession } from '../../auth/session/with-session';
 import { progressPath } from '../progress-path';
 
 export async function handleGetProgress(request: Request, slug: string, services: Services): Promise<Response> {
