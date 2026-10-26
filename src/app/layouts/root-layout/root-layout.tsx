@@ -4,6 +4,7 @@ import { ThemeSync } from '@/modules/profiles';
 import { makeSiteConfig } from '@/shared/main/factories/make-site-config.factory';
 import { ExternalLink } from '@/shared/presentation/components/navigation/external-link/external-link';
 import { SkipLink } from '@/shared/presentation/components/navigation/skip-link/skip-link';
+import { NewVersionBanner } from './components/new-version-banner/new-version-banner';
 import styles from './root-layout.module.css';
 
 export function RootLayout() {
@@ -36,6 +37,7 @@ export function RootLayout() {
           <UserMenu />
         </div>
       </header>
+      <NewVersionBanner />
       <main id="conteudo" className={styles.main} tabIndex={-1}>
         <Outlet />
       </main>
