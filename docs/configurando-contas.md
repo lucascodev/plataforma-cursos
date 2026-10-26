@@ -20,38 +20,19 @@ O navegador não recebe nenhuma delas. Ele fala só com `/api`, e as functions u
 
 ## 2. Crie as tabelas com RLS
 
-As migrations ficam em `supabase/migrations/` e precisam rodar na ordem do nome:
+As tabelas, as políticas de RLS e as funções ficam em `supabase/migrations/` e são aplicadas pelo Supabase CLI. Não cole SQL no painel.
 
-1. `20261026120000_course_progress.sql`: progresso de cada pessoa por curso.
-2. `20261026190000_courses.sql`: conteúdo dos cursos, leitura pública dos publicados.
-3. `20261026200000_profiles_and_roles.sql`: perfis, papéis, preferências da conta e o gatilho que cria o perfil no cadastro.
-4. `20261026200100_audit_log.sql`: histórico das ações de admin.
-5. `20261026200200_course_ownership.sql`: dono do curso, curso fora do catálogo e escrita em `courses` só por funções.
-6. `20261026200300_course_proposals.sql`: propostas de curso.
-7. `20261026200400_admin_rpcs.sql`: funções da análise de propostas e da área de admin.
-
-Se o projeto já estava no ar, aplique as migrations novas **antes** de publicar o código novo. O site antigo continua funcionando com o banco novo.
-
-Escolha um caminho:
-
-- **Painel**: abra **SQL Editor**, cole e execute cada arquivo, na ordem.
-- **CLI**:
-
-  ```bash
-  npx supabase login
-  npx supabase init          # mantém a pasta supabase/migrations existente
-  npx supabase link --project-ref SEU_PROJECT_REF
-  npx supabase db push
-  ```
-
-Depois confira em **Advisors > Security Advisor** que não há aviso de tabela sem RLS.
-
-Para rodar os testes de RLS localmente (precisa de Docker):
+Num projeto novo, com Docker e o Supabase CLI do projeto:
 
 ```bash
-npx supabase start
-npx supabase test db
+pnpm exec supabase login
+pnpm exec supabase link --project-ref SEU_PROJECT_REF
+pnpm db:push
 ```
+
+Depois disso, cada push na `main` aplica as migrations novas sozinho, antes do deploy. Para configurar a pipeline, escrever uma migration ou rodar os testes de RLS na sua máquina, veja [migracoes.md](migracoes.md).
+
+Depois confira em **Advisors > Security Advisor** que não há aviso de tabela sem RLS.
 
 ## 3. Crie o OAuth App no GitHub
 
@@ -112,11 +93,7 @@ SUPABASE_SECRET_KEY=sb_secret_...
 pnpm content:import -- supabase/seed/courses/engenharia-de-ia.json --publish
 ```
 
-O script valida o curso com o mesmo schema do site antes de enviar. Depois da primeira importação, valide a ligação entre progresso e cursos:
-
-```sql
-alter table public.course_progress validate constraint course_progress_course_fk;
-```
+O script valida o curso com o mesmo schema do site antes de enviar. A ligação entre progresso e cursos é validada pela migration `20261027090000_validate_progress_course_fk.sql`, sem passo manual.
 
 O script continua funcionando até o editor de cursos chegar: ele usa a chave secreta e não passa pelas regras de papel.
 
@@ -146,7 +123,7 @@ Quem já tinha `app_metadata.role = 'admin'` vira admin automaticamente na migra
 |---|---|
 | `/api/me` responde 503 | Variáveis ausentes no Cloudflare ou no `.dev.vars`, URL sem `https` ou chave secreta no lugar da publicável |
 | Volta do GitHub para `/entrar?erro=login` | Rota `/api/auth/callback` fora das **Redirect URLs**, login cancelado ou demora de mais de 10 minutos para concluir |
-| Login funciona mas o progresso não salva | Migrations não aplicadas, curso não importado ou RLS bloqueando (confira os logs da Data API) |
+| Login funciona mas o progresso não salva | Migrations não aplicadas, curso não importado ou não publicado, ou limite de escrita atingido (resposta 429) |
 | Catálogo vazio | Curso importado sem `--publish` ou tirado do catálogo na área de admin |
 | Área de admin mostra "Você não tem acesso" | Papel ainda não é `admin` (rode o SQL da seção 8) ou o login foi feito antes da mudança; saia e entre de novo |
 | Erro ao enviar proposta | Limite de 3 propostas abertas atingido, ou migrations novas não aplicadas |

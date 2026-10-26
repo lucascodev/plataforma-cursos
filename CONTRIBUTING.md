@@ -29,7 +29,7 @@ Obrigado pelo interesse. Contribuições de código e de conteúdo são bem-vind
 - Nunca coloque chaves em código ou em arquivo versionado. Locais: `.dev.vars` (chave publicável) e `.env.local` (chave secreta, só para importar cursos).
 - As functions usam o token da pessoa. Não use a chave secreta em `server/`.
 - Toda rota nova em `/api` que altera dados passa pelo middleware (checagem de origem) e valida o corpo com um schema de `contracts/`.
-- Mudança no banco vai em uma migration nova em `supabase/migrations/`, com RLS e com teste em `supabase/tests/`.
+- Mudança no banco vai em uma migration nova em `supabase/migrations/`, com RLS e com teste em `supabase/tests/`. Veja [docs/migracoes.md](docs/migracoes.md): nunca edite uma migration que já está na `main`, e rode `pnpm db:reset && pnpm db:test` antes do PR.
 - Não use `pull_request_target` nos workflows.
 
 ## Pull requests
