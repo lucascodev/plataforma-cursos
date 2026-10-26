@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { progressLimits } from '@contracts/progress-limits';
+import { progressLimits } from '@contracts/progress/progress-limits';
 import { buildJournalMarkdown } from './build-journal-markdown.rule';
 import { createEmptyProgress } from './create-empty-progress.rule';
 import { setItemCompletion } from './set-item-completion.rule';

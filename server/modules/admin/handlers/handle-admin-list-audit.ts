@@ -1,4 +1,4 @@
-import { auditPageSchema } from '../../../../contracts/audit-page.schema';
+import { auditPageSchema } from '../../../../contracts/admin/audit-page.schema';
 import type { Services } from '../../../main/services.type';
 import { withSession } from '../../auth/session/with-session';
 import { adminRpc } from '../admin-rpc';

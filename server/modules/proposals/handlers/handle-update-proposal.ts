@@ -1,4 +1,4 @@
-import { proposalInputSchema } from '../../../../contracts/proposal-input.schema';
+import { proposalInputSchema } from '../../../../contracts/proposal/proposal-input.schema';
 import type { Services } from '../../../main/services.type';
 import { isUuid } from '../../../shared/http/params/is-uuid';
 import { jsonResponse } from '../../../shared/http/responses/json-response';

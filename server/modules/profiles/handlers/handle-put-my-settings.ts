@@ -1,4 +1,4 @@
-import { accountSettingsSchema } from '../../../../contracts/account-settings.schema';
+import { accountSettingsSchema } from '../../../../contracts/account/account-settings.schema';
 import type { Services } from '../../../main/services.type';
 import { jsonResponse } from '../../../shared/http/responses/json-response';
 import { MAX_FORM_BODY_BYTES } from '../../../shared/http/request-body/max-form-body-bytes';

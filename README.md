@@ -51,7 +51,7 @@ Abra `http://localhost:5173` no Chrome ou no Firefox. Os cookies de sessão usam
 | `pnpm preview` | Gera o build e serve site e functions juntos, como em produção |
 | `pnpm check` | Tipos, lint, testes e build, na ordem |
 | `pnpm test` | Testes unitários do site e das functions (Vitest) |
-| `pnpm content:schema` | Regera `contracts/course.schema.json` a partir do schema Zod |
+| `pnpm content:schema` | Regera `contracts/course/course.schema.json` a partir do schema Zod |
 | `pnpm content:import -- <arquivo> [--publish]` | Valida um curso e grava no Supabase (usa `.env.local`) |
 | `pnpm audit:prod` | Auditoria das dependências de produção |
 

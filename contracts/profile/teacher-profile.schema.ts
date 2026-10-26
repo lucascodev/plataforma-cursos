@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { avatarUrlSchema } from './avatar-url.schema';
-import { courseSlugSchema } from './course-slug.schema';
+import { avatarUrlSchema } from '../url/avatar-url.schema';
+import { courseSlugSchema } from '../course/course-slug.schema';
 import { PROFILE_HANDLE_PATTERN } from './profile-handle-pattern';
 import { profileLinkSchema } from './profile-link.schema';
 

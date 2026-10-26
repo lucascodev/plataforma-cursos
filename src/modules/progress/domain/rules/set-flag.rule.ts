@@ -1,4 +1,4 @@
-import { progressLimits } from '@contracts/progress-limits';
+import { progressLimits } from '@contracts/progress/progress-limits';
 
 export function setFlag(flags: Readonly<Record<string, true>>, key: string, enabled: boolean): Readonly<Record<string, true>> {
   if (enabled === (key in flags)) return flags;

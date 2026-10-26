@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { courseSlugSchema } from './course-slug.schema';
+import { courseSlugSchema } from '../course/course-slug.schema';
 
 export const proposalApprovalSchema = z.object({
   slug: courseSlugSchema,

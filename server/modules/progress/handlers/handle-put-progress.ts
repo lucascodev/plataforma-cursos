@@ -1,4 +1,4 @@
-import { courseProgressSchema } from '../../../../contracts/course-progress.schema';
+import { courseProgressSchema } from '../../../../contracts/progress/course-progress.schema';
 import type { Services } from '../../../main/services.type';
 import { isCourseSlug } from '../../../shared/http/params/is-course-slug';
 import { problemResponse } from '../../../shared/http/responses/problem-response';

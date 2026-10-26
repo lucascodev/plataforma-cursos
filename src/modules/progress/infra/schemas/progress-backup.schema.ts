@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { courseProgressSchema } from '@contracts/course-progress.schema';
+import { courseProgressSchema } from '@contracts/progress/course-progress.schema';
 
 export const progressBackupSchema = z.object({
   format: z.literal('cursos-abertos/progresso'),

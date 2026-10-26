@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { progressSummarySchema } from '../../../../contracts/progress-summary.schema';
+import { progressSummarySchema } from '../../../../contracts/progress/progress-summary.schema';
 import type { Services } from '../../../main/services.type';
 import { jsonResponse } from '../../../shared/http/responses/json-response';
 import { problemResponse } from '../../../shared/http/responses/problem-response';

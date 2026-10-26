@@ -1,4 +1,4 @@
-import { proposalSchema } from '../../../../../contracts/proposal.schema';
+import { proposalSchema } from '../../../../../contracts/proposal/proposal.schema';
 import type { Services } from '../../../../main/services.type';
 import { isUuid } from '../../../../shared/http/params/is-uuid';
 import { problemResponse } from '../../../../shared/http/responses/problem-response';

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { ReadBackupOutputDto } from '../../../application/dtos/read-backup/read-backup-output.dto';
 import type { CourseProgress } from '../../../domain/entities/course-progress.entity';
-import { progressLimits } from '@contracts/progress-limits';
+import { progressLimits } from '@contracts/progress/progress-limits';
 import type { JournalExport } from '../../../domain/entities/journal-export.entity';
 import { InvalidBackupError } from '../../../domain/errors/invalid-backup.error';
 import { makeExportBackup } from '../../../main/factories/make-export-backup.factory';

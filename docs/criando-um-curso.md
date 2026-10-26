@@ -15,7 +15,7 @@ O `slug` vira o endereço do curso (`/cursos/<slug>`) e a chave do progresso. Us
 A forma mais rápida é copiar `supabase/seed/courses/engenharia-de-ia.json` e editar. Mantenha a primeira linha:
 
 ```json
-"$schema": "../../../contracts/course.schema.json",
+"$schema": "../../../contracts/course/course.schema.json",
 ```
 
 Com ela, o VS Code autocompleta os campos e sublinha erros enquanto você escreve.

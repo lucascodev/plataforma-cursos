@@ -1,4 +1,4 @@
-import { teacherProfileSchema } from '../../../../contracts/teacher-profile.schema';
+import { teacherProfileSchema } from '../../../../contracts/profile/teacher-profile.schema';
 import type { Services } from '../../../main/services.type';
 import { isProfileHandle } from '../../../shared/http/params/is-profile-handle';
 import { jsonResponse } from '../../../shared/http/responses/json-response';

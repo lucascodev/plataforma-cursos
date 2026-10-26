@@ -1,4 +1,4 @@
-import { adminOverviewSchema } from '../../../../contracts/admin-overview.schema';
+import { adminOverviewSchema } from '../../../../contracts/admin/admin-overview.schema';
 import type { Services } from '../../../main/services.type';
 import { withSession } from '../../auth/session/with-session';
 import { adminRpc } from '../admin-rpc';

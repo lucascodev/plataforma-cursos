@@ -1,4 +1,4 @@
-import { authUserSchema } from '../../../../contracts/auth-user.schema';
+import { authUserSchema } from '../../../../contracts/profile/auth-user.schema';
 import type { Services } from '../../../main/services.type';
 import { jsonResponse } from '../../../shared/http/responses/json-response';
 import { problemResponse } from '../../../shared/http/responses/problem-response';

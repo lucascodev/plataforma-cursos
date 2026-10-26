@@ -1,5 +1,5 @@
-import { proposalListSchema } from '../../../../../contracts/proposal-list.schema';
-import { proposalStatusSchema } from '../../../../../contracts/proposal-status.schema';
+import { proposalListSchema } from '../../../../../contracts/proposal/proposal-list.schema';
+import { proposalStatusSchema } from '../../../../../contracts/proposal/proposal-status.schema';
 import type { Services } from '../../../../main/services.type';
 import { readPageOffset } from '../../../../shared/http/params/read-page-offset';
 import { withSession } from '../../../auth/session/with-session';

@@ -4,7 +4,7 @@ import { dayOfWeek } from './day-of-week';
 import { daysBetween } from './days-between';
 import { formatDayMonth } from './format-day-month';
 import { formatMonthYear } from './format-month-year';
-import { isDateKey } from '@contracts/is-date-key';
+import { isDateKey } from '@contracts/date/is-date-key';
 import { mondayOf } from './monday-of';
 
 describe('date utils', () => {

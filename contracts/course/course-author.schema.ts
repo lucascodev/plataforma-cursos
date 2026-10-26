@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { avatarUrlSchema } from './avatar-url.schema';
-import { PROFILE_HANDLE_PATTERN } from './profile-handle-pattern';
+import { avatarUrlSchema } from '../url/avatar-url.schema';
+import { PROFILE_HANDLE_PATTERN } from '../profile/profile-handle-pattern';
 
 export const courseAuthorSchema = z.object({
   handle: z.string().regex(PROFILE_HANDLE_PATTERN),

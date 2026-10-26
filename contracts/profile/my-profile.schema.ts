@@ -1,8 +1,8 @@
 import { z } from 'zod';
-import { avatarUrlSchema } from './avatar-url.schema';
+import { avatarUrlSchema } from '../url/avatar-url.schema';
 import { PROFILE_HANDLE_PATTERN } from './profile-handle-pattern';
 import { profileLinkSchema } from './profile-link.schema';
-import { timestampSchema } from './timestamp.schema';
+import { timestampSchema } from '../date/timestamp.schema';
 import { userRoleSchema } from './user-role.schema';
 
 export const myProfileSchema = z.object({

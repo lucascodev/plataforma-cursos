@@ -1,4 +1,4 @@
-import { roleChangeSchema } from '../../../../../contracts/role-change.schema';
+import { roleChangeSchema } from '../../../../../contracts/admin/role-change.schema';
 import type { Services } from '../../../../main/services.type';
 import { isUuid } from '../../../../shared/http/params/is-uuid';
 import { MAX_FORM_BODY_BYTES } from '../../../../shared/http/request-body/max-form-body-bytes';

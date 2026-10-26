@@ -1,5 +1,5 @@
-import { adminPersonListSchema } from '../../../../../contracts/admin-person-list.schema';
-import { userRoleSchema } from '../../../../../contracts/user-role.schema';
+import { adminPersonListSchema } from '../../../../../contracts/admin/admin-person-list.schema';
+import { userRoleSchema } from '../../../../../contracts/profile/user-role.schema';
 import type { Services } from '../../../../main/services.type';
 import { readPageOffset } from '../../../../shared/http/params/read-page-offset';
 import { withSession } from '../../../auth/session/with-session';

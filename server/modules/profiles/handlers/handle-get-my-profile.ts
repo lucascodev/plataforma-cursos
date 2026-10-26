@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { myProfileSchema } from '../../../../contracts/my-profile.schema';
+import { myProfileSchema } from '../../../../contracts/profile/my-profile.schema';
 import type { Services } from '../../../main/services.type';
 import { jsonResponse } from '../../../shared/http/responses/json-response';
 import { problemResponse } from '../../../shared/http/responses/problem-response';

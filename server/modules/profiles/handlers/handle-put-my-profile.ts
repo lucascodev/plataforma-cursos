@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { myProfileSchema } from '../../../../contracts/my-profile.schema';
-import { profileUpdateSchema } from '../../../../contracts/profile-update.schema';
+import { myProfileSchema } from '../../../../contracts/profile/my-profile.schema';
+import { profileUpdateSchema } from '../../../../contracts/profile/profile-update.schema';
 import type { Services } from '../../../main/services.type';
 import { jsonResponse } from '../../../shared/http/responses/json-response';
 import { MAX_FORM_BODY_BYTES } from '../../../shared/http/request-body/max-form-body-bytes';

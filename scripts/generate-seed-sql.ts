@@ -1,5 +1,5 @@
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { courseContentSchema } from '../contracts/course-content.schema.ts';
+import { courseContentSchema } from '../contracts/course/course-content.schema.ts';
 
 // supabase/seed.sql only feeds the local database (db reset and CI). Production content still goes through content:import.
 const COURSES_DIR = new URL('../supabase/seed/courses/', import.meta.url);

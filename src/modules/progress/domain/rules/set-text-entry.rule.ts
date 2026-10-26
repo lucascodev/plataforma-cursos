@@ -1,4 +1,4 @@
-import { progressLimits } from '@contracts/progress-limits';
+import { progressLimits } from '@contracts/progress/progress-limits';
 import { limitText } from './limit-text.rule';
 
 export function setTextEntry(entries: Readonly<Record<string, string>>, key: string, text: string): Readonly<Record<string, string>> {

@@ -1,4 +1,4 @@
-import { courseOwnerSchema } from '../../../../../contracts/course-owner.schema';
+import { courseOwnerSchema } from '../../../../../contracts/course/course-owner.schema';
 import type { Services } from '../../../../main/services.type';
 import { isCourseSlug } from '../../../../shared/http/params/is-course-slug';
 import { MAX_FORM_BODY_BYTES } from '../../../../shared/http/request-body/max-form-body-bytes';

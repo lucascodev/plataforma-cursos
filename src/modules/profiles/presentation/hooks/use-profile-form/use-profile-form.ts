@@ -1,4 +1,4 @@
-import { profileUpdateSchema } from '@contracts/profile-update.schema';
+import { profileUpdateSchema } from '@contracts/profile/profile-update.schema';
 import { useState, type FormEvent } from 'react';
 import { readErrorMessage } from '@/shared/presentation/formatters/read-error-message';
 import type { ProfileLink } from '../../../domain/entities/profile-link.entity';

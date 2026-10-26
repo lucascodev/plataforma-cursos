@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { courseSlugSchema } from './course-slug.schema';
-import { timestampSchema } from './timestamp.schema';
+import { courseSlugSchema } from '../course/course-slug.schema';
+import { timestampSchema } from '../date/timestamp.schema';
 
 const flags = z.record(z.string().max(80), z.literal(true));
 

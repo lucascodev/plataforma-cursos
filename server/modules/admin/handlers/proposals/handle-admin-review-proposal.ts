@@ -1,4 +1,4 @@
-import { proposalReviewSchema } from '../../../../../contracts/proposal-review.schema';
+import { proposalReviewSchema } from '../../../../../contracts/proposal/proposal-review.schema';
 import type { Services } from '../../../../main/services.type';
 import { isUuid } from '../../../../shared/http/params/is-uuid';
 import { MAX_FORM_BODY_BYTES } from '../../../../shared/http/request-body/max-form-body-bytes';

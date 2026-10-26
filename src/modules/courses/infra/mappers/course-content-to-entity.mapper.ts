@@ -1,5 +1,5 @@
 import type { Course } from '../../domain/entities/course/course.entity';
-import type { CourseContent } from '@contracts/course-content.schema';
+import type { CourseContent } from '@contracts/course/course-content.schema';
 
 export function mapCourseContentToEntity(content: CourseContent): Course {
   return {

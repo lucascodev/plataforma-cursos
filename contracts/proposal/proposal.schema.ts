@@ -1,9 +1,9 @@
 import { z } from 'zod';
-import { courseSlugSchema } from './course-slug.schema';
-import { httpsUrlSchema } from './https-url.schema';
-import { profileCardSchema } from './profile-card.schema';
+import { courseSlugSchema } from '../course/course-slug.schema';
+import { httpsUrlSchema } from '../url/https-url.schema';
+import { profileCardSchema } from '../profile/profile-card.schema';
 import { proposalStatusSchema } from './proposal-status.schema';
-import { timestampSchema } from './timestamp.schema';
+import { timestampSchema } from '../date/timestamp.schema';
 
 export const proposalSchema = z.object({
   id: z.guid(),

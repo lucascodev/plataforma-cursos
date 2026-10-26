@@ -1,5 +1,5 @@
 import type { CourseProgress } from '../../domain/entities/course-progress.entity';
-import type { CourseProgressRecord } from '@contracts/course-progress.schema';
+import type { CourseProgressRecord } from '@contracts/progress/course-progress.schema';
 
 export function mapProgressRecordToEntity(record: CourseProgressRecord): CourseProgress {
   return {

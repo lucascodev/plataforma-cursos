@@ -33,7 +33,7 @@ jobs:
       - name: JSON Schema dos cursos está atualizado
         run: |
           pnpm content:schema
-          git diff --exit-code contracts/course.schema.json
+          git diff --exit-code contracts/course/course.schema.json
       - name: Seed do banco local está atualizado
         run: |
           pnpm db:seed

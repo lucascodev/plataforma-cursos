@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { isDateKey } from './is-date-key';
+import { isDateKey } from '../date/is-date-key';
 import { progressLimits } from './progress-limits';
 
 const dateKey = z.string().refine(isDateKey, 'Data inválida.');

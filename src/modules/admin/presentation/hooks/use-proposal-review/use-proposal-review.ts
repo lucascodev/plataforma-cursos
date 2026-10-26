@@ -1,4 +1,4 @@
-import { courseSlugSchema } from '@contracts/course-slug.schema';
+import { courseSlugSchema } from '@contracts/course/course-slug.schema';
 import { useState } from 'react';
 import { readErrorMessage } from '@/shared/presentation/formatters/read-error-message';
 import type { AdminProposal } from '../../../domain/entities/admin-proposal.entity';

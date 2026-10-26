@@ -203,7 +203,7 @@ Schemas Zod usados pelos dois lados: conteúdo do curso, progresso, limites de t
 | Horas por dia da semana | `courses/domain/rules/plan/hours-for-weekday.rule.ts` |
 | Ritmo (à frente, atrás) | `courses/domain/rules/summary/calculate-pace.rule.ts` |
 | Sequência e dias atrasados | `courses/domain/rules/summary/summarize-study-days.rule.ts` |
-| Limites de texto e de entradas | `contracts/progress-limits.ts` |
+| Limites de texto e de entradas | `contracts/progress/progress-limits.ts` |
 | Renovação da sessão | `server/modules/auth/session/resolve-session.ts` |
 | Quem pode fazer o quê | Políticas RLS e funções em `supabase/migrations/20261026200*.sql` |
 | Aprovar proposta (papel, curso e histórico juntos) | função `approve_proposal` |

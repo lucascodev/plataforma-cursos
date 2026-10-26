@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { courseSlugSchema } from './course-slug.schema';
-import { httpsUrlSchema } from './https-url.schema';
+import { courseSlugSchema } from '../course/course-slug.schema';
+import { httpsUrlSchema } from '../url/https-url.schema';
 
 export const proposalInputSchema = z.object({
   title: z.string().trim().min(3, 'Use pelo menos 3 letras.').max(120),

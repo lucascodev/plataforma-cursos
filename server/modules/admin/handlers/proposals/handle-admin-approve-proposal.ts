@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { courseSlugSchema } from '../../../../../contracts/course-slug.schema';
-import { proposalApprovalSchema } from '../../../../../contracts/proposal-approval.schema';
+import { courseSlugSchema } from '../../../../../contracts/course/course-slug.schema';
+import { proposalApprovalSchema } from '../../../../../contracts/proposal/proposal-approval.schema';
 import type { Services } from '../../../../main/services.type';
 import { isUuid } from '../../../../shared/http/params/is-uuid';
 import { MAX_FORM_BODY_BYTES } from '../../../../shared/http/request-body/max-form-body-bytes';
