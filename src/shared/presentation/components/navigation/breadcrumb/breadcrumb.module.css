@@ -31,3 +31,17 @@
 .item [aria-current='page'] {
   color: var(--fg);
 }
+
+.ink,
+.ink .item a {
+  color: var(--ink-muted);
+}
+
+.ink .item a:hover,
+.ink .item [aria-current='page'] {
+  color: var(--ink-fg);
+}
+
+.ink .item + .item::before {
+  color: var(--ink-line-strong);
+}
