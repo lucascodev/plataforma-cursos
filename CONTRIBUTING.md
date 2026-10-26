@@ -6,7 +6,7 @@ Obrigado pelo interesse. Contribuições de código e de conteúdo são bem-vind
 
 1. Leia [docs/arquitetura.md](docs/arquitetura.md).
 2. Para mudanças grandes, abra uma issue antes para combinar a abordagem.
-3. Rode `npm install` e `npm run check` para ter certeza de que tudo passa na sua máquina.
+3. Rode `pnpm install` e `pnpm check` para ter certeza de que tudo passa na sua máquina.
 
 ## Conteúdo
 
@@ -35,7 +35,7 @@ Obrigado pelo interesse. Contribuições de código e de conteúdo são bem-vind
 ## Pull requests
 
 - Uma mudança por PR, com descrição do que muda e por quê.
-- `npm run check` precisa passar.
+- `pnpm check` precisa passar.
 - Atualize o `CHANGELOG.md` na seção "Não lançado".
 
 Ao contribuir, você concorda que o código fica sob a licença MIT e o conteúdo sob a CC BY 4.0.

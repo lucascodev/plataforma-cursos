@@ -4,7 +4,7 @@
 
 ## Checklist
 
-- [ ] `npm run check` passa
+- [ ] `pnpm check` passa
 - [ ] Regra de negócio nova tem teste
 - [ ] Mudança no banco tem migration nova, RLS e teste em `supabase/tests/`
 - [ ] Nenhuma chave, token ou dado pessoal no diff

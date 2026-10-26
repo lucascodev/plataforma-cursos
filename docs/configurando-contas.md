@@ -97,7 +97,7 @@ SUPABASE_URL=https://SEU_PROJECT_REF.supabase.co
 SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 ```
 
-Rode `npm run dev`, que sobe a API e o site juntos. Abra `http://localhost:5173` e clique em **Entrar**.
+Rode `pnpm dev`, que sobe a API e o site juntos. Abra `http://localhost:5173` e clique em **Entrar**.
 
 ## 7. Importe os cursos
 
@@ -109,7 +109,7 @@ SUPABASE_SECRET_KEY=sb_secret_...
 ```
 
 ```bash
-npm run content:import -- supabase/seed/courses/engenharia-de-ia.json --publish
+pnpm content:import -- supabase/seed/courses/engenharia-de-ia.json --publish
 ```
 
 O script valida o curso com o mesmo schema do site antes de enviar. Depois da primeira importação, valide a ligação entre progresso e cursos:
