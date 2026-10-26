@@ -1,4 +1,4 @@
-import type { AuditEntry } from '../../../domain/entities/audit-entry.entity';
+import type { AuditEntry } from '../../../domain/entities/audit/audit-entry.entity';
 import { describeAuditEntry } from '../../formatters/describe-audit-entry';
 import { formatDateTime } from '../../formatters/format-date-time';
 import styles from './audit-list.module.css';

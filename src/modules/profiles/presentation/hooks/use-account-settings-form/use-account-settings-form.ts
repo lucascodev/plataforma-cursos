@@ -1,4 +1,4 @@
-import { isTimeZone } from '@contracts/is-time-zone';
+import { isTimeZone } from '@contracts/account/is-time-zone';
 import { useState, type FormEvent } from 'react';
 import { readErrorMessage } from '@/shared/presentation/formatters/read-error-message';
 import type { AccountSettings } from '../../../domain/entities/account-settings.entity';

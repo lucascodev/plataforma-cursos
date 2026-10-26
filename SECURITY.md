@@ -21,7 +21,9 @@ Resposta inicial em até 7 dias. Quando a correção sair, o relato é publicado
 - As functions do Cloudflare usam a chave **publicável** junto com o token de cada pessoa. A proteção dos dados vem das políticas de Row Level Security em `supabase/migrations/`, testadas em `supabase/tests/`.
 - A chave **secreta** só existe no `.env.local` de quem importa cursos. As functions recusam essa chave se ela for cadastrada por engano.
 - O build falha se encontrar no `dist/` qualquer chave do Supabase (secreta ou publicável), a URL de um projeto, um token do GitHub ou uma chave privada.
-- Cabeçalhos de segurança (CSP com `connect-src 'self'`, HSTS, `frame-ancestors 'none'`) ficam em `public/_headers`.
+- Cabeçalhos de segurança (CSP com `connect-src 'self'` e Trusted Types, HSTS, `frame-ancestors 'none'`) ficam em `public/_headers`.
+- Escritas no banco têm limite por pessoa. Os testes de RLS rodam no CI a cada push, e as migrations só chegam a produção depois deles.
+- O que precisa ser conferido nos painéis do Supabase, do GitHub e do Cloudflare está em [docs/seguranca.md](docs/seguranca.md).
 
 ## Achou uma chave exposta?
 

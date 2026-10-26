@@ -1,8 +1,8 @@
 import { pluralize } from '@/shared/utils/text/pluralize';
 import type { CourseDetailsOutputDto } from '../../../application/dtos/get-course-by-slug/course-details-output.dto';
 import { describeCourseFacts } from '../../formatters/describe-course-facts';
-import type { ModuleOutlineView } from '../../types/module-outline-view.type';
-import { buildRhythmView } from '../use-course-dashboard/build-rhythm-view';
+import type { ModuleOutlineView } from '../../types/module/module-outline-view.type';
+import { buildRhythmView } from '../use-course-dashboard/builders/build-rhythm-view';
 
 export function useCoursePreview({ course, totals }: CourseDetailsOutputDto) {
   return {

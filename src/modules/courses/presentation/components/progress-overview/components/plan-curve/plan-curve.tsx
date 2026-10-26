@@ -1,4 +1,4 @@
-import type { PlanCurveView } from '../../../../types/plan-curve-view.type';
+import type { PlanCurveView } from '../../../../types/plan/plan-curve-view.type';
 import styles from './plan-curve.module.css';
 
 interface PlanCurveProps {

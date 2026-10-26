@@ -1,6 +1,6 @@
 import { Button } from '@/shared/presentation/components/actions/button/button';
 import type { DateKey } from '@/shared/domain/types/date-key.type';
-import type { WeekView } from '../../../../types/week-view.type';
+import type { WeekView } from '../../../../types/plan/week-view.type';
 import styles from './week-calendar.module.css';
 import { WeekDayRow } from './components/week-day-row/week-day-row';
 

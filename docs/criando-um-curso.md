@@ -15,7 +15,7 @@ O `slug` vira o endereço do curso (`/cursos/<slug>`) e a chave do progresso. Us
 A forma mais rápida é copiar `supabase/seed/courses/engenharia-de-ia.json` e editar. Mantenha a primeira linha:
 
 ```json
-"$schema": "../../../contracts/course.schema.json",
+"$schema": "../../../contracts/course/course.schema.json",
 ```
 
 Com ela, o VS Code autocompleta os campos e sublinha erros enquanto você escreve.
@@ -80,7 +80,7 @@ A plataforma calcula tudo a partir de `months` e `rhythm`:
 ## 5. Valide
 
 ```bash
-npm test
+pnpm test
 ```
 
 O teste de conteúdo lê todos os arquivos de `supabase/seed/courses/` e falha se algum estiver inválido, mostrando o campo e o motivo.
@@ -93,8 +93,8 @@ O schema também confere: ids de módulo repetidos, `months` igual a 0 fora de m
 2. Depois do merge, quem mantém a plataforma importa o curso, da própria máquina, com a chave secreta no `.env.local` (veja [configurando-contas.md](configurando-contas.md#7-importe-os-cursos)):
 
    ```bash
-   npm run content:import -- supabase/seed/courses/<slug>.json            # rascunho, não aparece no catálogo
-   npm run content:import -- supabase/seed/courses/<slug>.json --publish  # publica
+   pnpm content:import -- supabase/seed/courses/<slug>.json            # rascunho, não aparece no catálogo
+   pnpm content:import -- supabase/seed/courses/<slug>.json --publish  # publica
    ```
 
 Rodar de novo atualiza o curso. Sem `--publish`, um curso que já estava publicado continua publicado. Para tirar um curso do ar, mude `published` para `false` no painel do Supabase; o banco não deixa apagar um curso que já tem progresso de alguém.

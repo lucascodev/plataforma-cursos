@@ -1,4 +1,4 @@
-import type { ProblemMessages } from '../../shared/http/problem-message.type';
+import type { ProblemMessages } from '../../shared/http/responses/problem-message.type';
 
 export const PROPOSAL_ERROR_MESSAGES: ProblemMessages = {
   'proposal-not-found': [404, 'Proposta não encontrada.'],

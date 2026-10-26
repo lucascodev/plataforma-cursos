@@ -1,4 +1,4 @@
-import type { ModuleView } from '../../../../types/module-view.type';
+import type { ModuleView } from '../../../../types/module/module-view.type';
 import { ItemCheck } from '../../../item-check/item-check';
 import styles from './module-project-card.module.css';
 

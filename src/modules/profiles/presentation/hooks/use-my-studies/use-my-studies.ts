@@ -1,6 +1,6 @@
 import { useCourseCatalogQuery } from '@/modules/courses';
 import { useProgressSummariesQuery } from '@/modules/progress';
-import type { StudySummary } from '../../../domain/entities/study-summary.entity';
+import type { StudySummary } from '../../../domain/entities/studies/study-summary.entity';
 import { summarizeStudies } from '../../../domain/rules/summarize-studies.rule';
 
 type MyStudies = { readonly status: 'loading' } | { readonly status: 'error' } | { readonly status: 'ready'; readonly summary: StudySummary };

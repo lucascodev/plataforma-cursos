@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { handleApiMiddleware } from '../main/handle-api-middleware';
-import { handleAdminApproveProposal } from '../modules/admin/handlers/handle-admin-approve-proposal';
-import { handleAdminDeleteCourse } from '../modules/admin/handlers/handle-admin-delete-course';
+import { handleApiMiddleware } from '../main/middleware/handle-api-middleware';
+import { handleAdminApproveProposal } from '../modules/admin/handlers/proposals/handle-admin-approve-proposal';
+import { handleAdminDeleteCourse } from '../modules/admin/handlers/courses/handle-admin-delete-course';
 import { handleAdminListAudit } from '../modules/admin/handlers/handle-admin-list-audit';
-import { handleAdminListPeople } from '../modules/admin/handlers/handle-admin-list-people';
+import { handleAdminListPeople } from '../modules/admin/handlers/people/handle-admin-list-people';
 import { handleAdminOverview } from '../modules/admin/handlers/handle-admin-overview';
-import { handleAdminReviewProposal } from '../modules/admin/handlers/handle-admin-review-proposal';
-import { handleAdminSetRole } from '../modules/admin/handlers/handle-admin-set-role';
-import { json, makeFakeServices, postgrestError, respondByPath } from './fake-supabase';
-import { SITE, signedIn } from './test-requests';
+import { handleAdminReviewProposal } from '../modules/admin/handlers/proposals/handle-admin-review-proposal';
+import { handleAdminSetRole } from '../modules/admin/handlers/people/handle-admin-set-role';
+import { json, makeFakeServices, postgrestError, respondByPath } from './fakes/fake-supabase';
+import { SITE, signedIn } from './fakes/test-requests';
 
 const ID = 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa';
 const overview = { people: { student: 3, teacher: 1, admin: 1 }, pendingProposals: 2, courses: { draft: 1, published: 1, unlisted: 0 }, activeStudents30d: 2 };

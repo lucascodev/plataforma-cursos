@@ -13,6 +13,9 @@ const FORBIDDEN = [
   { name: 'DeepSeek or OpenAI style key', pattern: /\bsk-[A-Za-z0-9]{32,}\b/ },
 ];
 
+// Not secrets, but publishing them sends people (and vulnerability reports) to someone else's GitHub account.
+const PLACEHOLDERS = [{ name: 'placeholder GitHub owner SEU-USUARIO (set the real repository URL)', pattern: /SEU-USUARIO/ }];
+
 function listFiles(directory) {
   return readdirSync(directory).flatMap((name) => {
     const path = join(directory, name);
@@ -30,8 +33,12 @@ function jwtRole(token) {
 }
 
 const findings = [];
+const placeholders = [];
 for (const file of listFiles(BUILD_DIR).filter((path) => TEXT_EXTENSIONS.test(path))) {
   const content = readFileSync(file, 'utf8');
+  for (const { name, pattern } of PLACEHOLDERS) {
+    if (pattern.test(content)) placeholders.push(`${file}: ${name}`);
+  }
   for (const { name, pattern } of FORBIDDEN) {
     if (pattern.test(content)) findings.push(`${file}: ${name}`);
   }
@@ -46,6 +53,12 @@ if (findings.length > 0) {
   console.error('Secrets found in the build output. Do not publish this build:');
   for (const finding of findings) console.error(`  - ${finding}`);
   console.error('Rotate the exposed key in the provider dashboard right away.');
+  process.exit(1);
+}
+
+if (placeholders.length > 0) {
+  console.error('Placeholders found in the build output:');
+  for (const placeholder of placeholders) console.error(`  - ${placeholder}`);
   process.exit(1);
 }
 

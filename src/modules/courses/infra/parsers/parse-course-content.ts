@@ -1,7 +1,7 @@
 import type { Course } from '../../domain/entities/course/course.entity';
 import { InvalidCourseContentError } from '../errors/invalid-course-content.error';
 import { mapCourseContentToEntity } from '../mappers/course-content-to-entity.mapper';
-import { courseContentSchema } from '@contracts/course-content.schema';
+import { courseContentSchema } from '@contracts/course/course-content.schema';
 
 export function parseCourseContent(source: string, raw: unknown): Course {
   const result = courseContentSchema.safeParse(raw);

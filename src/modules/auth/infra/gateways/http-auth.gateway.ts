@@ -1,5 +1,5 @@
 import { SessionExpiredError } from '@/shared/application/errors/session-expired.error';
-import type { HttpClient } from '@/shared/application/ports/http-client.interface';
+import type { HttpClient } from '@/shared/application/ports/http/http-client.interface';
 import type { AuthGateway } from '../../application/ports/auth-gateway.interface';
 import type { AuthUser } from '../../domain/entities/auth-user.entity';
 import { AUTH_API_PATHS } from '../constants/auth-api-paths';

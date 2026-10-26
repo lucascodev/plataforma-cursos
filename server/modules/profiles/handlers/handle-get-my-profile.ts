@@ -1,10 +1,10 @@
 import { z } from 'zod';
-import { myProfileSchema } from '../../../../contracts/my-profile.schema';
+import { myProfileSchema } from '../../../../contracts/profile/my-profile.schema';
 import type { Services } from '../../../main/services.type';
-import { jsonResponse } from '../../../shared/http/json-response';
-import { problemResponse } from '../../../shared/http/problem-response';
-import { readUpstreamJson } from '../../../shared/http/read-upstream-json';
-import { withSession } from '../../auth/with-session';
+import { jsonResponse } from '../../../shared/http/responses/json-response';
+import { problemResponse } from '../../../shared/http/responses/problem-response';
+import { readUpstreamJson } from '../../../shared/http/upstream/read-upstream-json';
+import { withSession } from '../../auth/session/with-session';
 import { MY_PROFILE_COLUMNS } from '../profile-columns';
 
 export function handleGetMyProfile(request: Request, services: Services): Promise<Response> {

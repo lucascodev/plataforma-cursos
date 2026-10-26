@@ -1,5 +1,5 @@
 import type { CourseGuide as CourseGuideData } from '../../../domain/entities/guide/course-guide.entity';
-import type { RhythmView } from '../../types/rhythm-view.type';
+import type { RhythmView } from '../../types/plan/rhythm-view.type';
 import styles from './course-guide.module.css';
 import { ArchitectureDiagram } from './components/architecture-diagram/architecture-diagram';
 import { GuideSectionCard } from './components/guide-section-card/guide-section-card';

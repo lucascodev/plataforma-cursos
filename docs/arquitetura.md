@@ -203,8 +203,8 @@ Schemas Zod usados pelos dois lados: conteúdo do curso, progresso, limites de t
 | Horas por dia da semana | `courses/domain/rules/plan/hours-for-weekday.rule.ts` |
 | Ritmo (à frente, atrás) | `courses/domain/rules/summary/calculate-pace.rule.ts` |
 | Sequência e dias atrasados | `courses/domain/rules/summary/summarize-study-days.rule.ts` |
-| Limites de texto e de entradas | `contracts/progress-limits.ts` |
-| Renovação da sessão | `server/modules/auth/resolve-session.ts` |
+| Limites de texto e de entradas | `contracts/progress/progress-limits.ts` |
+| Renovação da sessão | `server/modules/auth/session/resolve-session.ts` |
 | Quem pode fazer o quê | Políticas RLS e funções em `supabase/migrations/20261026200*.sql` |
 | Aprovar proposta (papel, curso e histórico juntos) | função `approve_proposal` |
 | Limite de propostas abertas | gatilho `course_proposals_limit_rows` |
@@ -326,6 +326,6 @@ audit_log (
 - **Limite de requisições**: um rate limit por IP ou por usuário nas functions (Cloudflare Rate Limiting) se aparecer abuso.
 - **Editor de cursos**: próxima etapa. Rascunho e versões em tabelas próprias, revisão pelo admin e fim da importação com a chave secreta.
 - **Avisos por e-mail**: as preferências já ficam guardadas; falta escolher um provedor de e-mail e disparar os avisos.
-- **Mais provedores de login**: o provedor é escolhido num lugar só (`server/shared/supabase/supabase-auth-client.ts`); basta receber o provedor na rota de login, habilitar no Supabase e adicionar o botão.
+- **Mais provedores de login**: o provedor é escolhido num lugar só (`server/shared/supabase/auth/supabase-auth-client.ts`); basta receber o provedor na rota de login, habilitar no Supabase e adicionar o botão.
 - **Estatísticas para professores**: funções que devolvem só números somados, com um mínimo de pessoas por número, nunca a tabela inteira.
 - **Plano pago do Supabase** quando a pausa por inatividade ou o limite de 500 MB virarem problema.

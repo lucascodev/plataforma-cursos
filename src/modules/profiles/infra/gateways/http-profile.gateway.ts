@@ -1,11 +1,11 @@
 import { HttpRequestError } from '@/shared/application/errors/http-request.error';
-import type { HttpClient } from '@/shared/application/ports/http-client.interface';
+import type { HttpClient } from '@/shared/application/ports/http/http-client.interface';
 import type { z } from 'zod';
 import type { UpdateMyProfileInputDto } from '../../application/dtos/update-my-profile-input.dto';
 import type { ProfileGateway } from '../../application/ports/profile-gateway.interface';
 import type { AccountSettings } from '../../domain/entities/account-settings.entity';
 import type { MyProfile } from '../../domain/entities/my-profile.entity';
-import type { TeacherProfile } from '../../domain/entities/teacher-profile.entity';
+import type { TeacherProfile } from '../../domain/entities/teacher/teacher-profile.entity';
 import { PROFILE_API_PATHS } from '../constants/profile-api-paths';
 import { InvalidProfileResponseError } from '../errors/invalid-profile-response.error';
 import { accountSettingsResponseSchema } from '../schemas/account-settings-response.schema';

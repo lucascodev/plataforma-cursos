@@ -1,4 +1,4 @@
-import type { PlanStatView } from '../../../../types/plan-stat-view.type';
+import type { PlanStatView } from '../../../../types/plan/plan-stat-view.type';
 import styles from './plan-stats.module.css';
 
 interface PlanStatsProps {

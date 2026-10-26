@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { addDays } from './add-days';
-import { dayOfWeek } from './day-of-week';
-import { daysBetween } from './days-between';
-import { formatDayMonth } from './format-day-month';
-import { formatMonthYear } from './format-month-year';
-import { isDateKey } from '@contracts/is-date-key';
-import { mondayOf } from './monday-of';
+import { addDays } from './calendar/add-days';
+import { dayOfWeek } from './calendar/day-of-week';
+import { daysBetween } from './calendar/days-between';
+import { formatDayMonth } from './format/format-day-month';
+import { formatMonthYear } from './format/format-month-year';
+import { isDateKey } from '@contracts/date/is-date-key';
+import { mondayOf } from './calendar/monday-of';
 
 describe('date utils', () => {
   it('adds days across months and years', () => {

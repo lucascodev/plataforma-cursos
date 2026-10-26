@@ -1,16 +1,17 @@
 import type { Services } from '../../../main/services.type';
-import { parseCookies } from '../../../shared/http/parse-cookies';
-import { clearCookies } from '../clear-cookies';
-import { SESSION_COOKIES } from '../session-cookie-names';
+import { clearCookies } from '../cookies/clear-cookies';
+import { resolveSession } from '../session/resolve-session';
+import { SESSION_COOKIES } from '../cookies/session-cookie-names';
 
+// The access cookie lives one hour but the refresh token lives 30 days, so an idle session is refreshed first:
+// otherwise only the cookies would go away and the refresh token would stay valid at Supabase.
 export async function handleLogout(request: Request, services: Services): Promise<Response> {
-  const accessToken = parseCookies(request.headers.get('Cookie'))[SESSION_COOKIES.accessToken];
-  if (accessToken) {
-    try {
-      await services.auth.signOut(accessToken);
-    } catch {
-      // The cookies are cleared anyway; the token expires on its own within the hour.
-    }
+  try {
+    const session = await resolveSession(request, services);
+    if (session) await services.auth.signOut(session.accessToken);
+  } catch (error) {
+    // The cookies are cleared anyway; the person is signed out of this browser even if Supabase could not be reached.
+    console.error(error instanceof Error ? `${error.name}: ${error.message}` : 'Unknown logout error');
   }
   const headers = new Headers({ 'Cache-Control': 'no-store' });
   for (const cookie of clearCookies([SESSION_COOKIES.accessToken, SESSION_COOKIES.refreshToken])) headers.append('Set-Cookie', cookie);

@@ -1,5 +1,5 @@
 import type { DateKey } from '@/shared/domain/types/date-key.type';
-import { addDays } from '@/shared/utils/date/add-days';
+import { addDays } from '@/shared/utils/date/calendar/add-days';
 import type { StudyPlan } from '../../entities/plan/study-plan.entity';
 import type { StudyDaysSummary } from '../../entities/summary/study-days-summary.entity';
 

@@ -1,4 +1,4 @@
-import type { ProposalRecord } from '@contracts/proposal.schema';
+import type { ProposalRecord } from '@contracts/proposal/proposal.schema';
 import type { Proposal } from '../../domain/entities/proposal.entity';
 
 export function mapProposalRecordToEntity(record: ProposalRecord): Proposal {

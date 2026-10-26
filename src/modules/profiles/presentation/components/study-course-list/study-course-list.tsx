@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import { ProgressMeter } from '@/shared/presentation/components/feedback/progress-meter/progress-meter';
-import type { StudyCourseSummary } from '../../../domain/entities/study-course-summary.entity';
+import type { StudyCourseSummary } from '../../../domain/entities/studies/study-course-summary.entity';
 import styles from './study-course-list.module.css';
 
 export function StudyCourseList({ courses }: { courses: readonly StudyCourseSummary[] }) {

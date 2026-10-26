@@ -1,8 +1,8 @@
 import type { Services } from '../../../main/services.type';
-import { isCourseSlug } from '../../../shared/http/is-course-slug';
-import { jsonResponse } from '../../../shared/http/json-response';
-import { problemResponse } from '../../../shared/http/problem-response';
-import { PUBLIC_CACHE_HEADERS } from '../../../shared/http/public-cache-headers';
+import { isCourseSlug } from '../../../shared/http/params/is-course-slug';
+import { jsonResponse } from '../../../shared/http/responses/json-response';
+import { problemResponse } from '../../../shared/http/responses/problem-response';
+import { PUBLIC_CACHE_HEADERS } from '../../../shared/http/responses/public-cache-headers';
 import { readCourseAuthor } from '../read-course-author';
 import { readCourseRows } from '../read-course-rows';
 

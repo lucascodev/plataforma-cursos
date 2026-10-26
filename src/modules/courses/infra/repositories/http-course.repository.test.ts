@@ -2,8 +2,8 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { HttpRequestError } from '@/shared/application/errors/http-request.error';
-import type { HttpClient } from '@/shared/application/ports/http-client.interface';
-import type { HttpRequest } from '@/shared/application/ports/http-request.type';
+import type { HttpClient } from '@/shared/application/ports/http/http-client.interface';
+import type { HttpRequest } from '@/shared/application/ports/http/http-request.type';
 import { HttpCourseRepository } from './http-course.repository';
 
 const seed: unknown = JSON.parse(readFileSync(join(process.cwd(), 'supabase', 'seed', 'courses', 'engenharia-de-ia.json'), 'utf8'));

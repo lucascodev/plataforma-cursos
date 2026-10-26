@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { handleApiMiddleware } from '../main/handle-api-middleware';
+import { handleApiMiddleware } from '../main/middleware/handle-api-middleware';
 import { handleCallback } from '../modules/auth/handlers/handle-callback';
 import { handleLogin } from '../modules/auth/handlers/handle-login';
 import { handleLogout } from '../modules/auth/handlers/handle-logout';
 import { handleMe } from '../modules/auth/handlers/handle-me';
-import { resolveSession } from '../modules/auth/resolve-session';
+import { resolveSession } from '../modules/auth/session/resolve-session';
 import { sanitizeReturnPath } from '../modules/auth/sanitize-return-path';
 import { handleGetCourse } from '../modules/courses/handlers/handle-get-course';
 import { handleListCourses } from '../modules/courses/handlers/handle-list-courses';
@@ -13,8 +13,8 @@ import { handleGetProgress } from '../modules/progress/handlers/handle-get-progr
 import { handlePutProgress } from '../modules/progress/handlers/handle-put-progress';
 import { readServerConfig } from '../shared/env/read-server-config';
 import { isSameOriginRequest } from '../shared/http/is-same-origin-request';
-import { parseCookies } from '../shared/http/parse-cookies';
-import { accessToken, fakeJwt, json, makeFakeServices } from './fake-supabase';
+import { parseCookies } from '../shared/http/cookies/parse-cookies';
+import { accessToken, fakeJwt, json, makeFakeServices, respondByPath } from './fakes/fake-supabase';
 
 const SITE = 'https://cursos.exemplo.dev';
 const setCookies = (response: Response) => response.headers.getSetCookie();
@@ -65,6 +65,19 @@ describe('proteções de requisição', () => {
     expect(response.status).toBe(403);
     expect(response.headers.get('X-Content-Type-Options')).toBe('nosniff');
     expect(response.headers.get('Cache-Control')).toBe('no-store');
+  });
+
+  it('rota ou método sem function responde 404 em JSON, não o index.html', async () => {
+    const context = {
+      request: new Request(`${SITE}/api/nao-existe`),
+      env: {},
+      params: {},
+      next: async () => new Response('<!doctype html>', { headers: { 'Content-Type': 'text/html; charset=utf-8' } }),
+    };
+    const response = await handleApiMiddleware(context);
+    expect(response.status).toBe(404);
+    expect(response.headers.get('Content-Type')).toContain('application/json');
+    expect(response.headers.get('Content-Security-Policy')).toContain("default-src 'none'");
   });
 
   it('middleware transforma erro inesperado em 500 sem vazar detalhes', async () => {
@@ -157,6 +170,19 @@ describe('sessão', () => {
     expect(setCookies(response).every((cookie) => cookie.includes('Max-Age=0'))).toBe(true);
   });
 
+  it('recusa refresh token malformado sem chamar o Supabase', async () => {
+    const { services, calls } = makeFakeServices(() => json({}));
+    const request = new Request(`${SITE}/api/me`, { headers: { Cookie: cookieHeader({ '__Host-ca-refresh': 'x'.repeat(600) }) } });
+    expect(await resolveSession(request, services)).toBeNull();
+    expect(calls.length).toBe(0);
+  });
+
+  it('limite de requisições do Supabase não derruba a sessão', async () => {
+    const { services } = makeFakeServices(() => json({ error: 'too many' }, 429));
+    const request = new Request(SITE, { headers: { Cookie: cookieHeader({ '__Host-ca-refresh': 'refresh-1' }) } });
+    await expect(resolveSession(request, services)).rejects.toMatchObject({ status: 429 });
+  });
+
   it('/api/me pergunta ao banco o papel e devolve só os campos do contrato', async () => {
     const { services, calls } = makeFakeServices(() =>
       json({ id: 'user-1', handle: 'ana', role: 'teacher', displayName: 'Ana', avatarUrl: null, email: 'ana@example.com' }),
@@ -184,6 +210,19 @@ describe('sessão', () => {
     expect(response.status).toBe(204);
     expect(calls[0]?.url).toContain('/auth/v1/logout');
     expect(setCookies(response).length).toBe(2);
+  });
+
+  it('logout de sessão parada renova o token para revogar no Supabase', async () => {
+    const { services, calls } = makeFakeServices(respondByPath({
+      token: () => json({ access_token: accessToken(), refresh_token: 'refresh-2', expires_in: 3600 }),
+      logout: () => new Response(null, { status: 204 }),
+    }));
+    const response = await handleLogout(
+      new Request(`${SITE}/api/auth/logout`, { method: 'POST', headers: { Cookie: cookieHeader({ '__Host-ca-refresh': 'refresh-1' }) } }),
+      services,
+    );
+    expect(calls.map((call) => new URL(call.url).pathname)).toEqual(['/auth/v1/token', '/auth/v1/logout']);
+    expect(setCookies(response).every((cookie) => cookie.includes('Max-Age=0'))).toBe(true);
   });
 });
 
@@ -256,6 +295,33 @@ describe('progresso', () => {
   it('curso inexistente vira 404', async () => {
     const { services } = makeFakeServices(() => json({ code: '23503' }, 409));
     expect((await handlePutProgress(authed('PUT', { progress: emptyProgress }), 'engenharia-de-ia', services)).status).toBe(404);
+  });
+
+  it('curso não publicado também vira 404, sem revelar que existe', async () => {
+    const { services } = makeFakeServices(() => json({ code: '42501' }, 403));
+    expect((await handlePutProgress(authed('PUT', { progress: emptyProgress }), 'rascunho', services)).status).toBe(404);
+  });
+
+  it('limite de escrita do banco vira 429', async () => {
+    const { services } = makeFakeServices(() => json({ code: 'PT429', hint: 'rate-limited' }, 429));
+    const response = await handlePutProgress(authed('PUT', { progress: emptyProgress }), 'engenharia-de-ia', services);
+    expect(response.status).toBe(429);
+    expect(((await response.json()) as { error: { code: string } }).error.code).toBe('rate-limited');
+  });
+
+  it('erro ao salvar ainda devolve os cookies renovados', async () => {
+    const { services } = makeFakeServices(respondByPath({
+      token: () => json({ access_token: accessToken(), refresh_token: 'refresh-2', expires_in: 3600 }),
+      course_progress: () => json({}, 500),
+    }));
+    const request = new Request(`${SITE}/api/progress/engenharia-de-ia`, {
+      method: 'PUT',
+      headers: { Cookie: cookieHeader({ '__Host-ca-refresh': 'refresh-1' }), 'Content-Type': 'application/json', Origin: SITE },
+      body: JSON.stringify({ progress: emptyProgress }),
+    });
+    const response = await handlePutProgress(request, 'engenharia-de-ia', services);
+    expect(response.status).toBe(502);
+    expect(setCookies(response).join(' ')).toContain('refresh-2');
   });
 
   it('apaga só o progresso da pessoa', async () => {

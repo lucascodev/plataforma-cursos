@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { dayOfWeek } from '@/shared/utils/date/day-of-week';
+import { dayOfWeek } from '@/shared/utils/date/calendar/day-of-week';
 import { listModuleItemIds } from '../item-ids/list-module-item-ids.rule';
 import { buildStudyPlan } from './build-study-plan.rule';
-import { suggestStartDate } from './suggest-start-date.rule';
+import { suggestStartDate } from './schedule/suggest-start-date.rule';
 import { loadTestCourse } from '@/test/fixtures/load-test-course.fixture';
 
 const course = loadTestCourse();

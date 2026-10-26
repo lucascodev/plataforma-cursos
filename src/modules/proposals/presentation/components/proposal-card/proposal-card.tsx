@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { formatDayMonth } from '@/shared/utils/date/format-day-month';
+import { formatDayMonth } from '@/shared/utils/date/format/format-day-month';
 import type { Proposal } from '../../../domain/entities/proposal.entity';
 import { ProposalStatusBadge } from '../proposal-status-badge/proposal-status-badge';
 import styles from './proposal-card.module.css';

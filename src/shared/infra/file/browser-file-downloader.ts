@@ -1,5 +1,5 @@
-import type { DownloadableFile } from '@/shared/application/ports/downloadable-file.type';
-import type { FileDownloader } from '@/shared/application/ports/file-downloader.interface';
+import type { DownloadableFile } from '@/shared/application/ports/files/downloadable-file.type';
+import type { FileDownloader } from '@/shared/application/ports/files/file-downloader.interface';
 
 export class BrowserFileDownloader implements FileDownloader {
   download(file: DownloadableFile): void {

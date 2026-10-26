@@ -2,7 +2,7 @@
   "json.schemas": [
     {
       "fileMatch": ["/supabase/seed/courses/*.json"],
-      "url": "./contracts/course.schema.json"
+      "url": "./contracts/course/course.schema.json"
     }
   ],
   "typescript.tsdk": "node_modules/typescript/lib"

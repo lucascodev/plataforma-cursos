@@ -1,4 +1,4 @@
-import type { ProposalInputRecord } from '../../../contracts/proposal-input.schema';
+import type { ProposalInputRecord } from '../../../contracts/proposal/proposal-input.schema';
 
 export function toProposalRow(input: ProposalInputRecord): Record<string, unknown> {
   return {

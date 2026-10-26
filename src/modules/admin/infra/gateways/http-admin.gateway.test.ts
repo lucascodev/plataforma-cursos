@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { HttpRequestError } from '@/shared/application/errors/http-request.error';
-import type { HttpClient } from '@/shared/application/ports/http-client.interface';
-import type { HttpRequest } from '@/shared/application/ports/http-request.type';
+import type { HttpClient } from '@/shared/application/ports/http/http-client.interface';
+import type { HttpRequest } from '@/shared/application/ports/http/http-request.type';
 import { InvalidAdminResponseError } from '../errors/invalid-admin-response.error';
 import { HttpAdminGateway } from './http-admin.gateway';
 

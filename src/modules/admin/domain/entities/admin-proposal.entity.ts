@@ -1,5 +1,5 @@
 import type { AdminProposalStatus } from '../types/admin-proposal-status.type';
-import type { PersonCard } from './person-card.entity';
+import type { PersonCard } from './people/person-card.entity';
 
 export interface AdminProposal {
   readonly id: string;

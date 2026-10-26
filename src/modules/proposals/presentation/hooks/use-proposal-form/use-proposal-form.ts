@@ -1,4 +1,4 @@
-import { proposalInputSchema } from '@contracts/proposal-input.schema';
+import { proposalInputSchema } from '@contracts/proposal/proposal-input.schema';
 import { useState, type FormEvent } from 'react';
 import type { ProposalDraft } from '../../../domain/entities/proposal-draft.entity';
 

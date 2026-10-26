@@ -1,5 +1,5 @@
 export type { JournalExport } from './domain/entities/journal-export.entity';
-export { progressLimits } from '@contracts/progress-limits';
+export { progressLimits } from '@contracts/progress/progress-limits';
 export type { CourseProgress } from './domain/entities/course-progress.entity';
 export { BackupBar } from './presentation/components/backup-bar/backup-bar';
 export { SaveStatus } from './presentation/components/save-status/save-status';

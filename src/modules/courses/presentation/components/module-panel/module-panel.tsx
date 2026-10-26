@@ -1,5 +1,5 @@
 import { ProgressMeter } from '@/shared/presentation/components/feedback/progress-meter/progress-meter';
-import type { ModuleView } from '../../types/module-view.type';
+import type { ModuleView } from '../../types/module/module-view.type';
 import styles from './module-panel.module.css';
 import { DrillList } from './components/drill-list/drill-list';
 import { LessonList } from './components/lesson-list/lesson-list';

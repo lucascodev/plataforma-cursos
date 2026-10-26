@@ -1,4 +1,4 @@
-import type { AuditEntry } from '../../domain/entities/audit-entry.entity';
+import type { AuditEntry } from '../../domain/entities/audit/audit-entry.entity';
 import type { AdminRole } from '../../domain/types/admin-role.type';
 import { ROLE_LABELS } from './describe-role';
 

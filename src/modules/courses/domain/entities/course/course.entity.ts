@@ -1,9 +1,9 @@
 import type { CourseGuide } from '../guide/course-guide.entity';
 import type { CourseAuthor } from './course-author.entity';
-import type { CourseModule } from './course-module.entity';
-import type { CourseTaskText } from './course-task-text.entity';
+import type { CourseModule } from './module/course-module.entity';
+import type { CourseTaskText } from './module/course-task-text.entity';
 import type { StudyRhythm } from './study-rhythm.entity';
-import type { SundayTrack } from './sunday-track.entity';
+import type { SundayTrack } from './sunday-track/sunday-track.entity';
 
 export interface Course {
   readonly slug: string;

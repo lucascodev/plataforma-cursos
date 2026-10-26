@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import type { DateKey } from '@/shared/domain/types/date-key.type';
-import { addDays } from '@/shared/utils/date/add-days';
-import { daysBetween } from '@/shared/utils/date/days-between';
-import { formatDayMonth } from '@/shared/utils/date/format-day-month';
-import { mondayOf } from '@/shared/utils/date/monday-of';
+import { addDays } from '@/shared/utils/date/calendar/add-days';
+import { daysBetween } from '@/shared/utils/date/calendar/days-between';
+import { formatDayMonth } from '@/shared/utils/date/format/format-day-month';
+import { mondayOf } from '@/shared/utils/date/calendar/monday-of';
 import type { StudyPlan } from '../../../domain/entities/plan/study-plan.entity';
 
 const DAYS_PER_WEEK = 7;

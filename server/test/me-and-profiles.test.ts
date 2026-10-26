@@ -5,8 +5,8 @@ import { handleGetMySettings } from '../modules/profiles/handlers/handle-get-my-
 import { handleGetTeacherProfile } from '../modules/profiles/handlers/handle-get-teacher-profile';
 import { handlePutMyProfile } from '../modules/profiles/handlers/handle-put-my-profile';
 import { handlePutMySettings } from '../modules/profiles/handlers/handle-put-my-settings';
-import { json, makeFakeServices } from './fake-supabase';
-import { signedIn, signedOut } from './test-requests';
+import { json, makeFakeServices } from './fakes/fake-supabase';
+import { signedIn, signedOut } from './fakes/test-requests';
 
 const profileRow = {
   id: 'user-1',

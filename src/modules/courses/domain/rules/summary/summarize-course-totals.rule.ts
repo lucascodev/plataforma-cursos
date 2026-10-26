@@ -1,6 +1,6 @@
 import type { Course } from '../../entities/course/course.entity';
 import type { CourseTotals } from '../../entities/summary/course-totals.entity';
-import { weeksForModule } from '../plan/weeks-for-module.rule';
+import { weeksForModule } from '../plan/schedule/weeks-for-module.rule';
 
 export function summarizeCourseTotals(course: Course): CourseTotals {
   const { weekdayHours, saturdayHours, sundayHours } = course.rhythm;

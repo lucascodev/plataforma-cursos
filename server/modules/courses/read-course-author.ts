@@ -1,4 +1,4 @@
-import { courseAuthorSchema, type CourseAuthorRecord } from '../../../contracts/course-author.schema';
+import { courseAuthorSchema, type CourseAuthorRecord } from '../../../contracts/course/course-author.schema';
 
 // The owner embed comes back as { handle, display_name, avatar_url } or null when the course has no owner.
 export function readCourseAuthor(row: unknown): CourseAuthorRecord | null {

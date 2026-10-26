@@ -2,11 +2,11 @@ import { describe, expect, it } from 'vitest';
 import type { Clock } from '@/shared/application/ports/clock.interface';
 import { InvalidBackupError } from '../../domain/errors/invalid-backup.error';
 import { createEmptyProgress } from '../../domain/rules/create-empty-progress.rule';
-import { setItemCompletion } from '../../domain/rules/set-item-completion.rule';
+import { setItemCompletion } from '../../domain/rules/updates/set-item-completion.rule';
 import { JsonBackupCodec } from '../../infra/codecs/json-backup.codec';
 import { InMemoryProgressRepository } from '../../infra/repositories/in-memory-progress.repository';
 import { LoadProgressUseCase } from './load-progress.use-case';
-import { ReadBackupUseCase } from './read-backup.use-case';
+import { ReadBackupUseCase } from './backup/read-backup.use-case';
 import { SaveProgressUseCase } from './save-progress.use-case';
 
 const fixedClock: Clock = { today: () => '2026-10-26', now: () => new Date('2026-10-26T13:00:00.000Z') };

@@ -1,10 +1,10 @@
 import { z } from 'zod';
-import { progressSummarySchema } from '../../../../contracts/progress-summary.schema';
+import { progressSummarySchema } from '../../../../contracts/progress/progress-summary.schema';
 import type { Services } from '../../../main/services.type';
-import { jsonResponse } from '../../../shared/http/json-response';
-import { problemResponse } from '../../../shared/http/problem-response';
-import { readUpstreamJson } from '../../../shared/http/read-upstream-json';
-import { withSession } from '../../auth/with-session';
+import { jsonResponse } from '../../../shared/http/responses/json-response';
+import { problemResponse } from '../../../shared/http/responses/problem-response';
+import { readUpstreamJson } from '../../../shared/http/upstream/read-upstream-json';
+import { withSession } from '../../auth/session/with-session';
 
 // Only completion flags and study days: notes and journal never leave the course page.
 const SUMMARY_COLUMNS = 'courseSlug:course_slug,updatedAt:updated_at,completedItems:data->completedItems,studyDays:data->studyDays';

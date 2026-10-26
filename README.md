@@ -25,17 +25,17 @@ O site é uma SPA em React. Tudo o que envolve dados passa pelas rotas `/api/*`,
 
 ## Rodando localmente
 
-Requisitos: Node 24 (ou 22.22 ou mais novo), npm e um projeto no Supabase configurado como em [docs/configurando-contas.md](docs/configurando-contas.md).
+Requisitos: Node 24 (ou 22.22 ou mais novo), pnpm (a versão fica em `packageManager`, no `package.json`) e um projeto no Supabase configurado como em [docs/configurando-contas.md](docs/configurando-contas.md).
 
 ```bash
-git clone https://github.com/SEU-USUARIO/plataforma-cursos.git
+git clone https://github.com/lucascodev/plataforma-cursos.git
 cd plataforma-cursos
-npm install
+pnpm install
 cp .dev.vars.example .dev.vars   # preencha com a URL e a chave publicável
 ```
 
 ```bash
-npm run dev       # sobe a API (functions do Cloudflare, porta 8788) e o site (porta 5173) juntos
+pnpm dev       # sobe a API (functions do Cloudflare, porta 8788) e o site (porta 5173) juntos
 ```
 
 Abra `http://localhost:5173` no Chrome ou no Firefox. Os cookies de sessão usam o prefixo `__Host-`, que esses navegadores aceitam em `localhost` sem HTTPS.
@@ -44,16 +44,16 @@ Abra `http://localhost:5173` no Chrome ou no Firefox. Os cookies de sessão usam
 
 | Comando | O que faz |
 |---|---|
-| `npm run dev` | Site com recarga rápida e API local juntos |
-| `npm run dev:site` | Só o site (Vite) |
-| `npm run dev:api` | Só as functions do Cloudflare (wrangler), lendo `.dev.vars` |
-| `npm run build` | Checa tipos, gera `dist/` e procura chaves vazadas no resultado |
-| `npm run preview` | Gera o build e serve site e functions juntos, como em produção |
-| `npm run check` | Tipos, lint, testes e build, na ordem |
-| `npm test` | Testes unitários do site e das functions (Vitest) |
-| `npm run content:schema` | Regera `contracts/course.schema.json` a partir do schema Zod |
-| `npm run content:import -- <arquivo> [--publish]` | Valida um curso e grava no Supabase (usa `.env.local`) |
-| `npm run audit:prod` | Auditoria das dependências de produção |
+| `pnpm dev` | Site com recarga rápida e API local juntos |
+| `pnpm dev:site` | Só o site (Vite) |
+| `pnpm dev:api` | Só as functions do Cloudflare (wrangler), lendo `.dev.vars` |
+| `pnpm build` | Checa tipos, gera `dist/` e procura chaves vazadas no resultado |
+| `pnpm preview` | Gera o build e serve site e functions juntos, como em produção |
+| `pnpm check` | Tipos, lint, testes e build, na ordem |
+| `pnpm test` | Testes unitários do site e das functions (Vitest) |
+| `pnpm content:schema` | Regera `contracts/course/course.schema.json` a partir do schema Zod |
+| `pnpm content:import -- <arquivo> [--publish]` | Valida um curso e grava no Supabase (usa `.env.local`) |
+| `pnpm audit:prod` | Auditoria das dependências de produção |
 
 ## Estrutura
 

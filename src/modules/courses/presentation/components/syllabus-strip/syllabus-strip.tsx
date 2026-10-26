@@ -1,4 +1,4 @@
-import type { ModuleView } from '../../types/module-view.type';
+import type { ModuleView } from '../../types/module/module-view.type';
 import styles from './syllabus-strip.module.css';
 
 interface SyllabusStripProps {
