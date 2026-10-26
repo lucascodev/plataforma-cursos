@@ -1,4 +1,4 @@
--- Run with: npx supabase test db
+-- Run with: pnpm db:test
 begin;
 create extension if not exists pgtap with schema extensions;
 select plan(14);

@@ -1,7 +1,10 @@
--- Run with: npx supabase test db
+-- Run with: pnpm db:test
 begin;
 create extension if not exists pgtap with schema extensions;
 select plan(9);
+
+-- Each test owns the rows it reads: the local seed is removed here and comes back when the transaction rolls back.
+delete from public.courses;
 
 insert into auth.users (id, email, aud, role)
 values
