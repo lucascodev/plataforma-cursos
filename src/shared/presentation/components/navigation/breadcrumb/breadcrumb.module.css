@@ -1,0 +1,33 @@
+.breadcrumb {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item + .item::before {
+  content: '/';
+  margin: 0 8px;
+  color: var(--line-strong);
+}
+
+.item a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.item a:hover {
+  color: var(--fg);
+  text-decoration: underline;
+}
+
+.item [aria-current='page'] {
+  color: var(--fg);
+}
