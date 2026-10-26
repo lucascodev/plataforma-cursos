@@ -1,6 +1,7 @@
 export type { AuthUser } from './domain/entities/auth-user.entity';
 export type { UserRole } from './domain/types/user-role.type';
 export { RequireRole } from './presentation/components/require-role/require-role';
+export { SessionMessageBanner } from './presentation/components/session-message-banner/session-message-banner';
 export { UserMenu } from './presentation/components/user-menu/user-menu';
 export { useAuthSession } from './presentation/hooks/use-auth-session/use-auth-session';
 export { AuthSessionProvider } from './presentation/providers/auth-session-provider/auth-session-provider';
