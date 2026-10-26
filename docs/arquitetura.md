@@ -161,8 +161,9 @@ main/factories monta tudo e é a única ponte entre presentation e infra
 
 | Módulo | Responsabilidade | Exporta pelo `index.ts` |
 |---|---|---|
-| `courses` | Catálogo, prévia pública, plano de estudo, painel do curso | rotas, query do catálogo |
-| `progress` | Estado do progresso, salvamento, backup, diário, resumo de estudos | hook de progresso, query de resumos, barra de backup, status de salvamento |
+| `courses` | Catálogo, página pública do curso, Começar e as telas de estudo (Hoje, Plano, Módulos, Projetos, Diário, Seus dados, Dia) | rotas, query do catálogo, resumo do curso |
+| `home` | Landing page | rotas |
+| `progress` | Estado do progresso, salvamento com revisão, backup, diário, entregas de projeto, resumo de estudos | hook de progresso, ações de backup, query de resumos, status de salvamento |
 | `auth` | Sessão, papel, login, logout, página de entrar | provider, hook de sessão, `RequireRole`, menu do usuário, rotas |
 | `profiles` | Meu perfil (abas Perfil, Estudos e Conta), página pública de professor, tema | rotas, `ThemeSync` |
 | `proposals` | Propor curso, minhas propostas, editar e retirar | rotas |
@@ -218,10 +219,9 @@ Os parâmetros do plano (semanas por mês, parcela de projeto, parcela de estudo
 
 ### Abrir um curso
 
-1. A rota `/cursos/:slug` carrega a página sob demanda.
-2. `useCourseDetailsQuery` chama o caso de uso `GetCourseBySlug`, que busca `/api/courses/:slug` e valida o conteúdo.
-3. Sem sessão, a página mostra a prévia (descrição, módulos e guia) com o botão **Entrar com GitHub para começar**.
-4. Com sessão, `useCourseProgress` carrega `/api/progress/:slug` e `useCourseDashboard` monta o plano (memorizado pela data de início) e os view models da tela.
+1. `/cursos/:slug` é a página pública do curso, igual para todos. `useCourseDetailsQuery` busca `/api/courses/:slug` e valida o conteúdo. A caixa "Monte o seu plano" calcula os dias e a data final para a data escolhida.
+2. Quem não está logado entra com o GitHub e volta para `/cursos/:slug/comecar`. Lá escolhe a data de início, vê o ritmo e pode baixar os horários em `.ics`.
+3. As telas de estudo ficam sob o layout `CourseStudyLayout` (`/cursos/:slug/hoje`, `plano`, `modulos/:id`, `projetos/:id`, `diario`, `dados`, `dia/:data`). Ele exige sessão, carrega curso, progresso e plano uma vez (`useCourseProgress` e `useCourseDashboard`, com o plano memorizado pela data de início), manda para o Começar quem ainda não tem data e entrega tudo às páginas pelo contexto do `Outlet`.
 
 ### Salvar
 
