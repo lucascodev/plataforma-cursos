@@ -15,7 +15,7 @@ export function TeacherProfilePage() {
     return (
       <PageStatus title="Perfil não encontrado">
         <p>
-          <Link to="/">Ver os cursos</Link>
+          <Link to="/cursos">Ver os cursos</Link>
         </p>
       </PageStatus>
     );

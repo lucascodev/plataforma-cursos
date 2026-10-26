@@ -2,7 +2,7 @@ import type { RouteObject } from 'react-router';
 
 export const coursesRoutes: RouteObject[] = [
   {
-    index: true,
+    path: 'cursos',
     lazy: async () => ({ Component: (await import('../pages/catalog-page/catalog-page')).CatalogPage }),
   },
   {

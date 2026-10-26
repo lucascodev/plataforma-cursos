@@ -1,45 +1,79 @@
 import { Link } from 'react-router';
+import { Button } from '@/shared/presentation/components/actions/button/button';
+import { EmptyState } from '@/shared/presentation/components/feedback/empty-state/empty-state';
 import { PageStatus } from '@/shared/presentation/components/feedback/page-status/page-status';
+import { Skeleton } from '@/shared/presentation/components/feedback/skeleton/skeleton';
 import { CourseCard } from '../../components/course-card/course-card';
-import { describeCourseFacts } from '../../formatters/describe-course-facts';
+import { CATALOG_LEVEL_OPTIONS } from '../../constants/catalog-level-options';
+import { useCatalogFilters } from '../../hooks/use-catalog-filters/use-catalog-filters';
 import { useCourseCatalogQuery } from '../../hooks/use-course-catalog-query/use-course-catalog-query';
 import styles from './catalog-page.module.css';
 
 export function CatalogPage() {
   const catalog = useCourseCatalogQuery();
+  const filters = useCatalogFilters(catalog.data ?? []);
 
-  if (catalog.isPending) return <PageStatus title="Carregando cursos…" />;
   if (catalog.isError) return <PageStatus title="Não foi possível carregar os cursos" />;
 
   return (
     <div className={styles.page}>
-      <header className={styles.header}>
-        <h1 className={styles.title}>Cursos</h1>
-        <p className={styles.lead}>
-          Cada curso tem plano diário, exercícios antes de cada projeto e um projeto prático por módulo. Entre com o GitHub para
-          começar: o progresso fica salvo na sua conta e aparece em qualquer aparelho.
-        </p>
-        <p className={styles.teach}>
-          Quer ensinar? <Link to="/propor-curso">Proponha um curso</Link> e, depois da aprovação, monte tudo pela plataforma.
-        </p>
-      </header>
-      {catalog.data.length === 0 ? (
-        <p>Nenhum curso publicado ainda.</p>
-      ) : (
-        <div className={styles.grid}>
-          {catalog.data.map((course) => (
-            <CourseCard
-              key={course.slug}
-              slug={course.slug}
-              title={course.title}
-              tagline={course.tagline}
-              level={course.level}
-              audience={course.audience}
-              facts={describeCourseFacts(course.totals).slice(0, 4)}
-            />
+      <title>Cursos</title>
+      <div className={styles.header}>
+        <div className={styles.heading}>
+          <h1 className={styles.title}>Cursos</h1>
+          <p className={styles.lead}>Todos gratuitos, com plano diário e um projeto prático por módulo.</p>
+        </div>
+        <label className={styles.search}>
+          Buscar curso
+          <span className={styles.searchBox}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" />
+              <path d="M20 20l-3.5-3.5" />
+            </svg>
+            <input type="search" value={filters.query} placeholder="Ex.: IA, Git, banco de dados" onChange={(event) => filters.setQuery(event.target.value)} />
+          </span>
+        </label>
+      </div>
+
+      <div className={styles.levels} role="group" aria-label="Filtrar por nível">
+        {CATALOG_LEVEL_OPTIONS.map((option) => (
+          <button
+            key={option.label}
+            type="button"
+            className={styles.level}
+            aria-pressed={filters.level === option.key}
+            onClick={() => filters.setLevel(option.key)}
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
+
+      {catalog.isPending ? (
+        <Skeleton height="420px" radius="md" />
+      ) : filters.visible.length > 0 ? (
+        <div className={styles.list}>
+          {filters.visible.map((course) => (
+            <CourseCard key={course.slug} course={course} />
           ))}
         </div>
+      ) : (
+        <EmptyState title={catalog.data.length === 0 ? 'Nenhum curso publicado ainda' : filters.emptyTitle} action={catalog.data.length > 0 ? <Button onClick={filters.clear}>Limpar filtros</Button> : null}>
+          <p>Qualquer pessoa pode propor um curso novo. Se a proposta for aprovada, ela vira professora e escreve o curso aqui mesmo.</p>
+        </EmptyState>
       )}
+
+      <aside className={styles.teach}>
+        <div>
+          <p className={styles.teachTitle}>Quer ensinar alguma coisa?</p>
+          <p className={styles.teachText}>
+            Mande uma proposta. Quem mantém a plataforma responde em até 7 dias; se aprovada, você escreve as aulas e a plataforma monta o plano diário.
+          </p>
+        </div>
+        <Link className={styles.teachLink} to="/propor-curso">
+          Propor um curso
+        </Link>
+      </aside>
     </div>
   );
 }

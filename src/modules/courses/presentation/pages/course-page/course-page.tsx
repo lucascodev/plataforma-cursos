@@ -16,7 +16,7 @@ export function CoursePage() {
     return (
       <PageStatus title={details.error instanceof CourseNotFoundError ? 'Curso não encontrado' : 'Não foi possível abrir o curso'}>
         <p>
-          <Link to="/">Ver todos os cursos</Link>
+          <Link to="/cursos">Ver todos os cursos</Link>
         </p>
       </PageStatus>
     );

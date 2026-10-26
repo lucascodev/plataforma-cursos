@@ -1,36 +1,151 @@
 .page {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 24px;
-  padding-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-top: 56px;
 }
 
 .header {
-  display: grid;
-  gap: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 640px;
 }
 
 .title {
   margin: 0;
-  font-size: clamp(34px, 6vw, 54px);
+  font-weight: 800;
+  font-size: clamp(36px, 5vw, 56px);
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 .lead {
   margin: 0;
-  max-width: 64ch;
+  font-size: 18px;
   color: var(--muted);
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 0 1 340px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--control-md);
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--muted);
+}
+
+.searchBox:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.searchBox input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: 15px;
+  color: var(--fg);
+}
+
+.levels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.level {
+  min-height: var(--control-sm);
+  padding: 0 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--fg);
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.level[aria-pressed='true'] {
+  border-color: var(--strong);
+  background: var(--strong);
+  color: var(--on-strong);
+  font-weight: 500;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .teach {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 28px 32px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-2xl);
+}
+
+.teach > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 640px;
+}
+
+.teachTitle {
   margin: 0;
-  font-size: 14px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.teachText {
+  margin: 0;
   color: var(--muted);
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-  gap: 14px;
+.teachLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-sm);
+  padding: 0 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--fg);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.teachLink:hover {
+  border-color: var(--accent);
+  color: var(--fg);
 }
