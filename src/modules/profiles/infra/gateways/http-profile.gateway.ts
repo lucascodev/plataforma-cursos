@@ -5,7 +5,7 @@ import type { UpdateMyProfileInputDto } from '../../application/dtos/update-my-p
 import type { ProfileGateway } from '../../application/ports/profile-gateway.interface';
 import type { AccountSettings } from '../../domain/entities/account-settings.entity';
 import type { MyProfile } from '../../domain/entities/my-profile.entity';
-import type { TeacherProfile } from '../../domain/entities/teacher-profile.entity';
+import type { TeacherProfile } from '../../domain/entities/teacher/teacher-profile.entity';
 import { PROFILE_API_PATHS } from '../constants/profile-api-paths';
 import { InvalidProfileResponseError } from '../errors/invalid-profile-response.error';
 import { accountSettingsResponseSchema } from '../schemas/account-settings-response.schema';

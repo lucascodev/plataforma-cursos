@@ -1,4 +1,4 @@
-import type { StudySummary } from '../../../domain/entities/study-summary.entity';
+import type { StudySummary } from '../../../domain/entities/studies/study-summary.entity';
 import { StatCard } from '../stat-card/stat-card';
 import styles from './study-stats.module.css';
 

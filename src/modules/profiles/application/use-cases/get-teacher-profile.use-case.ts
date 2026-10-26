@@ -1,4 +1,4 @@
-import type { TeacherProfile } from '../../domain/entities/teacher-profile.entity';
+import type { TeacherProfile } from '../../domain/entities/teacher/teacher-profile.entity';
 import type { ProfileGateway } from '../ports/profile-gateway.interface';
 
 export class GetTeacherProfileUseCase {

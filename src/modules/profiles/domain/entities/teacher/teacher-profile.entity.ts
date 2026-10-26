@@ -1,4 +1,4 @@
-import type { ProfileLink } from './profile-link.entity';
+import type { ProfileLink } from '../profile-link.entity';
 import type { TeacherCourse } from './teacher-course.entity';
 
 export interface TeacherProfile {

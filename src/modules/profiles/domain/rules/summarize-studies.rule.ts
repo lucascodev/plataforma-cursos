@@ -1,7 +1,7 @@
-import type { StudyCourseInfo } from '../entities/study-course-info.entity';
-import type { StudyCourseSummary } from '../entities/study-course-summary.entity';
-import type { StudyProgressInfo } from '../entities/study-progress-info.entity';
-import type { StudySummary } from '../entities/study-summary.entity';
+import type { StudyCourseInfo } from '../entities/studies/study-course-info.entity';
+import type { StudyCourseSummary } from '../entities/studies/study-course-summary.entity';
+import type { StudyProgressInfo } from '../entities/studies/study-progress-info.entity';
+import type { StudySummary } from '../entities/studies/study-summary.entity';
 
 const PROJECT_SUFFIX = '-cp';
 
