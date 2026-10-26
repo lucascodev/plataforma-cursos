@@ -10,7 +10,7 @@ export function HomePage() {
   return (
     <div data-layout="full">
       <title>{home.site.name}</title>
-      <HomeHero todaySample={home.todaySample} />
+      <HomeHero todaySample={home.todaySample} account={home.account} />
       <HowItWorks />
       {home.featured ? <FeaturedCourse course={home.featured} /> : null}
       <ProgressPromises />
