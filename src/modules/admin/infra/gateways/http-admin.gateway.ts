@@ -1,5 +1,5 @@
 import { HttpRequestError } from '@/shared/application/errors/http-request.error';
-import type { HttpClient } from '@/shared/application/ports/http-client.interface';
+import type { HttpClient } from '@/shared/application/ports/http/http-client.interface';
 import type { z } from 'zod';
 import type { ApproveProposalInputDto } from '../../application/dtos/approve-proposal-input.dto';
 import type { DecideProposalInputDto } from '../../application/dtos/decide-proposal-input.dto';

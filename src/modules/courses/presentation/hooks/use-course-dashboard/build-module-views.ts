@@ -1,4 +1,4 @@
-import { formatMonthYear } from '@/shared/utils/date/format-month-year';
+import { formatMonthYear } from '@/shared/utils/date/format/format-month-year';
 import type { CourseProgress } from '@/modules/progress';
 import type { Course } from '../../../domain/entities/course/course.entity';
 import type { StudyPlan } from '../../../domain/entities/plan/study-plan.entity';

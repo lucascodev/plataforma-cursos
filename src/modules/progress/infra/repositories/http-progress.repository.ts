@@ -1,6 +1,6 @@
 import { SessionExpiredError } from '@/shared/application/errors/session-expired.error';
-import type { HttpClient } from '@/shared/application/ports/http-client.interface';
-import type { HttpRequest } from '@/shared/application/ports/http-request.type';
+import type { HttpClient } from '@/shared/application/ports/http/http-client.interface';
+import type { HttpRequest } from '@/shared/application/ports/http/http-request.type';
 import type { CourseProgress } from '../../domain/entities/course-progress.entity';
 import type { ProgressSummary } from '../../domain/entities/progress-summary.entity';
 import { ProgressStorageError } from '../../domain/errors/progress-storage.error';

@@ -1,9 +1,9 @@
 import type { CourseProgress } from '@/modules/progress';
 import type { DateKey } from '@/shared/domain/types/date-key.type';
-import { dayOfWeek } from '@/shared/utils/date/day-of-week';
-import { formatDayMonth } from '@/shared/utils/date/format-day-month';
-import { WEEKDAY_LONG_NAMES } from '@/shared/utils/date/weekday-long-names';
-import { WEEKDAY_SHORT_NAMES } from '@/shared/utils/date/weekday-short-names';
+import { dayOfWeek } from '@/shared/utils/date/calendar/day-of-week';
+import { formatDayMonth } from '@/shared/utils/date/format/format-day-month';
+import { WEEKDAY_LONG_NAMES } from '@/shared/utils/date/names/weekday-long-names';
+import { WEEKDAY_SHORT_NAMES } from '@/shared/utils/date/names/weekday-short-names';
 import type { Course } from '../../../domain/entities/course/course.entity';
 import type { StudyPlan } from '../../../domain/entities/plan/study-plan.entity';
 import { describeStudyDay } from '../../formatters/describe-study-day';

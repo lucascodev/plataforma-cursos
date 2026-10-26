@@ -1,5 +1,5 @@
 import { HttpRequestError } from '@/shared/application/errors/http-request.error';
-import type { HttpClient } from '@/shared/application/ports/http-client.interface';
+import type { HttpClient } from '@/shared/application/ports/http/http-client.interface';
 import type { z } from 'zod';
 import type { UpdateMyProfileInputDto } from '../../application/dtos/update-my-profile-input.dto';
 import type { ProfileGateway } from '../../application/ports/profile-gateway.interface';

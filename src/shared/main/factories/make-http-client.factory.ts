@@ -1,4 +1,4 @@
-import type { HttpClient } from '@/shared/application/ports/http-client.interface';
+import type { HttpClient } from '@/shared/application/ports/http/http-client.interface';
 import { FetchHttpClient } from '@/shared/infra/http/fetch-http-client';
 
 let client: HttpClient | null = null;

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { HttpRequestError } from '@/shared/application/errors/http-request.error';
 import { SessionExpiredError } from '@/shared/application/errors/session-expired.error';
-import type { HttpClient } from '@/shared/application/ports/http-client.interface';
-import type { HttpRequest } from '@/shared/application/ports/http-request.type';
+import type { HttpClient } from '@/shared/application/ports/http/http-client.interface';
+import type { HttpRequest } from '@/shared/application/ports/http/http-request.type';
 import { InvalidAuthResponseError } from '../errors/invalid-auth-response.error';
 import { HttpAuthGateway } from './http-auth.gateway';
 

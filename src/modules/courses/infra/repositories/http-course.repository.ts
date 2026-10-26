@@ -1,5 +1,5 @@
 import { HttpRequestError } from '@/shared/application/errors/http-request.error';
-import type { HttpClient } from '@/shared/application/ports/http-client.interface';
+import type { HttpClient } from '@/shared/application/ports/http/http-client.interface';
 import type { Course } from '../../domain/entities/course/course.entity';
 import type { CourseRepository } from '../../domain/repositories/course.repository';
 import { COURSE_API_PATHS } from '../constants/course-api-paths';

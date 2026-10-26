@@ -1,6 +1,6 @@
 import type { DateKey } from '@/shared/domain/types/date-key.type';
-import { addDays } from '@/shared/utils/date/add-days';
-import { dayOfWeek } from '@/shared/utils/date/day-of-week';
+import { addDays } from '@/shared/utils/date/calendar/add-days';
+import { dayOfWeek } from '@/shared/utils/date/calendar/day-of-week';
 import type { Course } from '../../entities/course/course.entity';
 import type { ModuleDateRange } from '../../entities/plan/module-date-range.entity';
 import type { StudyDay } from '../../entities/plan/study-day.entity';

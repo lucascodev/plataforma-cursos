@@ -1,5 +1,5 @@
 import type { DateKey } from '@/shared/domain/types/date-key.type';
-import { daysBetween } from '@/shared/utils/date/days-between';
+import { daysBetween } from '@/shared/utils/date/calendar/days-between';
 
 const AVERAGE_DAYS_PER_MONTH = 30.44;
 

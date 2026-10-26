@@ -1,8 +1,8 @@
 import { useEffect, useMemo } from 'react';
 import type { CourseProgressState, JournalExport } from '@/modules/progress';
 import { makeClock } from '@/shared/main/factories/make-clock.factory';
-import { formatDayMonth } from '@/shared/utils/date/format-day-month';
-import { formatFullDate } from '@/shared/utils/date/format-full-date';
+import { formatDayMonth } from '@/shared/utils/date/format/format-day-month';
+import { formatFullDate } from '@/shared/utils/date/format/format-full-date';
 import { isDateKey } from '@contracts/date/is-date-key';
 import { pluralize } from '@/shared/utils/text/pluralize';
 import type { CourseDetailsOutputDto } from '../../../application/dtos/get-course-by-slug/course-details-output.dto';
