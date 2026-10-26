@@ -99,10 +99,10 @@ export function PrivacyPage() {
               <strong>Corrigir seus dados:</strong> nome, texto e links ficam em <em>Meu perfil</em>; tema e avisos, em <em>Conta</em>.
             </li>
             <li>
-              <strong>Ver e levar seus dados:</strong> na página de cada curso, use <em>Exportar backup</em> (arquivo JSON) ou <em>Exportar diário</em>.
+              <strong>Ver e levar seus dados:</strong> em <em>Seus dados</em>, dentro de cada curso, use <em>Exportar backup</em> (arquivo JSON) ou <em>Exportar diário</em>.
             </li>
             <li>
-              <strong>Apagar:</strong> na página de cada curso, use <em>Apagar meu progresso</em>. A exclusão é imediata e definitiva.
+              <strong>Apagar:</strong> em <em>Seus dados</em>, dentro de cada curso, use <em>Apagar meu progresso</em>. A exclusão é imediata e definitiva.
             </li>
             <li>
               <strong>Revogar o acesso do GitHub:</strong> em GitHub, abra Settings, depois Applications, depois Authorized OAuth Apps, e remova o
