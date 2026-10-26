@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { courseSlugSchema } from './course-slug.schema';
+import { httpsUrlSchema } from './https-url.schema';
 import { profileCardSchema } from './profile-card.schema';
 import { proposalStatusSchema } from './proposal-status.schema';
 import { timestampSchema } from './timestamp.schema';
@@ -14,7 +15,7 @@ export const proposalSchema = z.object({
   language: z.string().max(5),
   outline: z.array(z.string().max(120)).max(30),
   experience: z.string().max(2000),
-  sampleUrl: z.string().max(300).nullable(),
+  sampleUrl: httpsUrlSchema.nullable(),
   suggestedSlug: courseSlugSchema.nullable(),
   reviewNote: z.string().max(2000).nullable(),
   reviewedAt: timestampSchema.nullable(),

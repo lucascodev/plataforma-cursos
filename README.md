@@ -28,7 +28,7 @@ O site é uma SPA em React. Tudo o que envolve dados passa pelas rotas `/api/*`,
 Requisitos: Node 24 (ou 22.22 ou mais novo), pnpm (a versão fica em `packageManager`, no `package.json`) e um projeto no Supabase configurado como em [docs/configurando-contas.md](docs/configurando-contas.md).
 
 ```bash
-git clone https://github.com/SEU-USUARIO/plataforma-cursos.git
+git clone https://github.com/lucascodev/plataforma-cursos.git
 cd plataforma-cursos
 pnpm install
 cp .dev.vars.example .dev.vars   # preencha com a URL e a chave publicável
