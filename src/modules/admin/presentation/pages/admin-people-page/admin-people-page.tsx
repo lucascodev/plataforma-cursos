@@ -5,6 +5,7 @@ import { PageStatus } from '@/shared/presentation/components/feedback/page-statu
 import { SelectField } from '@/shared/presentation/components/form/select-field/select-field';
 import { TextField } from '@/shared/presentation/components/form/text-field/text-field';
 import type { AdminRole } from '../../../domain/types/admin-role.type';
+import type { PeopleFilter } from '../../../domain/types/people-filter.type';
 import { PersonRow } from '../../components/person-row/person-row';
 import { ROLE_LABELS } from '../../formatters/describe-role';
 import { useAdminPeopleQuery } from '../../hooks/use-admin-people-query/use-admin-people-query';
@@ -12,8 +13,9 @@ import styles from '../../styles/admin-page.module.css';
 
 const PAGE_SIZE = 50;
 const ROLES = Object.keys(ROLE_LABELS) as AdminRole[];
-const ROLE_OPTIONS = [{ value: '', label: 'Todos' }, ...ROLES.map((role) => ({ value: role, label: ROLE_LABELS[role] }))];
-const readRole = (value: string | null): AdminRole | null => ((ROLES as (string | null)[]).includes(value) ? (value as AdminRole) : null);
+const ROLE_OPTIONS = [{ value: '', label: 'Todos' }, ...ROLES.map((role) => ({ value: role, label: ROLE_LABELS[role] })), { value: 'blocked', label: 'Bloqueadas' }];
+const FILTERS: readonly PeopleFilter[] = [...ROLES, 'blocked'];
+const readRole = (value: string | null): PeopleFilter | null => FILTERS.find((filter) => filter === value) ?? null;
 
 export function AdminPeoplePage() {
   const [params, setParams] = useSearchParams();
@@ -38,7 +40,7 @@ export function AdminPeoplePage() {
       <h1 className={styles.title}>Pessoas e papéis</h1>
       <p className={styles.lead}>
         O papel decide o que cada pessoa pode fazer. A aprovação de uma proposta já torna a pessoa professora; aqui ficam os ajustes
-        manuais. E-mails nunca aparecem nesta tela.
+        manuais e a conta (sessões, bloqueio, exclusão). E-mails, anotações e diário nunca aparecem nesta tela.
       </p>
       <form
         className={styles.toolbar}
@@ -61,7 +63,7 @@ export function AdminPeoplePage() {
         <>
           <ul className={styles.list}>
             {people.data.items.map((person) => (
-              <PersonRow key={`${person.id}:${person.role}`} person={person} />
+              <PersonRow key={`${person.id}:${person.role}:${person.blockedAt ?? ''}`} person={person} />
             ))}
           </ul>
           <div className={styles.pager}>

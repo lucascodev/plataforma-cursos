@@ -7,7 +7,9 @@ import { describeVersionStatus } from '../../formatters/describe-version-status'
 import { formatDateTime } from '../../formatters/format-date-time';
 import { useVersionReview } from '../../hooks/use-version-review/use-version-review';
 import pageStyles from '../../styles/admin-page.module.css';
+import { Dialog } from '@/shared/presentation/components/overlay/dialog/dialog';
 import { PersonChip } from '../person-chip/person-chip';
+import { VersionImpact } from '../version-impact/version-impact';
 import { VersionHistory } from '../version-history/version-history';
 import styles from './version-review.module.css';
 
@@ -75,6 +77,15 @@ export function VersionReview({ detail }: { readonly detail: AdminVersionDetail 
         ) : null}
       </section>
 
+      {detail.publishedContent ? (
+        <section className={styles.card} aria-labelledby="efeito">
+          <h2 id="efeito" className={styles.heading}>
+            Efeito em quem já estuda
+          </h2>
+          <VersionImpact versionId={version.id} />
+        </section>
+      ) : null}
+
       <section className={styles.card} aria-labelledby="checagem">
         <h2 id="checagem" className={styles.heading}>
           Checagem automática
@@ -111,7 +122,7 @@ export function VersionReview({ detail }: { readonly detail: AdminVersionDetail 
               onChange={(event) => review.setReleaseNote(event.target.value)}
             />
             <div>
-              <Button tone="primary" size="md" disabled={!review.canPublish || review.isBusy} onClick={review.publish}>
+              <Button tone="primary" size="md" disabled={!review.canPublish || review.isBusy} onClick={review.askPublish}>
                 Publicar versão {version.semver}
               </Button>
             </div>
@@ -146,6 +157,27 @@ export function VersionReview({ detail }: { readonly detail: AdminVersionDetail 
       {review.failureMessage ? <Notice tone="warning">{review.failureMessage}</Notice> : null}
 
       <VersionHistory slug={course.slug} currentId={version.id} />
+
+      <Dialog
+        open={review.isConfirmingPublish}
+        title={`Publicar ${course.title} ${version.semver ?? ''}?`}
+        description={
+          detail.publishedContent
+            ? 'A versão no ar fica guardada no histórico, de onde dá para restaurar. O plano de quem estuda é recalculado no próximo acesso.'
+            : 'O curso entra no catálogo com esta versão.'
+        }
+        onClose={review.cancelPublish}
+        actions={
+          <>
+            <Button size="md" onClick={review.cancelPublish}>
+              Cancelar
+            </Button>
+            <Button size="md" tone="primary" isLoading={review.isBusy} onClick={review.publish}>
+              Publicar agora
+            </Button>
+          </>
+        }
+      />
     </>
   );
 }

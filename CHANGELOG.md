@@ -6,6 +6,14 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 
 ### Adicionado
 
+- Visão geral do admin com a fila "Precisa de você" (propostas, versões para revisar e avisos, mais antigos primeiro), a atividade recente e contadores no menu.
+- Cursos no admin com busca, filtros por situação, motivo e nota ao tirar do catálogo, transferência só para quem já é professor e exclusão com confirmação digitada.
+- Revisão de versão com o efeito em quem já estuda (quantas pessoas concluíram cada aula que sai) e confirmação antes de publicar.
+- Propostas no admin mostram nível, duração e o aceite dos compromissos; o endereço do curso é conferido antes de aprovar.
+- Pessoas e papéis com último acesso, cursos em estudo e a ação Conta: encerrar sessões, bloquear e excluir. Ninguém muda o próprio papel.
+- Página de avisos sobre perfis (`/admin/avisos`) para resolver ou arquivar.
+- Histórico com filtros por cursos, propostas e pessoas.
+
 - Área do professor (`/professor`): os cursos de cada professor, com a versão publicada, a versão aberta e números somados (pessoas estudando, ativas na semana, projetos entregues, concluintes e em que módulo estão). Qualquer número abaixo de 5 aparece como "menos de 5".
 - Editor de curso (`/professor/cursos/<curso>/editar`) com as abas Informações, Módulos e aulas, Guia e Ritmo e plano, salvamento automático, aviso de conflito entre abas, checagem automática com o mesmo schema do site e a lista do que muda em relação à versão publicada.
 - Versões de curso: o professor envia a versão para revisão, a equipe publica ou pede ajustes por pontos, e a versão anterior continua no ar até a nova ser publicada. Admin pode restaurar uma versão antiga como rascunho. Regras em `docs/versoes-de-curso.md`.
@@ -76,6 +84,10 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 - Rotas sem `#` (`/cursos/<slug>` em vez de `#/cursos/<slug>`).
 - Cursos saem de `content/courses/` e passam a ficar em `supabase/seed/courses/`; schemas compartilhados vão para `contracts/`.
 - A varredura do build falha também com chave publicável ou URL do Supabase no `dist/`.
+
+### Corrigido
+
+- O histórico do admin deixava de carregar assim que aparecia uma ação nova (versões, contas ou avisos).
 
 ### Removido
 

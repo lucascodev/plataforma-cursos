@@ -13,6 +13,18 @@ export const auditActionSchema = z.enum([
   'course.listed',
   'course.unlisted',
   'course.deleted',
+  'version.submitted',
+  'version.withdrawn',
+  'version.changes_requested',
+  'version.published',
+  'version.restored',
+  'account.deleted',
+  'account.sessions_ended',
+  'account.blocked',
+  'account.unblocked',
+  'profile.reported',
+  'report.resolved',
+  'report.dismissed',
 ]);
 
 export const auditEntrySchema = z.object({

@@ -19,4 +19,13 @@ export const ADMIN_ERROR_MESSAGES: ProblemMessages = {
   'version-not-restorable': [409, 'Só versões que já foram publicadas podem ser restauradas.'],
   'open-version-exists': [409, 'Já existe uma versão aberta deste curso. Publique, peça ajustes ou espere ela ser retirada antes.'],
   'review-items-required': [422, 'Liste pelo menos um ponto para ajustar.'],
+  'cannot-change-own-role': [409, 'Ninguém muda o próprio papel. Peça a outra pessoa admin.'],
+  'owner-not-teacher': [409, 'O curso só pode ir para alguém que já é professor. Mude o papel da pessoa antes.'],
+  'cannot-manage-self': [409, 'Use a sua própria aba Conta para isso.'],
+  'cannot-block-admin': [409, 'Uma pessoa admin não pode ser bloqueada. Mude o papel dela antes.'],
+  'cannot-delete-admin': [409, 'A conta de uma pessoa admin não pode ser excluída por aqui. Mude o papel dela antes.'],
+  'invalid-unlist-reason': [422, 'Escolha o motivo.'],
+  'note-too-long': [422, 'Use até 500 letras na nota.'],
+  'report-not-found': [404, 'Aviso não encontrado.'],
+  'report-closed': [409, 'Este aviso já foi tratado.'],
 };

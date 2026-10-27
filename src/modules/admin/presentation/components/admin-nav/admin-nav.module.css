@@ -23,6 +23,10 @@
 }
 
 .link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   padding: 8px 10px;
   border-radius: var(--radius-small);
   color: #cfe3df;
@@ -33,6 +37,17 @@
 .link:hover {
   background: #22332f;
   color: #ffffff;
+}
+
+.count {
+  min-width: 22px;
+  padding: 0 7px;
+  border-radius: 999px;
+  background: #fbefd9;
+  color: #6b4600;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
 }
 
 .active {

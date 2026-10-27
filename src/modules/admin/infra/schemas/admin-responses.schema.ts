@@ -1,4 +1,8 @@
 import { adminCourseSchema } from '@contracts/admin/admin-course.schema';
+import { adminNavBadgesSchema } from '@contracts/admin/admin-nav-badges.schema';
+import { adminReportSchema } from '@contracts/admin/admin-report.schema';
+import { attentionItemSchema } from '@contracts/admin/attention-item.schema';
+import { versionImpactSchema } from '@contracts/admin/version-impact.schema';
 import { adminOverviewSchema } from '@contracts/admin/admin-overview.schema';
 import { adminPersonListSchema } from '@contracts/admin/admin-person-list.schema';
 import { adminVersionDetailSchema } from '@contracts/admin/admin-version-detail.schema';
@@ -20,4 +24,9 @@ export const adminResponses = {
   audit: auditPageSchema,
   versions: z.object({ versions: z.array(courseVersionSchema).max(500) }),
   version: adminVersionDetailSchema,
+  badges: z.object({ badges: adminNavBadgesSchema }),
+  attention: z.object({ items: z.array(attentionItemSchema).max(30) }),
+  slug: z.object({ available: z.boolean() }),
+  impact: z.object({ impact: versionImpactSchema }),
+  reports: z.object({ reports: z.array(adminReportSchema).max(200) }),
 };

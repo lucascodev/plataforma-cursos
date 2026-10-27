@@ -1,7 +1,7 @@
-import type { AdminRole } from '../../domain/types/admin-role.type';
+import type { PeopleFilter } from '../../domain/types/people-filter.type';
 
 export interface ListPeopleInputDto {
   readonly query: string;
-  readonly role: AdminRole | null;
+  readonly role: PeopleFilter | null;
   readonly page: number;
 }

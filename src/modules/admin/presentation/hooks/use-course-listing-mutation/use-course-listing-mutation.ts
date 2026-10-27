@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import type { SetCourseListedInputDto } from '../../../application/dtos/set-course-listed-input.dto';
 import { makeSetCourseListed } from '../../../main/factories/courses/make-set-course-listed.factory';
 import { adminQueryKeys } from '../../query-keys/admin-query-keys';
 
@@ -6,7 +7,7 @@ import { adminQueryKeys } from '../../query-keys/admin-query-keys';
 export function useCourseListingMutation() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ slug, listed }: { slug: string; listed: boolean }) => makeSetCourseListed().execute(slug, listed),
+    mutationFn: (input: SetCourseListedInputDto) => makeSetCourseListed().execute(input),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: adminQueryKeys.all });
     },

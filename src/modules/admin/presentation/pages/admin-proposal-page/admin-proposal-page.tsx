@@ -6,6 +6,8 @@ import { ExternalLink } from '@/shared/presentation/components/navigation/extern
 import { PersonChip } from '../../components/person-chip/person-chip';
 import { ProposalReviewPanel } from '../../components/proposal-review-panel/proposal-review-panel';
 import { describeProposalStatus } from '../../formatters/describe-proposal-status';
+import { describeProposalDuration } from '../../formatters/describe-proposal-duration';
+import { describeProposalLevel } from '../../formatters/describe-proposal-level';
 import { formatDateTime } from '../../formatters/format-date-time';
 import { useAdminProposalQuery } from '../../hooks/use-admin-proposal-query/use-admin-proposal-query';
 import styles from '../../styles/admin-page.module.css';
@@ -38,6 +40,16 @@ export function AdminProposalPage() {
         <dd>{current.summary}</dd>
         <dt>Para quem é</dt>
         <dd>{current.audience}</dd>
+        <dt>Nível e duração</dt>
+        <dd>
+          {describeProposalLevel(current.level)} · {describeProposalDuration(current.duration)}
+        </dd>
+        <dt>Compromissos</dt>
+        <dd>
+          {current.commitmentsAcceptedAt
+            ? `Aceitou os três (licença aberta, projetos sem custo e revisão de cada versão) em ${formatDateTime(current.commitmentsAcceptedAt)}.`
+            : 'Proposta enviada antes do aceite dos compromissos.'}
+        </dd>
         <dt>Módulos previstos</dt>
         <dd>
           <ol>
