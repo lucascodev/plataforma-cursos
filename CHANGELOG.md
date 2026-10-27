@@ -69,6 +69,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 
 ### Alterado
 
+- A licença CC BY 4.0 do conteúdo vale para os cursos publicados na plataforma, cada um de quem o escreveu, e não mais só para a pasta do curso de exemplo.
 - Ícones do Lucide em todo o site.
 - A landing mostra "Meus estudos" em vez de "Entrar com GitHub" para quem já está logado.
 

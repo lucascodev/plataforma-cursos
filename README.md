@@ -95,6 +95,6 @@ O site segue Clean Architecture por módulo (`domain`, `application`, `infra`, `
 ## Licenças
 
 - Código: [MIT](LICENSE).
-- Conteúdo dos cursos (`supabase/seed/courses/`): [CC BY 4.0](LICENSE-CONTENT). Pode copiar, adaptar e redistribuir, inclusive comercialmente, desde que dê o crédito.
+- Conteúdo dos cursos publicados na plataforma e o curso de exemplo de `supabase/seed/courses/`: [CC BY 4.0](LICENSE-CONTENT). Pode copiar, adaptar e redistribuir, inclusive comercialmente, desde que dê o crédito a quem escreveu o curso.
 
 Os cursos indicam materiais de terceiros (livros, vídeos, cursos pagos). Esses materiais têm licenças próprias e não fazem parte deste repositório.
