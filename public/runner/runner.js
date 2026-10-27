@@ -168,6 +168,7 @@
 
     var RUNNERS = { python: runPython, javascript: runJavascript, sql: runSql };
 
+    // A dedicated Worker only hears from the page that created it, so there is no origin to check here.
     self.onmessage = async function (event) {
       var data = event.data || {};
       if (data.type === 'init') {
@@ -192,7 +193,7 @@
   }
 
   function reply(id, result) {
-    window.parent.postMessage({ type: 'runner-result', id: id, result: result }, '*');
+    window.parent.postMessage({ type: 'runner-result', id: id, result: result }, ORIGIN);
   }
 
   function run(id, job) {
@@ -226,12 +227,13 @@
   }
 
   window.addEventListener('message', function (event) {
-    if (event.source !== window.parent) return;
+    // Only the site itself drives the runner; frame-ancestors 'self' already keeps other sites from embedding it.
+    if (event.source !== window.parent || event.origin !== ORIGIN) return;
     var data = event.data || {};
     if (data.type === 'runner-run' && data.job && Object.prototype.hasOwnProperty.call({ python: 1, javascript: 1, sql: 1 }, data.job.language)) {
       run(data.id, data.job);
     }
   });
 
-  window.parent.postMessage({ type: 'runner-ready' }, '*');
+  window.parent.postMessage({ type: 'runner-ready' }, ORIGIN);
 })();
