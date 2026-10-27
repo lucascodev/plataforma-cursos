@@ -8,4 +8,16 @@ export type AuditAction =
   | 'course.owner_changed'
   | 'course.listed'
   | 'course.unlisted'
-  | 'course.deleted';
+  | 'course.deleted'
+  | 'version.submitted'
+  | 'version.withdrawn'
+  | 'version.changes_requested'
+  | 'version.published'
+  | 'version.restored'
+  | 'account.deleted'
+  | 'account.sessions_ended'
+  | 'account.blocked'
+  | 'account.unblocked'
+  | 'profile.reported'
+  | 'report.resolved'
+  | 'report.dismissed';
