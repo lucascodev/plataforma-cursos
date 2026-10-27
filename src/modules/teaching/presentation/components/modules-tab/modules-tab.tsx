@@ -88,6 +88,7 @@ export function ModulesTab({ course, publishedContent, update }: ModulesTabProps
       {module ? (
         <ModuleForm
           key={module.id}
+          courseSlug={course.slug}
           module={module}
           code={`M${index + 1}`}
           onChange={setModule}

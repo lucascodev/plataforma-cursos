@@ -46,4 +46,11 @@ describe('HttpTeachingGateway', () => {
     const { gateway } = gatewayWith(() => ({ stats: { students: 2 } }));
     await expect(gateway.getStats('curso')).rejects.toBeInstanceOf(InvalidTeachingResponseError);
   });
+
+  it('lists and registers lab completion codes', async () => {
+    const { gateway, requests } = gatewayWith((request) => (request.method === 'PUT' ? undefined : { codes: { 'm1-t3': 'LAB-AB12CD34' } }));
+    expect(await gateway.listLabCodes('curso')).toEqual({ 'm1-t3': 'LAB-AB12CD34' });
+    await gateway.setLabCode({ slug: 'curso', itemKey: 'm1-t3', code: '' });
+    expect(requests[1]).toEqual({ method: 'PUT', path: '/api/teaching/courses/curso/lab-codes/m1-t3', body: { code: '' } });
+  });
 });

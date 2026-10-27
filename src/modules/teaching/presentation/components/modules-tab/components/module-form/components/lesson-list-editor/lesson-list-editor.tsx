@@ -3,21 +3,25 @@ import { Button } from '@/shared/presentation/components/actions/button/button';
 import { TextAreaField } from '@/shared/presentation/components/form/text-area-field/text-area-field';
 import { TextField } from '@/shared/presentation/components/form/text-field/text-field';
 import type { EditableLesson } from '../../../../../../../domain/entities/draft/editable-module.entity';
+import { lessonItemKey } from '../../../../../../../domain/rules/exercise/lesson-item-key.rule';
 import { moveEntry } from '../../../../../../../domain/rules/list/move-entry.rule';
 import { replaceEntry } from '../../../../../../../domain/rules/list/replace-entry.rule';
 import styles from '../../../../../../styles/editor.module.css';
+import { ExerciseEditor } from '../../../../../exercise-editor/exercise-editor';
 import { ItemActions } from '../../../../../item-actions/item-actions';
 
 const MAX_LESSONS = 40;
 
 interface LessonListEditorProps {
+  readonly courseSlug: string;
+  readonly moduleId: string;
   readonly lessons: readonly EditableLesson[];
   readonly onChange: (lessons: EditableLesson[]) => void;
   readonly onAdd: () => void;
   readonly onRemove: (index: number) => void;
 }
 
-export function LessonListEditor({ lessons, onChange, onAdd, onRemove }: LessonListEditorProps) {
+export function LessonListEditor({ courseSlug, moduleId, lessons, onChange, onAdd, onRemove }: LessonListEditorProps) {
   const setLesson = (index: number, patch: Partial<EditableLesson>) => {
     const lesson = lessons[index];
     if (lesson) onChange(replaceEntry(lessons, index, { ...lesson, ...patch }));
@@ -46,15 +50,11 @@ export function LessonListEditor({ lessons, onChange, onAdd, onRemove }: LessonL
             </div>
             <TextField label="Título" value={lesson.title} maxLength={120} onChange={(event) => setLesson(index, { title: event.target.value })} />
             <TextAreaField label="Resumo" rows={3} value={lesson.summary} maxLength={600} onChange={(event) => setLesson(index, { summary: event.target.value })} />
-            <TextAreaField
-              label="Exercício"
-              rows={3}
-              value={typeof lesson.exercise === 'string' ? lesson.exercise : lesson.exercise.prompt}
-              maxLength={800}
-              hint="O que a pessoa faz para fixar a aula."
-              onChange={(event) =>
-                setLesson(index, { exercise: typeof lesson.exercise === 'string' ? event.target.value : { ...lesson.exercise, prompt: event.target.value } })
-              }
+            <ExerciseEditor
+              exercise={lesson.exercise}
+              courseSlug={courseSlug}
+              itemKey={lessonItemKey(moduleId, lesson.id ?? '')}
+              onChange={(exercise) => setLesson(index, { exercise })}
             />
           </li>
         ))}
