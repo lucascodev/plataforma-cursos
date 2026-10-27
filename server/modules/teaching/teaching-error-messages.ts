@@ -12,4 +12,6 @@ export const TEACHING_ERROR_MESSAGES: ProblemMessages = {
   'review-item-not-found': [404, 'Ajuste não encontrado.'],
   'invalid-content': [422, 'O conteúdo do rascunho é inválido.'],
   'invalid-version-kind': [422, 'Escolha o tipo da versão.'],
+  'invalid-lab-code': [422, 'O código tem o formato LAB-XXXXXXXX.'],
+  'invalid-lab-item': [422, 'Laboratório inválido.'],
 };
