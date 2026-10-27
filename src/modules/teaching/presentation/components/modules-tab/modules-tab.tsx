@@ -31,7 +31,7 @@ function describeRemoval(removal: Removal, module: EditableModule, published: Re
     return {
       title: `Remover "${module.title || module.id}"?`,
       text: isPublished
-        ? 'O módulo está publicado. Quando esta versão sair, quem marcou aulas dele como feitas perde essas marcas.'
+        ? 'O módulo está publicado. Quando esta versão sair, as aulas que as pessoas concluíram nele deixam de contar no progresso.'
         : 'O módulo ainda não foi publicado, então ninguém perde progresso.',
       confirm: 'Remover módulo',
     };
@@ -40,8 +40,8 @@ function describeRemoval(removal: Removal, module: EditableModule, published: Re
   const isLesson = removal.kind === 'lesson';
   const isPublished = item ? published.has(`${module.id}-${item.id}`) : false;
   const publishedText = isLesson
-    ? 'Esta aula já está publicada. Quando esta versão sair, quem marcou a aula como feita perde essa marca.'
-    : 'Este exercício já está publicado. Quando esta versão sair, quem marcou o exercício como feito perde essa marca.';
+    ? 'Esta aula já está publicada. Quando esta versão sair, ela deixa de contar no progresso de quem já a concluiu.'
+    : 'Este exercício já está publicado. Quando esta versão sair, ele deixa de contar no progresso de quem já o concluiu.';
   return {
     title: `Remover "${item?.title || (isLesson ? 'aula' : 'exercício')}"?`,
     text: isPublished ? publishedText : 'Ainda não foi publicado, então ninguém perde progresso.',

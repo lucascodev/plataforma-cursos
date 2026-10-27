@@ -70,7 +70,7 @@ export function VersionReview({ detail }: { readonly detail: AdminVersionDetail 
         {review.diff.removedItemKeys.length > 0 ? (
           <Notice tone="warning">
             {review.diff.removedItemKeys.length} {review.diff.removedItemKeys.length === 1 ? 'aula ou exercício publicado sai' : 'aulas ou exercícios publicados saem'}.
-            Quem marcou como feito perde essas marcas.
+            Para quem já concluiu, esses itens deixam de contar no progresso.
           </Notice>
         ) : null}
       </section>

@@ -24,7 +24,7 @@ export function ChangesPanel({ diff, isFirstVersion }: ChangesPanelProps) {
       {diff.removedItemKeys.length > 0 ? (
         <p className={styles.note}>
           {diff.removedItemKeys.length} {diff.removedItemKeys.length === 1 ? 'aula ou exercício publicado sai' : 'aulas ou exercícios publicados saem'} nesta
-          versão. Quem marcou como feito perde essas marcas.
+          versão. Para quem já concluiu, eles deixam de contar no progresso.
         </p>
       ) : null}
     </section>
