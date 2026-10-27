@@ -5,6 +5,7 @@ import type { ApproveProposalInputDto } from '../../application/dtos/approve-pro
 import type { DecideProposalInputDto } from '../../application/dtos/decide-proposal-input.dto';
 import type { ListPeopleInputDto } from '../../application/dtos/list-people-input.dto';
 import type { ListProposalsInputDto } from '../../application/dtos/list-proposals-input.dto';
+import type { PublishVersionInputDto } from '../../application/dtos/publish-version-input.dto';
 import type { AdminGateway } from '../../application/ports/admin-gateway.interface';
 import type { AdminCourse } from '../../domain/entities/admin-course.entity';
 import type { AdminOverview } from '../../domain/entities/admin-overview.entity';
@@ -12,6 +13,8 @@ import type { AdminPerson } from '../../domain/entities/people/admin-person.enti
 import type { AdminProposal } from '../../domain/entities/admin-proposal.entity';
 import type { AuditPage } from '../../domain/entities/audit/audit-page.entity';
 import type { PagedList } from '../../domain/entities/paged-list.entity';
+import type { AdminCourseVersion } from '../../domain/entities/versions/admin-course-version.entity';
+import type { AdminVersionDetail } from '../../domain/entities/versions/admin-version-detail.entity';
 import type { AdminRole } from '../../domain/types/admin-role.type';
 import { ADMIN_API_PATHS } from '../constants/admin-api-paths';
 import { InvalidAdminResponseError } from '../errors/invalid-admin-response.error';
@@ -84,6 +87,31 @@ export class HttpAdminGateway implements AdminGateway {
 
   async listAudit(before: number | null): Promise<AuditPage> {
     return this.get(withQuery(ADMIN_API_PATHS.audit, { before: before === null ? null : String(before) }), adminResponses.audit);
+  }
+
+  async listVersions(slug: string): Promise<AdminCourseVersion[]> {
+    return (await this.get(ADMIN_API_PATHS.courseVersions(slug), adminResponses.versions)).versions;
+  }
+
+  async getVersion(id: string): Promise<AdminVersionDetail | null> {
+    try {
+      return await this.get(ADMIN_API_PATHS.version(id), adminResponses.version);
+    } catch (error) {
+      if (error instanceof HttpRequestError && error.status === 404) return null;
+      throw error;
+    }
+  }
+
+  async publishVersion({ id, revision, releaseNote }: PublishVersionInputDto): Promise<void> {
+    await this.httpClient.request({ method: 'POST', path: ADMIN_API_PATHS.publishVersion(id), body: { revision, releaseNote } });
+  }
+
+  async requestVersionChanges(id: string, revision: number, items: readonly string[]): Promise<void> {
+    await this.httpClient.request({ method: 'POST', path: ADMIN_API_PATHS.requestVersionChanges(id), body: { revision, items } });
+  }
+
+  async restoreVersion(id: string): Promise<void> {
+    await this.httpClient.request({ method: 'POST', path: ADMIN_API_PATHS.restoreVersion(id) });
   }
 
   private async get<T>(path: string, schema: z.ZodType<T>): Promise<T> {

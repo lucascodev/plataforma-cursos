@@ -6,4 +6,6 @@ export const adminQueryKeys = {
   courses: () => ['admin', 'courses'] as const,
   people: (query: string, role: string | null, page: number) => ['admin', 'people', query, role ?? 'all', page] as const,
   audit: (before: number | null) => ['admin', 'audit', before ?? 'latest'] as const,
+  version: (id: string) => ['admin', 'version', id] as const,
+  courseVersions: (slug: string) => ['admin', 'course-versions', slug] as const,
 };
