@@ -8,7 +8,7 @@ A plataforma exige login para estudar. Este guia cria o banco, liga o login com 
 |---|---|---|
 | URL do projeto | Cloudflare, `.dev.vars`, `.env.local` | (não é segredo) |
 | Chave publicável (`sb_publishable_...`) | Cloudflare e `.dev.vars` | código do site, repositório |
-| Chave secreta (`sb_secret_...`) | só no `.env.local` de quem importa cursos | Cloudflare, repositório, qualquer coisa publicada |
+| Chave secreta (`sb_secret_...`) | em lugar nenhum: a plataforma não usa | Cloudflare, repositório, qualquer coisa publicada |
 | Client secret do OAuth App | só no painel do Supabase | qualquer outro lugar |
 
 O navegador não recebe nenhuma delas. Ele fala só com `/api`, e as functions usam a chave publicável junto com o token da pessoa, então o Row Level Security continua decidindo o que cada um pode ler e gravar.
@@ -63,7 +63,7 @@ Em **Authentication**:
 Em **Project Settings > API Keys**:
 
 - Copie a **Publishable key** (`sb_publishable_...`). Ela vai para o Cloudflare e para o `.dev.vars`.
-- A **Secret key** (`sb_secret_...`) só é usada para importar cursos, na sua máquina. Se tiver dúvida, não copie agora; dá para pegar quando for importar.
+- A **Secret key** (`sb_secret_...`) não é usada pela plataforma. Não copie.
 
 ## 6. Rodando local
 
@@ -80,22 +80,11 @@ SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 
 Rode `pnpm dev`, que sobe a API e o site juntos. Abra `http://localhost:5173` e clique em **Entrar**.
 
-## 7. Importe os cursos
+## 7. Cursos
 
-Crie `.env.local` a partir de `.env.example`, com a URL e a chave **secreta**:
+Cursos entram pela plataforma, nunca por arquivo: a pessoa propõe em **Propor curso**, um admin aprova, ela escreve no editor e o admin publica cada versão em **Admin > Cursos**. O passo a passo está em [criando-um-curso.md](criando-um-curso.md) e as regras de versão em [versoes-de-curso.md](versoes-de-curso.md).
 
-```bash
-SUPABASE_URL=https://SEU_PROJECT_REF.supabase.co
-SUPABASE_SECRET_KEY=sb_secret_...
-```
-
-```bash
-pnpm content:import -- supabase/seed/courses/engenharia-de-ia.json --publish
-```
-
-O script valida o curso com o mesmo schema do site antes de enviar. A ligação entre progresso e cursos é validada pela migration `20261027090000_validate_progress_course_fk.sql`, sem passo manual.
-
-O script continua funcionando até o editor de cursos chegar: ele usa a chave secreta e não passa pelas regras de papel.
+Os arquivos de `supabase/seed/courses/` servem só para o banco local: `pnpm db:reset` cria o banco do zero com eles.
 
 ## 8. Primeira pessoa admin
 
@@ -123,8 +112,8 @@ Quem já tinha `app_metadata.role = 'admin'` vira admin automaticamente na migra
 |---|---|
 | `/api/me` responde 503 | Variáveis ausentes no Cloudflare ou no `.dev.vars`, URL sem `https` ou chave secreta no lugar da publicável |
 | Volta do GitHub para `/entrar?erro=login` | Rota `/api/auth/callback` fora das **Redirect URLs**, login cancelado ou demora de mais de 10 minutos para concluir |
-| Login funciona mas o progresso não salva | Migrations não aplicadas, curso não importado ou não publicado, ou limite de escrita atingido (resposta 429) |
-| Catálogo vazio | Curso importado sem `--publish` ou tirado do catálogo na área de admin |
+| Login funciona mas o progresso não salva | Migrations não aplicadas, curso ainda não publicado ou limite de escrita atingido (resposta 429) |
+| Catálogo vazio | Nenhuma versão publicada ainda ou curso tirado do catálogo na área de admin |
 | Área de admin mostra "Você não tem acesso" | Papel ainda não é `admin` (rode o SQL da seção 8) ou o login foi feito antes da mudança; saia e entre de novo |
 | Erro ao enviar proposta | Limite de 3 propostas abertas atingido, ou migrations novas não aplicadas |
 | Login não fica salvo em `localhost` | Navegador que não aceita cookie `__Host-` sem HTTPS (use Chrome ou Firefox) ou site aberto na porta 8788 em vez de 5173 durante o `dev` |

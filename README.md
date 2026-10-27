@@ -52,7 +52,6 @@ Abra `http://localhost:5173` no Chrome ou no Firefox. Os cookies de sessão usam
 | `pnpm check` | Tipos, lint, testes e build, na ordem |
 | `pnpm test` | Testes unitários do site e das functions (Vitest) |
 | `pnpm content:schema` | Regera `contracts/course/course.schema.json` a partir do schema Zod |
-| `pnpm content:import -- <arquivo> [--publish]` | Valida um curso e grava no Supabase (usa `.env.local`) |
 | `pnpm audit:prod` | Auditoria das dependências de produção |
 
 ## Estrutura
@@ -75,9 +74,9 @@ src/
 public/                  _headers (segurança), _routes.json e ícone
 supabase/
   migrations/            tabelas, políticas RLS e funções do banco
-  seed/courses/          cursos em JSON, prontos para importar
+  seed/courses/          cursos de exemplo para o banco local
   tests/                 testes de RLS e das funções (pgTAP)
-scripts/                 schema JSON, importação de cursos, varredura de chaves
+scripts/                 schema JSON, seed do banco local, varredura de chaves
 docs/                    arquitetura e guias
 ```
 
@@ -88,6 +87,7 @@ O site segue Clean Architecture por módulo (`domain`, `application`, `infra`, `
 - [Arquitetura](docs/arquitetura.md)
 - [Papéis e propostas de curso](docs/papeis-e-propostas.md)
 - [Criando um curso](docs/criando-um-curso.md)
+- [Versões de curso](docs/versoes-de-curso.md)
 - [Configurando contas com Supabase e GitHub](docs/configurando-contas.md)
 - [Deploy no Cloudflare Pages](docs/deploy.md)
 - [Política de segurança](SECURITY.md)

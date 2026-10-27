@@ -10,7 +10,7 @@ Obrigado pelo interesse. Contribuições de código e de conteúdo são bem-vind
 
 ## Conteúdo
 
-- Para criar ou corrigir um curso, siga [docs/criando-um-curso.md](docs/criando-um-curso.md). O PR muda só o JSON em `supabase/seed/courses/`; a importação para o Supabase é feita por quem mantém a plataforma.
+- Cursos não entram por pull request: são propostos e escritos na própria plataforma, como explica [docs/criando-um-curso.md](docs/criando-um-curso.md). O JSON em `supabase/seed/courses/` é só o curso de exemplo do banco local.
 - Textos em português, diretos, sem jargão desnecessário.
 - Links sempre `https://` e para fontes estáveis.
 - Projetos e exercícios precisam rodar localmente e sem custo, com alternativa para computador modesto quando fizer sentido.
@@ -27,7 +27,7 @@ Obrigado pelo interesse. Contribuições de código e de conteúdo são bem-vind
 ## Segurança
 
 - O navegador fala só com `/api`. Não adicione cliente do Supabase, variáveis `VITE_` nem uso de `localStorage`, `sessionStorage` ou `document.cookie` em `src/` (o lint bloqueia).
-- Nunca coloque chaves em código ou em arquivo versionado. Locais: `.dev.vars` (chave publicável) e `.env.local` (chave secreta, só para importar cursos).
+- Nunca coloque chaves em código ou em arquivo versionado. A única chave local é a publicável, em `.dev.vars`. A chave secreta não é usada pela plataforma.
 - As functions usam o token da pessoa. Não use a chave secreta em `server/`.
 - Toda rota nova em `/api` que altera dados passa pelo middleware (checagem de origem) e valida o corpo com um schema de `contracts/`.
 - Mudança no banco vai em uma migration nova em `supabase/migrations/`, com RLS e com teste em `supabase/tests/`. Veja [docs/migracoes.md](docs/migracoes.md): nunca edite uma migration que já está na `main`, e rode `pnpm db:reset && pnpm db:test` antes do PR.
