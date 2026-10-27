@@ -1,0 +1,30 @@
+// Smallest course that passes the full course schema.
+export const VALID_COURSE = {
+  slug: 'curso',
+  title: 'Curso',
+  tagline: 'Chamada.',
+  description: 'Descrição.',
+  level: 'Iniciante',
+  audience: 'Todos',
+  version: '0.1.0',
+  updatedAt: '2027-01-11',
+  rhythm: { weekdayHours: 1, saturdayHours: 3, sundayHours: 1 },
+  kickoff: { title: 'Início', detail: 'Prepare o ambiente.' },
+  modules: [
+    {
+      id: 'm1',
+      shortTitle: 'Base',
+      title: 'Base',
+      kind: 'standard',
+      months: 1,
+      prerequisite: 'Nada.',
+      goal: 'Aprender.',
+      caseStudy: 'Caso.',
+      lessons: [{ id: 't0', title: 'Aula', summary: 'Resumo.', exercise: 'Faça.' }],
+      drills: [],
+      project: { title: 'Projeto', brief: 'Construa.', requirements: ['Funciona'], doneCriteria: ['Publicado'] },
+      selfCheck: ['Entendi?'],
+      resources: [],
+    },
+  ],
+};
