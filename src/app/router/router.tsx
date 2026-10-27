@@ -6,6 +6,7 @@ import { homeRoutes } from '@/modules/home';
 import { legalRoutes } from '@/modules/legal';
 import { profilesRoutes } from '@/modules/profiles';
 import { proposalsRoutes } from '@/modules/proposals';
+import { teachingRoutes } from '@/modules/teaching';
 import { RootLayout } from '../layouts/root-layout/root-layout';
 import { RouteErrorPage } from '../pages/route-error-page/route-error-page';
 
@@ -14,6 +15,6 @@ export const router = createBrowserRouter([
     path: '/',
     Component: RootLayout,
     ErrorBoundary: RouteErrorPage,
-    children: [...homeRoutes, ...coursesRoutes, ...authRoutes, ...profilesRoutes, ...proposalsRoutes, ...adminRoutes, ...legalRoutes, notFoundRoute],
+    children: [...homeRoutes, ...coursesRoutes, ...authRoutes, ...profilesRoutes, ...proposalsRoutes, ...teachingRoutes, ...adminRoutes, ...legalRoutes, notFoundRoute],
   },
 ]);
