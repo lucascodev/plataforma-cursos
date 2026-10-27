@@ -1,6 +1,6 @@
-import type { Exercise } from '../../entities/course/module/exercise/exercise.entity';
+import type { ExerciseRecord } from './exercise.schema.ts';
 
-type CodeLanguage = Extract<Exercise, { type: 'code' }>['language'];
+type CodeLanguage = Extract<ExerciseRecord, { type: 'code' }>['language'];
 
 const FILE_NAMES: Readonly<Record<CodeLanguage, string>> = { python: 'solucao.py', javascript: 'solucao.js', sql: 'solucao.sql' };
 

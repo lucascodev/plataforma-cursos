@@ -1,3 +1,4 @@
+import { codeFileName } from '@contracts/course/exercise/code-file-name';
 import { httpsUrlSchema } from '@contracts/url/https-url.schema';
 import { useState } from 'react';
 import type { CourseProgressState, ExerciseProgress } from '@/modules/progress';
@@ -8,7 +9,6 @@ import { makeCodeRunner } from '@/shared/main/factories/make-code-runner.factory
 import { readErrorMessage } from '@/shared/presentation/formatters/read-error-message';
 import { useToast } from '@/shared/presentation/hooks/use-toast/use-toast';
 import type { Exercise } from '../../../domain/entities/course/module/exercise/exercise.entity';
-import { codeFileName } from '../../../domain/rules/exercise/code-file-name.rule';
 import { isSolutionRevealed } from '../../../domain/rules/exercise/is-solution-revealed.rule';
 import { labFiles } from '../../../domain/rules/exercise/lab-files.rule';
 import { missingForCompletion } from '../../../domain/rules/exercise/missing-for-completion.rule';
