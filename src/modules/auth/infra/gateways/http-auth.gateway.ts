@@ -33,4 +33,12 @@ export class HttpAuthGateway implements AuthGateway {
   async signOut(): Promise<void> {
     await this.httpClient.request({ method: 'POST', path: AUTH_API_PATHS.logout });
   }
+
+  async signOutEverywhere(): Promise<void> {
+    await this.httpClient.request({ method: 'POST', path: AUTH_API_PATHS.logoutEverywhere });
+  }
+
+  async deleteAccount(): Promise<void> {
+    await this.httpClient.request({ method: 'DELETE', path: AUTH_API_PATHS.currentUser });
+  }
 }

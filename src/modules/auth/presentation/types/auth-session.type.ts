@@ -6,6 +6,9 @@ export interface AuthSession {
   readonly errorMessage: string | null;
   signIn(returnPath: string): void;
   signOut(): Promise<void>;
+  signOutEverywhere(): Promise<void>;
+  /** Rejects when the account cannot be deleted; the error carries the reason. */
+  deleteAccount(): Promise<void>;
   reportSessionExpired(): void;
   refresh(): void;
 }

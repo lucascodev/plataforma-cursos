@@ -1,6 +1,8 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useState, type ReactNode } from 'react';
+import { makeDeleteAccount } from '../../../main/factories/make-delete-account.factory';
 import { makeSignInWithGitHub } from '../../../main/factories/make-sign-in-with-github.factory';
+import { makeSignOutEverywhere } from '../../../main/factories/make-sign-out-everywhere.factory';
 import { makeSignOut } from '../../../main/factories/make-sign-out.factory';
 import { AuthSessionContext } from '../../contexts/auth-session-context';
 import { useCurrentUserQuery } from '../../hooks/use-current-user-query/use-current-user-query';
@@ -26,6 +28,11 @@ export function AuthSessionProvider({ children }: { children: ReactNode }) {
   };
   useSessionExpiryWatcher(reportSessionExpired);
 
+  const forgetSession = () => {
+    queryClient.clear();
+    queryClient.setQueryData(authQueryKeys.currentUser(), null);
+  };
+
   const user = currentUser.data ?? null;
   const session: AuthSession = {
     status: currentUser.isPending ? 'loading' : user ? 'signed-in' : 'signed-out',
@@ -43,11 +50,24 @@ export function AuthSessionProvider({ children }: { children: ReactNode }) {
       setErrorMessage(null);
       try {
         await makeSignOut().execute();
-        queryClient.clear();
-        queryClient.setQueryData(authQueryKeys.currentUser(), null);
+        forgetSession();
       } catch {
         setErrorMessage(MESSAGES.signOutFailed);
       }
+    },
+    async signOutEverywhere() {
+      setErrorMessage(null);
+      try {
+        await makeSignOutEverywhere().execute();
+        forgetSession();
+      } catch {
+        setErrorMessage(MESSAGES.signOutFailed);
+      }
+    },
+    async deleteAccount() {
+      setErrorMessage(null);
+      await makeDeleteAccount().execute();
+      forgetSession();
     },
   };
 
