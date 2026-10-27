@@ -1,5 +1,4 @@
 {
-  "$schema": "../../../contracts/course/course.schema.json",
   "slug": "engenharia-de-ia",
   "title": "Engenharia de IA",
   "tagline": "Dos fundamentos dos modelos à arquitetura de sistemas em produção.",

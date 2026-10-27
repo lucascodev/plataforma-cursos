@@ -30,10 +30,6 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm lint
       - run: pnpm test
-      - name: JSON Schema dos cursos está atualizado
-        run: |
-          pnpm content:schema
-          git diff --exit-code contracts/course/course.schema.json
       - name: Seed do banco local está atualizado
         run: |
           pnpm db:seed

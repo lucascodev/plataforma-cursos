@@ -68,7 +68,6 @@ const guideSchema = z.object({
 
 export const courseContentSchema = z
   .object({
-    $schema: z.string().optional(),
     slug: identifier,
     title: text(120),
     tagline: text(240),

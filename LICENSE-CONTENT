@@ -1,6 +1,8 @@
-Conteúdo dos cursos (pasta supabase/seed/courses/)
+Conteúdo dos cursos publicados na plataforma Cursos Abertos
 
-Copyright (c) 2026 Lucas Pereira dos Reis
+Cada curso pertence a quem o escreveu, como indicado na página do curso. Quem propõe um curso
+concorda em publicá-lo sob esta licença. O curso de exemplo da pasta supabase/seed/courses/ é
+Copyright (c) 2026 Lucas Pereira dos Reis.
 
 Este conteúdo está licenciado sob a Creative Commons Atribuição 4.0 Internacional (CC BY 4.0).
 
