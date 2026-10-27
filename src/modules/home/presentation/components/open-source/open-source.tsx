@@ -1,15 +1,15 @@
+import { Link } from 'react-router';
 import { ExternalLink } from '@/shared/presentation/components/navigation/external-link/external-link';
-import { COURSE_FILE_EXAMPLE } from '../../constants/course-file-example';
+import { TEACHING_STEPS } from '../../constants/teaching-steps';
 import styles from './open-source.module.css';
 
 interface OpenSourceProps {
   readonly repositoryUrl: string;
-  readonly guideUrl: string;
   readonly codeLicense: string;
   readonly contentLicense: string;
 }
 
-export function OpenSource({ repositoryUrl, guideUrl, codeLicense, contentLicense }: OpenSourceProps) {
+export function OpenSource({ repositoryUrl, codeLicense, contentLicense }: OpenSourceProps) {
   return (
     <section id="aberto" className={styles.section} aria-labelledby="aberto-titulo">
       <div className={styles.inner}>
@@ -19,16 +19,27 @@ export function OpenSource({ repositoryUrl, guideUrl, codeLicense, contentLicens
             Use, adapte e proponha o seu próprio curso.
           </h2>
           <p className={styles.text}>
-            O código é {codeLicense} e o conteúdo é {contentLicense}. Um curso é um arquivo JSON validado pelo mesmo schema que o site usa.
+            O código é {codeLicense} e o conteúdo é {contentLicense}. Para ensinar aqui, mande uma proposta: se for aprovada, você escreve o curso no
+            editor da plataforma.
           </p>
           <div className={styles.links}>
+            <Link to="/propor-curso">Propor um curso</Link>
             <ExternalLink href={repositoryUrl}>Ver o código-fonte</ExternalLink>
-            <ExternalLink href={guideUrl}>Como criar um curso</ExternalLink>
           </div>
         </div>
-        <pre className={styles.code} tabIndex={0} aria-label="Exemplo de arquivo de curso">
-          <code>{COURSE_FILE_EXAMPLE}</code>
-        </pre>
+        <ol className={styles.steps}>
+          {TEACHING_STEPS.map((step, index) => (
+            <li key={step.title} className={styles.step}>
+              <span className={styles.stepNumber} aria-hidden="true">
+                {index + 1}
+              </span>
+              <span>
+                <strong className={styles.stepTitle}>{step.title}</strong>
+                {step.text}
+              </span>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
