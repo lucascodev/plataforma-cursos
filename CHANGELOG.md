@@ -69,6 +69,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 
 ### Alterado
 
+- Dependências atualizadas, entre elas Vitest 5, globals 17 e as actions `checkout` 7, `setup-node` 7 e `dependency-review-action` 5. Os exercícios de SQL passam a rodar no SQLite 3.54 (sql.js 1.15.2).
 - A licença CC BY 4.0 do conteúdo vale para os cursos publicados na plataforma, cada um de quem o escreveu, e não mais só para a pasta do curso de exemplo.
 - Ícones do Lucide em todo o site.
 - A landing mostra "Meus estudos" em vez de "Entrar com GitHub" para quem já está logado.
