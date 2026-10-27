@@ -79,11 +79,12 @@ Cadastre estes **secrets** no environment:
 
 | Secret | Onde pegar |
 |---|---|
-| `SUPABASE_ACCESS_TOKEN` | supabase.com > Account > **Access Tokens** > Generate new token |
-| `SUPABASE_PROJECT_ID` | o `SEU_PROJECT_REF` da URL do projeto |
-| `SUPABASE_DB_PASSWORD` | a senha do banco criada com o projeto (**Project Settings > Database** permite trocar) |
+| `SUPABASE_DB_URL` | **Connect > Direct > Session pooler** no painel (porta 5432), com `[YOUR-PASSWORD]` trocado pela senha do banco, sem colchetes. Caracteres especiais da senha vão codificados (`@` vira `%40`, `#` vira `%23`) |
 | `CLOUDFLARE_DEPLOY_HOOK` | URL do Deploy Hook, veja [deploy.md](deploy.md#deploy-pela-pipeline) |
-| `SUPABASE_DB_URL` | opcional, veja abaixo |
+
+Com o pooler, a pipeline não precisa de access token: o `db push --db-url` conecta direto no Postgres. O host direto do banco só tem IPv6 e o runner do GitHub não, por isso o pooler.
+
+Sem `SUPABASE_DB_URL`, o job cai no caminho com `supabase link`, que pede mais três secrets: `SUPABASE_ACCESS_TOKEN`, `SUPABASE_PROJECT_ID` e `SUPABASE_DB_PASSWORD`. O token precisa da permissão **API Key Secrets: Read**, porque o `link` lê as chaves do projeto, e ele expira.
 
 ### 3. Desligue o deploy automático do Cloudflare
 
@@ -93,7 +94,9 @@ Siga [deploy.md](deploy.md#deploy-pela-pipeline). Enquanto o Cloudflare continua
 
 | Sintoma | Causa provável |
 |---|---|
-| `release` falha em `supabase link` ou `db push` com erro de rede | O host direto do banco só tem IPv6 e o runner do GitHub não. Cadastre `SUPABASE_DB_URL` com a connection string do **Session pooler** (**Connect** no painel, porta 5432) e a senha preenchida |
+| `release` falha em `supabase link` ou `db push` com erro de rede | O host direto do banco só tem IPv6 e o runner do GitHub não. Cadastre `SUPABASE_DB_URL` (passo 2) |
+| `supabase link` falha com "Authorization failed for the access token and project ref pair" | O token não tem **API Key Secrets: Read**. Prefira cadastrar `SUPABASE_DB_URL`, que dispensa o token |
+| `db push --db-url` falha com erro de autenticação | A senha na URL tem caractere especial sem codificar, ou ficou com os colchetes |
 | `db push` quer aplicar as migrations antigas | O passo 1 não foi feito no projeto certo |
 | `db push` falha em uma migration nova | O erro desfaz só aquele arquivo. Corrija com uma migration nova; não edite a que falhou se ela já está na `main` |
 | `db` falha no CI mas passa na sua máquina | Rode `pnpm db:reset` antes do `pnpm db:test`: o teste depende do banco recriado do zero |
