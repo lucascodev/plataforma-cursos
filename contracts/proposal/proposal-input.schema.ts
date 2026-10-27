@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { courseSlugSchema } from '../course/course-slug.schema.ts';
 import { httpsUrlSchema } from '../url/https-url.schema.ts';
+import { proposalDurationSchema } from './proposal-duration.schema.ts';
+import { proposalLevelSchema } from './proposal-level.schema.ts';
 
 export const proposalInputSchema = z.object({
   title: z.string().trim().min(3, 'Use pelo menos 3 letras.').max(120),
@@ -12,6 +14,10 @@ export const proposalInputSchema = z.object({
   experience: z.string().trim().max(2000),
   sampleUrl: httpsUrlSchema.nullable(),
   suggestedSlug: courseSlugSchema.nullable(),
+  // Optional so a tab running older code can still send; the current form always fills them.
+  level: proposalLevelSchema.nullable().optional(),
+  duration: proposalDurationSchema.nullable().optional(),
+  commitmentsAccepted: z.boolean().optional(),
 });
 
 export type ProposalInputRecord = z.infer<typeof proposalInputSchema>;
