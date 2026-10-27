@@ -10,7 +10,8 @@ export const exerciseProgressSchema = z.object({
   criteriaDone: z.array(z.number().int().min(0).max(9)).max(10).default([]),
   answers: z.record(partId, partId).refine((answers) => Object.keys(answers).length <= 20).default({}),
   attempts: z.number().int().min(0).max(10_000).default(0),
-  passedChecks: z.array(partId).max(15).default([]),
+  // Lab check ids, or the names of the tests of a code exercise (test_soma, "soma" in SQL).
+  passedChecks: z.array(z.string().trim().min(1).max(80)).max(30).default([]),
   hintsOpened: z.number().int().min(0).max(5).default(0),
   code: z.string().max(MAX_SOURCE).nullable().default(null),
   files: z
