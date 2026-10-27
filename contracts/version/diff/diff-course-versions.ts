@@ -2,6 +2,7 @@ import { defaultDrillId } from '../../course/item-ids/default-drill-id.ts';
 import { defaultLessonId } from '../../course/item-ids/default-lesson-id.ts';
 import type { CourseChange } from './course-change.type.ts';
 import type { CourseDiff } from './course-diff.type.ts';
+import { isSameValue } from './is-same-value.ts';
 
 type Loose = Record<string, unknown>;
 
@@ -17,7 +18,7 @@ const MODULE_DETAIL_FIELDS = ['shortTitle', 'title', 'kind', 'months', 'projectD
 
 const asRecord = (value: unknown): Loose => (value !== null && typeof value === 'object' && !Array.isArray(value) ? (value as Loose) : {});
 const asList = (value: unknown): readonly unknown[] => (Array.isArray(value) ? value : []);
-const same = (a: unknown, b: unknown) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
+const same = (a: unknown, b: unknown) => isSameValue(a ?? null, b ?? null);
 const plural = (count: number, one: string, many: string) => `${count} ${count === 1 ? one : many}`;
 
 function itemsById(items: unknown, defaultId: (index: number) => string): Map<string, unknown> {
