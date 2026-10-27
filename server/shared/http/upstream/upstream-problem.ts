@@ -7,6 +7,7 @@ export async function upstreamProblem(response: Response, messages: ProblemMessa
   if (response.status === 401) return problemResponse(401, 'unauthenticated', 'Entre com o GitHub para continuar.');
   const { hint } = await readPostgrestError(response);
   if (hint === 'rate-limited') return problemResponse(429, 'rate-limited', 'Muitas alterações em pouco tempo. Espere alguns minutos e tente de novo.');
+  if (hint === 'account-blocked') return problemResponse(403, 'account-blocked', 'Sua conta está bloqueada. Fale com a equipe da plataforma.');
   const known = hint ? messages[hint] : undefined;
   if (hint && known) return problemResponse(known[0], hint, known[1]);
   if (response.status === 403) return problemResponse(403, 'forbidden', 'Você não tem permissão para isso.');

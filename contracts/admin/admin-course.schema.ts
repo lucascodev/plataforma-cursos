@@ -12,6 +12,8 @@ export const adminCourseSchema = z.object({
   listed: z.boolean(),
   owner: profileCardSchema.nullable(),
   studentCount: z.number().int().min(0),
+  active7d: z.number().int().min(0).default(0),
+  unlistedNote: z.string().max(500).nullable().default(null),
   updatedAt: timestampSchema,
   openVersion: courseVersionSchema.nullable().default(null),
 });

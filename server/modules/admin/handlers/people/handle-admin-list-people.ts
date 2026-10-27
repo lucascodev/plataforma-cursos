@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import { adminPersonListSchema } from '../../../../../contracts/admin/admin-person-list.schema';
 import { userRoleSchema } from '../../../../../contracts/profile/user-role.schema';
 import type { Services } from '../../../../main/services.type';
@@ -9,7 +10,7 @@ const PAGE_SIZE = 50;
 
 export function handleAdminListPeople(request: Request, services: Services): Promise<Response> {
   const url = new URL(request.url);
-  const role = userRoleSchema.safeParse(url.searchParams.get('role'));
+  const role = userRoleSchema.or(z.literal('blocked')).safeParse(url.searchParams.get('role'));
   const query = (url.searchParams.get('q') ?? '').trim().slice(0, 80);
   return withSession(request, services, (session) =>
     adminRpc(

@@ -12,6 +12,7 @@ export async function handleAdminSetCourseListing(request: Request, slug: string
   return withSession(request, services, async (session) => {
     const body = await readValidatedBody(request, courseListingSchema, MAX_FORM_BODY_BYTES);
     if (!body.ok) return body.response;
-    return adminRpc(services, session, 'admin_set_course_listed', { p_slug: slug, p_listed: body.data.listed }, null, () => null);
+    const { listed, reason = null, note = null } = body.data;
+    return adminRpc(services, session, 'admin_set_course_listed', { p_slug: slug, p_listed: listed, p_reason: reason, p_note: note }, null, () => null);
   });
 }

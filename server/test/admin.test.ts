@@ -90,7 +90,7 @@ describe('admin', () => {
   it('histórico pagina pelo id', async () => {
     const { services, calls } = makeFakeServices(() => json({ items: [], nextBefore: null }));
     await handleAdminListAudit(signedIn('/api/admin/audit?before=120'), services);
-    expect(calls[0]?.body).toEqual({ p_before: 120, p_limit: 50 });
+    expect(calls[0]?.body).toEqual({ p_before: 120, p_limit: 50, p_kind: null });
   });
 
   it('token recusado pelo banco encerra a sessão', async () => {
