@@ -24,6 +24,13 @@ Contados por pessoa, em janelas fixas. Quem passa recebe `429 rate-limited` até
 | Enviar ou editar proposta | 30 por hora |
 | Editar perfil | 60 por hora |
 | Editar preferências da conta | 60 por hora |
+| Salvar rascunho de curso | 600 a cada 10 minutos |
+| Enviar versão para revisão | 20 por hora |
+| Avisar sobre um perfil | 10 por hora |
+
+### Contas bloqueadas
+
+O bloqueio bane o login no Supabase (`banned_until`) e apaga as sessões, então nenhum refresh token volta a funcionar. O token de acesso que já está num navegador vale até uma hora; nesse tempo, políticas restritivas (`private.is_blocked()`) e as funções do banco recusam qualquer gravação, com a mensagem "Sua conta está bloqueada".
 
 ### Riscos conhecidos
 
