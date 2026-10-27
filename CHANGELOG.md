@@ -6,6 +6,12 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 
 ### Adicionado
 
+- Tipos de exercício nas aulas: entrega (link e/ou texto), quiz, código com testes (Python, JavaScript e SQL rodando no navegador), passo a passo, reflexão no diário e laboratório (no navegador, no GitHub Codespaces ou no computador). Todos com dicas, critérios de pronto, sugestões para quem travou e solução liberada pela regra do professor.
+- Página do dia com o exercício completo: o estado de cada exercício é salvo junto com o progresso, e concluir com algo faltando mostra o que ficou para trás.
+- Ambiente isolado para rodar o código dos cursos (iframe em origem opaca, com Pyodide e sql.js servidos pelo próprio site).
+- Código de conclusão de laboratório (`LAB-XXXXXXXX`), cadastrado pelo professor no editor e conferido pelo banco, com limite de tentativas.
+- Editor de exercícios para os seis tipos, com botão para rodar os testes com a solução de referência e mensagens da checagem que dizem onde está cada campo do exercício.
+
 - Visão geral do admin com a fila "Precisa de você" (propostas, versões para revisar e avisos, mais antigos primeiro), a atividade recente e contadores no menu.
 - Cursos no admin com busca, filtros por situação, motivo e nota ao tirar do catálogo, transferência só para quem já é professor e exclusão com confirmação digitada.
 - Revisão de versão com o efeito em quem já estuda (quantas pessoas concluíram cada aula que sai) e confirmação antes de publicar.
@@ -87,6 +93,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 
 ### Corrigido
 
+- A lista "Mudanças nesta versão" mostrava módulos alterados num rascunho recém-aberto, porque comparava a ordem das chaves do conteúdo.
 - O histórico do admin deixava de carregar assim que aparecia uma ação nova (versões, contas ou avisos).
 
 ### Removido
