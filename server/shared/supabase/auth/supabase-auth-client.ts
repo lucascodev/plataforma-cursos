@@ -37,8 +37,9 @@ export class SupabaseAuthClient {
     return user && typeof user === 'object' && typeof (user as SupabaseUser).id === 'string' ? (user as SupabaseUser) : null;
   }
 
-  async signOut(accessToken: string): Promise<void> {
-    const response = await this.fetcher(`${this.config.supabaseUrl}/auth/v1/logout?scope=local`, {
+  // "global" ends every session of the person, on every device; "local" only this one.
+  async signOut(accessToken: string, scope: 'local' | 'global' = 'local'): Promise<void> {
+    const response = await this.fetcher(`${this.config.supabaseUrl}/auth/v1/logout?scope=${scope}`, {
       method: 'POST',
       headers: { apikey: this.config.publishableKey, Authorization: `Bearer ${accessToken}` },
     });
