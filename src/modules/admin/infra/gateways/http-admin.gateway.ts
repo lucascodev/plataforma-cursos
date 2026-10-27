@@ -3,6 +3,8 @@ import type { HttpClient } from '@/shared/application/ports/http/http-client.int
 import type { z } from 'zod';
 import type { ApproveProposalInputDto } from '../../application/dtos/approve-proposal-input.dto';
 import type { DecideProposalInputDto } from '../../application/dtos/decide-proposal-input.dto';
+import type { ListCoursesInputDto } from '../../application/dtos/list-courses-input.dto';
+import type { SetCourseListedInputDto } from '../../application/dtos/set-course-listed-input.dto';
 import type { ListPeopleInputDto } from '../../application/dtos/list-people-input.dto';
 import type { ListProposalsInputDto } from '../../application/dtos/list-proposals-input.dto';
 import type { PublishVersionInputDto } from '../../application/dtos/publish-version-input.dto';
@@ -15,7 +17,13 @@ import type { AuditPage } from '../../domain/entities/audit/audit-page.entity';
 import type { PagedList } from '../../domain/entities/paged-list.entity';
 import type { AdminCourseVersion } from '../../domain/entities/versions/admin-course-version.entity';
 import type { AdminVersionDetail } from '../../domain/entities/versions/admin-version-detail.entity';
+import type { AttentionItem } from '../../domain/entities/attention-item.entity';
+import type { NavBadges } from '../../domain/entities/nav-badges.entity';
+import type { AdminReport } from '../../domain/entities/reports/admin-report.entity';
+import type { VersionImpact } from '../../domain/entities/versions/version-impact.entity';
 import type { AdminRole } from '../../domain/types/admin-role.type';
+import type { AuditKind } from '../../domain/types/audit-kind.type';
+import type { ReportStatus } from '../../domain/types/report-status.type';
 import { ADMIN_API_PATHS } from '../constants/admin-api-paths';
 import { InvalidAdminResponseError } from '../errors/invalid-admin-response.error';
 import { adminResponses } from '../schemas/admin-responses.schema';
@@ -60,12 +68,16 @@ export class HttpAdminGateway implements AdminGateway {
     await this.httpClient.request({ method: 'POST', path, body: { note } });
   }
 
-  async listCourses(): Promise<AdminCourse[]> {
-    return (await this.get(ADMIN_API_PATHS.courses, adminResponses.courses)).courses;
+  async listCourses({ query, status }: ListCoursesInputDto): Promise<AdminCourse[]> {
+    return (await this.get(withQuery(ADMIN_API_PATHS.courses, { q: query || null, status }), adminResponses.courses)).courses;
   }
 
-  async setCourseListed(slug: string, listed: boolean): Promise<void> {
-    await this.httpClient.request({ method: 'PUT', path: ADMIN_API_PATHS.courseListing(slug), body: { listed } });
+  async setCourseListed({ slug, listed, reason, note }: SetCourseListedInputDto): Promise<void> {
+    await this.httpClient.request({ method: 'PUT', path: ADMIN_API_PATHS.courseListing(slug), body: { listed, reason, note } });
+  }
+
+  async isSlugAvailable(slug: string): Promise<boolean> {
+    return (await this.get(ADMIN_API_PATHS.slug(slug), adminResponses.slug)).available;
   }
 
   async setCourseOwner(slug: string, handle: string): Promise<void> {
@@ -85,8 +97,41 @@ export class HttpAdminGateway implements AdminGateway {
     await this.httpClient.request({ method: 'PUT', path: ADMIN_API_PATHS.personRole(personId), body: { role } });
   }
 
-  async listAudit(before: number | null): Promise<AuditPage> {
-    return this.get(withQuery(ADMIN_API_PATHS.audit, { before: before === null ? null : String(before) }), adminResponses.audit);
+  async listAudit(before: number | null, kind: AuditKind | null): Promise<AuditPage> {
+    return this.get(withQuery(ADMIN_API_PATHS.audit, { before: before === null ? null : String(before), kind }), adminResponses.audit);
+  }
+
+  async getNavBadges(): Promise<NavBadges> {
+    return (await this.get(ADMIN_API_PATHS.badges, adminResponses.badges)).badges;
+  }
+
+  async getAttentionQueue(): Promise<AttentionItem[]> {
+    return (await this.get(ADMIN_API_PATHS.attention, adminResponses.attention)).items;
+  }
+
+  async getVersionImpact(id: string): Promise<VersionImpact> {
+    return (await this.get(ADMIN_API_PATHS.versionImpact(id), adminResponses.impact)).impact;
+  }
+
+  async listReports(status: ReportStatus): Promise<AdminReport[]> {
+    return (await this.get(withQuery(ADMIN_API_PATHS.reports, { status }), adminResponses.reports)).reports;
+  }
+
+  async resolveReport(id: string, decision: 'resolved' | 'dismissed'): Promise<void> {
+    const path = decision === 'resolved' ? ADMIN_API_PATHS.resolveReport(id) : ADMIN_API_PATHS.dismissReport(id);
+    await this.httpClient.request({ method: 'POST', path });
+  }
+
+  async endSessions(personId: string): Promise<void> {
+    await this.httpClient.request({ method: 'DELETE', path: ADMIN_API_PATHS.personSessions(personId) });
+  }
+
+  async setBlocked(personId: string, blocked: boolean): Promise<void> {
+    await this.httpClient.request({ method: 'PUT', path: ADMIN_API_PATHS.personBlock(personId), body: { blocked } });
+  }
+
+  async deletePerson(personId: string): Promise<void> {
+    await this.httpClient.request({ method: 'DELETE', path: ADMIN_API_PATHS.person(personId) });
   }
 
   async listVersions(slug: string): Promise<AdminCourseVersion[]> {

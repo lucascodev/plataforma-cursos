@@ -5,6 +5,7 @@ import type { AdminProposal } from '../../../domain/entities/admin-proposal.enti
 import { suggestCourseSlug } from '../../../domain/rules/suggest-course-slug.rule';
 import { useApproveProposalMutation } from '../use-approve-proposal-mutation/use-approve-proposal-mutation';
 import { useDecideProposalMutation } from '../use-decide-proposal-mutation/use-decide-proposal-mutation';
+import { useSlugAvailabilityQuery } from '../use-slug-availability-query/use-slug-availability-query';
 
 export function useProposalReview(proposal: AdminProposal) {
   const approve = useApproveProposalMutation();
@@ -13,7 +14,10 @@ export function useProposalReview(proposal: AdminProposal) {
   const [note, setNote] = useState('');
   const [localError, setLocalError] = useState<string | null>(null);
 
-  const slugError = courseSlugSchema.safeParse(slug).success ? null : 'Use letras minúsculas, números e hífens (até 60).';
+  const isWellFormed = courseSlugSchema.safeParse(slug).success;
+  const availability = useSlugAvailabilityQuery(slug, isWellFormed);
+  const isTaken = availability.data === false;
+  const slugError = !isWellFormed ? 'Use letras minúsculas, números e hífens (até 60).' : isTaken ? 'Esse endereço já é usado por outro curso.' : null;
   const failed = approve.error ?? decide.error;
 
   const runDecision = (decision: 'changes_requested' | 'refused') => {

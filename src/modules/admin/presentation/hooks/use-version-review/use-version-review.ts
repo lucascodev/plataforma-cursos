@@ -17,6 +17,7 @@ export function useVersionReview(detail: AdminVersionDetail) {
   const restore = useRestoreVersionMutation();
   const [releaseNote, setReleaseNote] = useState('');
   const [changesText, setChangesText] = useState('');
+  const [isConfirmingPublish, setConfirmingPublish] = useState(false);
 
   const errors = runCourseChecks(version.content).filter((check) => check.severity === 'error');
   const diff = diffCourseVersions(detail.publishedContent, version.content);
@@ -34,10 +35,16 @@ export function useVersionReview(detail: AdminVersionDetail) {
     canRestore: version.status === 'published' || version.status === 'superseded',
     isBusy: publish.isPending || requestChanges.isPending || restore.isPending,
     failureMessage: failure ? readErrorMessage(failure, 'Não foi possível concluir agora.') : null,
+    isConfirmingPublish,
+    askPublish: () => setConfirmingPublish(true),
+    cancelPublish: () => setConfirmingPublish(false),
     publish: () =>
       publish.mutate(
         { id: version.id, revision: version.revision, releaseNote },
-        { onSuccess: () => toast.show({ text: `Versão ${version.semver ?? ''} publicada.`, tone: 'success' }) },
+        {
+          onSuccess: () => toast.show({ text: `Versão ${version.semver ?? ''} publicada.`, tone: 'success' }),
+          onSettled: () => setConfirmingPublish(false),
+        },
       ),
     requestChanges: () =>
       requestChanges.mutate(

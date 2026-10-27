@@ -53,7 +53,8 @@ describe('HttpAdminGateway', () => {
 
   it('pages the history by id', async () => {
     const { gateway, requests } = gatewayWith(() => ({ items: [], nextBefore: null }));
-    await gateway.listAudit(120);
-    expect(requests[0]?.path).toBe('/api/admin/audit?before=120');
+    await gateway.listAudit(120, null);
+    await gateway.listAudit(null, 'people');
+    expect(requests.map((request) => request.path)).toEqual(['/api/admin/audit?before=120', '/api/admin/audit?kind=people']);
   });
 });

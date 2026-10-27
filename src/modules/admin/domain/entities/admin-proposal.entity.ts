@@ -13,6 +13,9 @@ export interface AdminProposal {
   readonly experience: string;
   readonly sampleUrl: string | null;
   readonly suggestedSlug: string | null;
+  readonly level: 'beginner' | 'intermediate' | 'advanced' | null;
+  readonly duration: 'up-to-3-months' | '3-to-6-months' | '6-to-12-months' | 'over-12-months' | null;
+  readonly commitmentsAcceptedAt: string | null;
   readonly reviewNote: string | null;
   readonly reviewedAt: string | null;
   readonly courseSlug: string | null;

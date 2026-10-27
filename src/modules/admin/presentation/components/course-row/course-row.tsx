@@ -1,29 +1,25 @@
-import { useState } from 'react';
 import { Link } from 'react-router';
 import { Button } from '@/shared/presentation/components/actions/button/button';
 import { Badge } from '@/shared/presentation/components/feedback/badge/badge';
 import { Notice } from '@/shared/presentation/components/feedback/notice/notice';
-import { readErrorMessage } from '@/shared/presentation/formatters/read-error-message';
+import { TypedConfirmDialog } from '@/shared/presentation/components/overlay/typed-confirm-dialog/typed-confirm-dialog';
 import type { AdminCourse } from '../../../domain/entities/admin-course.entity';
-import { useCourseListingMutation } from '../../hooks/use-course-listing-mutation/use-course-listing-mutation';
-import { useCourseOwnerMutation } from '../../hooks/use-course-owner-mutation/use-course-owner-mutation';
 import { describeVersionStatus } from '../../formatters/describe-version-status';
-import { useDeleteCourseMutation } from '../../hooks/use-delete-course-mutation/use-delete-course-mutation';
+import { formatDateTime } from '../../formatters/format-date-time';
+import { useCourseRowActions } from '../../hooks/use-course-row-actions/use-course-row-actions';
 import { PersonChip } from '../person-chip/person-chip';
+import { TransferDialog } from './components/transfer-dialog/transfer-dialog';
+import { UnlistDialog } from './components/unlist-dialog/unlist-dialog';
 import styles from './course-row.module.css';
 
-function CourseState({ course }: { course: AdminCourse }) {
-  if (!course.published) return <Badge>Rascunho</Badge>;
+function CourseState({ course }: { readonly course: AdminCourse }) {
+  if (!course.published) return <Badge>Nunca publicado</Badge>;
   return course.listed ? <Badge tone="accent">No catálogo</Badge> : <Badge tone="warning">Fora do catálogo</Badge>;
 }
 
-export function CourseRow({ course }: { course: AdminCourse }) {
-  const listing = useCourseListingMutation();
-  const owner = useCourseOwnerMutation();
-  const remove = useDeleteCourseMutation();
-  const [handle, setHandle] = useState('');
-  const [confirmingDelete, setConfirmingDelete] = useState(false);
-  const failure = listing.error ?? owner.error ?? remove.error;
+export function CourseRow({ course }: { readonly course: AdminCourse }) {
+  const actions = useCourseRowActions(course);
+  const people = course.studentCount === 1 ? '1 pessoa estudando' : `${course.studentCount} pessoas estudando`;
 
   return (
     <li className={styles.row}>
@@ -41,8 +37,8 @@ export function CourseRow({ course }: { course: AdminCourse }) {
         <CourseState course={course} />
       </div>
       <p className={styles.meta}>
-        Dono: <PersonChip person={course.owner} /> · {course.studentCount === 1 ? '1 pessoa estudando' : `${course.studentCount} pessoas estudando`}
-        {course.version ? ` · versão ${course.version}` : ''}
+        Professor: <PersonChip person={course.owner} /> · {people} · {course.active7d} ativas na semana
+        {course.version ? ` · versão ${course.version}` : ''} · atualizado em {formatDateTime(course.updatedAt)}
       </p>
       {course.openVersion ? (
         <p className={styles.meta}>
@@ -50,48 +46,51 @@ export function CourseRow({ course }: { course: AdminCourse }) {
           <Link to={`/admin/versoes/${course.openVersion.id}`}>{course.openVersion.status === 'in_review' ? 'Revisar' : 'Ver versão'}</Link>
         </p>
       ) : null}
+      {course.unlistedNote ? <p className={styles.meta}>Nota: {course.unlistedNote}</p> : null}
       <div className={styles.actions}>
-        {course.published ? (
-          <Button disabled={listing.isPending} onClick={() => listing.mutate({ slug: course.slug, listed: !course.listed })}>
-            {course.listed ? 'Tirar do catálogo' : 'Voltar ao catálogo'}
+        {course.published && course.listed ? <Button onClick={() => actions.open('unlist')}>Tirar do catálogo</Button> : null}
+        {course.published && !course.listed ? (
+          <Button disabled={actions.isBusy} onClick={actions.relist}>
+            Voltar ao catálogo
           </Button>
         ) : null}
-        <form
-          className={styles.owner}
-          onSubmit={(event) => {
-            event.preventDefault();
-            if (handle.trim()) owner.mutate({ slug: course.slug, handle }, { onSuccess: () => setHandle('') });
-          }}
-        >
-          <input
-            className={styles.input}
-            aria-label={`Novo dono de ${course.title}`}
-            placeholder="@endereco do perfil"
-            value={handle}
-            maxLength={40}
-            onChange={(event) => setHandle(event.target.value)}
-          />
-          <Button type="submit" disabled={owner.isPending || !handle.trim()}>
-            Trocar dono
-          </Button>
-        </form>
+        <Button onClick={() => actions.open('transfer')}>Transferir</Button>
         {course.studentCount > 0 ? (
-          <span className={styles.hint}>Com estudantes, o curso não pode ser apagado.</span>
-        ) : confirmingDelete ? (
-          <span className={styles.confirm}>
-            Apagar de vez?
-            <Button tone="danger" disabled={remove.isPending} onClick={() => remove.mutate(course.slug)}>
-              Sim, apagar
-            </Button>
-            <Button onClick={() => setConfirmingDelete(false)}>Cancelar</Button>
-          </span>
+          <span className={styles.hint}>Com estudantes, o curso não pode ser excluído.</span>
         ) : (
-          <Button tone="danger" onClick={() => setConfirmingDelete(true)}>
-            Apagar
+          <Button tone="danger" onClick={() => actions.open('delete')}>
+            Excluir
           </Button>
         )}
       </div>
-      {failure ? <Notice tone="warning">{readErrorMessage(failure, 'Não foi possível concluir agora.')}</Notice> : null}
+      {actions.dialog === null && actions.error ? <Notice tone="warning">{actions.error}</Notice> : null}
+
+      <UnlistDialog
+        open={actions.dialog === 'unlist'}
+        title={course.title}
+        isBusy={actions.isBusy}
+        error={actions.error}
+        onConfirm={actions.unlist}
+        onClose={actions.close}
+      />
+      <TransferDialog
+        open={actions.dialog === 'transfer'}
+        title={course.title}
+        isBusy={actions.isBusy}
+        error={actions.error}
+        onConfirm={actions.transfer}
+        onClose={actions.close}
+      />
+      <TypedConfirmDialog
+        open={actions.dialog === 'delete'}
+        title={`Excluir "${course.title}"?`}
+        description="O curso, todas as versões e o rascunho são apagados. Não dá para desfazer."
+        phrase={course.slug}
+        confirmLabel="Excluir definitivamente"
+        isLoading={actions.isBusy}
+        onConfirm={actions.remove}
+        onClose={actions.close}
+      />
     </li>
   );
 }

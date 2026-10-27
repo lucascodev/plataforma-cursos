@@ -1,10 +1,11 @@
 import type { AuditPage } from '../../domain/entities/audit/audit-page.entity';
+import type { AuditKind } from '../../domain/types/audit-kind.type';
 import type { AdminGateway } from '../ports/admin-gateway.interface';
 
 export class ListAuditUseCase {
   constructor(private readonly adminGateway: AdminGateway) {}
 
-  execute(before: number | null): Promise<AuditPage> {
-    return this.adminGateway.listAudit(before);
+  execute(before: number | null, kind: AuditKind | null): Promise<AuditPage> {
+    return this.adminGateway.listAudit(before, kind);
   }
 }
