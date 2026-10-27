@@ -12,6 +12,7 @@ export function mergeProgress(base: CourseProgress, local: CourseProgress, remot
     journal: mergeRecord(base.journal, local.journal, remote.journal),
     projectChecks: mergeRecord(base.projectChecks, local.projectChecks, remote.projectChecks),
     projectDeliveries: mergeRecord(base.projectDeliveries, local.projectDeliveries, remote.projectDeliveries),
+    exercises: mergeRecord(base.exercises, local.exercises, remote.exercises),
     startDate: changedStart ? local.startDate : remote.startDate,
     startDateSource: changedStart ? local.startDateSource : remote.startDateSource,
     updatedAt: mergeValue(base.updatedAt, local.updatedAt, remote.updatedAt),

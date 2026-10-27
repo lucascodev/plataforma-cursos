@@ -8,6 +8,7 @@ export function createEmptyProgress(): CourseProgress {
     journal: {},
     projectChecks: {},
     projectDeliveries: {},
+    exercises: {},
     startDate: null,
     startDateSource: null,
     updatedAt: null,

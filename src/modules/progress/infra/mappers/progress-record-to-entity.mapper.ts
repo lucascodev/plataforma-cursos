@@ -9,6 +9,7 @@ export function mapProgressRecordToEntity(record: CourseProgressRecord): CourseP
     journal: record.journal,
     projectChecks: record.projectChecks,
     projectDeliveries: record.projectDeliveries,
+    exercises: record.exercises,
     startDate: record.startDate,
     startDateSource: record.startDateSource,
     updatedAt: record.updatedAt,
