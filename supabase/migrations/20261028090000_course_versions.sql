@@ -225,6 +225,7 @@ begin
   return jsonb_build_object(
     'course', jsonb_build_object('slug', v_course.slug, 'published', v_course.published, 'listed', v_course.listed),
     'publishedVersion', case when v_published.id is not null then private.course_version_json(v_published, false) end,
+    'publishedContent', v_published.content,
     'openVersion', case when v_open.id is not null then private.course_version_json(v_open, true) end
   );
 end;

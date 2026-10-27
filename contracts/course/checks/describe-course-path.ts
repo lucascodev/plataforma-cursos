@@ -25,6 +25,8 @@ const NESTED_FIELDS: Readonly<Record<string, string>> = {
   goal: 'objetivo',
   caseStudy: 'caso de estudo',
   lowSpecTip: 'dica para computador modesto',
+  lessons: 'aulas',
+  drills: 'exercícios de fixação',
   summary: 'resumo',
   exercise: 'exercício',
   task: 'tarefa',

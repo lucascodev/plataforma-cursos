@@ -36,6 +36,7 @@ const version = (overrides: Record<string, unknown> = {}) => ({
 const workspace = (content: Record<string, unknown>) => ({
   course: { slug: 'curso', published: false, listed: true },
   publishedVersion: null,
+  publishedContent: null,
   openVersion: { ...version(), content },
 });
 
