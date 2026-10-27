@@ -7,6 +7,7 @@ export interface Proposal extends ProposalDraft {
   readonly reviewNote: string | null;
   readonly reviewedAt: string | null;
   readonly courseSlug: string | null;
+  readonly commitmentsAcceptedAt: string | null;
   readonly createdAt: string;
   readonly updatedAt: string;
 }

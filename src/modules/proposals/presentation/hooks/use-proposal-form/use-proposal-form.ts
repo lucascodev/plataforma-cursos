@@ -1,6 +1,7 @@
 import { proposalInputSchema } from '@contracts/proposal/proposal-input.schema';
 import { useState, type FormEvent } from 'react';
 import type { ProposalDraft } from '../../../domain/entities/proposal-draft.entity';
+import { findMissingProposalDetails } from '../../../domain/rules/find-missing-proposal-details.rule';
 
 const MAX_MODULES = 30;
 
@@ -14,6 +15,9 @@ const EMPTY_DRAFT: ProposalDraft = {
   experience: '',
   sampleUrl: null,
   suggestedSlug: null,
+  level: null,
+  duration: null,
+  commitmentsAccepted: false,
 };
 
 type FieldErrors = Partial<Record<keyof ProposalDraft, string>>;
@@ -34,9 +38,10 @@ export function useProposalForm(initial: ProposalDraft | null, onValid: (draft: 
       sampleUrl: draft.sampleUrl?.trim() || null,
       suggestedSlug: draft.suggestedSlug?.trim() || null,
     });
-    if (!parsed.success) {
-      const next: FieldErrors = {};
-      for (const issue of parsed.error.issues) {
+    const missing = findMissingProposalDetails(draft);
+    if (!parsed.success || Object.keys(missing).length > 0) {
+      const next: FieldErrors = { ...missing };
+      for (const issue of parsed.success ? [] : parsed.error.issues) {
         const field = issue.path[0] as keyof ProposalDraft | undefined;
         if (field && !next[field]) next[field] = issue.message;
       }
@@ -44,7 +49,7 @@ export function useProposalForm(initial: ProposalDraft | null, onValid: (draft: 
       return;
     }
     setErrors({});
-    onValid(parsed.data);
+    onValid({ ...draft, ...parsed.data, level: draft.level, duration: draft.duration, commitmentsAccepted: true });
   };
 
   return {

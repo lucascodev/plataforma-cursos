@@ -27,6 +27,9 @@ const draft = {
   experience: '',
   sampleUrl: null,
   suggestedSlug: null,
+  level: null,
+  duration: null,
+  commitmentsAccepted: true,
 };
 const record = { ...draft, id: ID, status: 'pending', reviewNote: null, reviewedAt: null, courseSlug: null, createdAt: '2026-11-02', updatedAt: '2026-11-02' };
 
