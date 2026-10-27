@@ -1,3 +1,5 @@
+import { copyFileSync, createReadStream, mkdirSync } from 'node:fs';
+import { join } from 'node:path';
 import { fileURLToPath, URL } from 'node:url';
 import react from '@vitejs/plugin-react';
 import type { Plugin } from 'vite';
@@ -21,8 +23,41 @@ function versionFile(): Plugin {
   };
 }
 
+// The code runner (public/runner) loads these from the site itself: nothing comes from a CDN, and the files stay out of git.
+const RUNTIME_FILES: Readonly<Record<string, { readonly from: string; readonly files: readonly string[] }>> = {
+  pyodide: {
+    from: 'node_modules/pyodide',
+    files: ['pyodide.js', 'pyodide.asm.mjs', 'pyodide.asm.wasm', 'python_stdlib.zip', 'pyodide-lock.json'],
+  },
+  sqljs: { from: 'node_modules/sql.js/dist', files: ['sql-wasm.js', 'sql-wasm.wasm'] },
+};
+const CONTENT_TYPES: Readonly<Record<string, string>> = { '.js': 'text/javascript', '.mjs': 'text/javascript', '.wasm': 'application/wasm', '.zip': 'application/zip', '.json': 'application/json' };
+
+function codeRuntimes(): Plugin {
+  return {
+    name: 'code-runtimes',
+    configureServer(server) {
+      server.middlewares.use((request, response, next) => {
+        const [, folder, file] = (request.url ?? '').split('?')[0]?.match(/^\/(pyodide|sqljs)\/([\w.-]+)$/) ?? [];
+        const runtime = folder ? RUNTIME_FILES[folder] : undefined;
+        if (!runtime || !file || !runtime.files.includes(file)) return next();
+        response.setHeader('Content-Type', CONTENT_TYPES[file.slice(file.lastIndexOf('.'))] ?? 'application/octet-stream');
+        response.setHeader('Access-Control-Allow-Origin', '*');
+        createReadStream(join(runtime.from, file)).pipe(response);
+      });
+    },
+    writeBundle(options) {
+      const outDir = options.dir ?? 'dist';
+      for (const [folder, runtime] of Object.entries(RUNTIME_FILES)) {
+        mkdirSync(join(outDir, folder), { recursive: true });
+        for (const file of runtime.files) copyFileSync(join(runtime.from, file), join(outDir, folder, file));
+      }
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [react(), versionFile()],
+  plugins: [react(), versionFile(), codeRuntimes()],
   define: {
     __BUILD_ID__: JSON.stringify(BUILD_ID),
   },

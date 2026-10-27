@@ -15,4 +15,5 @@ export const teachingResponses = {
   savedDraft: z.object({ revision: z.number().int().min(1) }),
   version: z.object({ version: courseVersionSchema }),
   reviewItems: z.object({ reviewItems: z.array(reviewItemSchema).max(20) }),
+  labCodes: z.object({ codes: z.record(z.string().max(80), z.string().max(20)) }),
 };

@@ -18,6 +18,16 @@ describe('diffCourseVersions', () => {
     expect(diffCourseVersions(published, published)).toEqual({ changes: [], removedItemKeys: [] });
   });
 
+  it('a ordem das chaves não conta como mudança', () => {
+    const reordered = (value: unknown): unknown =>
+      Array.isArray(value)
+        ? value.map(reordered)
+        : value !== null && typeof value === 'object'
+          ? Object.fromEntries(Object.entries(value).reverse().map(([key, item]) => [key, reordered(item)]))
+          : value;
+    expect(diffCourseVersions(published, reordered(published))).toEqual({ changes: [], removedItemKeys: [] });
+  });
+
   it('conta aulas novas, removidas e revisadas por módulo', () => {
     const draft = {
       ...published,

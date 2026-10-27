@@ -290,7 +290,8 @@ describe('progresso', () => {
     expect(await response.json()).toEqual({ revision: 4 });
     expect(calls[0]?.url).toContain('/rest/v1/rpc/save_course_progress');
     expect(calls[0]?.headers.authorization).toBe(`Bearer ${accessToken()}`);
-    expect(calls[0]?.body).toEqual({ p_slug: 'engenharia-de-ia', p_data: { ...emptyProgress, projectChecks: {}, projectDeliveries: {} }, p_base_revision: 3 });
+    // Fields the client did not send (here projectChecks, projectDeliveries and exercises) stay out, so the database keeps them.
+    expect(calls[0]?.body).toEqual({ p_slug: 'engenharia-de-ia', p_data: emptyProgress, p_base_revision: 3 });
   });
 
   it('aba com código antigo, sem revisão, salva sem conferir', async () => {

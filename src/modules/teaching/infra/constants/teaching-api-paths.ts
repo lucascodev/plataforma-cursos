@@ -9,4 +9,6 @@ export const TEACHING_API_PATHS = {
   submit: (slug: string) => `${course(slug)}/submit`,
   withdraw: (slug: string) => `${course(slug)}/withdraw`,
   reviewItem: (slug: string, itemId: string) => `${course(slug)}/review-items/${segment(itemId)}`,
+  labCodes: (slug: string) => `${course(slug)}/lab-codes`,
+  labCode: (slug: string, itemKey: string) => `${course(slug)}/lab-codes/${segment(itemKey)}`,
 } as const;

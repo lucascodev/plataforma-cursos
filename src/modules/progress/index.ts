@@ -1,6 +1,8 @@
 export type { JournalExport } from './domain/entities/journal-export.entity';
 export { progressLimits } from '@contracts/progress/progress-limits';
 export type { CourseProgress } from './domain/entities/course-progress.entity';
+export type { ExerciseProgress } from './domain/entities/exercise-progress.entity';
+export { EMPTY_EXERCISE_PROGRESS } from './domain/rules/exercises/empty-exercise-progress.rule';
 export type { ProjectDelivery } from './domain/entities/project-delivery.entity';
 export type { ProjectCheckKind } from './domain/types/project-check-kind.type';
 export { SaveStatus } from './presentation/components/save-status/save-status';

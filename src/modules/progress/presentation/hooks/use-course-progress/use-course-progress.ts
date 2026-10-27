@@ -6,6 +6,8 @@ import type { LoadProgressOutputDto } from '../../../application/dtos/load-progr
 import type { CourseProgress } from '../../../domain/entities/course-progress.entity';
 import type { ProgressSnapshot } from '../../../domain/entities/progress-snapshot.entity';
 import { createEmptyProgress } from '../../../domain/rules/create-empty-progress.rule';
+import { completeExercise } from '../../../domain/rules/exercises/complete-exercise.rule';
+import { updateExercise } from '../../../domain/rules/exercises/update-exercise.rule';
 import { mergeProgress } from '../../../domain/rules/merge/merge-progress.rule';
 import { setItemCompletion } from '../../../domain/rules/updates/set-item-completion.rule';
 import { setJournalEntry } from '../../../domain/rules/updates/set-journal-entry.rule';
@@ -115,6 +117,8 @@ export function useCourseProgress(courseSlug: string): CourseProgressState {
       setStartDate: (date, source) => update((progress) => setStartDate(progress, date, source)),
       setProjectCheck: (moduleId, kind, checkId, checked) => update((progress) => setProjectCheck(progress, moduleId, kind, checkId, checked)),
       deliverProject: (moduleId, projectItemId, delivery) => update((progress) => deliverProject(progress, moduleId, projectItemId, delivery)),
+      updateExercise: (itemKey, change) => update((progress) => updateExercise(progress, itemKey, change)),
+      completeExercise: (itemKey, completed) => update((progress) => completeExercise(progress, itemKey, completed, new Date().toISOString())),
       replaceProgress: (progress) => update(() => progress),
       eraseProgress: async () => {
         if (!userId) return;

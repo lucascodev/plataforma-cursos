@@ -5,9 +5,10 @@ type TextAreaFieldProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
   label: string;
   hint?: string;
   error?: string | null;
+  isCode?: boolean;
 };
 
-export function TextAreaField({ label, hint, error, id, ...textarea }: TextAreaFieldProps) {
+export function TextAreaField({ label, hint, error, isCode = false, id, ...textarea }: TextAreaFieldProps) {
   const generatedId = useId();
   const fieldId = id ?? generatedId;
   const describedBy = [hint ? `${fieldId}-hint` : null, error ? `${fieldId}-error` : null].filter(Boolean).join(' ');
@@ -16,7 +17,10 @@ export function TextAreaField({ label, hint, error, id, ...textarea }: TextAreaF
       <label className={styles.label} htmlFor={fieldId}>
         {label}
       </label>
-      <textarea id={fieldId} className={styles.control} aria-invalid={error ? true : undefined} aria-describedby={describedBy || undefined} {...textarea} />
+      <textarea
+        id={fieldId}
+        className={isCode ? `${styles.control} ${styles.code}` : styles.control}
+        spellCheck={isCode ? false : undefined} aria-invalid={error ? true : undefined} aria-describedby={describedBy || undefined} {...textarea} />
       {hint ? (
         <p id={`${fieldId}-hint`} className={styles.hint}>
           {hint}

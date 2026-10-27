@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { DateKey } from '@/shared/domain/types/date-key.type';
 import { useCountdownTimer } from '@/shared/presentation/hooks/use-countdown-timer/use-countdown-timer';
 import { formatFullDate } from '@/shared/utils/date/format/format-full-date';
+import { exercisePrompt } from '../../../domain/rules/module/exercise-prompt.rule';
+import { lessonItemId } from '../../../domain/rules/item-ids/lesson-item-id.rule';
 import { describeStudyDay } from '../../formatters/describe-study-day';
 import type { StudyContext } from '../../types/study/study-context.type';
 
@@ -35,9 +37,14 @@ export function useDayPage({ details, progressState, study }: StudyContext, date
     title: text.title,
     reference: `${text.reference} · ${day.hours} h`,
     detail: text.detail,
-    lesson: lesson ? { title: lesson.title, summary: lesson.summary, exercise: lesson.exercise } : null,
+    lesson: lesson ? { title: lesson.title, summary: lesson.summary, exerciseText: exercisePrompt(lesson.exercise) } : null,
+    // Exercises with a type get their own panel; a plain text exercise stays a paragraph.
+    exercise:
+      lesson && module && typeof lesson.exercise !== 'string'
+        ? { itemKey: lessonItemId(module.id, lesson.id), exercise: lesson.exercise, courseSlug: course.slug, progressState }
+        : null,
     tabs: [
-      { id: 'tarefa', label: 'Tarefa' },
+      { id: 'tarefa', label: lesson && typeof lesson.exercise !== 'string' ? 'Exercício' : 'Tarefa' },
       ...(lesson ? [{ id: 'aula', label: 'Aula' }] : []),
       { id: 'anotacoes', label: 'Anotações' },
     ],

@@ -3,6 +3,7 @@ import { defaultDrillId } from './item-ids/default-drill-id.ts';
 import { defaultLessonId } from './item-ids/default-lesson-id.ts';
 import { drillIdSchema } from './item-ids/drill-id.schema.ts';
 import { lessonIdSchema } from './item-ids/lesson-id.schema.ts';
+import { exerciseSchema } from './exercise/exercise.schema.ts';
 
 const text = (max: number) => z.string().trim().min(1).max(max);
 const httpsUrl = z
@@ -11,7 +12,8 @@ const httpsUrl = z
   .refine((value) => value.startsWith('https://'), 'Use links https.');
 const identifier = z.string().regex(/^[a-z0-9-]{1,60}$/, 'Use letras minúsculas, números e hífens.');
 
-const lessonSchema = z.object({ id: lessonIdSchema.optional(), title: text(120), summary: text(600), exercise: text(800) });
+// A plain text exercise is how courses were written before the exercise types; it still works.
+const lessonSchema = z.object({ id: lessonIdSchema.optional(), title: text(120), summary: text(600), exercise: z.union([text(800), exerciseSchema]) });
 const drillSchema = z.object({ id: drillIdSchema.optional(), title: text(120), task: text(800) });
 const projectSchema = z.object({
   title: text(160),

@@ -44,7 +44,8 @@ export function PrivacyPage() {
             <li>o e-mail principal da conta GitHub, que o serviço de autenticação registra no login (a plataforma não exibe nem usa esse e-mail);</li>
             <li>seu perfil: endereço (o login do GitHub), nome, texto sobre você, links e papel (estudante, professor ou admin);</li>
             <li>suas preferências de conta: tema, fuso horário e quais avisos você quer receber;</li>
-            <li>por curso: itens concluídos, dias feitos, data de início, anotações dos módulos, o diário, os requisitos marcados nos projetos e a entrega de cada projeto (link do repositório, link da demonstração e os números que você escrever);</li>
+            <li>por curso: itens concluídos, dias feitos, data de início, anotações dos módulos, o diário, os requisitos marcados nos projetos e a entrega de cada projeto (link do repositório, link da demonstração e os números que você escrever) e, em cada exercício, as respostas, o código que você escreveu, a entrega, as etapas que passaram e as dicas que abriu;</li>
+            <li>os laboratórios que você concluiu com o código de conclusão, e quando;</li>
             <li>as propostas de curso que você enviar e a resposta da equipe;</li>
             <li>se você dá aula: as versões dos seus cursos, o recado enviado para a revisão e os ajustes pedidos pela equipe;</li>
             <li>os avisos que você mandar sobre um perfil público (motivo e detalhes). Só a equipe vê, e a pessoa avisada não sabe quem avisou;</li>
@@ -58,6 +59,11 @@ export function PrivacyPage() {
             Anotações, diário e progresso individual são só seus. Nem professores nem admins conseguem ler: eles veem apenas números somados,
             como quantas pessoas estudam um curso. Para professores, qualquer número abaixo de 5 aparece como "menos de 5", para que ninguém
             seja identificado num curso pequeno.
+          </p>
+          <p>
+            O código dos exercícios roda no seu navegador, num ambiente isolado que não tem acesso à sua sessão nem ao resto do site. Os
+            ambientes de Python e SQL são servidos pelo próprio site, sem serviços de terceiros. O laboratório no Codespaces usa a sua conta do
+            GitHub, com as regras e a cota do GitHub; a plataforma só recebe o código de conclusão que você colar.
           </p>
           <p>
             Não pedimos acesso aos seus repositórios. Não há anúncios, rastreamento nem ferramentas de análise de uso. Os dados servem só para mostrar

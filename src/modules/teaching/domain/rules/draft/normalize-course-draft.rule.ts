@@ -1,6 +1,7 @@
 import { defaultDrillId } from '@contracts/course/item-ids/default-drill-id';
 import { defaultLessonId } from '@contracts/course/item-ids/default-lesson-id';
 import type { EditableCourse } from '../../entities/draft/editable-course.entity';
+import type { EditableExerciseType, EditableLessonExercise } from '../../entities/draft/editable-exercise.entity';
 import type { EditableGuideSection } from '../../entities/draft/editable-guide-section.entity';
 import type { EditableModule } from '../../entities/draft/editable-module.entity';
 
@@ -9,11 +10,16 @@ type Loose = Record<string, unknown>;
 const DRAFT_VERSION = '0.1.0';
 const DEFAULT_RHYTHM = { weekdayHours: 1, saturdayHours: 3, sundayHours: 1 };
 const MODULE_KINDS: readonly EditableModule['kind'][] = ['standard', 'capstone', 'continuous'];
+const EXERCISE_TYPES: Readonly<Record<EditableExerciseType, true>> = { delivery: true, quiz: true, code: true, steps: true, reflection: true, lab: true };
 
 const record = (value: unknown): Loose => (value !== null && typeof value === 'object' && !Array.isArray(value) ? (value as Loose) : {});
 const list = (value: unknown): readonly unknown[] => (Array.isArray(value) ? value : []);
 const text = (value: unknown): string => (typeof value === 'string' ? value : '');
 const texts = (value: unknown): string[] => list(value).map(text);
+const exercise = (value: unknown): EditableLessonExercise => {
+  const type = record(value).type;
+  return typeof type === 'string' && Object.hasOwn(EXERCISE_TYPES, type) ? (value as EditableLessonExercise) : text(value);
+};
 const amount = (value: unknown, fallback: number): number => (typeof value === 'number' && Number.isFinite(value) ? value : fallback);
 
 function normalizeModule(value: unknown, index: number): EditableModule {
@@ -33,7 +39,7 @@ function normalizeModule(value: unknown, index: number): EditableModule {
     ...(typeof module.lowSpecTip === 'string' ? { lowSpecTip: module.lowSpecTip } : {}),
     lessons: list(module.lessons).map((lesson, lessonIndex) => {
       const item = record(lesson);
-      return { id: text(item.id) || defaultLessonId(lessonIndex), title: text(item.title), summary: text(item.summary), exercise: text(item.exercise) };
+      return { id: text(item.id) || defaultLessonId(lessonIndex), title: text(item.title), summary: text(item.summary), exercise: exercise(item.exercise) };
     }),
     drills: list(module.drills).map((drill, drillIndex) => {
       const item = record(drill);

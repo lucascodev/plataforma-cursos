@@ -8,6 +8,8 @@ Todo curso é publicado em versões. Quem dá aula escreve uma versão nova no e
 |---|---|
 | `courses` | O curso e o conteúdo **publicado** (`content`). É o que o catálogo, a página do curso e o plano leem |
 | `course_versions` | Cada versão: o rascunho aberto, a que está em revisão, a publicada e as anteriores, com recado de envio, ajustes pedidos e nota da versão |
+| `course_lab_codes` | O código de conclusão de cada laboratório, por aula. Fica fora das versões: o professor cadastra direto no editor e vale para a aula com aquele id em qualquer versão publicada |
+| `lab_completions` | Quem concluiu cada laboratório com o código certo, e quando |
 
 `course_versions` não tem permissão nenhuma pela API. Só as funções do banco leem e gravam, e cada uma confere quem está chamando: o dono do curso nas funções `teacher_*`, um admin nas `admin_*`. Para qualquer outra pessoa, o curso de outro professor simplesmente "não existe" (404), então um rascunho nunca revela que existe.
 
@@ -78,6 +80,9 @@ Enviar, retirar, pedir ajustes, publicar e restaurar gravam uma linha em `audit_
 | `POST /api/teaching/courses/<slug>/draft` | Dono | Abre um rascunho a partir da versão publicada |
 | `PUT /api/teaching/courses/<slug>/draft` | Dono | Salva o rascunho (`versionId`, `revision`, `content`) |
 | `POST /api/teaching/courses/<slug>/submit` | Dono | Envia para revisão (`versionId`, `revision`, `kind`, `message`) |
+| `GET /api/teaching/courses/<slug>/lab-codes` | Dono | Códigos de conclusão cadastrados, por aula |
+| `PUT /api/teaching/courses/<slug>/lab-codes/<aula>` | Dono | Cadastra ou troca o código (`code`); vazio remove |
+| `POST /api/courses/<slug>/labs/<aula>/verify` | Quem estuda | Confere o código de conclusão (`code`) e responde `completed` |
 | `POST /api/teaching/courses/<slug>/withdraw` | Dono | Retira da revisão |
 | `PUT /api/teaching/courses/<slug>/review-items/<id>` | Dono | Marca um ajuste como feito |
 | `GET /api/admin/courses/<slug>/versions` | Admin | Versões do curso |

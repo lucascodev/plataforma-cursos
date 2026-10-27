@@ -5,6 +5,7 @@ import { CheckboxField } from '@/shared/presentation/components/form/checkbox-fi
 import { TextAreaField } from '@/shared/presentation/components/form/text-area-field/text-area-field';
 import { Breadcrumb } from '@/shared/presentation/components/navigation/breadcrumb/breadcrumb';
 import { Tabs } from '@/shared/presentation/components/navigation/tabs/tabs';
+import { DayExercise } from '../../../components/day-exercise/day-exercise';
 import { useDayPage } from '../../../hooks/use-day-page/use-day-page';
 import { useStudyContext } from '../../../hooks/use-study-context/use-study-context';
 import styles from './day-page.module.css';
@@ -32,11 +33,13 @@ export function DayPage() {
           <Tabs label="Conteúdo do dia" items={page.tabs} selectedId={page.tab} idPrefix={TABS_ID} onSelect={page.setTab} />
           {page.tab === 'tarefa' ? (
             <section id={`${TABS_ID}-panel-tarefa`} role="tabpanel" aria-labelledby={`${TABS_ID}-tab-tarefa`} className={styles.panel}>
-              <p className={styles.task}>{page.detail}</p>
-              {page.lesson ? (
+              {page.exercise ? null : <p className={styles.task}>{page.detail}</p>}
+              {page.exercise ? (
+                <DayExercise {...page.exercise} journalText={page.journalText} setJournalText={page.setJournal} />
+              ) : page.lesson ? (
                 <div className={styles.exercise}>
                   <p className={styles.label}>Exercício da aula</p>
-                  <p>{page.lesson.exercise}</p>
+                  <p>{page.lesson.exerciseText}</p>
                 </div>
               ) : null}
             </section>

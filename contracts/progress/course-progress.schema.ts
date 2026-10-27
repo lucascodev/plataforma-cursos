@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { isDateKey } from '../date/is-date-key.ts';
 import { progressLimits } from './progress-limits.ts';
+import { exerciseProgressSchema } from './exercise-progress.schema.ts';
 import { projectChecksSchema } from './project-checks.schema.ts';
 import { projectDeliverySchema } from './project-delivery.schema.ts';
 
@@ -18,6 +19,7 @@ export const courseProgressSchema = z.object({
   // Added later: rows saved before these fields existed parse with empty maps.
   projectChecks: z.record(moduleId, projectChecksSchema).refine(withinEntryLimit).default({}),
   projectDeliveries: z.record(moduleId, projectDeliverySchema).refine(withinEntryLimit).default({}),
+  exercises: z.record(itemId, exerciseProgressSchema).refine(withinEntryLimit).default({}),
   startDate: dateKey.nullable(),
   startDateSource: z.enum(['suggested', 'user']).nullable(),
   updatedAt: z.string().max(40).nullable(),

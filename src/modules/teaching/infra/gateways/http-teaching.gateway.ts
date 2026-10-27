@@ -4,11 +4,13 @@ import type { HttpRequest } from '@/shared/application/ports/http/http-request.t
 import type { z } from 'zod';
 import type { ResolveReviewItemInputDto } from '../../application/dtos/resolve-review-item-input.dto';
 import type { SaveDraftInputDto } from '../../application/dtos/save-draft-input.dto';
+import type { SetLabCodeInputDto } from '../../application/dtos/set-lab-code-input.dto';
 import type { SubmitVersionInputDto } from '../../application/dtos/submit-version-input.dto';
 import { VersionConflictError } from '../../application/errors/version-conflict.error';
 import type { TeachingGateway } from '../../application/ports/teaching-gateway.interface';
 import type { CourseStats } from '../../domain/entities/course-stats.entity';
 import type { CourseWorkspace } from '../../domain/entities/course-workspace.entity';
+import type { LabCodes } from '../../domain/entities/lab-codes.entity';
 import type { TeacherCourse } from '../../domain/entities/teacher-course.entity';
 import type { CourseVersion } from '../../domain/entities/versions/course-version.entity';
 import type { OpenVersion } from '../../domain/entities/versions/open-version.entity';
@@ -61,6 +63,14 @@ export class HttpTeachingGateway implements TeachingGateway {
   async resolveReviewItem({ slug, versionId, itemId, resolved }: ResolveReviewItemInputDto): Promise<ReviewItem[]> {
     const request: HttpRequest = { method: 'PUT', path: TEACHING_API_PATHS.reviewItem(slug, itemId), body: { versionId, resolved } };
     return (await this.send(request, teachingResponses.reviewItems)).reviewItems;
+  }
+
+  async listLabCodes(slug: string): Promise<LabCodes> {
+    return (await this.send({ path: TEACHING_API_PATHS.labCodes(slug) }, teachingResponses.labCodes)).codes;
+  }
+
+  async setLabCode({ slug, itemKey, code }: SetLabCodeInputDto): Promise<void> {
+    await this.httpClient.request({ method: 'PUT', path: TEACHING_API_PATHS.labCode(slug, itemKey), body: { code } });
   }
 
   private async sendWithConflict<T>(request: HttpRequest, schema: z.ZodType<T>): Promise<T> {

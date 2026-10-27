@@ -11,6 +11,7 @@ import { callRpc } from '../../../shared/supabase/rest/call-rpc';
 import { withSession } from '../../auth/session/with-session';
 import { MAX_PROGRESS_BODY_BYTES } from '../max-progress-body-bytes';
 import { PROGRESS_ERROR_MESSAGES } from '../progress-error-messages';
+import { sentProgressFields } from '../sent-progress-fields';
 
 const UNAVAILABLE = 'Não foi possível salvar seu progresso agora.';
 
@@ -23,7 +24,7 @@ export async function handlePutProgress(request: Request, slug: string, services
     const response = await callRpc(
       services,
       'save_course_progress',
-      { p_slug: slug, p_data: body.data.progress, p_base_revision: body.data.baseRevision ?? null },
+      { p_slug: slug, p_data: sentProgressFields(body.data.progress, body.raw), p_base_revision: body.data.baseRevision ?? null },
       session.accessToken,
     );
     if (response.status === 401) return response;

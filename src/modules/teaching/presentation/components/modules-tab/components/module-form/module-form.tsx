@@ -18,6 +18,7 @@ const KIND_OPTIONS = [
 ];
 
 interface ModuleFormProps {
+  readonly courseSlug: string;
   readonly module: EditableModule;
   readonly code: string;
   readonly onChange: (module: EditableModule) => void;
@@ -28,7 +29,7 @@ interface ModuleFormProps {
   readonly onRemoveModule: () => void;
 }
 
-export function ModuleForm({ module, code, onChange, onAddLesson, onRemoveLesson, onAddDrill, onRemoveDrill, onRemoveModule }: ModuleFormProps) {
+export function ModuleForm({ courseSlug, module, code, onChange, onAddLesson, onRemoveLesson, onAddDrill, onRemoveDrill, onRemoveModule }: ModuleFormProps) {
   const set = <K extends keyof EditableModule>(key: K, value: EditableModule[K]) => onChange({ ...module, [key]: value });
   const setKind = (kind: EditableModule['kind']) => onChange({ ...module, kind, months: kind === 'continuous' ? 0 : module.months || 1 });
 
@@ -60,7 +61,7 @@ export function ModuleForm({ module, code, onChange, onAddLesson, onRemoveLesson
           onChange={(event) => set('lowSpecTip', event.target.value || undefined)}
         />
       </section>
-      <LessonListEditor lessons={module.lessons} onChange={(lessons) => set('lessons', lessons)} onAdd={onAddLesson} onRemove={onRemoveLesson} />
+      <LessonListEditor courseSlug={courseSlug} moduleId={module.id} lessons={module.lessons} onChange={(lessons) => set('lessons', lessons)} onAdd={onAddLesson} onRemove={onRemoveLesson} />
       <DrillListEditor drills={module.drills} onChange={(drills) => set('drills', drills)} onAdd={onAddDrill} onRemove={onRemoveDrill} />
       <ProjectEditor project={module.project} onChange={(project) => set('project', project)} />
       <section className={styles.card} aria-labelledby="modulo-autoavaliacao">

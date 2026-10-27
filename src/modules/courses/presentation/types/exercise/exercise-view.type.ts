@@ -1,0 +1,41 @@
+import type { ExerciseProgress } from '@/modules/progress';
+import type { CodeRunResult } from '@/shared/application/ports/code-runner/code-run-result.type';
+import type { Exercise } from '../../../domain/entities/course/module/exercise/exercise.entity';
+import type { QuizScore } from '../../../domain/rules/exercise/score-quiz.rule';
+
+export interface ExerciseView {
+  readonly exercise: Exercise;
+  readonly state: ExerciseProgress;
+  readonly missing: readonly string[];
+  readonly isDone: boolean;
+  readonly isSolutionRevealed: boolean;
+  readonly quizScore: QuizScore | null;
+  readonly code: string;
+  readonly files: Readonly<Record<string, string>>;
+  readonly lastRun: CodeRunResult | null;
+  readonly isRunning: boolean;
+  readonly labCode: string;
+  readonly labError: string | null;
+  readonly isVerifying: boolean;
+  readonly deliveryUrlDraft: string;
+  readonly deliveryUrlError: string | null;
+  readonly journalText: string;
+  readonly isConfirmingFinish: boolean;
+  readonly toggleStep: (stepId: string) => void;
+  readonly toggleCriterion: (index: number) => void;
+  readonly answer: (questionId: string, optionId: string) => void;
+  readonly checkQuiz: () => void;
+  readonly setDeliveryUrl: (value: string) => void;
+  readonly setDeliveryText: (value: string) => void;
+  readonly setJournalText: (value: string) => void;
+  readonly setCode: (value: string) => void;
+  readonly setFile: (name: string, content: string) => void;
+  readonly run: () => Promise<void>;
+  readonly setLabCode: (value: string) => void;
+  readonly verifyLabCode: () => Promise<void>;
+  readonly openHint: () => void;
+  readonly finish: () => void;
+  readonly confirmFinish: () => void;
+  readonly cancelFinish: () => void;
+  readonly undo: () => void;
+}
