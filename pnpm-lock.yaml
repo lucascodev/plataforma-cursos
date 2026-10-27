@@ -222,8 +222,8 @@ importers:
         specifier: 314.0.7
         version: 314.0.7
       sql.js:
-        specifier: 1.14.2
-        version: 1.14.2
+        specifier: 1.15.2
+        version: 1.15.2
       supabase:
         specifier: 2.122.0
         version: 2.122.0
@@ -1613,8 +1613,8 @@ packages:
     resolution: {integrity: sha512-KGj/8Y43x35aZVDtt+J4mK1hoLGHULMYfSkODJNQjNDC3oW1PqPoxMwo0pLUsWM/UEGzON/NxeHywEfNXNP3Vw==}
     engines: {node: '>=0.10.0'}
 
-  sql.js@1.14.2:
-    resolution: {integrity: sha512-3ZGPovObMFrdw79zrUHbfdE/DLIsy8jdNdssmMSQuRAymedU6q84asPt0kgiqrdMYlPegDItiIMfmIXzZnYFcw==}
+  sql.js@1.15.2:
+    resolution: {integrity: sha512-ZmMYFsZPZWDKIJUh3A5rdnpRV3hB/r7AijwAzSzLnfv/9CSx4obUmDtA8brAjWJWjGtUVh43nIEJ+6nl6HuOUg==}
 
   std-env@4.3.0:
     resolution: {integrity: sha512-OtU/EgQ1kIm5KwqQpBC6ZEMXrZRui11w8zgfTWp8cdO9B8OaPsbA8bTHO2P+HNo1VlUTGMVBwPhydu6poeXiag==}
@@ -3021,7 +3021,7 @@ snapshots:
 
   source-map-js@1.2.2: {}
 
-  sql.js@1.14.2: {}
+  sql.js@1.15.2: {}
 
   std-env@4.3.0: {}
 
