@@ -32,9 +32,15 @@ export function RootLayout() {
                 Meus estudos
               </NavLink>
             ) : null}
-            <NavLink to="/propor-curso" className={navClass}>
-              Propor curso
-            </NavLink>
+            {session.user?.role === 'teacher' || session.user?.role === 'admin' ? (
+              <NavLink to="/professor" className={navClass}>
+                Área do professor
+              </NavLink>
+            ) : (
+              <NavLink to="/propor-curso" className={navClass}>
+                Propor curso
+              </NavLink>
+            )}
             {session.user?.role === 'admin' ? (
               <NavLink to="/admin" className={navClass}>
                 Admin

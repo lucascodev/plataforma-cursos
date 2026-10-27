@@ -21,7 +21,6 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "content:schema": "node scripts/generate-course-schema.ts",
-    "content:import": "node --env-file=.env.local scripts/import-course.ts",
     "db:seed": "node scripts/generate-seed-sql.ts",
     "db:start": "supabase start",
     "db:stop": "supabase stop",

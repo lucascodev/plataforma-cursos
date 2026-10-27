@@ -20,7 +20,8 @@ export function handleCreateProposal(request: Request, services: Services): Prom
       method: 'POST',
       accessToken: session.accessToken,
       prefer: 'return=representation',
-      body: toProposalRow(body.data),
+      // The database stamps its own time; this only says the commitments were accepted.
+      body: { ...toProposalRow(body.data), commitments_accepted_at: body.data.commitmentsAccepted ? new Date(services.now()).toISOString() : null },
     });
     if (!response.ok) return upstreamProblem(response, PROPOSAL_ERROR_MESSAGES, 'Não foi possível enviar a proposta agora.');
     const proposal = (await readUpstreamJson(response, proposalRowsSchema))?.[0];

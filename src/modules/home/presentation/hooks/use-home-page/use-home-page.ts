@@ -14,7 +14,6 @@ export function useHomePage() {
   return {
     site,
     account: session.status === 'loading' ? null : session.user ? ({ label: 'Meus estudos', to: '/perfil/estudos' } as const) : ({ label: 'Entrar com GitHub', to: '/entrar' } as const),
-    guideUrl: `${site.repositoryUrl}/blob/main/docs/criando-um-curso.md`,
     featured: featured ? buildFeaturedCourseView(featured) : null,
     todaySample: featured ? buildTodaySampleView(featured, makeClock().today()) : null,
   };

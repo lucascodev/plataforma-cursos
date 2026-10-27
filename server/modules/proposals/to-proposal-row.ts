@@ -11,5 +11,7 @@ export function toProposalRow(input: ProposalInputRecord): Record<string, unknow
     experience: input.experience,
     sample_url: input.sampleUrl,
     suggested_slug: input.suggestedSlug,
+    ...(input.level === undefined ? {} : { level: input.level }),
+    ...(input.duration === undefined ? {} : { duration: input.duration }),
   };
 }

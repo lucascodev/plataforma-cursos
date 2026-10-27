@@ -1,0 +1,21 @@
+.line {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.link {
+  min-height: 44px;
+  padding: 0 4px;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.fields {
+  display: grid;
+  gap: 14px;
+}

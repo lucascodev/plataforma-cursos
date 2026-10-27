@@ -1,6 +1,7 @@
 import { HttpRequestError } from '@/shared/application/errors/http-request.error';
 import type { HttpClient } from '@/shared/application/ports/http/http-client.interface';
 import type { z } from 'zod';
+import type { ReportTeacherInputDto } from '../../application/dtos/report-teacher-input.dto';
 import type { UpdateMyProfileInputDto } from '../../application/dtos/update-my-profile-input.dto';
 import type { ProfileGateway } from '../../application/ports/profile-gateway.interface';
 import type { AccountSettings } from '../../domain/entities/account-settings.entity';
@@ -43,6 +44,10 @@ export class HttpProfileGateway implements ProfileGateway {
       if (error instanceof HttpRequestError && error.status === 404) return null;
       throw error;
     }
+  }
+
+  async reportTeacher({ handle, reason, details }: ReportTeacherInputDto): Promise<void> {
+    await this.httpClient.request({ method: 'POST', path: PROFILE_API_PATHS.reportTeacher(handle), body: { reason, details } });
   }
 
   private parse<T>(path: string, schema: z.ZodType<T>, body: unknown): T {

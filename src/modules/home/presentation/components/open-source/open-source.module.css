@@ -55,15 +55,39 @@
   font-weight: 600;
 }
 
-.code {
+.steps {
+  display: grid;
+  gap: 14px;
   margin: 0;
-  padding: 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  padding: 18px 20px;
   border: 1px solid var(--ink-line-strong);
   border-radius: var(--radius-xl);
   background: var(--ink-surface);
+  color: var(--ink-fg-2);
+}
+
+.stepNumber {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--ink-accent);
+  color: var(--ink-bg);
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+.stepTitle {
+  display: block;
   color: var(--ink-fg);
-  font-family: var(--font-mono);
-  font-size: 14px;
-  line-height: 1.6;
-  overflow-x: auto;
 }

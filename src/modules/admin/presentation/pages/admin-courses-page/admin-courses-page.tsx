@@ -11,8 +11,8 @@ export function AdminCoursesPage() {
       <title>Cursos</title>
       <h1 className={styles.title}>Cursos</h1>
       <p className={styles.lead}>
-        Um curso com estudantes não é apagado: tire do catálogo e ele continua abrindo para quem já estuda. A revisão e a publicação de
-        versões chegam junto com o editor.
+        Um curso com estudantes não é apagado: tire do catálogo e ele continua abrindo para quem já estuda. Versões enviadas pelo editor
+        aparecem aqui para revisar e publicar.
       </p>
       {courses.isPending ? (
         <PageStatus title="Carregando cursos…" />

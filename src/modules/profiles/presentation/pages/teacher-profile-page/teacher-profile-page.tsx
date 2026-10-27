@@ -2,6 +2,8 @@ import { Link, useParams } from 'react-router';
 import { ExternalLink } from '@/shared/presentation/components/navigation/external-link/external-link';
 import { PageStatus } from '@/shared/presentation/components/feedback/page-status/page-status';
 import { SectionHeading } from '@/shared/presentation/components/layout/section-heading/section-heading';
+import { ProfileLinkIcon } from '../../components/profile-link-icon/profile-link-icon';
+import { ReportTeacher } from '../../components/report-teacher/report-teacher';
 import { useTeacherProfileQuery } from '../../hooks/use-teacher-profile-query/use-teacher-profile-query';
 import styles from './teacher-profile-page.module.css';
 
@@ -44,7 +46,10 @@ export function TeacherProfilePage() {
         <ul className={styles.links}>
           {profile.links.map((link) => (
             <li key={link.url}>
-              <ExternalLink href={link.url}>{link.label}</ExternalLink>
+              <ExternalLink href={link.url}>
+                <ProfileLinkIcon kind={link.kind} />
+                {link.label}
+              </ExternalLink>
             </li>
           ))}
         </ul>
@@ -66,6 +71,7 @@ export function TeacherProfilePage() {
           </ul>
         )}
       </section>
+      <ReportTeacher handle={profile.handle} />
     </div>
   );
 }

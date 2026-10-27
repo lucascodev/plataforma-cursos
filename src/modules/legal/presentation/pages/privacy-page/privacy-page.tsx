@@ -46,6 +46,8 @@ export function PrivacyPage() {
             <li>suas preferências de conta: tema, fuso horário e quais avisos você quer receber;</li>
             <li>por curso: itens concluídos, dias feitos, data de início, anotações dos módulos, o diário, os requisitos marcados nos projetos e a entrega de cada projeto (link do repositório, link da demonstração e os números que você escrever);</li>
             <li>as propostas de curso que você enviar e a resposta da equipe;</li>
+            <li>se você dá aula: as versões dos seus cursos, o recado enviado para a revisão e os ajustes pedidos pela equipe;</li>
+            <li>os avisos que você mandar sobre um perfil público (motivo e detalhes). Só a equipe vê, e a pessoa avisada não sabe quem avisou;</li>
             <li>um histórico das ações de administração (aprovações, trocas de papel, mudanças em cursos), com quem fez e quando.</li>
           </ul>
           <p>
@@ -54,7 +56,8 @@ export function PrivacyPage() {
           </p>
           <p>
             Anotações, diário e progresso individual são só seus. Nem professores nem admins conseguem ler: eles veem apenas números somados,
-            como quantas pessoas estudam um curso.
+            como quantas pessoas estudam um curso. Para professores, qualquer número abaixo de 5 aparece como "menos de 5", para que ninguém
+            seja identificado num curso pequeno.
           </p>
           <p>
             Não pedimos acesso aos seus repositórios. Não há anúncios, rastreamento nem ferramentas de análise de uso. Os dados servem só para mostrar
@@ -109,9 +112,9 @@ export function PrivacyPage() {
               aplicativo.
             </li>
             <li>
-              <strong>Excluir a conta de login:</strong> peça a quem mantém esta instância, abrindo uma solicitação no repositório. Perfil,
-              preferências, propostas e progresso são apagados junto com a conta. No histórico de administração, o nome some e fica só o registro
-              da ação.
+              <strong>Excluir a conta:</strong> em <em>Meu perfil</em>, na aba <em>Conta</em>, use <em>Excluir minha conta</em>. Perfil,
+              preferências, propostas, avisos enviados e progresso são apagados na hora. Quem é responsável por um curso pede antes à equipe para
+              transferi-lo, para que quem estuda não perca o acesso. No histórico de administração, o nome some e fica só o registro da ação.
             </li>
           </ul>
         </section>

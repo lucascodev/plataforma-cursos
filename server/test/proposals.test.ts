@@ -51,7 +51,15 @@ describe('propostas', () => {
       experience: '',
       sample_url: null,
       suggested_slug: 'python-do-zero',
+      commitments_accepted_at: null,
     });
+  });
+
+  it('nível, duração e o aceite dos compromissos vão junto', async () => {
+    const { services, calls } = makeFakeServices(() => json([row], 201));
+    const body = { ...input, level: 'beginner', duration: '3-to-6-months', commitmentsAccepted: true };
+    await handleCreateProposal(signedIn('/api/proposals', { method: 'POST', body }), services);
+    expect(calls[0]?.body).toMatchObject({ level: 'beginner', duration: '3-to-6-months', commitments_accepted_at: expect.any(String) });
   });
 
   it('limite de propostas abertas vira mensagem clara', async () => {

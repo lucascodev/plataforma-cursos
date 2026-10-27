@@ -63,7 +63,7 @@ flowchart LR
 - **O navegador fala só com o próprio site.** A CSP tem `connect-src 'self'`; não existe cliente Supabase no bundle, nem URL do projeto, nem chave.
 - **As functions são um BFF** (backend for frontend): fazem o login, guardam a sessão em cookies e repassam as chamadas ao Supabase.
 - **O RLS continua sendo a proteção dos dados.** As functions usam a chave publicável e o token da pessoa, nunca a chave secreta. Mesmo um bug nas functions não dá acesso ao progresso de outra pessoa.
-- **O conteúdo dos cursos** fica na tabela `courses`, como um documento JSON por curso, e é validado pelo mesmo schema Zod no script de importação e no site.
+- **O conteúdo dos cursos** fica na tabela `courses`, como um documento JSON por curso: a versão publicada. As versões em edição e o histórico ficam em `course_versions`. O mesmo schema Zod valida o curso no editor, na API antes de enviar e de publicar, e no site.
 - **Papéis e mudanças de estado ficam no banco.** O papel de cada pessoa está em `profiles.role`. Toda ação que mexe em mais de uma tabela ou nos dados de outra pessoa (aprovar proposta, mudar papel, tirar curso do catálogo) é uma função `security definer` que confere o papel e grava o histórico na mesma transação. Detalhes em [papeis-e-propostas.md](papeis-e-propostas.md).
 
 ## 3. Sessão e login
@@ -295,7 +295,9 @@ audit_log (
 ```
 
 - `profiles`: a pessoa lê o próprio perfil; qualquer um lê perfis de professor; admin lê todos. A pessoa edita só nome, texto, links e a opção de contagem. O perfil nasce por gatilho no cadastro e, se faltar, `ensure_profile()` cria na próxima visita.
-- `courses`: leitura dos publicados por qualquer um; o dono e os admins também veem rascunhos. Ninguém escreve direto pela API: só as funções de admin, que gravam o histórico. O script de importação usa a chave secreta e roda só na máquina de quem mantém a plataforma, até o editor substituí-lo.
+- `courses`: leitura dos publicados por qualquer um; o dono e os admins também veem rascunhos. Ninguém escreve direto pela API: o conteúdo muda só quando um admin publica uma versão (`admin_publish_version`), e as outras mudanças passam pelas funções de admin, que gravam o histórico.
+- `course_versions`: sem acesso pela API. O dono edita o rascunho pelas funções `teacher_*` e o admin revisa pelas `admin_*`; veja [versoes-de-curso.md](versoes-de-curso.md).
+- `profile_reports`: sem acesso pela API. Qualquer pessoa com login avisa sobre um perfil público por `report_profile`; a pessoa avisada nunca vê quem avisou.
 - `course_progress`: cada pessoa lê e grava só as próprias linhas. Nenhuma política dá acesso a admin.
 - `course_proposals`: o autor vê e edita as próprias enquanto estão abertas; admin vê todas. Status e resposta mudam só pelas funções de análise.
 - `audit_log`: sem acesso pela API; escrita e leitura só por funções.
@@ -328,8 +330,6 @@ audit_log (
 
 - **Uso em vários aparelhos ao mesmo tempo**: enviar o `updatedAt` lido e recusar gravação mais antiga (concorrência otimista), ou gravar alterações por item.
 - **Limite de requisições**: um rate limit por IP ou por usuário nas functions (Cloudflare Rate Limiting) se aparecer abuso.
-- **Editor de cursos**: próxima etapa. Rascunho e versões em tabelas próprias, revisão pelo admin e fim da importação com a chave secreta.
 - **Avisos por e-mail**: as preferências já ficam guardadas; falta escolher um provedor de e-mail e disparar os avisos.
 - **Mais provedores de login**: o provedor é escolhido num lugar só (`server/shared/supabase/auth/supabase-auth-client.ts`); basta receber o provedor na rota de login, habilitar no Supabase e adicionar o botão.
-- **Estatísticas para professores**: funções que devolvem só números somados, com um mínimo de pessoas por número, nunca a tabela inteira.
 - **Plano pago do Supabase** quando a pausa por inatividade ou o limite de 500 MB virarem problema.

@@ -1,0 +1,29 @@
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.saving svg {
+  animation: spin 1s linear infinite;
+}
+
+.error,
+.conflict {
+  color: var(--danger-ink);
+  font-weight: 600;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .saving svg {
+    animation: none;
+  }
+}

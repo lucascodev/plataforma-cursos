@@ -21,7 +21,13 @@ function ReviewOutcome({ proposal }: { proposal: Proposal }) {
     return (
       <Notice tone="success">
         <p>Proposta aprovada. Você agora é professor e o curso foi criado como rascunho no endereço /cursos/{proposal.courseSlug}.</p>
-        <p>O editor do curso chega na próxima etapa da plataforma. Até lá, o rascunho fica guardado e só você e a equipe o veem.</p>
+        <p>Escreva o curso no editor. Só você e a equipe veem o rascunho até a primeira versão ser publicada.</p>
+        {proposal.courseSlug ? (
+          <p>
+            <Link to={`/professor/cursos/${proposal.courseSlug}/editar`}>Abrir o editor do curso</Link> ·{' '}
+            <Link to="/perfil">Completar perfil de professor</Link>
+          </p>
+        ) : null}
         {proposal.reviewNote ? <p>Recado da equipe: {proposal.reviewNote}</p> : null}
       </Notice>
     );

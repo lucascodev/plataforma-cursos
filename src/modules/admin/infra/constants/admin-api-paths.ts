@@ -14,4 +14,9 @@ export const ADMIN_API_PATHS = {
   people: '/api/admin/people',
   personRole: (id: string) => `/api/admin/people/${segment(id)}/role`,
   audit: '/api/admin/audit',
+  courseVersions: (slug: string) => `/api/admin/courses/${segment(slug)}/versions`,
+  version: (id: string) => `/api/admin/versions/${segment(id)}`,
+  publishVersion: (id: string) => `/api/admin/versions/${segment(id)}/publish`,
+  requestVersionChanges: (id: string) => `/api/admin/versions/${segment(id)}/request-changes`,
+  restoreVersion: (id: string) => `/api/admin/versions/${segment(id)}/restore`,
 } as const;

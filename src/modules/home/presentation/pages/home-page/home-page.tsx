@@ -14,7 +14,7 @@ export function HomePage() {
       <HowItWorks />
       {home.featured ? <FeaturedCourse course={home.featured} /> : null}
       <ProgressPromises />
-      <OpenSource repositoryUrl={home.site.repositoryUrl} guideUrl={home.guideUrl} codeLicense={home.site.codeLicense} contentLicense={home.site.contentLicense} />
+      <OpenSource repositoryUrl={home.site.repositoryUrl} codeLicense={home.site.codeLicense} contentLicense={home.site.contentLicense} />
     </div>
   );
 }

@@ -6,6 +6,16 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 
 ### Adicionado
 
+- Área do professor (`/professor`): os cursos de cada professor, com a versão publicada, a versão aberta e números somados (pessoas estudando, ativas na semana, projetos entregues, concluintes e em que módulo estão). Qualquer número abaixo de 5 aparece como "menos de 5".
+- Editor de curso (`/professor/cursos/<curso>/editar`) com as abas Informações, Módulos e aulas, Guia e Ritmo e plano, salvamento automático, aviso de conflito entre abas, checagem automática com o mesmo schema do site e a lista do que muda em relação à versão publicada.
+- Versões de curso: o professor envia a versão para revisão, a equipe publica ou pede ajustes por pontos, e a versão anterior continua no ar até a nova ser publicada. Admin pode restaurar uma versão antiga como rascunho. Regras em `docs/versoes-de-curso.md`.
+- Revisão de versões na área de admin (`/admin/versoes/<id>`), com o recado do professor, a checagem, o que muda e quantas aulas publicadas saem.
+- Histórico público de versões de cada curso em `/api/courses/<curso>/releases`.
+- Propostas com nível, duração estimada e o aceite dos três compromissos; a proposta aprovada leva direto ao editor.
+- Excluir a própria conta e sair de todos os aparelhos, na aba Conta.
+- Avisar a equipe sobre um perfil público; a pessoa avisada não sabe quem avisou.
+- Links do perfil com tipo (site, LinkedIn, GitHub ou outro).
+
 - Novo design nas páginas públicas: landing em `/`, catálogo em `/cursos` com busca e filtro de nível, página do curso com "Monte o seu plano", Entrar em tela dividida e Privacidade com navegação lateral.
 - Começar o curso (`/cursos/<curso>/comecar`): data de início, ritmo da semana e os horários como evento recorrente (`.ics`).
 - Telas de estudo com menu lateral (barra inferior no celular): Hoje, Plano (mês e lista, recomeçar de outra data), Módulo, Projetos (requisitos, critérios e entrega com link do repositório), Diário (busca e filtro por módulo), Seus dados (backup, diário, importação comparada e apagar com confirmação digitada) e a página do dia com cronômetro.
@@ -69,6 +79,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 
 ### Removido
 
+- Importação de cursos por arquivo JSON (`pnpm content:import`) e o `.env.example` da chave secreta. Cursos entram só pela plataforma; `supabase/seed/courses/` fica apenas para o banco local.
 - Modo visitante, progresso no `localStorage` e migração do progresso do navegador para a conta.
 - Dependência `@supabase/supabase-js` e variáveis `VITE_SUPABASE_*`.
 - Workflow de deploy no GitHub Pages e CSP por meta tag.

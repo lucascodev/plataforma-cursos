@@ -13,4 +13,10 @@ export const ADMIN_ERROR_MESSAGES: ProblemMessages = {
   'last-admin': [409, 'Precisa existir pelo menos uma pessoa admin.'],
   'owns-courses': [409, 'Essa pessoa é dona de cursos. Passe os cursos para outra pessoa antes.'],
   'course-has-students': [409, 'Este curso tem estudantes e não pode ser apagado. Tire do catálogo em vez disso.'],
+  'version-not-found': [404, 'Versão não encontrada.'],
+  'version-not-in-review': [409, 'Esta versão não está mais esperando revisão.'],
+  'version-conflict': [409, 'A versão mudou desde que você abriu esta página. Recarregue para ver a atual.'],
+  'version-not-restorable': [409, 'Só versões que já foram publicadas podem ser restauradas.'],
+  'open-version-exists': [409, 'Já existe uma versão aberta deste curso. Publique, peça ajustes ou espere ela ser retirada antes.'],
+  'review-items-required': [422, 'Liste pelo menos um ponto para ajustar.'],
 };

@@ -9,6 +9,7 @@ export const adminRoutes: RouteObject[] = [
       { path: 'propostas', lazy: async () => ({ Component: (await import('../pages/admin-proposals-page/admin-proposals-page')).AdminProposalsPage }) },
       { path: 'propostas/:id', lazy: async () => ({ Component: (await import('../pages/admin-proposal-page/admin-proposal-page')).AdminProposalPage }) },
       { path: 'cursos', lazy: async () => ({ Component: (await import('../pages/admin-courses-page/admin-courses-page')).AdminCoursesPage }) },
+      { path: 'versoes/:id', lazy: async () => ({ Component: (await import('../pages/admin-version-page/admin-version-page')).AdminVersionPage }) },
       { path: 'pessoas', lazy: async () => ({ Component: (await import('../pages/admin-people-page/admin-people-page')).AdminPeoplePage }) },
       { path: 'historico', lazy: async () => ({ Component: (await import('../pages/admin-history-page/admin-history-page')).AdminHistoryPage }) },
     ],

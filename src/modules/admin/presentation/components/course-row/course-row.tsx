@@ -7,6 +7,7 @@ import { readErrorMessage } from '@/shared/presentation/formatters/read-error-me
 import type { AdminCourse } from '../../../domain/entities/admin-course.entity';
 import { useCourseListingMutation } from '../../hooks/use-course-listing-mutation/use-course-listing-mutation';
 import { useCourseOwnerMutation } from '../../hooks/use-course-owner-mutation/use-course-owner-mutation';
+import { describeVersionStatus } from '../../formatters/describe-version-status';
 import { useDeleteCourseMutation } from '../../hooks/use-delete-course-mutation/use-delete-course-mutation';
 import { PersonChip } from '../person-chip/person-chip';
 import styles from './course-row.module.css';
@@ -43,6 +44,12 @@ export function CourseRow({ course }: { course: AdminCourse }) {
         Dono: <PersonChip person={course.owner} /> · {course.studentCount === 1 ? '1 pessoa estudando' : `${course.studentCount} pessoas estudando`}
         {course.version ? ` · versão ${course.version}` : ''}
       </p>
+      {course.openVersion ? (
+        <p className={styles.meta}>
+          {course.openVersion.semver ? `v${course.openVersion.semver}` : 'Rascunho'}: {describeVersionStatus(course.openVersion.status).toLowerCase()} ·{' '}
+          <Link to={`/admin/versoes/${course.openVersion.id}`}>{course.openVersion.status === 'in_review' ? 'Revisar' : 'Ver versão'}</Link>
+        </p>
+      ) : null}
       <div className={styles.actions}>
         {course.published ? (
           <Button disabled={listing.isPending} onClick={() => listing.mutate({ slug: course.slug, listed: !course.listed })}>

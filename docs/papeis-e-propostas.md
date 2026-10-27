@@ -66,6 +66,5 @@ Logo depois de aplicar as migrations não existe nenhum admin, então a primeira
 
 | Etapa | O que entra |
 |---|---|
-| Editor e versões | Editor do curso por abas (informações, módulos, guia, ritmo), envio de versões para revisão, publicação pelo admin e fim da importação por JSON |
 | Tipos de exercício | Entrega com checklist, quiz, código com testes, passo a passo e reflexão |
 | Laboratório | Ambientes no navegador, no GitHub Codespaces e no computador da pessoa, com verificação por etapas |

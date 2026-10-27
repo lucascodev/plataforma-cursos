@@ -1,6 +1,7 @@
 import type { AccountSettings } from '../../domain/entities/account-settings.entity';
 import type { MyProfile } from '../../domain/entities/my-profile.entity';
 import type { TeacherProfile } from '../../domain/entities/teacher/teacher-profile.entity';
+import type { ReportTeacherInputDto } from '../dtos/report-teacher-input.dto';
 import type { UpdateMyProfileInputDto } from '../dtos/update-my-profile-input.dto';
 
 export interface ProfileGateway {
@@ -9,4 +10,6 @@ export interface ProfileGateway {
   getAccountSettings(): Promise<AccountSettings>;
   updateAccountSettings(settings: AccountSettings): Promise<AccountSettings>;
   getTeacherProfile(handle: string): Promise<TeacherProfile | null>;
+  /** The teacher never learns who reported. */
+  reportTeacher(input: ReportTeacherInputDto): Promise<void>;
 }

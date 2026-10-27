@@ -22,7 +22,7 @@
 
 .row {
   display: grid;
-  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr) auto;
+  grid-template-columns: minmax(0, 0.5fr) minmax(0, 0.7fr) minmax(0, 1.3fr) auto;
   gap: 8px;
   width: 100%;
 }
