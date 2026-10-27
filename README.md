@@ -51,7 +51,6 @@ Abra `http://localhost:5173` no Chrome ou no Firefox. Os cookies de sessão usam
 | `pnpm preview` | Gera o build e serve site e functions juntos, como em produção |
 | `pnpm check` | Tipos, lint, testes e build, na ordem |
 | `pnpm test` | Testes unitários do site e das functions (Vitest) |
-| `pnpm content:schema` | Regera `contracts/course/course.schema.json` a partir do schema Zod |
 | `pnpm audit:prod` | Auditoria das dependências de produção |
 
 ## Estrutura
@@ -76,7 +75,7 @@ supabase/
   migrations/            tabelas, políticas RLS e funções do banco
   seed/courses/          cursos de exemplo para o banco local
   tests/                 testes de RLS e das funções (pgTAP)
-scripts/                 schema JSON, seed do banco local, varredura de chaves
+scripts/                 seed do banco local, varredura de chaves
 docs/                    arquitetura e guias
 ```
 

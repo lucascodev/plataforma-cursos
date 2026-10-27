@@ -101,6 +101,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/). 
 - Importação de cursos por arquivo JSON (`pnpm content:import`) e o `.env.example` da chave secreta. Cursos entram só pela plataforma; `supabase/seed/courses/` fica apenas para o banco local.
 - Modo visitante, progresso no `localStorage` e migração do progresso do navegador para a conta.
 - Dependência `@supabase/supabase-js` e variáveis `VITE_SUPABASE_*`.
+- JSON Schema dos cursos (`contracts/course/course.schema.json`) e o comando `pnpm content:schema`. Só servia para escrever curso em JSON; o curso de exemplo do banco local continua validado pelo schema Zod no `pnpm db:seed`.
 - Workflow de deploy no GitHub Pages e CSP por meta tag.
 
 ### Segurança

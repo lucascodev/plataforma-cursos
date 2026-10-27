@@ -17,7 +17,7 @@ function readCourse(fileName: string): { slug: string; json: string } {
     const problems = parsed.error.issues.map((issue) => `  - ${issue.path.join('.') || '(raiz)'}: ${issue.message}`);
     fail(`Curso inválido em supabase/seed/courses/${fileName}:\n${problems.join('\n')}`);
   }
-  const { $schema: _schema, ...content } = parsed.data;
+  const content = parsed.data;
   const json = JSON.stringify(content);
   if (json.includes(QUOTE_TAG)) fail(`O curso ${fileName} contém ${QUOTE_TAG}, que fecharia a string do SQL.`);
   return { slug: content.slug, json };
