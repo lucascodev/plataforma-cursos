@@ -20,6 +20,9 @@ export function useReportTeacher(handle: string) {
 
   return {
     isOwnProfile: session.user?.handle === handle,
+    // Signing in is the person's choice: the dialog explains why and offers the button, it never redirects on its own.
+    needsSignIn: session.status === 'signed-out',
+    isCheckingSession: session.status === 'loading',
     isOpen,
     reason,
     details,
@@ -27,7 +30,8 @@ export function useReportTeacher(handle: string) {
     error: report.error ? readErrorMessage(report.error, 'Não foi possível enviar o aviso agora.') : null,
     setReason,
     setDetails,
-    open: () => (session.user ? setOpen(true) : session.signIn(`/professores/${handle}`)),
+    open: () => setOpen(true),
+    signIn: () => session.signIn(`/professores/${handle}`),
     close,
     send: () =>
       report.mutate(
