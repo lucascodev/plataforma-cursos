@@ -1,3 +1,4 @@
+import { exercisePrompt } from '../../domain/rules/module/exercise-prompt.rule';
 import type { Course } from '../../domain/entities/course/course.entity';
 import type { StudyTask } from '../../domain/entities/plan/study-task.entity';
 import { lowerFirst } from './lower-first';
@@ -36,7 +37,7 @@ export function describeStudyDay(course: Course, task: StudyTask): StudyDayText 
     case 'lesson-exercise':
       return {
         title: `Exercício: ${lesson?.title ?? ''}${partSuffix(task)}`,
-        detail: `${exercisePrefix(task)}${lesson?.exercise ?? ''}`,
+        detail: `${exercisePrefix(task)}${lesson ? exercisePrompt(lesson.exercise) : ''}`,
         reference: lessonReference,
         itemLabel: lessonItemLabel,
       };

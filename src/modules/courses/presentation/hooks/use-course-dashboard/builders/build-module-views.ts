@@ -1,3 +1,4 @@
+import { exercisePrompt } from '../../../../domain/rules/module/exercise-prompt.rule';
 import { formatMonthYear } from '@/shared/utils/date/format/format-month-year';
 import type { CourseProgress } from '@/modules/progress';
 import type { Course } from '../../../../domain/entities/course/course.entity';
@@ -41,7 +42,7 @@ export function buildModuleViews(course: Course, plan: StudyPlan, progress: Cour
       lowSpecTip: module.lowSpecTip,
       lessons: module.lessons.map((lesson, lessonIndex) => {
         const itemId = lessonItemId(module.id, lesson.id);
-        return { itemId, number: `${number}.${lessonIndex + 1}`, title: lesson.title, summary: lesson.summary, exercise: lesson.exercise, isDone: isCompleted(itemId) };
+        return { itemId, number: `${number}.${lessonIndex + 1}`, title: lesson.title, summary: lesson.summary, exercise: exercisePrompt(lesson.exercise), isDone: isCompleted(itemId) };
       }),
       drills: module.drills.map((drill, drillIndex) => {
         const itemId = drillItemId(module.id, drill.id);

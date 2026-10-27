@@ -49,10 +49,12 @@ export function LessonListEditor({ lessons, onChange, onAdd, onRemove }: LessonL
             <TextAreaField
               label="Exercício"
               rows={3}
-              value={lesson.exercise}
+              value={typeof lesson.exercise === 'string' ? lesson.exercise : lesson.exercise.prompt}
               maxLength={800}
               hint="O que a pessoa faz para fixar a aula."
-              onChange={(event) => setLesson(index, { exercise: event.target.value })}
+              onChange={(event) =>
+                setLesson(index, { exercise: typeof lesson.exercise === 'string' ? event.target.value : { ...lesson.exercise, prompt: event.target.value } })
+              }
             />
           </li>
         ))}

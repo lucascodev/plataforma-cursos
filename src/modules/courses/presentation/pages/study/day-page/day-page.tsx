@@ -36,7 +36,7 @@ export function DayPage() {
               {page.lesson ? (
                 <div className={styles.exercise}>
                   <p className={styles.label}>Exercício da aula</p>
-                  <p>{page.lesson.exercise}</p>
+                  <p>{typeof page.lesson.exercise === 'string' ? page.lesson.exercise : page.lesson.exercise.prompt}</p>
                 </div>
               ) : null}
             </section>
