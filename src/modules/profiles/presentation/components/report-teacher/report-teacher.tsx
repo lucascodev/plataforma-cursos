@@ -29,35 +29,47 @@ export function ReportTeacher({ handle }: { readonly handle: string }) {
       <Dialog
         open={report.isOpen}
         title="Avisar a equipe"
-        description="O professor não fica sabendo quem avisou."
+        description={
+          report.needsSignIn
+            ? 'Para avisar, entre com o GitHub. Isso evita avisos falsos em massa; o professor continua sem saber quem avisou.'
+            : 'O professor não fica sabendo quem avisou.'
+        }
         onClose={report.close}
         actions={
           <>
             <Button size="md" onClick={report.close}>
               Cancelar
             </Button>
-            <Button size="md" tone="primary" isLoading={report.isSending} onClick={report.send}>
-              Enviar aviso
-            </Button>
+            {report.needsSignIn ? (
+              <Button size="md" tone="primary" onClick={report.signIn}>
+                Entrar com o GitHub
+              </Button>
+            ) : (
+              <Button size="md" tone="primary" disabled={report.isCheckingSession} isLoading={report.isSending} onClick={report.send}>
+                Enviar aviso
+              </Button>
+            )}
           </>
         }
       >
-        <div className={styles.fields}>
-          <SelectField
-            label="Motivo"
-            value={report.reason}
-            options={REASONS}
-            onChange={(event) => report.setReason(event.target.value as ProfileReportReason)}
-          />
-          <TextAreaField
-            label="Detalhes (opcional)"
-            rows={3}
-            maxLength={1000}
-            value={report.details}
-            onChange={(event) => report.setDetails(event.target.value)}
-          />
-          {report.error ? <Notice tone="danger">{report.error}</Notice> : null}
-        </div>
+        {report.needsSignIn ? null : (
+          <div className={styles.fields}>
+            <SelectField
+              label="Motivo"
+              value={report.reason}
+              options={REASONS}
+              onChange={(event) => report.setReason(event.target.value as ProfileReportReason)}
+            />
+            <TextAreaField
+              label="Detalhes (opcional)"
+              rows={3}
+              maxLength={1000}
+              value={report.details}
+              onChange={(event) => report.setDetails(event.target.value)}
+            />
+            {report.error ? <Notice tone="danger">{report.error}</Notice> : null}
+          </div>
+        )}
       </Dialog>
     </>
   );

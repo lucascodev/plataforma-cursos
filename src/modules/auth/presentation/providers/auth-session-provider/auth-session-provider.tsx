@@ -28,9 +28,11 @@ export function AuthSessionProvider({ children }: { children: ReactNode }) {
   };
   useSessionExpiryWatcher(reportSessionExpired);
 
+  // clear() would also drop the current-user query the header listens to, and the screen kept showing the person until
+  // a reload. The session query gets null instead, and every other cached answer goes away.
   const forgetSession = () => {
-    queryClient.clear();
     queryClient.setQueryData(authQueryKeys.currentUser(), null);
+    queryClient.removeQueries({ predicate: (query) => query.queryKey[0] !== authQueryKeys.all[0] });
   };
 
   const user = currentUser.data ?? null;
